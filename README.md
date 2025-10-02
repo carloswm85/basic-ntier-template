@@ -1,5 +1,6 @@
 - [Basic Solution Template](#basic-solution-template)
-  - [Templates](#templates)
+  - [How To Use](#how-to-use)
+  - [Template Information](#template-information)
     - [Readings](#readings)
     - [Video Tutorials](#video-tutorials)
     - [Other .NET Solution Templates](#other-net-solution-templates)
@@ -11,9 +12,32 @@
 
 # Basic Solution Template
 
+## How To Use
+
+1. Install from local folder.
+2. At root level run:
+
+```powershell
+# .\basic-solution-template\My.Custom.Template
+dotnet new install .
+```
+
+Or:
+
+```powershell
+# .\basic-solution-template\My.Custom.Template
+dotnet new uninstall .
+```
+
+3. Use the template from anywhere:
+
+```powershell
+dotnet new basic-sol-template -o "MyAmazingDragonOfFire"
+```
+
 ---
 
-## Templates
+## Template Information
 
 ### Readings
 
