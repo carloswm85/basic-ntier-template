@@ -1,14 +1,15 @@
-- [.NET Templates](#net-templates)
+- [Basic Solution Template](#basic-solution-template)
   - [Templates](#templates)
     - [Readings](#readings)
     - [Video Tutorials](#video-tutorials)
+    - [Other .NET Solution Templates](#other-net-solution-templates)
   - [Clean Architecture](#clean-architecture)
     - [Readings (CA)](#readings-ca)
     - [Video Tutorials (CA)](#video-tutorials-ca)
 
 ---
 
-# .NET Templates
+# Basic Solution Template
 
 ---
 
@@ -25,6 +26,17 @@ Official Documentation:
 ### Video Tutorials
 
 1. [How To Create Your Own Templates in NET](https://youtu.be/rdWZo5PD9Ek)
+
+### Other .NET Solution Templates
+
+Good:
+
+- <https://github.com/jasontaylordev/CleanArchitecture>
+- <https://github.com/ardalis/CleanArchitecture>
+
+Average:
+
+- <https://github.com/dorlugasigal/MiniClean.Template>
 
 ---
 
