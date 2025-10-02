@@ -4,9 +4,9 @@
     <PackageType>Template</PackageType>
     <PackageVersion>1.0</PackageVersion>
     <PackageId>My.Custom.Template</PackageId>
-    <Title>Carlos's Custom Templates</Title>
+    <Title>Carlos's Custom Template</Title>
     <Authors>Carlos Mercado</Authors>
-    <Description>Bunch of cool templates for y'all to use</Description>
+    <Description>This is a solution template for you to use</Description>
     <PackageTags>dotnet-new;templates</PackageTags>
     <TargetFramework>netstandard2.0</TargetFramework>
 
