@@ -32,7 +32,7 @@ dotnet new uninstall .
 3. Use the template from anywhere:
 
 ```powershell
-dotnet new basic-sol-template -o "MyAmazingDragonOfFire"
+dotnet new basic-sol-template -o "MyAmazingDotNetSuperSolutionExample"
 ```
 
 ---
@@ -46,6 +46,9 @@ Official Documentation:
 - [Tutorial: Create a project template](https://learn.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-project-template)
 - [Manage .NET project and item templates](https://learn.microsoft.com/en-us/dotnet/core/install/templates)
 - [Default templates for `dotnet new`](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-new-sdk-templates)
+- [Custom templates for `dotnet new`]([https://](https://learn.microsoft.com/en-us/dotnet/core/tools/custom-templates))
+- Templating syntax:
+  - <https://github.com/dotnet/templating/wiki/Conditional-processing-and-comment-syntax>
 
 ### Video Tutorials
 
