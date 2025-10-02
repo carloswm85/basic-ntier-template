@@ -15,17 +15,17 @@
 ## How To Use
 
 1. Install from local folder.
-2. At root level run:
+2. At root level `basic-solution-template` run:
 
 ```powershell
-# .\basic-solution-template\My.Custom.Template
+# .\templates\My.Custom.Template
 dotnet new install .
 ```
 
 Or:
 
 ```powershell
-# .\basic-solution-template\My.Custom.Template
+# .\templates\My.Custom.Template
 dotnet new uninstall .
 ```
 
@@ -46,7 +46,7 @@ Official Documentation:
 - [Tutorial: Create a project template](https://learn.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-project-template)
 - [Manage .NET project and item templates](https://learn.microsoft.com/en-us/dotnet/core/install/templates)
 - [Default templates for `dotnet new`](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-new-sdk-templates)
-- [Custom templates for `dotnet new`]([https://](https://learn.microsoft.com/en-us/dotnet/core/tools/custom-templates))
+- [Custom templates for `dotnet new`](<[https://](https://learn.microsoft.com/en-us/dotnet/core/tools/custom-templates)>)
 - Templating syntax:
   - <https://github.com/dotnet/templating/wiki/Conditional-processing-and-comment-syntax>
 
