@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.Custom.Template.API", "My.Custom.Template.API\My.Custom.Template.API.csproj", "{3B038546-C363-471A-9D58-F6D475CBC7C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCustomTemplate.API", "MyCustomTemplate.API\MyCustomTemplate.API.csproj", "{3B038546-C363-471A-9D58-F6D475CBC7C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.Custom.Template.Data", "My.Custom.Template.Data\My.Custom.Template.Data.csproj", "{7E07B764-76C5-41E3-A890-4AFD72DDFB22}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCustomTemplate.Data", "MyCustomTemplate.Data\MyCustomTemplate.Data.csproj", "{7E07B764-76C5-41E3-A890-4AFD72DDFB22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.Custom.Template.Repository", "My.Custom.Template.Repository\My.Custom.Template.Repository.csproj", "{78559D09-1014-4AD0-929A-EC929E67E1DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCustomTemplate.Repository", "MyCustomTemplate.Repository\MyCustomTemplate.Repository.csproj", "{78559D09-1014-4AD0-929A-EC929E67E1DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My.Custom.Template.Service", "My.Custom.Template.Service\My.Custom.Template.Service.csproj", "{5DFF6E8F-CFA0-4B17-B323-E00AB32B4569}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCustomTemplate.Service", "MyCustomTemplate.Service\MyCustomTemplate.Service.csproj", "{5DFF6E8F-CFA0-4B17-B323-E00AB32B4569}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

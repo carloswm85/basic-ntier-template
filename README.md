@@ -18,14 +18,14 @@
 2. At root level `basic-solution-template` run:
 
 ```powershell
-# .\templates\My.Custom.Template
+# .\templates\MyCustomTemplate
 dotnet new install .
 ```
 
 Or:
 
 ```powershell
-# .\templates\My.Custom.Template
+# .\templates\MyCustomTemplate
 dotnet new uninstall .
 ```
 

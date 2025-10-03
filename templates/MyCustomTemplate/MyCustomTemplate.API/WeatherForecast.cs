@@ -1,4 +1,4 @@
-namespace My.Custom.Template.API
+namespace MyCustomTemplate.API
 {
     public class WeatherForecast
     {

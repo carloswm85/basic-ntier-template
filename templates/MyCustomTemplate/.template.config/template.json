@@ -10,7 +10,7 @@
 	"identity": "CWM.Custom.Template",
 	"name": "Basic Solution Template",
 	"shortName": "basic-sol-template",
-	"sourceName": "My.Custom.Template",
+	"sourceName": "MyCustomTemplate",
 	"tags": {
 		"language": "C#",
 		"type": "solution",
@@ -68,7 +68,7 @@
 					"type": "condition",
 					"condition": "(IncludeReadmeFile)",
 					"include": [
-						"My.Custom.Template/README.md"
+						"MyCustomTemplate/README.md"
 					]
 				}
 			]

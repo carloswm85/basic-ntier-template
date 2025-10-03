@@ -3,7 +3,7 @@
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <PackageVersion>1.0</PackageVersion>
-    <PackageId>My.Custom.Template</PackageId>
+    <PackageId>MyCustomTemplate</PackageId>
     <Title>Carlos's Custom Template</Title>
     <Authors>Carlos Mercado</Authors>
     <Description>This is a solution template for you to use</Description>
