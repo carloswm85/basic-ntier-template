@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MyCustomTemplate.API.Models;
 
 namespace MyCustomTemplate.API.Controllers
 {
