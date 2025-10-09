@@ -9,7 +9,7 @@ namespace MyCustomTemplate.Repository
         void CustomExec(string sqlQuery);
 
         IRepository<Blog> BlogRepository { get; }
-        IRepository<Post> PostRepository { get; }
+        IRepository<Posteo> PostRepository { get; }
 
     }
 }

@@ -22,15 +22,15 @@
             UserId = userId;
             Password = password;
         }
-        
+
         public string? MetaData { get; }
-        
+
         public string? DataSource { get; }
-        
+
         public string? InitialCatalog { get; }
-        
+
         public string? UserId { get; }
-        
+
         public string? Password { get; }
 
         #endregion

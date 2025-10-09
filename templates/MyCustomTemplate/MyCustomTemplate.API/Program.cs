@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyCustomTemplate.Data.Tools;
 using MyCustomTemplate.Repository;
+using MyCustomTemplate.Service.Mappings;
 using MyCustomTemplate.Service.Services;
 using MyCustomTemplate.Service.Services.Interfaces;
 
@@ -23,20 +24,28 @@ namespace MyCustomTemplate.API
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
                 ?? throw new InvalidOperationException("Connection string" + "'DefaultConnection' not found.");
 
-            builder.Services.AddSingleton<ConnectionResource>(sp =>
+            builder.Services.AddSingleton(sp =>
             {
-                var config = sp.GetRequiredService<IConfiguration>();
                 return new ConnectionResource(connectionString);
             });
 
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            builder.Services.AddAutoMapper(
+                cfg => { },
+                typeof(BlogProfile).Assembly,
+                typeof(PostProfile).Assembly
+            );
+            
             // Register application services for dependency injection.
             // IBlogService (interface) will be resolved to BlogService (implementation).
-            builder.Services.AddScoped<IBlogService, BlogService>();
+            builder.Services.AddScoped<ISampleService, SampleService>();
 
             // Add controller support (enables MVC-style controllers).
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.PropertyNamingPolicy = null;
+            });
 
             // Register services required for minimal APIs (endpoint metadata exploration).
             builder.Services.AddEndpointsApiExplorer();

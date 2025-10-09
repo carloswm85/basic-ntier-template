@@ -2,9 +2,9 @@
 {
     public partial class Blog
     {
-        public int BlogId { get; set; }
-        public required string Url { get; set; }
+        public int id { get; set; }
+        public required string url { get; set; }
 
-        public List<Post> Posts { get; } = new();
+        public virtual ICollection<Posteo>? posteos { get; set; }
     }
 }

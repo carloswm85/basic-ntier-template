@@ -33,7 +33,8 @@ namespace MyCustomTemplate.Data.Model
             var optionsBuilder = new DbContextOptionsBuilder<MyCustomTemplateContext>();
 
             // Configure the DbContext to use SQL Server with the "DefaultConnection" connection string
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            optionsBuilder
+                .UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
 
             // Return a new instance of the context with the configured options
             return new MyCustomTemplateContext(optionsBuilder.Options);

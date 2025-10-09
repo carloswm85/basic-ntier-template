@@ -40,10 +40,10 @@ namespace MyCustomTemplate.Data.Tools
                     UserID = connectionResource.UserId,
                     Password = connectionResource.Password
                 };
-            
+
                 return sqlBuilder.ConnectionString;
             }
-            
+
             // For simplicity, we return the provided connection string directly:
             return connectionResource.ConnectionString;
         }

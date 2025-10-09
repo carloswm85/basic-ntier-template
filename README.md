@@ -39,6 +39,27 @@ dotnet new basic-sol-template -o "MyAmazingDotNetSuperSolutionExample"
 
 ## Template Information
 
+### AutoMapper Use
+
+```
+YourApp.Api/  (Presentation)
+├── Program.cs  → builder.Services.AddAutoMapper()
+└── [References Service Layer]
+
+YourApp.Services/  (Business Logic)
+├── Mappings/
+│   └── UserProfile.cs  → Profile classes
+├── UserService.cs  → Uses IMapper
+└── [Needs: AutoMapper package]
+
+YourApp.Data/  (Data Access)
+└── [No AutoMapper needed here]
+```
+
+---
+
+## Other Information
+
 ### Readings
 
 Official Documentation:
@@ -67,13 +88,13 @@ Average:
 
 ---
 
-## Clean Architecture
+### Clean Architecture Information
 
-### Readings (CA)
+#### Readings (CA)
 
 - [The Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), by Uncle Bob
 
-### Video Tutorials (CA)
+#### Video Tutorials (CA)
 
 1. [Clean Architecture with ASP.NET Core 3.0 - Jason Taylor - NDC Sydney 2019](https://www.youtube.com/watch?v=5OtUm1BLmG0)
 2. [💻 Clean Architecture (by Syntax Async)](https://www.youtube.com/playlist?list=PLlKSF1mm1dufAZmGexWGnORX-yKiGpFjM) playlist

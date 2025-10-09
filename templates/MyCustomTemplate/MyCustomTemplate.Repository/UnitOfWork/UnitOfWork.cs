@@ -8,12 +8,12 @@ namespace MyCustomTemplate.Repository
     {
         #region Private Fields
 
-        private readonly MyCustomTemplateContext _context;
+        private readonly MyCustomTemplateContext _dbContext;
 
         private bool _disposed = false;
 
-        private IRepository<Blog> _blogRepository;
-        private IRepository<Post> _postRepository;
+        private IRepository<Blog>? _blogRepository;
+        private IRepository<Posteo>? _postRepository;
 
 
         #endregion
@@ -22,23 +22,14 @@ namespace MyCustomTemplate.Repository
 
         public UnitOfWork(ConnectionResource connection)
         {
-            _context = ConnectionHelper.CreateConnection(connection);
-
-            // Default command timeout within the EF connection string
-            //_context.Database.CommandTimeout = 250;
-
-            // This might speed up things a little aswell. Default is true
-            //_context.Configuration.AutoDetectChangesEnabled = false;
-
-            // As might this (if applicable for your situation). Default is true
-            //_context.Configuration.ValidateOnSaveEnabled = false;
+            _dbContext = ConnectionHelper.CreateConnection(connection);
         }
         #endregion
 
         #region Public Methods
 
-        public IRepository<Blog> BlogRepository => _blogRepository ?? (_blogRepository = new Repository<Blog>(_context));
-        public IRepository<Post> PostRepository => _postRepository ?? (_postRepository = new Repository<Post>(_context));
+        public IRepository<Blog> BlogRepository => _blogRepository ?? (_blogRepository = new Repository<Blog>(_dbContext));
+        public IRepository<Posteo> PostRepository => _postRepository ?? (_postRepository = new Repository<Posteo>(_dbContext));
 
         public void Dispose()
         {
@@ -48,12 +39,12 @@ namespace MyCustomTemplate.Repository
 
         public void Save()
         {
-            _context.SaveChanges();
+            _dbContext.SaveChanges();
         }
 
         public void CustomExec(string sqlQuery)
         {
-            _context.Database.ExecuteSqlRaw(sqlQuery);
+            _dbContext.Database.ExecuteSqlRaw(sqlQuery);
         }
 
         #endregion
@@ -66,7 +57,7 @@ namespace MyCustomTemplate.Repository
             {
                 if (disposing)
                 {
-                    _context.Dispose();
+                    _dbContext.Dispose();
                 }
             }
             _disposed = true;
