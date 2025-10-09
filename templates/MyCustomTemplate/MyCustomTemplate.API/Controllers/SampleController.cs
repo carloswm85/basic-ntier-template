@@ -8,11 +8,11 @@ namespace MyCustomTemplate.API.Controllers
     [ApiController]
     public class SampleController : ControllerBase
     {
-        private readonly ISampleService _blogService;
+        private readonly ISampleService _sampleService;
 
-        public SampleController(ISampleService blogService)
+        public SampleController(ISampleService sampleService)
         {
-            _blogService = blogService;
+            _sampleService = sampleService;
         }
 
         #region Blog
@@ -21,7 +21,7 @@ namespace MyCustomTemplate.API.Controllers
         [HttpGet("blogs")]
         public ActionResult<IEnumerable<BlogDto>> GetBlogs()
         {
-            var blogs = _blogService.GetBlogList();
+            var blogs = _sampleService.GetBlogList();
             return Ok(blogs);
         }
 
@@ -29,7 +29,7 @@ namespace MyCustomTemplate.API.Controllers
         [HttpGet("blogs/{id}")]
         public ActionResult<BlogDto> GetBlog(int id)
         {
-            var blog = _blogService.GetBlogItem(id);
+            var blog = _sampleService.GetBlogItem(id);
 
             if (blog == null)
             {
@@ -43,7 +43,7 @@ namespace MyCustomTemplate.API.Controllers
         [HttpPost("blogs")]
         public ActionResult<int> SaveBlog(BlogDto blogDto)
         {
-            var blogId = _blogService.SaveBlog(blogDto);
+            var blogId = _sampleService.SaveBlog(blogDto);
 
             if (blogDto.Id == 0)
             {
@@ -57,7 +57,7 @@ namespace MyCustomTemplate.API.Controllers
         [HttpDelete("blogs/{id}")]
         public ActionResult<bool> DeleteBlog(int id)
         {
-            var result = _blogService.DeleteBlog(id);
+            var result = _sampleService.DeleteBlog(id);
 
             if (!result)
             {
@@ -75,7 +75,7 @@ namespace MyCustomTemplate.API.Controllers
         [HttpGet("posts")]
         public ActionResult<IEnumerable<PostDto>> GetPosts()
         {
-            var posts = _blogService.GetPostList();
+            var posts = _sampleService.GetPostList();
             return Ok(posts);
         }
 
@@ -83,7 +83,7 @@ namespace MyCustomTemplate.API.Controllers
         [HttpGet("posts/{id}")]
         public ActionResult<PostDto> GetPost(int id)
         {
-            var post = _blogService.GetPostItem(id);
+            var post = _sampleService.GetPostItem(id);
 
             if (post == null)
             {
@@ -97,7 +97,7 @@ namespace MyCustomTemplate.API.Controllers
         [HttpPost("posts")]
         public ActionResult<int> SavePost(PostDto postDto)
         {
-            var postId = _blogService.SavePost(postDto);
+            var postId = _sampleService.SavePost(postDto);
 
             if (postDto.Id == 0)
             {
@@ -111,7 +111,7 @@ namespace MyCustomTemplate.API.Controllers
         [HttpDelete("posts/{id}")]
         public ActionResult<bool> DeletePost(int id)
         {
-            var result = _blogService.DeletePost(id);
+            var result = _sampleService.DeletePost(id);
 
             if (!result)
             {

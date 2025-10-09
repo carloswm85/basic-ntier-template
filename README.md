@@ -1,12 +1,18 @@
 - [Basic Solution Template](#basic-solution-template)
   - [How To Use](#how-to-use)
+    - [Connection String](#connection-string)
+    - [Entity Framework Migration Commands](#entity-framework-migration-commands)
   - [Template Information](#template-information)
+    - [AutoMapper Use](#automapper-use)
+  - [Troubleshooting](#troubleshooting)
+    - [HTTPS Developer Ccertificate](#https-developer-ccertificate)
+  - [Other Information](#other-information)
     - [Readings](#readings)
     - [Video Tutorials](#video-tutorials)
     - [Other .NET Solution Templates](#other-net-solution-templates)
-  - [Clean Architecture](#clean-architecture)
-    - [Readings (CA)](#readings-ca)
-    - [Video Tutorials (CA)](#video-tutorials-ca)
+    - [Clean Architecture Information](#clean-architecture-information)
+      - [Readings (CA)](#readings-ca)
+      - [Video Tutorials (CA)](#video-tutorials-ca)
 
 ---
 
@@ -35,6 +41,59 @@ dotnet new uninstall .
 dotnet new basic-sol-template -o "MyAmazingDotNetSuperSolutionExample"
 ```
 
+### Connection String
+
+```json
+{
+	"ConnectionStrings": {
+		"DefaultConnection": "Server=.;Database=MyCustomTemplateData;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+	}
+}
+```
+
+1. `Server=.;`
+
+   - Specifies the SQL Server instance to connect to.
+   - Selected server is: `Default Server`
+
+2. `Database=MyCustomTemplateData;`
+
+   - Name of the **database** you want to connect to.
+
+3. `Trusted_Connection=True;`
+
+   - Uses **Windows Authentication** (your Windows user credentials) instead of a SQL username/password.
+
+4. `MultipleActiveResultSets=true;`
+
+   - Enables **MARS**, allowing multiple queries to be active on the same connection at once (useful for EF and lazy loading).
+
+5. `TrustServerCertificate=True;`
+
+   - Skips certificate validation when using **encrypted connections** — useful for local or development setups where SSL certificates may not be trusted.
+
+_Remember to change it for secure production-ready version (with SQL login and safer defaults)._
+
+### Entity Framework Migration Commands
+
+- Using PowerShell:
+
+  - Inside the `MyCustomTemplate.Data` project folder.
+
+    ```powershell
+    > dotnet ef migrations add InitialMigration
+    > dotnet ef database update
+    ```
+
+- Using Package Manager:
+
+  - Set "Default Project" to `MyCustomTemplate.Data`
+
+    ```console
+    PM> Add-Migration InitialMigration
+    PM> Update-Database
+    ```
+
 ---
 
 ## Template Information
@@ -54,6 +113,18 @@ YourApp.Services/  (Business Logic)
 
 YourApp.Data/  (Data Access)
 └── [No AutoMapper needed here]
+```
+
+---
+
+## Troubleshooting
+
+### HTTPS Developer Ccertificate
+
+```powershell
+> dotnet dev-certs https --clean
+> dotnet dev-certs https --trust
+> dotnet dev-certs https --check
 ```
 
 ---
