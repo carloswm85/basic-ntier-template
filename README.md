@@ -1,4 +1,4 @@
-- [Basic Solution Template](#basic-solution-template)
+- [Basic Ntier Template](#basic-ntier-template)
   - [How To Use](#how-to-use)
     - [Connection String](#connection-string)
     - [Entity Framework Migration Commands](#entity-framework-migration-commands)
@@ -16,29 +16,29 @@
 
 ---
 
-# Basic Solution Template
+# Basic Ntier Template
 
 ## How To Use
 
 1. Install from local folder.
-2. At root level `basic-solution-template` run:
+2. At root level `basic-ntier-template` run:
 
 ```powershell
-# .\templates\MyCustomTemplate
+# .\templates\BasicNtierTemplate
 dotnet new install .
 ```
 
 Or:
 
 ```powershell
-# .\templates\MyCustomTemplate
+# .\templates\BasicNtierTemplate
 dotnet new uninstall .
 ```
 
 3. Use the template from anywhere:
 
 ```powershell
-dotnet new basic-sol-template -o "MyAmazingDotNetSuperSolutionExample"
+dotnet new basic-ntier-template -o "MyAmazingDotNetSuperSolutionExample"
 ```
 
 ### Connection String
