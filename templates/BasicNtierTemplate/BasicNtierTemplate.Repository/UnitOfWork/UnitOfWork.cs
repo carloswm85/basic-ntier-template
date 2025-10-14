@@ -8,7 +8,7 @@ namespace BasicNtierTemplate.Repository
     {
         #region Private Fields
 
-        private readonly BasicNtierTemplateContext _dbContext;
+        private readonly BasicNtierTemplateDbContext _dbContext;
 
         private bool _disposed = false;
 

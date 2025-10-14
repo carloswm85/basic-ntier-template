@@ -116,6 +116,10 @@ _Remember to change it for secure production-ready version (with SQL login and s
 
 ### Entity Framework Core: Database-First (Database Scaffolding, or Reverse Engineering)
 
+Your database should be named `MyDatabaseDb` for scaffolding to work out-of-the-box. Otherwise, you will need to modify the some parts of the code to make it work.
+
+<https://learn.microsoft.com/en-us/ef/core/managing-schemas/scaffolding/>
+
 - Inside the `BasicNtierTemplate.Data` project folder, using Package Manager Console:
 
   - When using directly the connection string from the command line:
@@ -127,7 +131,7 @@ _Remember to change it for secure production-ready version (with SQL login and s
 - When extracting the connection string from `appsettings.json` in the `BasicNtierTemplate.API` project:
 
 ```console
-Scaffold-DbContext "Name=BasicNtierTemplateConnection" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model -Project BasicNtierTemplate.Data -StartupProject BasicNtierTemplate.API -Force
+Scaffold-DbContext "Name=BasicNtierTemplateConnection" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model -Project BasicNtierTemplate.Data -StartupProject BasicNtierTemplate.API -Force --UseDatabaseNames
 ```
 
 The previous command will overrite the existing `BasicNtierTemplateContext.cs` file.

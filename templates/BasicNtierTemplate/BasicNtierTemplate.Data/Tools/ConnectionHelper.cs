@@ -49,16 +49,16 @@ namespace BasicNtierTemplate.Data.Tools
         }
 
         /// <summary>
-        /// Creates a new instance of <see cref="BasicNtierTemplateContext"/> using the connection 
+        /// Creates a new instance of <see cref="BasicNtierTemplateDbContext"/> using the connection 
         /// information from the provided <see cref="ConnectionResource"/>.
         /// </summary>
         /// <param name="connectionResource">
         /// An object containing connection configuration details, including the connection string.
         /// </param>
         /// <returns>
-        /// A fully configured <see cref="BasicNtierTemplateContext"/> ready for database operations.
+        /// A fully configured <see cref="BasicNtierTemplateDbContext"/> ready for database operations.
         /// </returns>
-        public static BasicNtierTemplateContext CreateConnection(ConnectionResource connectionResource)
+        public static BasicNtierTemplateDbContext CreateConnection(ConnectionResource connectionResource)
         {
             // Generate the connection string from the given resource.
             string connectionString = CreateConnectionString(connectionResource)
@@ -68,11 +68,11 @@ namespace BasicNtierTemplate.Data.Tools
             Debug.WriteLine($"Connection String: {connectionString}");
 
             // Configure the EF Core DbContext options to use SQL Server.
-            var optionsBuilder = new DbContextOptionsBuilder<BasicNtierTemplateContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<BasicNtierTemplateDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
 
             // Return a new context instance configured with the specified options.
-            return new BasicNtierTemplateContext(optionsBuilder.Options);
+            return new BasicNtierTemplateDbContext(optionsBuilder.Options);
         }
     }
 }

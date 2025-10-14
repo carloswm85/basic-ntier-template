@@ -8,13 +8,13 @@
 /// - DO NOT use this file for customizations. Instead use additional partial class files.
 /// - This is the convention.
 /// </summary>
-public partial class BasicNtierTemplateContext : DbContext
+public partial class BasicNtierTemplateDbContext : DbContext
 {
-    public BasicNtierTemplateContext()
+    public BasicNtierTemplateDbContext()
     {
     }
 
-    public BasicNtierTemplateContext(DbContextOptions<BasicNtierTemplateContext> options)
+    public BasicNtierTemplateDbContext(DbContextOptions<BasicNtierTemplateDbContext> options)
         : base(options)
     {
     }

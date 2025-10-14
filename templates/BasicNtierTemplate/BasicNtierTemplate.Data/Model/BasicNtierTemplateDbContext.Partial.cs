@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 /// <summary>
 /// Partial class for BasicNtierTemplateContext.
 /// </summary>
-public partial class BasicNtierTemplateContext : DbContext
+public partial class BasicNtierTemplateDbContext : DbContext
 {
     /// <summary>
     /// Example content for the partial class to configure the model.
