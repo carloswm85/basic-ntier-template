@@ -1,8 +1,6 @@
-# BasicNtierTemplate
+# BasicNtierTemplate Architecture
 
-This is a test.
-
-## "Clean Architecture" In This Solution Template
+## "Clean Architecture" In This Solution
 
 | Level | Clean Arch.    | Uncle Bob          | Equivalent in This Template\* | Technology             |
 | ----- | -------------- | ------------------ | ----------------------------- | ---------------------- |

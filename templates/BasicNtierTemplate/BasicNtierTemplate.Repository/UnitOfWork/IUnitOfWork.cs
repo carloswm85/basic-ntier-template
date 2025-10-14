@@ -1,4 +1,4 @@
-﻿using BasicNtierTemplate.Data.Entities;
+﻿using BasicNtierTemplate.Data.Model;
 
 namespace BasicNtierTemplate.Repository
 {

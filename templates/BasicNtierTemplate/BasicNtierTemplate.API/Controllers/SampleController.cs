@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using BasicNtierTemplate.Service.Dtos;
+﻿using BasicNtierTemplate.Service.Dtos;
 using BasicNtierTemplate.Service.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BasicNtierTemplate.API.Controllers
 {

@@ -1,9 +1,9 @@
-using Microsoft.EntityFrameworkCore;
 using BasicNtierTemplate.Data.Tools;
 using BasicNtierTemplate.Repository;
 using BasicNtierTemplate.Service.Mappings;
 using BasicNtierTemplate.Service.Services;
 using BasicNtierTemplate.Service.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BasicNtierTemplate.API
 {
@@ -17,12 +17,12 @@ namespace BasicNtierTemplate.API
             #region Service addition
 
             // Register DbContext with SQL Server as the database provider.
-            // Connection string "DefaultConnection" is pulled from configuration (appsettings.json).
+            // Connection string "BasicNtierTemplateConnection" is pulled from configuration (appsettings.json).
             //builder.Services.AddDbContext<BasicNtierTemplateContext>(options =>
-            //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            //    options.UseSqlServer(builder.Configuration.GetConnectionString("BasicNtierTemplateConnection")));
 
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-                ?? throw new InvalidOperationException("Connection string" + "'DefaultConnection' not found.");
+            var connectionString = builder.Configuration.GetConnectionString("BasicNtierTemplateConnection")
+                ?? throw new InvalidOperationException("Connection string" + "'BasicNtierTemplateConnection' not found.");
 
             builder.Services.AddSingleton(sp =>
             {
@@ -36,7 +36,7 @@ namespace BasicNtierTemplate.API
                 typeof(BlogProfile).Assembly,
                 typeof(PostProfile).Assembly
             );
-            
+
             // Register application services for dependency injection.
             // IBlogService (interface) will be resolved to BlogService (implementation).
             builder.Services.AddScoped<ISampleService, SampleService>();

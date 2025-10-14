@@ -1,33 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
-using BasicNtierTemplate.Data.Entities;
+﻿using BasicNtierTemplate.Data.Model;
+using Microsoft.EntityFrameworkCore;
 
 /// <summary>
-/// Represents the Entity Framework Core database context for the application.
+/// Partial class for BasicNtierTemplateContext.
 /// </summary>
-public sealed partial class BasicNtierTemplateContext : DbContext
+public partial class BasicNtierTemplateContext : DbContext
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="BasicNtierTemplateContext"/> class 
-    /// using the specified <see cref="DbContextOptions{TContext}"/>.
+    /// Example content for the partial class to configure the model.
+    /// 
+    /// This `OnModelCreatingPartial` mathod is used for:
+    /// - Keeps your custom configurations separate from auto-generated code.
+    /// - Prevents losing changes if you re-scaffold the database.
+    /// - Follows the partial class pattern (a clean extension mechanism).
     /// </summary>
-    /// <param name="contextOptions">
-    /// The options used to configure the database context, such as the connection string 
-    /// and database provider (e.g., SQL Server).
-    /// </param>
-    public BasicNtierTemplateContext(DbContextOptions<BasicNtierTemplateContext> contextOptions)
-        : base(contextOptions)
-    {
-        // The `contextOptions` parameter passes connection details and provider configuration
-        // to the base DbContext constructor.
-    }
-
-    /// <summary>
-    /// Configures the entity model and seeds initial data for the database.
-    /// </summary>
-    /// <param name="modelBuilder">
-    /// Provides a simple API to configure entity relationships, constraints, and seed data.
-    /// </param>
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    /// <param name="modelBuilder"></param>
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder)
     {
         // Always call the base method first to ensure EF Core's default configurations are applied.
         base.OnModelCreating(modelBuilder);

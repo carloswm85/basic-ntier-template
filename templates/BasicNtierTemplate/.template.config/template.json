@@ -8,8 +8,9 @@
 		"API",
 		"Web"
 	],
-	"identity": "Basic.Ntier.Template",
-	"name": "Basic N-Tier Template",
+	"identity": "Basic.Ntier.Template.CSharp",
+	"groupIdentity": "Basic.Ntier.Template",
+	"name": "Basic N-Tier Template (C#)",
 	"shortName": "basic-ntier-template",
 	"sourceName": "BasicNtierTemplate",
 	"tags": {
@@ -27,15 +28,15 @@
 			"defaultValue": "net8.0",
 			"choices": [
 				{
-					"displayName": ".NET 10.0",
+					"displayName": ".NET 10.0 (LTS, Preview)",
 					"choice": "net10.0"
 				},
 				{
-					"displayName": ".NET 9.0",
+					"displayName": ".NET 9.0 (STS)",
 					"choice": "net9.0"
 				},
 				{
-					"displayName": ".NET 8.0",
+					"displayName": ".NET 8.0 (LTS, Current default)",
 					"choice": "net8.0"
 				},
 				{
@@ -49,30 +50,44 @@
 			],
 			"description": "The target framework for the projects."
 		},
-		"SwaggerSupportEnabling": {
+		"IncludeDocs": {
 			"type": "parameter",
-			"description": "Include Swagger support in the API project.",
-			"datatype": "bool",
-			"defaultValue": "true"
-		},
-		"IncludeReadmeFile": {
-			"type": "parameter",
-			"description": "Include the README.md file in the generated project.",
+			"description": "Include explanatory documentation",
 			"datatype": "bool",
 			"defaultValue": "true"
 		}
 	},
 	"sources": [
 		{
+			"source": "./",
+			"target": "./",
 			"modifiers": [
 				{
 					"type": "condition",
-					"condition": "(IncludeReadmeFile)",
+					"condition": "(IncludeDocs)",
 					"include": [
-						"BasicNtierTemplate/README.md"
+						"BasicNtierTemplate/docs/**/*"
 					]
 				}
 			]
+		}
+	],
+	"primaryOutputs": [
+		{ "path": "BasicNtierTemplate.API/BasicNtierTemplate.API.csproj" },
+		{ "path": "BasicNtierTemplate.Service/BasicNtierTemplate.Service.csproj" },
+		{ "path": "BasicNtierTemplate.Repository/BasicNtierTemplate.Repository.csproj" },
+		{ "path": "BasicNtierTemplate.Data/BasicNtierTemplate.Data.csproj" }
+	],
+	"postActions": [
+		{
+			"actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+			"manualInstructions": [
+				{
+					"text": "Run 'dotnet restore'"
+				}
+			],
+			"continueOnError": true,
+			"description": "Restore NuGet packages"
 		}
 	]
 }

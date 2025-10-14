@@ -1,5 +1,5 @@
+using BasicNtierTemplate.API.ApiModels;
 using Microsoft.AspNetCore.Mvc;
-using BasicNtierTemplate.API.Models;
 
 namespace BasicNtierTemplate.API.Controllers
 {

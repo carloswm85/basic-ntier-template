@@ -32,9 +32,9 @@ namespace BasicNtierTemplate.Data.Model
             // Create the DbContext options builder
             var optionsBuilder = new DbContextOptionsBuilder<BasicNtierTemplateContext>();
 
-            // Configure the DbContext to use SQL Server with the "DefaultConnection" connection string
+            // Configure the DbContext to use SQL Server with the "BasicNtierTemplateConnection" connection string
             optionsBuilder
-                .UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                .UseSqlServer(configuration.GetConnectionString("BasicNtierTemplateConnection"));
 
             // Return a new instance of the context with the configured options
             return new BasicNtierTemplateContext(optionsBuilder.Options);

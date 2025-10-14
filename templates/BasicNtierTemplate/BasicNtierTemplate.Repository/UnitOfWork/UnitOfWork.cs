@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using BasicNtierTemplate.Data.Entities;
+﻿using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Data.Tools;
+using Microsoft.EntityFrameworkCore;
 
 namespace BasicNtierTemplate.Repository
 {

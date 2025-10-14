@@ -1,4 +1,4 @@
-namespace BasicNtierTemplate.API.Models
+namespace BasicNtierTemplate.API.ApiModels
 {
     public class WeatherForecast
     {

@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using BasicNtierTemplate.Data;
+﻿using BasicNtierTemplate.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace BasicNtierTemplate.Repository
 {

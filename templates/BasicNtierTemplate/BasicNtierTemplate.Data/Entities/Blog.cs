@@ -1,4 +1,4 @@
-﻿namespace BasicNtierTemplate.Data.Entities
+﻿namespace BasicNtierTemplate.Data.Model
 {
     public partial class Blog
     {
