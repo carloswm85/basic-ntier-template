@@ -27,6 +27,12 @@
 
 <https://github.com/carloswm85/basic-ntier-template>
 
+Version compatibility:
+
+|         | Version | Requirements                                                                                              |
+| ------- | ------- | --------------------------------------------------------------------------------------------------------- |
+| .NET    | 8.0     | EF Core: `8.0`                                                                                            |
+
 ---
 
 ## Template Installation
@@ -195,7 +201,7 @@ YourApp.Data/  (Data Access)
 
 ### Readings
 
-Official Documentation:
+Official documentation:
 
 - [Tutorial: Create a project template](https://learn.microsoft.com/en-us/dotnet/core/tutorials/cli-templates-create-project-template)
 - [Manage .NET project and item templates](https://learn.microsoft.com/en-us/dotnet/core/install/templates)
@@ -204,9 +210,13 @@ Official Documentation:
 - Templating syntax:
   - <https://github.com/dotnet/templating/wiki/Conditional-processing-and-comment-syntax>
 
+Other documentation:
+
+- <https://www.entityframeworktutorial.net/efcore/entity-framework-core.aspx>
+
 ### Video Tutorials
 
-1. [How To Create Your Own Templates in NET](https://youtu.be/rdWZo5PD9Ek)
+- [How To Create Your Own Templates in NET](https://youtu.be/rdWZo5PD9Ek)
 
 ### Other Custom .NET Solution Templates
 
