@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using BasicNtierTemplate.Data.Model;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 

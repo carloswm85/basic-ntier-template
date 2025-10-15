@@ -11,13 +11,13 @@ namespace BasicNtierTemplate.Service.Mappings
             CreateMap<Blog, BlogDto>()
                 .ForMember(destination => destination.Id, options => options.MapFrom(source => source.id))
                 .ForMember(dto => dto.Url, opt => opt.MapFrom(src => src.url))
-                .ForMember(dto => dto.Posts, opt => opt.MapFrom(src => src.posteos))
+                .ForMember(dto => dto.Posts, opt => opt.MapFrom(src => src.Posteos))
                 ;
 
             CreateMap<BlogDto, Blog>()
                 .ForMember(destination => destination.id, options => options.MapFrom(source => source.Id))
                 .ForMember(dto => dto.url, opt => opt.MapFrom(src => src.Url))
-                .ForMember(dto => dto.posteos, opt => opt.MapFrom(src => src.Posts))
+                .ForMember(dto => dto.Posteos, opt => opt.MapFrom(src => src.Posts))
                 ;
         }
     }

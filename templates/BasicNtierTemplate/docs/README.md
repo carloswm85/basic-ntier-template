@@ -1,19 +1,22 @@
 - [Basic Ntier Template](#basic-ntier-template)
-  - [How To Use](#how-to-use)
+  - [Template Installation](#template-installation)
     - [Nuget Installation](#nuget-installation)
-    - [Local Installation](#local-installation)
+    - [Local Repository Installation](#local-repository-installation)
     - [Installation Commands](#installation-commands)
-    - [Connection String](#connection-string)
-    - [Entity Framework Core: Code-First](#entity-framework-core-code-first)
-    - [Entity Framework Core: Database-First (Database Scaffolding, or Reverse Engineering)](#entity-framework-core-database-first-database-scaffolding-or-reverse-engineering)
+  - [Entity Framework Core](#entity-framework-core)
+    - [Code-First](#code-first)
+    - [Database-First (Database Scaffolding, or Reverse Engineering)](#database-first-database-scaffolding-or-reverse-engineering)
+      - [Additional Commands](#additional-commands)
   - [Template Information](#template-information)
+    - [Connection String](#connection-string)
     - [AutoMapper Use](#automapper-use)
   - [Troubleshooting](#troubleshooting)
     - [HTTPS Developer Ccertificate](#https-developer-ccertificate)
   - [Other Information](#other-information)
     - [Readings](#readings)
     - [Video Tutorials](#video-tutorials)
-    - [Other .NET Solution Templates](#other-net-solution-templates)
+    - [Other Custom .NET Solution Templates](#other-custom-net-solution-templates)
+    - [Recommended Tools](#recommended-tools)
     - [Clean Architecture Information](#clean-architecture-information)
       - [Readings (CA)](#readings-ca)
       - [Video Tutorials (CA)](#video-tutorials-ca)
@@ -24,13 +27,15 @@
 
 <https://github.com/carloswm85/basic-ntier-template>
 
-## How To Use
+---
+
+## Template Installation
 
 ### Nuget Installation
 
 TODO
 
-### Local Installation
+### Local Repository Installation
 
 1. Clone or download repository.
 1. Install from local folder.
@@ -60,6 +65,67 @@ dotnet new basic-ntier-template -o "BasicNtierTemplateExample"
 -o # Custom solution name
 ```
 
+---
+
+## Entity Framework Core
+
+### Code-First
+
+- Using PowerShell:
+
+  - Inside the `BasicNtierTemplate.Data` project folder.
+
+    ```powershell
+    > dotnet ef migrations add InitialMigration
+    > dotnet ef database update
+    ```
+
+- Using Package Manager Console:
+
+  - Set "Default Project" to `BasicNtierTemplate.Data`
+
+    ```console
+    PM> Add-Migration InitialMigration
+    PM> Update-Database
+    ```
+
+### Database-First (Database Scaffolding, or Reverse Engineering)
+
+Your database should be named `MyDatabaseDb` for scaffolding to work out-of-the-box. Otherwise, you will need to modify the some parts of the code to make it work.
+
+<https://learn.microsoft.com/en-us/ef/core/managing-schemas/scaffolding/>
+
+- Inside the `BasicNtierTemplate.Data` project folder, using Package Manager Console:
+
+  - When using directly the connection string in the command line:
+
+    ```console
+    PM> Scaffold-DbContext "Server=.;Database=BasicNtierTemplateDb;user id=SomeUser;password=ThisIsSomePassword;Trusted_Connection=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
+    ```
+
+  - When extracting the connection string from `appsettings.json` in the `BasicNtierTemplate.API` project:
+
+    ```console
+    PM> Scaffold-DbContext "Name=BasicNtierTemplateConnection" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
+    ```
+
+The previous command will overrite the existing `BasicNtierTemplateContext.cs` file.
+
+#### Additional Commands
+
+```console
+PM>  Scaffold-DbContext "Name=BasicNtierTemplateConnection" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model -Project BasicNtierTemplate.Data -StartupProject BasicNtierTemplate.API -Force -UseDatabaseNames -NoPluralize
+```
+
+Or using .NET Core CLI:
+
+```console
+dotnet ef dbcontext scaffold "Name=BasicNtierTemplateConnection" Microsoft.EntityFrameworkCore.SqlServer --output-dir Model --project BasicNtierTemplate.Data --startup-project BasicNtierTemplate.API --force --use-database-names --no-pluralize
+```
+
+---
+
+## Template Information
 
 ### Connection String
 
@@ -93,52 +159,6 @@ dotnet new basic-ntier-template -o "BasicNtierTemplateExample"
    - Skips certificate validation when using **encrypted connections** — useful for local or development setups where SSL certificates may not be trusted.
 
 _Remember to change it for secure production-ready version (with SQL login and safer defaults)._
-
-### Entity Framework Core: Code-First
-
-- Using PowerShell:
-
-  - Inside the `BasicNtierTemplate.Data` project folder.
-
-    ```powershell
-    > dotnet ef migrations add InitialMigration
-    > dotnet ef database update
-    ```
-
-- Using Package Manager Console:
-
-  - Set "Default Project" to `BasicNtierTemplate.Data`
-
-    ```console
-    PM> Add-Migration InitialMigration
-    PM> Update-Database
-    ```
-
-### Entity Framework Core: Database-First (Database Scaffolding, or Reverse Engineering)
-
-Your database should be named `MyDatabaseDb` for scaffolding to work out-of-the-box. Otherwise, you will need to modify the some parts of the code to make it work.
-
-<https://learn.microsoft.com/en-us/ef/core/managing-schemas/scaffolding/>
-
-- Inside the `BasicNtierTemplate.Data` project folder, using Package Manager Console:
-
-  - When using directly the connection string from the command line:
-
-    ```console
-    PM> Scaffold-DbContext "Server=.;Database=BasicNtierTemplateDb;user id=SomeUser;password=ThisIsSomePassword;Trusted_Connection=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
-    ```
-
-- When extracting the connection string from `appsettings.json` in the `BasicNtierTemplate.API` project:
-
-```console
-Scaffold-DbContext "Name=BasicNtierTemplateConnection" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model -Project BasicNtierTemplate.Data -StartupProject BasicNtierTemplate.API -Force --UseDatabaseNames
-```
-
-The previous command will overrite the existing `BasicNtierTemplateContext.cs` file.
-
----
-
-## Template Information
 
 ### AutoMapper Use
 
@@ -188,7 +208,7 @@ Official Documentation:
 
 1. [How To Create Your Own Templates in NET](https://youtu.be/rdWZo5PD9Ek)
 
-### Other .NET Solution Templates
+### Other Custom .NET Solution Templates
 
 Good:
 
@@ -198,6 +218,10 @@ Good:
 Average:
 
 - <https://github.com/dorlugasigal/MiniClean.Template>
+
+### Recommended Tools
+
+- <https://marketplace.visualstudio.com/items?itemName=ErikEJ.EFCorePowerTools>
 
 ---
 

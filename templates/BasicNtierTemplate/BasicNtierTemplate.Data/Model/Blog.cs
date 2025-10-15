@@ -5,6 +5,6 @@
         public int id { get; set; }
         public required string url { get; set; }
 
-        public virtual ICollection<Posteo>? posteos { get; set; }
+        public virtual ICollection<Posteo>? Posteos { get; set; }
     }
 }

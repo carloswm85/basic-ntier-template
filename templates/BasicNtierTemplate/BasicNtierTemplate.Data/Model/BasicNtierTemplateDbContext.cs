@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+namespace BasicNtierTemplate.Data.Model;
+
 /// <summary>
 /// Partial class for BasicNtierTemplateContext.
 /// 

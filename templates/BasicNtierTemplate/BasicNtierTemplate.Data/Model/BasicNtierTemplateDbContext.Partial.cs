@@ -1,6 +1,8 @@
 ﻿using BasicNtierTemplate.Data.Model;
 using Microsoft.EntityFrameworkCore;
 
+namespace BasicNtierTemplate.Data.Model;
+
 /// <summary>
 /// Partial class for BasicNtierTemplateContext.
 /// </summary>
@@ -27,7 +29,7 @@ public partial class BasicNtierTemplateDbContext : DbContext
             .HasOne<Blog>(p => p.blog)
             // Defines that the related 'Blog' entity has *many* 'Posteo' entities.
             // The navigation property from 'Blog' to 'Posteo' is 'b.posteos'.
-            .WithMany(b => b.posteos)
+            .WithMany(b => b.Posteos)
             // Specifies 'id_blog' in the 'Posteo' entity as the *foreign key*
             // that links 'Posteo' back to the primary key of 'Blog'.
             .HasForeignKey(p => p.blogid);

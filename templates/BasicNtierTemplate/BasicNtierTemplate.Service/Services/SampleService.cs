@@ -24,7 +24,7 @@ namespace BasicNtierTemplate.Service.Services
 
         public IEnumerable<BlogDto> GetBlogList()
         {
-            var blogs = _unitOfWork.BlogRepository.GetAll().Include(blogs => blogs.posteos);
+            var blogs = _unitOfWork.BlogRepository.GetAll().Include(blogs => blogs.Posteos);
             return _mapper.Map<IEnumerable<BlogDto>>(blogs);
         }
 
@@ -32,7 +32,7 @@ namespace BasicNtierTemplate.Service.Services
         {
             var blog = _unitOfWork.BlogRepository.GetAll()
                 .Where(blog => blog.id == blogId)
-                .Include(blog => blog.posteos)
+                .Include(blog => blog.Posteos)
                 .FirstOrDefault()
                 ;
 
