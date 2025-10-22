@@ -1,1 +1,1 @@
-Main `README.md` file is top-level one.
+Go to top-level [../README.md](../README.md)
