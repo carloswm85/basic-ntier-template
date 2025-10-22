@@ -20,6 +20,8 @@
     - [Clean Architecture Information](#clean-architecture-information)
       - [Readings (CA)](#readings-ca)
       - [Video Tutorials (CA)](#video-tutorials-ca)
+  - [Videos](#videos)
+    - [Project Videos](#project-videos)
 
 ---
 
@@ -245,3 +247,12 @@ Average:
 
 1. [Clean Architecture with ASP.NET Core 3.0 - Jason Taylor - NDC Sydney 2019](https://www.youtube.com/watch?v=5OtUm1BLmG0)
 2. [💻 Clean Architecture (by Syntax Async)](https://www.youtube.com/playlist?list=PLlKSF1mm1dufAZmGexWGnORX-yKiGpFjM) playlist
+
+---
+
+## Videos
+
+### Project Videos
+
+- [Week 4](https://youtu.be/RSQXpOOT220)
+- [Week 5](https://youtu.be/TAKPFr6R8Ac)
