@@ -1,6 +1,6 @@
-@BasicNtierTemplate.API_HostAddress = http://localhost:5161
+@BasicNtierTemplate.Server_HostAddress = http://localhost:5018
 
-GET {{BasicNtierTemplate.API_HostAddress}}/weatherforecast/
+GET {{BasicNtierTemplate.Server_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
