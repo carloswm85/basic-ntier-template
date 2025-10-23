@@ -1,0 +1,35 @@
+﻿using System.Security.Claims;
+using BasicNtierTemplate.Service.Models;
+using Microsoft.AspNetCore.Identity;
+
+namespace BasicNtierTemplate.Service.Services.Interfaces
+{
+
+
+    public interface IAdministrationService
+    {
+        // Users
+        Task<ApplicationUser?> FindUserByIdAsync(string userId);
+        Task<IList<Claim>> GetUserClaimsAsync(ApplicationUser user);
+        Task<IList<string>> GetUserRolesAsync(ApplicationUser user);
+        Task<IdentityResult> UpdateUserAsync(ApplicationUser user);
+        Task<IdentityResult> DeleteUserAsync(ApplicationUser user);
+        Task<IQueryable<ApplicationUser>> GetAllUsersAsync();
+
+        // Claims
+        Task<IdentityResult> RemoveClaimsAsync(ApplicationUser user, IEnumerable<Claim> claims);
+        Task<IdentityResult> AddClaimsAsync(ApplicationUser user, IEnumerable<Claim> claims);
+
+        // Roles
+        IQueryable<IdentityRole> GetAllRoles();
+        Task<IdentityRole?> FindRoleByIdAsync(string roleId);
+        Task<IdentityResult> CreateRoleAsync(IdentityRole role);
+        Task<IdentityResult> UpdateRoleAsync(IdentityRole role);
+        Task<IdentityResult> DeleteRoleAsync(IdentityRole role);
+
+        Task<bool> IsUserInRoleAsync(ApplicationUser user, string roleName);
+        Task<IdentityResult> AddUserToRoleAsync(ApplicationUser user, string roleName);
+        Task<IdentityResult> RemoveUserFromRoleAsync(ApplicationUser user, string roleName);
+        Task<IList<string>> GetUsersInRoleAsync(IdentityRole role);
+    }
+}

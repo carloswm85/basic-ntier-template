@@ -1,8 +1,10 @@
+using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Data.Tools;
 using BasicNtierTemplate.Repository;
 using BasicNtierTemplate.Service.Mappings;
 using BasicNtierTemplate.Service.Services;
 using BasicNtierTemplate.Service.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BasicNtierTemplate.API
@@ -24,10 +26,18 @@ namespace BasicNtierTemplate.API
             var connectionString = builder.Configuration.GetConnectionString("BasicNtierTemplateConnection")
                 ?? throw new InvalidOperationException("Connection string" + "'BasicNtierTemplateConnection' not found.");
 
+            // Register Connection for Unit of Work use
             builder.Services.AddSingleton(sp =>
             {
                 return new ConnectionResource(connectionString);
             });
+
+            builder.Services.AddDbContext<BasicNtierTemplateDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString(connectionString)));
+
+
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<BasicNtierTemplateDbContext>();
 
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -40,6 +50,7 @@ namespace BasicNtierTemplate.API
             // Register application services for dependency injection.
             // IBlogService (interface) will be resolved to BlogService (implementation).
             builder.Services.AddScoped<ISampleService, SampleService>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             // Add controller support (enables MVC-style controllers).
             builder.Services.AddControllers().AddJsonOptions(options =>
@@ -70,12 +81,18 @@ namespace BasicNtierTemplate.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
+            }
 
-            // Redirect all HTTP requests to HTTPS for security.
-            app.UseHttpsRedirection();
+                // Redirect all HTTP requests to HTTPS for security.
+                app.UseHttpsRedirection();
 
             // Enable authorization middleware (validates user access).
-            app.UseAuthorization();
+            app.UseAuthentication();
+            //app.UseAuthorization();
 
             // Map controllers to endpoints (routes controllers’ actions to HTTP requests).
             app.MapControllers();
