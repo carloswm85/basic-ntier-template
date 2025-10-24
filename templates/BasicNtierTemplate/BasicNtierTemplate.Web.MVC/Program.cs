@@ -1,8 +1,8 @@
-using BasicNtierTemplate.Web.Razor.Services;
-using BasicNtierTemplate.Web.Razor.Services.Interfaces;
+using BasicNtierTemplate.Web.MVC.Services;
+using BasicNtierTemplate.Web.MVC.Services.Interfaces;
 using NLog;
 
-namespace BasicNtierTemplate.Web.Razor
+namespace BasicNtierTemplate.Web.MVC
 {
     public class Program
     {
@@ -52,7 +52,6 @@ namespace BasicNtierTemplate.Web.Razor
 
                 app.UseAuthorization();
 
-                //app.MapRazorPages();
                 app.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}"

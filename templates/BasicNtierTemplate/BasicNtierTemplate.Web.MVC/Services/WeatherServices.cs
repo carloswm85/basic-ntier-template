@@ -1,10 +1,10 @@
 ﻿using System.Net.Http;
 using System.Text.Json;
-using BasicNtierTemplate.Web.Razor.Models;
-using BasicNtierTemplate.Web.Razor.Services.Interfaces;
+using BasicNtierTemplate.Web.MVC.Models;
+using BasicNtierTemplate.Web.MVC.Services.Interfaces;
 using NLog;
 
-namespace BasicNtierTemplate.Web.Razor.Services
+namespace BasicNtierTemplate.Web.MVC.Services
 {
 
     public class WeatherServices(IHttpClientFactory httpClientFactory) : IWeatherServices

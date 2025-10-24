@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicNtierTemplate.Reposito
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicNtierTemplate.Service", "BasicNtierTemplate.Service\BasicNtierTemplate.Service.csproj", "{5DFF6E8F-CFA0-4B17-B323-E00AB32B4569}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicNtierTemplate.Web.Razor", "BasicNtierTemplate.Web.Razor\BasicNtierTemplate.Web.Razor.csproj", "{F5728761-A152-4E30-85E4-717E8212A34D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicNtierTemplate.Web.MVC", "BasicNtierTemplate.Web.MVC\BasicNtierTemplate.Web.MVC.csproj", "{F5728761-A152-4E30-85E4-717E8212A34D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

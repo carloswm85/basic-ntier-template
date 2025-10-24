@@ -1,6 +1,6 @@
-﻿using BasicNtierTemplate.Web.Razor.Models;
+﻿using BasicNtierTemplate.Web.MVC.Models;
 
-namespace BasicNtierTemplate.Web.Razor.Services.Interfaces
+namespace BasicNtierTemplate.Web.MVC.Services.Interfaces
 {
     public interface IWeatherServices
     {

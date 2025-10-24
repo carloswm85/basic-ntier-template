@@ -1,10 +1,10 @@
 ﻿using System.Text.Json;
-using BasicNtierTemplate.Web.Razor.Models;
-using BasicNtierTemplate.Web.Razor.Services.Interfaces;
+using BasicNtierTemplate.Web.MVC.Models;
+using BasicNtierTemplate.Web.MVC.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
 
-namespace BasicNtierTemplate.Web.Razor.Controllers
+namespace BasicNtierTemplate.Web.MVC.Controllers
 {
     /// <summary>
     /// Using primary constructor syntax for dependency injection

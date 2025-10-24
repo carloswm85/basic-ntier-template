@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace BasicNtierTemplate.Web.Razor.Controllers
+namespace BasicNtierTemplate.Web.MVC.Controllers
 {
     public class AccountController(IHttpClientFactory httpClientFactory) : Controller
     {

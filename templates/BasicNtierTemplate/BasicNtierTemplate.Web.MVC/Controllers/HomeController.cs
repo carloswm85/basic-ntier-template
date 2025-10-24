@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BasicNtierTemplate.Web.Razor.Controllers
+namespace BasicNtierTemplate.Web.MVC.Controllers
 {
     /// <summary>
     /// Using primary constructor syntax for dependency injection

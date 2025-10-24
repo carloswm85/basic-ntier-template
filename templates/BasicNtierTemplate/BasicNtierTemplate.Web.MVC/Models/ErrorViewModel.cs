@@ -1,4 +1,4 @@
-﻿namespace BasicNtierTemplate.Web.Razor.Models
+﻿namespace BasicNtierTemplate.Web.MVC.Models
 {
     public class ErrorViewModel
     {
