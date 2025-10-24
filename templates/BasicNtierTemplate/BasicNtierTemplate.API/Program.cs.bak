@@ -1,4 +1,4 @@
-using BasicNtierTemplate.Data.Model;
+﻿using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Data.Tools;
 using BasicNtierTemplate.Repository;
 using BasicNtierTemplate.Service.Mappings;
@@ -64,12 +64,22 @@ namespace BasicNtierTemplate.API
             // Register Swagger generator for API documentation.
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowRazorApp",
+                    policy => policy.WithOrigins("https://localhost:7244")
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod());
+            });
+
             #endregion
 
             // Build the application with the configured services.
             var app = builder.Build();
 
             #region Middleware addition
+
+            app.UseCors("AllowRazorApp");
 
             // Configure the HTTP request pipeline (middleware execution order).
             if (app.Environment.IsDevelopment())
@@ -94,7 +104,7 @@ namespace BasicNtierTemplate.API
             app.UseAuthentication();
             //app.UseAuthorization();
 
-            // Map controllers to endpoints (routes controllers� actions to HTTP requests).
+            // Map controllers to endpoints (routes controllers’ actions to HTTP requests).
             app.MapControllers();
 
             #endregion

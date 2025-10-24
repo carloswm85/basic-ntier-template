@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
-using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Repository;
-using BasicNtierTemplate.Service.Dtos;
 using BasicNtierTemplate.Service.Services.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace BasicNtierTemplate.Service.Services
 {

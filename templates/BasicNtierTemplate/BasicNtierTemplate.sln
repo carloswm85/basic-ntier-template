@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicNtierTemplate.Reposito
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicNtierTemplate.Service", "BasicNtierTemplate.Service\BasicNtierTemplate.Service.csproj", "{5DFF6E8F-CFA0-4B17-B323-E00AB32B4569}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicNtierTemplate.Web.Razor", "BasicNtierTemplate.Web.Razor\BasicNtierTemplate.Web.Razor.csproj", "{F5728761-A152-4E30-85E4-717E8212A34D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{5DFF6E8F-CFA0-4B17-B323-E00AB32B4569}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DFF6E8F-CFA0-4B17-B323-E00AB32B4569}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DFF6E8F-CFA0-4B17-B323-E00AB32B4569}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5728761-A152-4E30-85E4-717E8212A34D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5728761-A152-4E30-85E4-717E8212A34D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5728761-A152-4E30-85E4-717E8212A34D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5728761-A152-4E30-85E4-717E8212A34D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

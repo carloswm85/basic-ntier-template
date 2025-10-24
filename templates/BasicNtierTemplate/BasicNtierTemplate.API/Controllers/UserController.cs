@@ -1,7 +1,5 @@
 ﻿using BasicNtierTemplate.Service.Services.Interfaces;
-using Microsoft.AspNetCore.Authentication.BearerToken;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 
 

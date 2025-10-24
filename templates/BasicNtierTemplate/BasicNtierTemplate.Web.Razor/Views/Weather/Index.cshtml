@@ -1,0 +1,41 @@
+﻿@model BasicNtierTemplate.Web.Razor.Models.WeatherViewModel
+@{
+    ViewData["Title"] = "Weather Forecast";
+}
+
+<div class="container mt-4">
+    <h1 class="display-4 mb-4">Weather Forecast</h1>
+    
+    @if (Model?.WeatherList != null && Model.WeatherList.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Date</th>
+                        <th>Temperature (°C)</th>
+                        <th>Temperature (°F)</th>
+                        <th>Summary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var weather in Model.WeatherList)
+                    {
+                        <tr>
+                            <td>@weather.Date.ToShortDateString()</td>
+                            <td>@weather.TemperatureC°C</td>
+                            <td>@weather.TemperatureF°F</td>
+                            <td>@weather.Summary</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info" role="alert">
+            No weather data available.
+        </div>
+    }
+</div>

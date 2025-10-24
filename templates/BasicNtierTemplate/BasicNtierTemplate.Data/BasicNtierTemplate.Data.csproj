@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.9" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.9" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.9" />
+    <PackageReference Include="NLog" Version="6.0.5" />
   </ItemGroup>
 
 </Project>

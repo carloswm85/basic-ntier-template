@@ -1,5 +1,4 @@
-﻿using BasicNtierTemplate.Data.Model;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BasicNtierTemplate.Data.Model;
