@@ -1,4 +1,7 @@
 - [Basic Ntier Template](#basic-ntier-template)
+  - [Version compatibility:](#version-compatibility)
+  - [Architecture](#architecture)
+    - [Notes](#notes)
   - [Template Installation](#template-installation)
     - [Nuget Installation](#nuget-installation)
     - [Local Repository Installation](#local-repository-installation)
@@ -29,7 +32,7 @@
 
 <https://github.com/carloswm85/basic-ntier-template>
 
-Version compatibility:
+## Version compatibility:
 
 | Current |      | Version | Requirements   |
 | ------- | ---- | ------- | -------------- |
@@ -46,6 +49,28 @@ Version compatibility:
 |         | `18.0.x`             | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.4.0 <5.5.0`   | `^6.5.3` or `^7.4.0` |
 
 ---
+
+## Architecture
+
+| Level | Layers        | Classification                     | Functionality                                          | Technology/Notes                                                   | Role                                                                             |
+| ----- | ------------- | ---------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| 1     | `Data`        | -                                  | Database schema, migrations, models                    | Entity Framework Core, Identity API integration                    | Define database schema, manage migrations, and entity mapping.                   |
+| 2     | `Repository`  | -                                  | Data access abstraction, caching, Unit of Work Pattern | Querying interfaces                                                | Abstract data access logic to decouple the service layer from EF Core specifics. |
+| 3     | `Service`     | Business logic                     | Logic, validation                                      | Business rules, support async methods                              | Implement business logic, enforce rules and validation.                          |
+| 4     | `API`         | Request handling, Dev presentation | RESTful API, documentation                             | Swagger/OpenAPI, versioning                                        | Expose business services as RESTful endpoints.                                   |
+| 5     | `Web.MVC`     | User presentation                  | Server-side rendering, UI logic                        | MVC design pattern, Razor syntax                                   | Traditional server-rendered UI using MVC and Razor Pages.                        |
+| 5     | `Web.Angular` | User presentation                  | Client-side SPA                                        | Angular SPA, with strong typing (TypeScript), Rest API integration | Modern client-side SPA experience.                                               |
+
+![Basic Ntier Template Architecture Diagram](./docs/img/basic-ntier-template-architecture-diagram.png)
+
+### Notes
+
+- Data Layer:
+  - Etity Framework Core, with code-first and database-first support.
+- Repository:
+  - Define interfaces for repositories (e.g., IUserRepository) which support CRUD and query operations asynchronously.
+  - Caching: Caching strategies, or as a decorator pattern, to optimize repeated data retrieval.
+  - Unit of Work Pattern: Aggregate repository transactions ensuring atomicity.
 
 ## Template Installation
 
