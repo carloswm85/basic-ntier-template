@@ -11,120 +11,125 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BasicNtierTemplate.API
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            try
-            {
-                Debug.WriteLine(">>> API: Starting application...");
+	public class Program
+	{
+		public static void Main(string[] args)
+		{
+			try
+			{
+				Debug.WriteLine(">>> API: Starting application...");
 
-                // Create a WebApplication builder to configure services and middleware
-                var builder = WebApplication.CreateBuilder(args);
+				// Create a WebApplication builder to configure services and middleware
+				var builder = WebApplication.CreateBuilder(args);
 
-                #region Service addition
+				#region Service addition
 
-                // Connection string "BasicNtierTemplateConnection" is pulled from configuration (appsettings.json).
-                var connectionString = builder.Configuration.GetConnectionString("BasicNtierTemplateConnection")
-                ?? throw new InvalidOperationException("Connection string" + "'BasicNtierTemplateConnection' not found.");
+				// Connection string "BasicNtierTemplateConnection" is pulled from configuration (appsettings.json).
+				var connectionString = builder.Configuration.GetConnectionString("BasicNtierTemplateConnection")
+				?? throw new InvalidOperationException("Connection string" + "'BasicNtierTemplateConnection' not found.");
 
-                // (01) Register DbContext with Connection Pooling
-                // Register DbContext with SQL Server as the database provider.
-                builder.Services.AddDbContextPool<BasicNtierTemplateDbContext>(options =>
-                    options.UseSqlServer(connectionString));
+				// (01) Register DbContext with Connection Pooling
+				// Register DbContext with SQL Server as the database provider.
+				builder.Services.AddDbContextPool<BasicNtierTemplateDbContext>(options =>
+					options.UseSqlServer(connectionString));
 
-                // (02) Register Connection for UnitofWork usage
-                builder.Services.AddSingleton(sp =>
-                {
-                    return new ConnectionResource(connectionString);
-                });
+				// (02) Register Connection for UnitofWork usage
+				builder.Services.AddSingleton(sp =>
+				{
+					return new ConnectionResource(connectionString);
+				});
 
-                // TODO https://youtu.be/kC9qrUcy2Js?list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&t=199
-                builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-                {
-                    options.Password.RequireDigit = true;
-                    options.Password.RequireUppercase = true;
-                    options.Password.RequireLowercase = true;
-                    options.Password.RequiredLength = 6;
-                    options.SignIn.RequireConfirmedEmail = false;
-                    //options.Tokens.EmailConfirmationTokenProvider = "CustomEmailConfirmation";
-                    // TODO https://youtu.be/jHRWR36UC2s?list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU
-                    options.Lockout.MaxFailedAccessAttempts = 5;
-                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
-                })
-                    .AddEntityFrameworkStores<BasicNtierTemplateDbContext>()
-                    .AddDefaultTokenProviders();
+				// TODO https://youtu.be/kC9qrUcy2Js?list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&t=199
+				builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+				{
+					options.Password.RequireDigit = true;
+					options.Password.RequireUppercase = true;
+					options.Password.RequireLowercase = true;
+					options.Password.RequiredLength = 6;
+					options.SignIn.RequireConfirmedEmail = false;
+					//options.Tokens.EmailConfirmationTokenProvider = "CustomEmailConfirmation";
+					// TODO https://youtu.be/jHRWR36UC2s?list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU
+					options.Lockout.MaxFailedAccessAttempts = 5;
+					options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+				})
+					.AddEntityFrameworkStores<BasicNtierTemplateDbContext>()
+					.AddDefaultTokenProviders();
 
-                builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+				builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-                builder.Services.AddAutoMapper(
-                    cfg => { },
-                    typeof(BlogProfile).Assembly,
-                    typeof(PostProfile).Assembly
-                );
+				builder.Services.AddAutoMapper(
+					cfg => { },
+					typeof(BlogProfile).Assembly,
+					typeof(PostProfile).Assembly
+				);
 
-                // Register application services for dependency injection.
-                builder.Services.AddScoped<ISampleService, SampleService>(); // SAMPLE
-                                                                             // Identity Services
-                builder.Services.AddScoped<IEmailService, EmailService>();
-                builder.Services.AddScoped<IUserService, UserService>();
-                builder.Services.AddScoped<IRegistrationService, RegistrationService>();
+				// Register application services for dependency injection.
+				builder.Services.AddScoped<ISampleService, SampleService>(); // SAMPLE
+																			 // Identity Services
+				builder.Services.AddScoped<IEmailService, EmailService>();
+				builder.Services.AddScoped<IUserService, UserService>();
+				builder.Services.AddScoped<IRegistrationService, RegistrationService>();
 
-                // Add controller support (enables MVC-style controllers).
-                builder.Services.AddControllers().AddJsonOptions(options =>
-                {
-                    options.JsonSerializerOptions.PropertyNamingPolicy = null;
-                });
+				// Add controller support (enables MVC-style controllers).
+				builder.Services.AddControllers().AddJsonOptions(options =>
+				{
+					options.JsonSerializerOptions.PropertyNamingPolicy = null;
+				});
 
-                // Register services required for minimal APIs (endpoint metadata exploration).
-                builder.Services.AddEndpointsApiExplorer();
+				// Register services required for minimal APIs (endpoint metadata exploration).
+				builder.Services.AddEndpointsApiExplorer();
 
-                // Register Swagger generator for API documentation.
-                builder.Services.AddSwaggerGen();
+				// Register Swagger generator for API documentation.
+				builder.Services.AddSwaggerGen();
 
-                #endregion
+				#endregion
 
-                // Build the application with the configured services.
-                var app = builder.Build();
+				// Build the application with the configured services.
+				var app = builder.Build();
 
-                #region Middleware addition
+				#region Middleware addition
 
-                // Configure the HTTP request pipeline (middleware execution order).
-                if (app.Environment.IsDevelopment())
-                {
-                    // Show detailed error pages during development.
-                    // app.UseDeveloperExceptionPage(); // Not required after NET6
+				app.UseDefaultFiles();
+				app.UseStaticFiles();
 
-                    // Enable Swagger UI in development for API testing and documentation.
-                    app.UseSwagger();
-                    app.UseSwaggerUI();
-                }
-                else
-                {
-                    app.UseExceptionHandler("/error");
-                    app.UseStatusCodePagesWithReExecute("/error/{0}");
-                }
+				// Configure the HTTP request pipeline (middleware execution order).
+				if (app.Environment.IsDevelopment())
+				{
+					// Show detailed error pages during development.
+					// app.UseDeveloperExceptionPage(); // Not required after NET6
 
-                // Redirect all HTTP requests to HTTPS for security.
-                app.UseHttpsRedirection();
+					// Enable Swagger UI in development for API testing and documentation.
+					app.UseSwagger();
+					app.UseSwaggerUI();
+				}
+				else
+				{
+					app.UseExceptionHandler("/error");
+					app.UseStatusCodePagesWithReExecute("/error/{0}");
+				}
 
-                // Enable authorization middleware (validates user access).
-                app.UseAuthentication();
-                app.UseAuthorization();
+				// Redirect all HTTP requests to HTTPS for security.
+				app.UseHttpsRedirection();
 
-                // Map controllers to endpoints (routes controllers’ actions to HTTP requests).
-                app.MapControllers();
+				// Enable authorization middleware (validates user access).
+				app.UseAuthentication();
+				app.UseAuthorization();
 
-                #endregion
+				// Map controllers to endpoints (routes controllers’ actions to HTTP requests).
+				app.MapControllers();
+			
+				app.MapFallbackToFile("/index.html");
 
-                // Run the application and start listening for incoming HTTP requests.
-                app.Run();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex, "API: Stopped program because of exception");
-                throw;
-            }
-        }
-    }
+				#endregion
+
+				// Run the application and start listening for incoming HTTP requests.
+				app.Run();
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex, "API: Stopped program because of exception");
+				throw;
+			}
+		}
+	}
 }
