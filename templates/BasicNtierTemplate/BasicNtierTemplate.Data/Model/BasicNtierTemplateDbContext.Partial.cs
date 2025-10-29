@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using BasicNtierTemplate.Data.Model.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BasicNtierTemplate.Data.Model;
@@ -6,7 +7,7 @@ namespace BasicNtierTemplate.Data.Model;
 /// <summary>
 /// Partial class for BasicNtierTemplateContext.
 /// </summary>
-public partial class BasicNtierTemplateDbContext : IdentityDbContext
+public partial class BasicNtierTemplateDbContext : IdentityDbContext<ApplicationUser>
 {
     /// <summary>
     /// Example content for the partial class to configure the model.

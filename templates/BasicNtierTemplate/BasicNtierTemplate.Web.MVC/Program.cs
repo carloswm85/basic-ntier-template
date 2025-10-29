@@ -1,6 +1,6 @@
+using System.Diagnostics;
 using BasicNtierTemplate.Web.MVC.Services;
 using BasicNtierTemplate.Web.MVC.Services.Interfaces;
-using NLog;
 
 namespace BasicNtierTemplate.Web.MVC
 {
@@ -8,12 +8,13 @@ namespace BasicNtierTemplate.Web.MVC
     {
         public static void Main(string[] args)
         {
-            var logger = LogManager.Setup().LoadConfigurationFromFile().GetCurrentClassLogger();
-            logger.Debug("init main");
-
             try
             {
+                Debug.WriteLine("MVC: Starting application...");
+
                 var builder = WebApplication.CreateBuilder(args);
+
+                #region Services Addition
 
                 builder.Services.AddHttpClient("ApiClient", client =>
                 {
@@ -25,7 +26,6 @@ namespace BasicNtierTemplate.Web.MVC
                     client.BaseAddress = new Uri(apiBaseUrl);
                 });
 
-
                 // Add services to the container.
                 builder.Services.AddRazorPages();
 
@@ -35,7 +35,11 @@ namespace BasicNtierTemplate.Web.MVC
 
                 builder.Services.AddScoped<IWeatherServices, WeatherServices>();
 
+                #endregion
+
                 var app = builder.Build();
+
+                #region Middleware Addition
 
                 // Configure the HTTP request pipeline.
                 if (!app.Environment.IsDevelopment())
@@ -57,17 +61,14 @@ namespace BasicNtierTemplate.Web.MVC
                     pattern: "{controller=Home}/{action=Index}/{id?}"
                 );
 
+                #endregion
+
                 app.Run();
             }
             catch (Exception ex)
             {
-                logger.Error(ex, "Stopped program because of exception");
+                Debug.WriteLine(ex, "MVC: Stopped program because of exception");
                 throw;
-            }
-            finally
-            {
-                LogManager.Shutdown();
-
             }
         }
     }

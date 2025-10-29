@@ -1,8 +1,6 @@
-﻿using System.Text.Json;
-using BasicNtierTemplate.Web.MVC.Models;
+﻿using BasicNtierTemplate.Web.MVC.Models;
 using BasicNtierTemplate.Web.MVC.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using NLog;
 
 namespace BasicNtierTemplate.Web.MVC.Controllers
 {
@@ -12,7 +10,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers
     /// <param name="httpClientFactory"></param>
     public class WeatherController : Controller
     {
-        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
+        private readonly ILogger<WeatherController> _logger;
         private readonly IWeatherServices _weatherService;
 
         public WeatherController(IWeatherServices weatherService)
@@ -34,7 +32,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "Unexpected error occurred in HomeController.Index");
+                _logger.LogError(ex, "Unexpected error occurred in HomeController.Index");
                 return View("Error");
             }
         }

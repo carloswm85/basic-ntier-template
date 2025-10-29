@@ -5,8 +5,8 @@ namespace BasicNtierTemplate.Repository
 {
     public class StoredProcedureRepository<T> : IStoredProcedureRepository<T> where T : class
     {
-        private DbContext _context;
-        private string _query;
+        private readonly DbContext _context;
+        private readonly string _query;
 
         public StoredProcedureRepository(DbContext context, string query)
         {

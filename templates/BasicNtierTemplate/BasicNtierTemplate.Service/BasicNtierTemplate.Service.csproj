@@ -14,6 +14,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Services\Interfaces\IAdministrationService.cs.example" />
+    <None Remove="Services\Interfaces\IAuthenticationService.cs.TODO" />
+    <None Remove="Services\Interfaces\IAuthService.cs.example" />
+    <None Remove="Services\Interfaces\IPasswordService.cs.TODO" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BasicNtierTemplate.Data\BasicNtierTemplate.Data.csproj" />
     <ProjectReference Include="..\BasicNtierTemplate.Repository\BasicNtierTemplate.Repository.csproj" />
   </ItemGroup>
