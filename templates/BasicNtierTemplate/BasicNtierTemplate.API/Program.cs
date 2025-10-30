@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Data.Model.Identity;
-using BasicNtierTemplate.Data.Tools;
 using BasicNtierTemplate.Repository;
 using BasicNtierTemplate.Service.Mappings;
 using BasicNtierTemplate.Service.Services;
@@ -48,7 +47,20 @@ namespace BasicNtierTemplate.API
 					.AddEntityFrameworkStores<BasicNtierTemplateDbContext>()
 					.AddDefaultTokenProviders();
 
-				builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+				// CORS Configuration to allow requests from frontend applications (for production, configure appropriately).
+				/* Not required when running frontend and backend in the same solution with proper proxy setup
+				builder.Services.AddCors(options =>
+				{
+					options.AddPolicy("AllowFrontend", policy =>
+					{
+						policy.WithOrigins("http://localhost:3000", "http://localhost:4200") // Your frontend URLs
+							  .AllowAnyHeader()
+							  .AllowAnyMethod()
+							  .AllowCredentials(); // Important for cookies/auth
+					});
+				});
+				*/
+
 				builder.Services.AddScoped<IUnitOfWork, UnitOfWorkEF>();
 
 				builder.Services.AddAutoMapper(
@@ -101,6 +113,10 @@ namespace BasicNtierTemplate.API
 
 				// Redirect all HTTP requests to HTTPS for security.
 				app.UseHttpsRedirection();
+
+				// Enable CORS using the defined policy to allow frontend access.
+				// Not required when running frontend and backend in the same solution with proper proxy setup
+				// app.UseCors("AllowFrontend");
 
 				// Enable authorization middleware (validates user access).
 				app.UseAuthentication();

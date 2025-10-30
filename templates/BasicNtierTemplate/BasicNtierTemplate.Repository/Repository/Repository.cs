@@ -1,5 +1,5 @@
-﻿using BasicNtierTemplate.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using BasicNtierTemplate.Data;
 
 namespace BasicNtierTemplate.Repository
 {
@@ -20,7 +20,7 @@ namespace BasicNtierTemplate.Repository
         {
             _context = context;
             _entities = context.Set<T>();
-        }        
+        }
 
         #endregion
 
