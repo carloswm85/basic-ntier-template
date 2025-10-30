@@ -15,17 +15,18 @@ namespace BasicNtierTemplate.Repository
 
         #region Constructors
 
+        // TODO should DbContext be changed to BasicNtierTemplateDbContext?
         public Repository(DbContext context)
         {
             _context = context;
             _entities = context.Set<T>();
-        }
-
-        public Repository() { }
+        }        
 
         #endregion
 
         #region Public Methods: GetAll, GetById, Add, Delete, Delete, Update
+
+        // TODO should I improve these methods?
 
         public virtual IQueryable<T> GetAll(bool cache = true)
         {

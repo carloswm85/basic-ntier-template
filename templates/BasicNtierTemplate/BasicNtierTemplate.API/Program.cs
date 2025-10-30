@@ -28,9 +28,8 @@ namespace BasicNtierTemplate.API
 				var connectionString = builder.Configuration.GetConnectionString("BasicNtierTemplateConnection")
 				?? throw new InvalidOperationException("Connection string" + "'BasicNtierTemplateConnection' not found.");
 
-				// (01) Register DbContext with Connection Pooling
 				// Register DbContext with SQL Server as the database provider.
-				builder.Services.AddDbContextPool<BasicNtierTemplateDbContext>(options =>
+				builder.Services.AddDbContext<BasicNtierTemplateDbContext>(options =>
 					options.UseSqlServer(connectionString));
 
 				// TODO https://youtu.be/kC9qrUcy2Js?list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&t=199
@@ -83,9 +82,6 @@ namespace BasicNtierTemplate.API
 				var app = builder.Build();
 
 				#region Middleware addition
-
-				app.UseDefaultFiles();
-				app.UseStaticFiles();
 
 				// Configure the HTTP request pipeline (middleware execution order).
 				if (app.Environment.IsDevelopment())
