@@ -1,29 +1,27 @@
 ﻿using BasicNtierTemplate.Data.Model;
-using BasicNtierTemplate.Data.Tools;
 using Microsoft.EntityFrameworkCore;
 
 namespace BasicNtierTemplate.Repository
 {
-    public sealed class UnitOfWork : IDisposable, IUnitOfWork
+    public sealed class UnitOfWorkEF : IDisposable, IUnitOfWork
     {
         #region Private Fields
 
         private readonly BasicNtierTemplateDbContext _dbContext;
-
         private bool _disposed = false;
 
         private IRepository<Blog>? _blogRepository;
         private IRepository<Posteo>? _postRepository;
 
-
         #endregion
 
         #region Dependency (Unity) Injection Constructor
 
-        public UnitOfWork(ConnectionResource connection)
+        public UnitOfWorkEF(BasicNtierTemplateDbContext dbContext)
         {
-            _dbContext = ConnectionHelper.CreateConnection(connection);
+            _dbContext = dbContext;
         }
+
         #endregion
 
         #region Public Methods

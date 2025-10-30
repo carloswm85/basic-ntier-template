@@ -33,12 +33,6 @@ namespace BasicNtierTemplate.API
 				builder.Services.AddDbContextPool<BasicNtierTemplateDbContext>(options =>
 					options.UseSqlServer(connectionString));
 
-				// (02) Register Connection for UnitofWork usage
-				builder.Services.AddSingleton(sp =>
-				{
-					return new ConnectionResource(connectionString);
-				});
-
 				// TODO https://youtu.be/kC9qrUcy2Js?list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&t=199
 				builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 				{
@@ -56,6 +50,7 @@ namespace BasicNtierTemplate.API
 					.AddDefaultTokenProviders();
 
 				builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+				builder.Services.AddScoped<IUnitOfWork, UnitOfWorkEF>();
 
 				builder.Services.AddAutoMapper(
 					cfg => { },
