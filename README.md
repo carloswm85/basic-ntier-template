@@ -48,7 +48,7 @@
 |         | `18.1.x` or `18.2.x` | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.4.0 <5.6.0`   | `^6.5.3` or `^7.4.0` |
 |         | `18.0.x`             | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.4.0 <5.5.0`   | `^6.5.3` or `^7.4.0` |
 
-- [Installation instructions](./docs/content/installation-instructions.md)
+- [Installation requirements](./docs/content/installation-requirements.md)
 
 ---
 
