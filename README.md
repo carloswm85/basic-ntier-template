@@ -1,5 +1,5 @@
 - [Basic Ntier Template](#basic-ntier-template)
-  - [Version compatibility:](#version-compatibility)
+  - [Version compatibility](#version-compatibility)
   - [Architecture](#architecture)
     - [Notes](#notes)
   - [Template Installation](#template-installation)
@@ -32,7 +32,7 @@
 
 <https://github.com/carloswm85/basic-ntier-template>
 
-## Version compatibility:
+## Version compatibility
 
 | Current |      | Version | Requirements   |
 | ------- | ---- | ------- | -------------- |
@@ -47,6 +47,8 @@
 |         | `19.0.x`             | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.5.0 <5.7.0`   | `^6.5.3` or `^7.4.0` |
 |         | `18.1.x` or `18.2.x` | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.4.0 <5.6.0`   | `^6.5.3` or `^7.4.0` |
 |         | `18.0.x`             | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.4.0 <5.5.0`   | `^6.5.3` or `^7.4.0` |
+
+- [Installation instructions](./docs/content/installation-instructions.md)
 
 ---
 
