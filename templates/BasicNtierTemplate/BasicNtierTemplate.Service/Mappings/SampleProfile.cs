@@ -4,11 +4,30 @@ using BasicNtierTemplate.Service.Dtos;
 
 namespace BasicNtierTemplate.Service.Mappings
 {
-    public class PostProfile : Profile
+    public class SampleProfile : Profile
     {
-        public PostProfile()
+        public SampleProfile()
         {
+            #region Blog
+
             // Entity -> DTO
+            CreateMap<Blog, BlogDto>()
+                .ForMember(destination => destination.Id, options => options.MapFrom(source => source.id))
+                .ForMember(dto => dto.Url, opt => opt.MapFrom(src => src.url))
+                .ForMember(dto => dto.Posts, opt => opt.MapFrom(src => src.Posteos))
+                ;
+
+            // DTO -> Entity
+            CreateMap<BlogDto, Blog>()
+                .ForMember(destination => destination.id, options => options.MapFrom(source => source.Id))
+                .ForMember(dto => dto.url, opt => opt.MapFrom(src => src.Url))
+                .ForMember(dto => dto.Posteos, opt => opt.MapFrom(src => src.Posts))
+                ;
+
+            #endregion
+
+            #region Posteo
+
             CreateMap<Posteo, PostDto>()
                 .ForMember(destination => destination.Id, options => options.MapFrom(source => source.id))
                 .ForMember(dto => dto.Title, opt => opt.MapFrom(src => src.titulo))
@@ -17,7 +36,6 @@ namespace BasicNtierTemplate.Service.Mappings
                 .ForMember(dto => dto.Blog, opt => opt.Ignore())
                 ;
 
-            // DTO -> Entity
             CreateMap<PostDto, Posteo>()
                 .ForMember(destination => destination.id, options => options.MapFrom(source => source.Id))
                 .ForMember(dto => dto.titulo, opt => opt.MapFrom(src => src.Title))
@@ -25,6 +43,8 @@ namespace BasicNtierTemplate.Service.Mappings
                 .ForMember(dto => dto.blogid, opt => opt.MapFrom(src => src.BlogId))
                 .ForMember(dto => dto.blog, opt => opt.Ignore())
                 ;
+
+            #endregion
         }
     }
 }
