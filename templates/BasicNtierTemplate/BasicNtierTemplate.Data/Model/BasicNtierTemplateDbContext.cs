@@ -1,6 +1,4 @@
-﻿using BasicNtierTemplate.Data.Model.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace BasicNtierTemplate.Data.Model;
 
@@ -12,7 +10,7 @@ namespace BasicNtierTemplate.Data.Model;
 /// - DO NOT use this file for customizations. Instead use additional partial class files.
 /// - This is the convention.
 /// </summary>
-public partial class BasicNtierTemplateDbContext : IdentityDbContext<ApplicationUser>
+public partial class BasicNtierTemplateDbContext : DbContext
 {
     public BasicNtierTemplateDbContext()
     {
