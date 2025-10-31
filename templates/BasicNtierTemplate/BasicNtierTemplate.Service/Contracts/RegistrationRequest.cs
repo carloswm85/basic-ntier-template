@@ -7,17 +7,18 @@
         public string FullName { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
-        public string UserName { get; set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
 
         public RegisterRequest() { }
-        public RegisterRequest(string city, string email, string fullName, string password, string phoneNumber, string username)
+        public RegisterRequest(string city, string email, string fullName,
+            string password, string phoneNumber, string username)
         {
             City = city;
             Email = email;
             FullName = fullName;
             Password = password;
             PhoneNumber = phoneNumber;
-            UserName = username;
+            Username = username;
         }
     }
 }

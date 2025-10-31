@@ -37,10 +37,10 @@ namespace BasicNtierTemplate.API.Controllers
                 Email = email,
                 Password = password,
                 PhoneNumber = phoneNumber,
-                UserName = username
+                Username = username
             });
 
-            if (!result.Success)
+            if (!result.IsSuccess)
                 return BadRequest(result.Errors);
 
             return Ok(result);
@@ -56,7 +56,7 @@ namespace BasicNtierTemplate.API.Controllers
 
             var result = await _registrationService.RegisterAsync(request);
 
-            if (!result.Success)
+            if (!result.IsSuccess)
                 return BadRequest(result.Errors);
 
             return Ok(result);

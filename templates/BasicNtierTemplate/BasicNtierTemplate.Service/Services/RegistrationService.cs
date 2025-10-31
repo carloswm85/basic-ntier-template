@@ -1,8 +1,8 @@
-﻿using BasicNtierTemplate.Data.Model.Identity;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
+using BasicNtierTemplate.Data.Model.Identity;
 using BasicNtierTemplate.Service.Contracts;
 using BasicNtierTemplate.Service.Services.Interfaces;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
 
 namespace BasicNtierTemplate.Service.Services
 {
@@ -27,7 +27,7 @@ namespace BasicNtierTemplate.Service.Services
 
             var user = new ApplicationUser
             {
-                UserName = request.UserName,
+                UserName = request.Username,
                 Email = request.Email,
                 City = request.City,
                 PhoneNumber = request.PhoneNumber,
@@ -39,7 +39,7 @@ namespace BasicNtierTemplate.Service.Services
             {
                 return new RegistrationResult
                 {
-                    Success = false,
+                    IsSuccess = false,
                     Errors = result.Errors.Select(e => e.Description).ToList()
                 };
             }
@@ -49,7 +49,7 @@ namespace BasicNtierTemplate.Service.Services
 
             return new RegistrationResult
             {
-                Success = true,
+                IsSuccess = true,
                 UserId = user.Id
             };
         }

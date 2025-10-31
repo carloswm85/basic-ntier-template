@@ -11,10 +11,11 @@ namespace BasicNtierTemplate.Web.MVC.Controllers
     public class WeatherController : Controller
     {
         private readonly ILogger<WeatherController> _logger;
-        private readonly IWeatherServices _weatherService;
+        private readonly IWeatherService _weatherService;
 
-        public WeatherController(IWeatherServices weatherService)
+        public WeatherController(IWeatherService weatherService, ILogger<WeatherController> logger)
         {
+            _logger = logger;
             _weatherService = weatherService;
         }
 

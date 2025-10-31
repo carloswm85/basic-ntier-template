@@ -5,10 +5,10 @@ using BasicNtierTemplate.Web.MVC.Services.Interfaces;
 namespace BasicNtierTemplate.Web.MVC.Services
 {
 
-    public class WeatherServices(IHttpClientFactory httpClientFactory, ILogger<WeatherServices> logger) : IWeatherServices
+    public class WeatherService(IHttpClientFactory httpClientFactory, ILogger<WeatherService> logger) : IWeatherService
     {
         private readonly HttpClient _client = httpClientFactory.CreateClient("ApiClient");
-        private readonly ILogger<WeatherServices> _logger = logger;
+        private readonly ILogger<WeatherService> _logger = logger;
 
         public async Task<List<WeatherForecast>> GetWeatherForecasts()
         {

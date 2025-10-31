@@ -1,6 +1,13 @@
 using System.Diagnostics;
+using BasicNtierTemplate.Data.Model;
+using BasicNtierTemplate.Data.Model.Identity;
+using BasicNtierTemplate.Repository;
+using BasicNtierTemplate.Service.Services;
+using BasicNtierTemplate.Service.Services.Interfaces;
 using BasicNtierTemplate.Web.MVC.Services;
 using BasicNtierTemplate.Web.MVC.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace BasicNtierTemplate.Web.MVC
 {
@@ -16,6 +23,28 @@ namespace BasicNtierTemplate.Web.MVC
 
                 #region Services Addition
 
+                // Build the configuration by locating the appsettings.json file
+                // in the API project directory (1 directory level up from the current directory).
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "../BasicNtierTemplate.API");
+                var configuration = new ConfigurationBuilder()
+                    .SetBasePath(path)
+                    .AddJsonFile("appsettings.json", optional: false)
+                    .Build();
+
+                // Connection string "BasicNtierTemplateConnection" is pulled from configuration (appsettings.json).
+                var connectionString = configuration.GetConnectionString("BasicNtierTemplateConnection")
+                ?? throw new InvalidOperationException("Connection string" + "'BasicNtierTemplateConnection' not found.");
+
+                // Register DbContext with SQL Server as the database provider.
+                builder.Services.AddDbContext<BasicNtierTemplateDbContext>(options =>
+                    options.UseSqlServer(connectionString));
+
+                // Configure Identity services
+                builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                    .AddEntityFrameworkStores<BasicNtierTemplateDbContext>()
+                    .AddDefaultTokenProviders();
+
+                // Configure HttpClient with base address from configuration
                 builder.Services.AddHttpClient("ApiClient", client =>
                 {
                     var apiBaseUrl = builder.Configuration["ApiBaseUrl"];
@@ -33,7 +62,14 @@ namespace BasicNtierTemplate.Web.MVC
                     .AddControllersWithViews()
                     .AddXmlDataContractSerializerFormatters();
 
-                builder.Services.AddScoped<IWeatherServices, WeatherServices>();
+                builder.Services.AddScoped<IUnitOfWork, UnitOfWorkEF>();
+
+                // Services from current project
+                builder.Services.AddScoped<IWeatherService, WeatherService>();
+
+                // Services from external project
+                builder.Services.AddScoped<IEmailService, EmailService>();
+                builder.Services.AddScoped<IRegistrationService, RegistrationService>();
 
                 #endregion
 
