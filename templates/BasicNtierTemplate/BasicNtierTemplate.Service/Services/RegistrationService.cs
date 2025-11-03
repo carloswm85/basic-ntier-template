@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
-using BasicNtierTemplate.Data.Model.Identity;
+﻿using BasicNtierTemplate.Data.Model.Identity;
 using BasicNtierTemplate.Service.Contracts;
 using BasicNtierTemplate.Service.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 
 namespace BasicNtierTemplate.Service.Services
 {
@@ -27,9 +27,11 @@ namespace BasicNtierTemplate.Service.Services
 
             var user = new ApplicationUser
             {
-                UserName = request.Username,
+                UserName = request.UserName,
                 Email = request.Email,
                 City = request.City,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
                 PhoneNumber = request.PhoneNumber,
             };
 

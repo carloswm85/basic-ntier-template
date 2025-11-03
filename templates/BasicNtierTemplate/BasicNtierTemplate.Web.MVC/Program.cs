@@ -58,8 +58,12 @@ namespace BasicNtierTemplate.Web.MVC
                 // Add services to the container.
                 builder.Services.AddRazorPages();
 
+                builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
                 builder.Services
                     .AddControllersWithViews()
+                    .AddViewLocalization()
+                    .AddDataAnnotationsLocalization()
                     .AddXmlDataContractSerializerFormatters();
 
                 builder.Services.AddScoped<IUnitOfWork, UnitOfWorkEF>();
@@ -91,6 +95,8 @@ namespace BasicNtierTemplate.Web.MVC
                 app.UseRouting();
 
                 app.UseAuthorization();
+
+                app.UseRequestLocalization();
 
                 app.MapControllerRoute(
                     name: "default",

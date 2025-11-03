@@ -19,13 +19,16 @@ namespace BasicNtierTemplate.API.Controllers
         // POST: api/registration/register
         [HttpPost("register")]
         [AllowAnonymous]
-        public async Task<ActionResult<RegistrationResult>> Register(string city, string email, string password, string phoneNumber, string username)
+        public async Task<ActionResult<RegistrationResult>> Register(string city, string email,
+            string password, string phoneNumber, string username, string firstName, string lastName)
         {
             if (string.IsNullOrEmpty(city) ||
                 string.IsNullOrEmpty(email) ||
                 string.IsNullOrEmpty(password) ||
                 string.IsNullOrEmpty(phoneNumber) ||
-                string.IsNullOrEmpty(username))
+                string.IsNullOrEmpty(username) ||
+                string.IsNullOrEmpty(firstName) ||
+                string.IsNullOrEmpty(lastName))
             {
                 return BadRequest("Request cannot be null.");
             }
@@ -35,9 +38,11 @@ namespace BasicNtierTemplate.API.Controllers
             {
                 City = city,
                 Email = email,
+                FirstName = firstName,
+                LastName = lastName,
                 Password = password,
                 PhoneNumber = phoneNumber,
-                Username = username
+                UserName = username
             });
 
             if (!result.IsSuccess)

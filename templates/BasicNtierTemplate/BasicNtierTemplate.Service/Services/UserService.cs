@@ -46,8 +46,11 @@ namespace BasicNtierTemplate.Service.Services
 
             var user = new ApplicationUser
             {
-                UserName = request.UserName,
-                Email = request.Email
+                City = request.City,
+                Email = request.Email,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                UserName = request.UserName
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);

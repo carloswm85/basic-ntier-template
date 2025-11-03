@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BasicNtierTemplate.Data.Migrations
 {
     [DbContext(typeof(BasicNtierTemplateDbContext))]
-    [Migration("20251028172435_InitialMigration")]
+    [Migration("20251103132921_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -73,6 +73,7 @@ namespace BasicNtierTemplate.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("City")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -85,6 +86,14 @@ namespace BasicNtierTemplate.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");

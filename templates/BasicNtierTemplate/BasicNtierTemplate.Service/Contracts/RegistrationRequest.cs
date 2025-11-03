@@ -2,23 +2,25 @@
 {
     public class RegisterRequest
     {
-        public string City { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string FullName { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
-        public string PhoneNumber { get; set; } = string.Empty;
-        public string Username { get; set; } = string.Empty;
+        public required string City { get; set; }
+        public required string Email { get; set; }
+        public required string FirstName { get; set; }
+        public required string LastName { get; set; }
+        public required string Password { get; set; }
+        public required string PhoneNumber { get; set; }
+        public required string UserName { get; set; }
 
         public RegisterRequest() { }
-        public RegisterRequest(string city, string email, string fullName,
-            string password, string phoneNumber, string username)
+        public RegisterRequest(string city, string email, string firstName,
+            string lastName, string password, string phoneNumber, string userName)
         {
             City = city;
             Email = email;
-            FullName = fullName;
+            FirstName = firstName;
+            LastName = lastName;
             Password = password;
             PhoneNumber = phoneNumber;
-            Username = username;
+            UserName = userName;
         }
     }
 }

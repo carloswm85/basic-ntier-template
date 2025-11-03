@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using BasicNtierTemplate.Service.Contracts;
+﻿using BasicNtierTemplate.Service.Contracts;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using BasicNtierTemplate.Web.MVC.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BasicNtierTemplate.Web.MVC.Controllers
 {
@@ -45,10 +45,11 @@ namespace BasicNtierTemplate.Web.MVC.Controllers
                     {
                         City = model.City,
                         Email = model.Email,
-                        FullName = model.FullName,
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
                         Password = model.Password,
                         PhoneNumber = model.PhoneNumber,
-                        Username = model.Username,
+                        UserName = model.UserName,
                         //ConfirmPassword = model.ConfirmPassword,
                     };
 
