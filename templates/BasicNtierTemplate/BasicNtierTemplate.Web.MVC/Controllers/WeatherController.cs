@@ -1,4 +1,5 @@
 ﻿using BasicNtierTemplate.Web.MVC.Models;
+using BasicNtierTemplate.Web.MVC.Models.ViewModels;
 using BasicNtierTemplate.Web.MVC.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

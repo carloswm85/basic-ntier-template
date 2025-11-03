@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using BasicNtierTemplate.Web.MVC.Resources;
 
-namespace BasicNtierTemplate.Web.MVC.Models
+namespace BasicNtierTemplate.Web.MVC.Models.ViewModels
 {
     public class RegisterViewModel
     {

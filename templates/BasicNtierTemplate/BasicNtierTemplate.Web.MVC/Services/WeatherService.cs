@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using BasicNtierTemplate.Web.MVC.Models;
+using BasicNtierTemplate.Web.MVC.Models.ViewModels;
 using BasicNtierTemplate.Web.MVC.Services.Interfaces;
 
 namespace BasicNtierTemplate.Web.MVC.Services

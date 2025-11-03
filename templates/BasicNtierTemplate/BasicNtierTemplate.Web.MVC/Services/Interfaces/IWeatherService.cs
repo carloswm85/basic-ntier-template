@@ -1,4 +1,4 @@
-﻿using BasicNtierTemplate.Web.MVC.Models;
+﻿using BasicNtierTemplate.Web.MVC.Models.ViewModels;
 
 namespace BasicNtierTemplate.Web.MVC.Services.Interfaces
 {

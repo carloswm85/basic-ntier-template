@@ -1,18 +1,18 @@
 ﻿using BasicNtierTemplate.Service.Contracts;
 using BasicNtierTemplate.Service.Services.Interfaces;
-using BasicNtierTemplate.Web.MVC.Models;
+using BasicNtierTemplate.Web.MVC.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BasicNtierTemplate.Web.MVC.Controllers
 {
-    public class AccountController : Controller
+    public class AuthenticationController : Controller
     {
         private readonly IRegistrationService _registrationService;
-        private readonly ILogger<AccountController> _logger;
+        private readonly ILogger<AuthenticationController> _logger;
 
-        public AccountController(
-            ILogger<AccountController> logger,
+        public AuthenticationController(
+            ILogger<AuthenticationController> logger,
             IRegistrationService registrationService
         )
         {

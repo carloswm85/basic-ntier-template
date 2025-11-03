@@ -55,7 +55,6 @@ namespace BasicNtierTemplate.Web.MVC
                     client.BaseAddress = new Uri(apiBaseUrl);
                 });
 
-                // Add services to the container.
                 builder.Services.AddRazorPages();
 
                 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
