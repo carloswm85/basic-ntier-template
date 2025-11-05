@@ -28,6 +28,8 @@
 
 ---
 
+🛑 STILL UNDER DEVELOPMENT 🛑
+
 # Basic Ntier Template
 
 <https://github.com/carloswm85/basic-ntier-template>
@@ -176,9 +178,9 @@ dotnet ef dbcontext scaffold "Name=BasicNtierTemplateConnection" Microsoft.Entit
 
 ```json
 {
-	"ConnectionStrings": {
-		"DefaultConnection": "Server=.;Database=BasicNtierTemplateData;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
-	}
+    "ConnectionStrings": {
+        "DefaultConnection": "Server=.;Database=BasicNtierTemplateData;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+    }
 }
 ```
 
