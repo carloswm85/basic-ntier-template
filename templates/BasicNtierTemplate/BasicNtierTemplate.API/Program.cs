@@ -4,113 +4,112 @@ using BasicNtierTemplate.Repository;
 using BasicNtierTemplate.Service.Mappings;
 using BasicNtierTemplate.Service.Services;
 using BasicNtierTemplate.Service.Services.Interfaces;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BasicNtierTemplate.API
 {
-	public class Program
-	{
-		public static void Main(string[] args)
-		{
-			try
-			{
-				Debug.WriteLine(">>> API: Starting application...");
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            try
+            {
+                Debug.WriteLine(">>> API: Starting application...");
 
-				// Create a WebApplication builder to configure services and middleware
-				var builder = WebApplication.CreateBuilder(args);
+                // Create a WebApplication builder to configure services and middleware
+                var builder = WebApplication.CreateBuilder(args);
 
-				#region Service addition
+                #region Service addition
 
-				// Connection string "BasicNtierTemplateConnection" is pulled from configuration (appsettings.json).
-				var connectionString = builder.Configuration.GetConnectionString("BasicNtierTemplateConnection")
-				?? throw new InvalidOperationException("Connection string" + "'BasicNtierTemplateConnection' not found.");
+                // Connection string "BasicNtierTemplateConnection" is pulled from configuration (appsettings.json).
+                var connectionString = builder.Configuration.GetConnectionString("BasicNtierTemplateConnection")
+                ?? throw new InvalidOperationException("Connection string" + "'BasicNtierTemplateConnection' not found.");
 
-				// Register DbContext with SQL Server as the database provider.
-				builder.Services.AddDbContext<BasicNtierTemplateDbContext>(options =>
-					options.UseSqlServer(connectionString));
-				
-				// CORS Configuration to allow requests from frontend applications (for production, configure appropriately).
-				/* Not required when running frontend and backend in the same solution with proper proxy setup
-				builder.Services.AddCors(options =>
-				{
-					options.AddPolicy("AllowFrontend", policy =>
-					{
-						policy.WithOrigins("http://localhost:3000", "http://localhost:4200") // Your frontend URLs
-							  .AllowAnyHeader()
-							  .AllowAnyMethod()
-							  .AllowCredentials(); // Important for cookies/auth
-					});
-				});
-				*/
+                // Register DbContext with SQL Server as the database provider.
+                builder.Services.AddDbContext<BasicNtierTemplateDbContext>(options =>
+                    options.UseSqlServer(connectionString));
 
-				builder.Services.AddScoped<IUnitOfWork, UnitOfWorkEF>();
+                // CORS Configuration to allow requests from frontend applications (for production, configure appropriately).
+                /* Not required when running frontend and backend in the same solution with proper proxy setup
+                builder.Services.AddCors(options =>
+                {
+                    options.AddPolicy("AllowFrontend", policy =>
+                    {
+                        policy.WithOrigins("http://localhost:3000", "http://localhost:4200") // Your frontend URLs
+                              .AllowAnyHeader()
+                              .AllowAnyMethod()
+                              .AllowCredentials(); // Important for cookies/auth
+                    });
+                });
+                */
 
-				builder.Services.AddAutoMapper(
-					cfg => { },
-					typeof(SampleProfile).Assembly
-				);
+                builder.Services.AddScoped<IUnitOfWork, UnitOfWorkEF>();
 
-				// Register application services for dependency injection.
-				builder.Services.AddScoped<ISampleService, SampleService>(); // SAMPLE
-				
-				// Add controller support (enables MVC-style controllers).
-				builder.Services.AddControllers().AddJsonOptions(options =>
-				{
-					options.JsonSerializerOptions.PropertyNamingPolicy = null;
-				});
+                builder.Services.AddAutoMapper(
+                    cfg => { },
+                    typeof(SampleProfile).Assembly
+                );
 
-				// Register services required for minimal APIs (endpoint metadata exploration).
-				builder.Services.AddEndpointsApiExplorer();
+                // Register application services for dependency injection.
+                builder.Services.AddScoped<ISampleService, SampleService>(); // SAMPLE
 
-				// Register Swagger generator for API documentation.
-				builder.Services.AddSwaggerGen();
+                // Add controller support (enables MVC-style controllers).
+                builder.Services.AddControllers().AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                });
 
-				#endregion
+                // Register services required for minimal APIs (endpoint metadata exploration).
+                builder.Services.AddEndpointsApiExplorer();
 
-				// Build the application with the configured services.
-				var app = builder.Build();
+                // Register Swagger generator for API documentation.
+                builder.Services.AddSwaggerGen();
 
-				#region Middleware addition
+                #endregion
 
-				// Configure the HTTP request pipeline (middleware execution order).
-				if (app.Environment.IsDevelopment())
-				{
-					// Show detailed error pages during development.
-					// app.UseDeveloperExceptionPage(); // Not required after NET6
+                // Build the application with the configured services.
+                var app = builder.Build();
 
-					// Enable Swagger UI in development for API testing and documentation.
-					app.UseSwagger();
-					app.UseSwaggerUI();
-				}
-				else
-				{
-					app.UseExceptionHandler("/error");
-					app.UseStatusCodePagesWithReExecute("/error/{0}");
-				}
+                #region Middleware addition
 
-				// Redirect all HTTP requests to HTTPS for security.
-				app.UseHttpsRedirection();
+                // Configure the HTTP request pipeline (middleware execution order).
+                if (app.Environment.IsDevelopment())
+                {
+                    // Show detailed error pages during development.
+                    // app.UseDeveloperExceptionPage(); // Not required after NET6
 
-				// Enable CORS using the defined policy to allow frontend access.
-				// Not required when running frontend and backend in the same solution with proper proxy setup
-				// app.UseCors("AllowFrontend");
-				
-				// Map controllers to endpoints (routes controllers’ actions to HTTP requests).
-				app.MapControllers();
+                    // Enable Swagger UI in development for API testing and documentation.
+                    app.UseSwagger();
+                    app.UseSwaggerUI();
+                }
+                else
+                {
+                    app.UseExceptionHandler("/error");
+                    app.UseStatusCodePagesWithReExecute("/error/{0}");
+                }
 
-				app.MapFallbackToFile("/index.html");
+                // Redirect all HTTP requests to HTTPS for security.
+                app.UseHttpsRedirection();
 
-				#endregion
+                // Enable CORS using the defined policy to allow frontend access.
+                // Not required when running frontend and backend in the same solution with proper proxy setup
+                // app.UseCors("AllowFrontend");
 
-				// Run the application and start listening for incoming HTTP requests.
-				app.Run();
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex, "API: Stopped program because of exception");
-				throw;
-			}
-		}
-	}
+                // Map controllers to endpoints (routes controllers’ actions to HTTP requests).
+                app.MapControllers();
+
+                app.MapFallbackToFile("/index.html");
+
+                #endregion
+
+                // Run the application and start listening for incoming HTTP requests.
+                app.Run();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex, "API: Stopped program because of exception");
+                throw;
+            }
+        }
+    }
 }
