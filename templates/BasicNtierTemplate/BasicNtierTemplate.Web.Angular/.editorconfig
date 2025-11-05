@@ -1,12 +1,21 @@
 # Editor configuration, see https://editorconfig.org
+
+# Root
 root = true
 
 [*]
 charset = utf-8
 indent_style = space
-indent_size = 2
+indent_size = 4
+end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
+
+# C# code
+[*.cs]
+dotnet_sort_system_directives_first = true
+dotnet_style_require_accessibility_modifiers = always
+
 
 [*.ts]
 quote_type = single
