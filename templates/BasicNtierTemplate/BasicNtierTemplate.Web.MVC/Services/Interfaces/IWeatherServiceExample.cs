@@ -2,8 +2,8 @@
 
 namespace BasicNtierTemplate.Web.MVC.Services.Interfaces
 {
-    public interface IWeatherService
+    public interface IWeatherServiceExample
     {
-        Task<List<WeatherForecast>> GetWeatherForecasts();
+        Task<List<WeatherForecast>> GetWeatherForecastExample();
     }
 }

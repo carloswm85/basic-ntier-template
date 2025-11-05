@@ -49,17 +49,17 @@ namespace BasicNtierTemplate.API
 
                 // CORS Configuration to allow requests from frontend applications (for production, configure appropriately).
                 /* Not required when running frontend and backend in the same solution with proper proxy setup
-				builder.Services.AddCors(options =>
-				{
-					options.AddPolicy("AllowFrontend", policy =>
-					{
-						policy.WithOrigins("http://localhost:3000", "http://localhost:4200") // Your frontend URLs
-							  .AllowAnyHeader()
-							  .AllowAnyMethod()
-							  .AllowCredentials(); // Important for cookies/auth
-					});
-				});
-				*/
+                builder.Services.AddCors(options =>
+                {
+                    options.AddPolicy("AllowFrontend", policy =>
+                    {
+                        policy.WithOrigins("http://localhost:3000", "http://localhost:4200") // Your frontend URLs
+                              .AllowAnyHeader()
+                              .AllowAnyMethod()
+                              .AllowCredentials(); // Important for cookies/auth
+                    });
+                });
+                */
 
                 builder.Services.AddScoped<IUnitOfWork, UnitOfWorkEF>();
 
@@ -124,7 +124,7 @@ namespace BasicNtierTemplate.API
                 // Map controllers to endpoints (routes controllers’ actions to HTTP requests).
                 app.MapControllers();
 
-                app.MapFallbackToFile("/index.html");
+                app.MapFallback(() => Results.NotFound("Endpoint not found."));
 
                 #endregion
 

@@ -5,56 +5,29 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BasicNtierTemplate.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class RegistrationController : ControllerBase
+    [Route("api/[controller]")]
+    public class RegistrationsController : ControllerBase
     {
         private readonly IRegistrationService _registrationService;
 
-        public RegistrationController(IRegistrationService registrationService)
+        public RegistrationsController(IRegistrationService registrationService)
         {
             _registrationService = registrationService;
         }
 
-        // POST: api/registration/register
+        [HttpGet("status")]
+        public IActionResult Status() => Ok($"API online - {DateTime.Now}");
+
+        /// <summary>
+        /// Registers a new user account
+        /// </summary>
+        /// <param name="request">User registration details</param>
+        /// <returns>Registration result with user information</returns>
+        // POST: api2/apiregistration/register
         [HttpPost("register")]
         [AllowAnonymous]
-        public async Task<ActionResult<RegistrationResult>> Register(string city, string email,
-            string password, string phoneNumber, string username, string firstName, string lastName)
-        {
-            if (string.IsNullOrEmpty(city) ||
-                string.IsNullOrEmpty(email) ||
-                string.IsNullOrEmpty(password) ||
-                string.IsNullOrEmpty(phoneNumber) ||
-                string.IsNullOrEmpty(username) ||
-                string.IsNullOrEmpty(firstName) ||
-                string.IsNullOrEmpty(lastName))
-            {
-                return BadRequest("Request cannot be null.");
-            }
-
-            // Called from RegistrationController when a new user signs up
-            var result = await _registrationService.RegisterAsync(new RegisterRequest
-            {
-                City = city,
-                Email = email,
-                FirstName = firstName,
-                LastName = lastName,
-                Password = password,
-                PhoneNumber = phoneNumber,
-                UserName = username
-            });
-
-            if (!result.IsSuccess)
-                return BadRequest(result.Errors);
-
-            return Ok(result);
-        }
-
-        // POST: api/registration/register/body
-        [HttpPost("register/body")]
-        [AllowAnonymous]
-        public async Task<ActionResult<RegistrationResult>> Register([FromBody] RegisterRequest request)
+        public async Task<ActionResult<RegistrationResult>> RegisterAsync([FromBody] RegisterRequest request)
         {
             if (request == null)
                 return BadRequest("Request cannot be null.");

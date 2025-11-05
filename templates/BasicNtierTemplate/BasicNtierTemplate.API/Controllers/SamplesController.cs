@@ -6,11 +6,11 @@ namespace BasicNtierTemplate.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SampleController : ControllerBase
+    public class SamplesController : ControllerBase
     {
         private readonly ISampleService _sampleService;
 
-        public SampleController(ISampleService sampleService)
+        public SamplesController(ISampleService sampleService)
         {
             _sampleService = sampleService;
         }

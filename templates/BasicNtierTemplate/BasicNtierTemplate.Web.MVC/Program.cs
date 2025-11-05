@@ -40,7 +40,17 @@ namespace BasicNtierTemplate.Web.MVC
                     options.UseSqlServer(connectionString));
 
                 // Configure Identity services
-                builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+                {
+                    options.Password.RequiredLength = 10;
+                    options.Password.RequiredUniqueChars = 3;
+                    options.SignIn.RequireConfirmedEmail = true;
+                    //options.Tokens.EmailConfirmationTokenProvider = "CustomEmailConfirmation";
+
+                    // https://youtu.be/jHRWR36UC2s?list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU
+                    options.Lockout.MaxFailedAccessAttempts = 5;
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+                })
                     .AddEntityFrameworkStores<BasicNtierTemplateDbContext>()
                     .AddDefaultTokenProviders();
 
@@ -68,7 +78,7 @@ namespace BasicNtierTemplate.Web.MVC
                 builder.Services.AddScoped<IUnitOfWork, UnitOfWorkEF>();
 
                 // Services from current project
-                builder.Services.AddScoped<IWeatherService, WeatherService>();
+                builder.Services.AddScoped<IWeatherServiceExample, WeatherServiceExample>();
 
                 // Services from external project
                 builder.Services.AddScoped<IEmailService, EmailService>();
@@ -80,11 +90,31 @@ namespace BasicNtierTemplate.Web.MVC
 
                 #region Middleware Addition
 
-                // Configure the HTTP request pipeline.
-                if (!app.Environment.IsDevelopment())
+                if (app.Environment.IsDevelopment())
                 {
+                    // Enable the Developer Exception Page in the development environment.
+                    app.UseDeveloperExceptionPage();
+                }
+                else
+                {
+                    // Use a custom error handling page for production.
+                    // app.UseExceptionHandler("/Home/Error");
                     app.UseExceptionHandler("/Error");
-                    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
+                    // REMEMBER THIS WORKS ONLY WITH:
+                    // "ASPNETCORE_ENVIRONMENT": "Production"
+
+                    // Returns error as plain text
+                    // app.UseStatusCodePages(); // (1)
+
+                    // Intersect error and return a view
+                    // {0} is a placeholder for the status code
+                    // app.UseStatusCodePagesWithRedirects("/Error/{0}"); // (2) Redirect to the string controller
+                    app.UseStatusCodePagesWithReExecute("/Error/{0}"); // (3) Re-executes the pipeline
+
+
+                    // Enable HTTP Strict Transport Security (HSTS) for enhanced security in production.
+                    // The default duration is 30 days; you can adjust this value based on your requirements.
                     app.UseHsts();
                 }
 
@@ -94,7 +124,6 @@ namespace BasicNtierTemplate.Web.MVC
                 app.UseRouting();
 
                 app.UseAuthorization();
-
                 app.UseRequestLocalization();
 
                 app.MapControllerRoute(

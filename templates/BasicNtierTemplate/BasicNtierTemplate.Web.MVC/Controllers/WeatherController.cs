@@ -1,5 +1,4 @@
-﻿using BasicNtierTemplate.Web.MVC.Models;
-using BasicNtierTemplate.Web.MVC.Models.ViewModels;
+﻿using BasicNtierTemplate.Web.MVC.Models.ViewModels;
 using BasicNtierTemplate.Web.MVC.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,9 +11,9 @@ namespace BasicNtierTemplate.Web.MVC.Controllers
     public class WeatherController : Controller
     {
         private readonly ILogger<WeatherController> _logger;
-        private readonly IWeatherService _weatherService;
+        private readonly IWeatherServiceExample _weatherService;
 
-        public WeatherController(IWeatherService weatherService, ILogger<WeatherController> logger)
+        public WeatherController(IWeatherServiceExample weatherService, ILogger<WeatherController> logger)
         {
             _logger = logger;
             _weatherService = weatherService;
@@ -24,7 +23,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers
         {
             try
             {
-                var weatherDataList = await _weatherService.GetWeatherForecasts();
+                var weatherDataList = await _weatherService.GetWeatherForecastExample();
                 var weatherViewModel = new WeatherViewModel
                 {
                     WeatherList = weatherDataList

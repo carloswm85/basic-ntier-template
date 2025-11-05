@@ -1,3 +1,159 @@
-﻿@{
-	ViewBag.Title = "Login";
+﻿@using BasicNtierTemplate.Web.MVC.Models.ViewModels.Authorization
+
+@model LoginViewModel
+
+@{
+    ViewBag.Title = "User Login";
+}
+
+@section Styles {
+    <style>
+        ul {
+            margin: 0;
+        }
+    </style>
+}
+
+
+@if (Model.ExternalLogins != null)
+{
+    @for (int i = 0; i < Model.ExternalLogins.Count; i++)
+    {
+        <input type="hidden" asp-for="ExternalLogins[i]" />
+    }
+}
+
+<div class="container py-4">
+    <div class="row g-4">
+
+        <!-- LOCAL LOGIN -->
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-center">
+                    <h4 class="mb-0">Local Account Login</h4>
+                </div>
+
+                <div class="card-body">
+                    <form method="post" novalidate>
+                        <div asp-validation-summary="All" class="alert alert-danger d-none" id="validationSummary"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" class="form-control" id="emailInput" autocomplete="email" />
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label"></label>
+                            <input asp-for="Password" class="form-control" id="passwordInput" autocomplete="current-password" />
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input asp-for="RememberMe" class="form-check-input" id="rememberInput" />
+                            <label asp-for="RememberMe" class="form-check-label"></label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mb-2">Login →</button>
+
+                        <div class="text-center">
+                            <a asp-action="ForgotPassword" class="link-primary">Forgot Password?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- QUICK TEST LOGIN BLOCK -->
+            <div class="card shadow-sm mt-4">
+                <div class="card-header">
+                    <strong>Quick Test Accounts</strong> (password is "!Abc123")
+                </div>
+                <div class="list-group list-group-flush">
+
+                    <a href="#" class="list-group-item list-group-item-action" onclick="insertUserAndPassword('admin')">
+                        <i>Admin1@BasicNtierTemplate.com</i> — <b>Admin role</b>
+                    </a>
+
+                    <a href="#" class="list-group-item list-group-item-action" onclick="insertUserAndPassword('superAdmin')">
+                        <i>SuperAdmin1@BasicNtierTemplate.com</i> — <b>Super Admin role</b>
+                    </a>
+
+                    <a href="#" class="list-group-item list-group-item-action" onclick="insertUserAndPassword('test')">
+                        <i>Test1@BasicNtierTemplate.com</i> — <b>Test User</b>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- EXTERNAL LOGIN -->
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header text-center">
+                    <h4 class="mb-0">External Login</h4>
+                </div>
+
+                <div class="card-body text-center">
+                    @if (Model.ExternalLogins == null || Model.ExternalLogins.Count == 0)
+                    {
+                        <div class="text-muted">No external logins configured.</div>
+                    }
+                    else
+                    {
+                        <form method="post" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
+                            @foreach (var provider in Model.ExternalLogins)
+                            {
+                                <button type="submit"
+                                        class="btn btn-outline-secondary w-100 mb-2"
+                                        name="provider" value="@provider.Name">
+                                    @provider.DisplayName ↗
+                                </button>
+                            }
+                        </form>
+                    }
+                </div>
+            </div>
+
+            <div class="alert alert-warning mt-4 small">
+                <ul>
+                    <li>
+                        External authentication may fail behind proxy servers.
+                    </li>
+                    <li>
+                        <a asp-controller="Error" asp-action="ProxyServerError">This error</a> may be risen.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Show validation summary only when errors exist
+        document.addEventListener("DOMContentLoaded", () => {
+            const v = document.getElementById("validationSummary");
+            if (v.innerText.trim().length > 0) v.classList.remove("d-none");
+        });
+
+        function insertUserAndPassword(selection) {
+            const email = document.getElementById('emailInput');
+            const pass = document.getElementById('passwordInput');
+            const remember = document.getElementById('rememberInput');
+
+            const accounts = {
+                admin: "Admin1@BasicNtierTemplate.com",
+                superAdmin: "SuperAdmin1@BasicNtierTemplate.com",
+                test: "Test1@BasicNtierTemplate.com"
+            };
+
+            const value = accounts[selection] ?? "";
+
+            email.value = value;
+            pass.value = '!Abc123';
+            remember.checked = true;
+        }
+    </script>
 }

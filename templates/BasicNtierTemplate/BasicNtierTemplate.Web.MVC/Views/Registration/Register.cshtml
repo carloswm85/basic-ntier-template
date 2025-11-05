@@ -1,5 +1,5 @@
-﻿@using BasicNtierTemplate.Web.MVC.Models.ViewModels
-@using BasicNtierTemplate.Web.MVC.Models.ViewModels
+﻿@using BasicNtierTemplate.Web.MVC.Models.ViewModels.Authorization
+@using BasicNtierTemplate.Web.MVC.Models.ViewModels.Register
 
 @model RegisterViewModel
 
@@ -15,8 +15,9 @@
                     <h4 class="mb-0">User Registration</h4>
                 </div>
 
+                <!-- FORM -->
                 <div class="card-body">
-                    <form method="post" novalidate>
+                    <form asp-controller ="Registration" asp-action="Register" method="post" novalidate>
                         <div asp-validation-summary="All" class="text-danger"></div>
 
                         <div class="mb-3">
@@ -68,6 +69,7 @@
 
                         <hr />
 
+                        <!-- BUTTON -->
                         <button type="submit" class="btn btn-primary w-100">
                             Register
                         </button>
