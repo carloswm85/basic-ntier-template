@@ -13,7 +13,7 @@ Project template generate 6 layers:
 
 ## Under development
 
-Use this branches under your own discretion:
+Use these branches under your own discretion:
 
 - [developer-lightweight](https://github.com/carloswm85/basic-ntier-template/tree/developer-lightweight) - NET Core 8 without Identity API
     - It can be used, but it may require additional development to fit your needs.
