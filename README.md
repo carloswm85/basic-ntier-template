@@ -2,7 +2,7 @@
 
 Use branches `main` and `developer-*` for stable and development versions respectively.
 
-Project template generate 6 layers:
+Project template generates 6 layers:
 
 - `Data` (inner most)
 - `Repository` (next)
