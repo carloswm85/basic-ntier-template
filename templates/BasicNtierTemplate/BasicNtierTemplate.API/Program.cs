@@ -98,7 +98,7 @@ namespace BasicNtierTemplate.API
                 // Map controllers to endpoints (routes controllers’ actions to HTTP requests).
                 app.MapControllers();
 
-                app.MapFallbackToFile("/index.html");
+                app.MapFallback(() => Results.NotFound("Endpoint not found."));
 
                 #endregion
 

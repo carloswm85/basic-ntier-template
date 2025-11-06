@@ -1,5 +1,9 @@
 - [Basic Ntier Template](#basic-ntier-template)
   - [Version compatibility](#version-compatibility)
+    - [.NET Core](#net-core)
+    - [MVC](#mvc)
+    - [Angular](#angular)
+  - [Installation Requirements](#installation-requirements)
   - [Architecture](#architecture)
     - [Notes](#notes)
   - [Template Installation](#template-installation)
@@ -10,6 +14,7 @@
     - [Code-First](#code-first)
     - [Database-First (Database Scaffolding, or Reverse Engineering)](#database-first-database-scaffolding-or-reverse-engineering)
       - [Additional Commands](#additional-commands)
+    - [Example: `Blog` and `Post` models](#example-blog-and-post-models)
   - [Template Information](#template-information)
     - [Connection String](#connection-string)
     - [AutoMapper Use](#automapper-use)
@@ -28,15 +33,34 @@
 
 ---
 
+> **🛑 STILL UNDER DEVELOPMENT - USE WITH CAUTION 🛑**
+
 # Basic Ntier Template
 
 <https://github.com/carloswm85/basic-ntier-template>
 
 ## Version compatibility
 
-| Current |      | Version | Requirements   |
-| ------- | ---- | ------- | -------------- |
-| ✅      | .NET | 8.0     | EF Core: `8.0` |
+### .NET Core
+
+| Current | .NET Core | .NET Core release type | EF Core |
+| ------- | --------- | ---------------------- | ------- |
+| ✅      | `8.0.100` | LTS                    | `8.0`   |
+|         | `9`       | STS                    | -       |
+|         | `10`      | pre-release            | -       |
+
+- [.NET and .NET Core Support Policy](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core) ↗
+
+### MVC
+
+| Current | Bootstrap | jQuery  | jQuery Validate | Jquery Validation Unobtrusive |
+| ------- | --------- | ------- | --------------- | ----------------------------- |
+| ✅      | `5.3.8`   | `3.7.1` | `1.21.0`        | `4.0.0`                       |
+
+- Used `libman.json` for client side libraries.
+- Bootstrap `+5.x` does not depend on `jQuery`.
+
+### Angular
 
 | Current | Angular Version      | Node.js Version                       | TypeScript Version | RxJS Version         |
 | ------- | -------------------- | ------------------------------------- | ------------------ | -------------------- |
@@ -47,6 +71,10 @@
 |         | `19.0.x`             | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.5.0 <5.7.0`   | `^6.5.3` or `^7.4.0` |
 |         | `18.1.x` or `18.2.x` | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.4.0 <5.6.0`   | `^6.5.3` or `^7.4.0` |
 |         | `18.0.x`             | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.4.0 <5.5.0`   | `^6.5.3` or `^7.4.0` |
+
+---
+
+## Installation Requirements
 
 - [Installation requirements](./docs/content/installation-requirements.md)
 
@@ -59,9 +87,9 @@
 | 1     | `Data`        | -                                  | Database schema, migrations, models                    | Entity Framework Core, Identity API integration                    | Define database schema, manage migrations, and entity mapping.                   |
 | 2     | `Repository`  | -                                  | Data access abstraction, caching, Unit of Work Pattern | Querying interfaces                                                | Abstract data access logic to decouple the service layer from EF Core specifics. |
 | 3     | `Service`     | Business logic                     | Logic, validation                                      | Business rules, support async methods                              | Implement business logic, enforce rules and validation.                          |
-| 4     | `API`         | Request handling, Dev presentation | RESTful API, documentation                             | Swagger/OpenAPI, versioning                                        | Expose business services as RESTful endpoints.                                   |
-| 5     | `Web.MVC`     | User presentation                  | Server-side rendering, UI logic                        | MVC design pattern, Razor syntax                                   | Traditional server-rendered UI using MVC and Razor Pages.                        |
-| 5     | `Web.Angular` | User presentation                  | Client-side SPA                                        | Angular SPA, with strong typing (TypeScript), Rest API integration | Modern client-side SPA experience.                                               |
+| 4.a   | `API`         | Request handling, Dev presentation | RESTful API, documentation                             | Swagger/OpenAPI, versioning                                        | Expose business services as RESTful endpoints.                                   |
+| 4.b   | `Web.MVC`     | User presentation                  | Server-side rendering, UI logic                        | MVC design pattern, Razor syntax                                   | Traditional server-rendered UI using MVC and Razor Pages.                        |
+| 4.c   | `Web.Angular` | User presentation                  | Client-side SPA                                        | Angular SPA, with strong typing (TypeScript), Rest API integration | Modern client-side SPA experience.                                               |
 
 ![Basic Ntier Template Architecture Diagram](./docs/img/basic-ntier-template-architecture-diagram.png)
 
@@ -120,19 +148,19 @@ dotnet new basic-ntier-template -o "BasicNtierTemplateExample"
 
   - Inside the `BasicNtierTemplate.Data` project folder.
 
-    ```powershell
-    > dotnet ef migrations add InitialMigration
-    > dotnet ef database update
-    ```
+  ```powershell
+  > dotnet ef migrations add InitialMigration
+  > dotnet ef database update
+  ```
 
 - Using Package Manager Console:
 
   - Set "Default Project" to `BasicNtierTemplate.Data`
 
-    ```console
-    PM> Add-Migration InitialMigration
-    PM> Update-Database
-    ```
+  ```console
+  PM> Add-Migration InitialMigration
+  PM> Update-Database
+  ```
 
 ### Database-First (Database Scaffolding, or Reverse Engineering)
 
@@ -144,15 +172,15 @@ Your database should be named `MyDatabaseDb` for scaffolding to work out-of-the-
 
   - When using directly the connection string in the command line:
 
-    ```console
-    PM> Scaffold-DbContext "Server=.;Database=BasicNtierTemplateDb;user id=SomeUser;password=ThisIsSomePassword;Trusted_Connection=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
-    ```
+  ```console
+  PM> Scaffold-DbContext "Server=.;Database=BasicNtierTemplateDb;user id=SomeUser;password=ThisIsSomePassword;Trusted_Connection=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
+  ```
 
   - When extracting the connection string from `appsettings.json` in the `BasicNtierTemplate.API` project:
 
-    ```console
-    PM> Scaffold-DbContext "Name=BasicNtierTemplateConnection" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
-    ```
+  ```console
+  PM> Scaffold-DbContext "Name=BasicNtierTemplateConnection" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
+  ```
 
 The previous command will overrite the existing `BasicNtierTemplateContext.cs` file.
 
@@ -168,6 +196,12 @@ Or using .NET Core CLI:
 dotnet ef dbcontext scaffold "Name=BasicNtierTemplateConnection" Microsoft.EntityFrameworkCore.SqlServer --output-dir Model --project BasicNtierTemplate.Data --startup-project BasicNtierTemplate.API --force --use-database-names --no-pluralize
 ```
 
+### Example: `Blog` and `Post` models
+
+This template has a built in example case for use and testing of database, EF Core and API endpoints (with `Sample` service, repository, interfaces and API resource name).
+
+For additional information on this example, see: <https://learn.microsoft.com/en-us/ef/core/modeling/relationships>
+
 ---
 
 ## Template Information
@@ -176,9 +210,9 @@ dotnet ef dbcontext scaffold "Name=BasicNtierTemplateConnection" Microsoft.Entit
 
 ```json
 {
-	"ConnectionStrings": {
-		"DefaultConnection": "Server=.;Database=BasicNtierTemplateData;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
-	}
+    "ConnectionStrings": {
+        "DefaultConnection": "Server=.;Database=BasicNtierTemplateData;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+    }
 }
 ```
 
