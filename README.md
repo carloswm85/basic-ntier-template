@@ -1,38 +1,39 @@
 - [Basic Ntier Template](#basic-ntier-template)
-	- [Version compatibility](#version-compatibility)
-		- [.NET Core](#net-core)
-		- [Angular](#angular)
-	- [Installation Requirements](#installation-requirements)
-	- [Architecture](#architecture)
-		- [Notes](#notes)
-	- [Template Installation](#template-installation)
-		- [Nuget Installation](#nuget-installation)
-		- [Local Repository Installation](#local-repository-installation)
-		- [Installation Commands](#installation-commands)
-	- [Entity Framework Core](#entity-framework-core)
-		- [Code-First](#code-first)
-		- [Database-First (Database Scaffolding, or Reverse Engineering)](#database-first-database-scaffolding-or-reverse-engineering)
-			- [Additional Commands](#additional-commands)
-		- [Example: `Blog` and `Post` models](#example-blog-and-post-models)
-	- [Template Information](#template-information)
-		- [Connection String](#connection-string)
-		- [AutoMapper Use](#automapper-use)
-	- [Troubleshooting](#troubleshooting)
-		- [HTTPS Developer Ccertificate](#https-developer-ccertificate)
-	- [Other Information](#other-information)
-		- [Readings](#readings)
-		- [Video Tutorials](#video-tutorials)
-		- [Other Custom .NET Solution Templates](#other-custom-net-solution-templates)
-		- [Recommended Tools](#recommended-tools)
-		- [Clean Architecture Information](#clean-architecture-information)
-			- [Readings (CA)](#readings-ca)
-			- [Video Tutorials (CA)](#video-tutorials-ca)
-	- [Videos](#videos)
-		- [Project Videos](#project-videos)
+  - [Version compatibility](#version-compatibility)
+    - [.NET Core](#net-core)
+    - [MVC](#mvc)
+    - [Angular](#angular)
+  - [Installation Requirements](#installation-requirements)
+  - [Architecture](#architecture)
+    - [Notes](#notes)
+  - [Template Installation](#template-installation)
+    - [Nuget Installation](#nuget-installation)
+    - [Local Repository Installation](#local-repository-installation)
+    - [Installation Commands](#installation-commands)
+  - [Entity Framework Core](#entity-framework-core)
+    - [Code-First](#code-first)
+    - [Database-First (Database Scaffolding, or Reverse Engineering)](#database-first-database-scaffolding-or-reverse-engineering)
+      - [Additional Commands](#additional-commands)
+    - [Example: `Blog` and `Post` models](#example-blog-and-post-models)
+  - [Template Information](#template-information)
+    - [Connection String](#connection-string)
+    - [AutoMapper Use](#automapper-use)
+  - [Troubleshooting](#troubleshooting)
+    - [HTTPS Developer Ccertificate](#https-developer-ccertificate)
+  - [Other Information](#other-information)
+    - [Readings](#readings)
+    - [Video Tutorials](#video-tutorials)
+    - [Other Custom .NET Solution Templates](#other-custom-net-solution-templates)
+    - [Recommended Tools](#recommended-tools)
+    - [Clean Architecture Information](#clean-architecture-information)
+      - [Readings (CA)](#readings-ca)
+      - [Video Tutorials (CA)](#video-tutorials-ca)
+  - [Videos](#videos)
+    - [Project Videos](#project-videos)
 
 ---
 
-**🛑 STILL UNDER DEVELOPMENT - USE WITH CAUTION 🛑**
+> **🛑 STILL UNDER DEVELOPMENT - USE WITH CAUTION 🛑**
 
 # Basic Ntier Template
 
@@ -42,13 +43,22 @@
 
 ### .NET Core
 
-| Current | .NET Core | .NET Core release type | EF Core | Bootstrap |
-| ------- | --------- | ---------------------- | ------- | --------- |
-| ✅      | `8.0.100` | LTS                    | `8.0`   | `5.3.8`   |
-|         | `9`       | STS                    | -       | -         |
-|         | `10`      | pre-release            | -       | -         |
+| Current | .NET Core | .NET Core release type | EF Core |
+| ------- | --------- | ---------------------- | ------- |
+| ✅      | `8.0.100` | LTS                    | `8.0`   |
+|         | `9`       | STS                    | -       |
+|         | `10`      | pre-release            | -       |
 
 - [.NET and .NET Core Support Policy](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core) ↗
+
+### MVC
+
+| Current | Bootstrap | jQuery  | jQuery Validate | Jquery Validation Unobtrusive |
+| ------- | --------- | ------- | --------------- | ----------------------------- |
+| ✅      | `5.3.8`   | `3.7.1` | `1.21.0`        | `4.0.0`                       |
+
+- Used `libman.json` for client side libraries.
+- Bootstrap `+5.x` does not depend on `jQuery`.
 
 ### Angular
 
