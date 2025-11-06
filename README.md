@@ -11,9 +11,11 @@ Project template generates 6 layers:
 - `Web.Angular` (presentation too)
 - `Web.MVC` (presentation too)
 
-## Under development
+## Branches Under Development
 
-Use these branches under your own discretion:
+`main` brach is not reciving updates.
+
+Remember this project is still under development. Yet, branches are usable. But because they are still under development, you shall use them under your own discretion:
 
 - [developer-lightweight](https://github.com/carloswm85/basic-ntier-template/tree/developer-lightweight) - NET Core 8 without Identity API
     - It can be used, but it may require additional development to fit your needs.
