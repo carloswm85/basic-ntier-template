@@ -6,6 +6,7 @@ namespace BasicNtierTemplate.Web.MVC.Models.ViewModels.WeatherForecast
     {
         public List<WeatherForecast> WeatherList { get; set; } = [];
     }
+
     public class WeatherForecast
     {
         [Display(Name = "SAMPLE_DATE")]

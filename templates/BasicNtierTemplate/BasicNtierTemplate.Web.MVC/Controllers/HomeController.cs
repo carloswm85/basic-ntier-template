@@ -20,5 +20,11 @@ namespace BasicNtierTemplate.Web.MVC.Controllers
         {
             return View();
         }
+
+        [AllowAnonymous]
+        public IActionResult Example()
+        {
+            return Ok("This is an example route.");
+        }
     }
 }

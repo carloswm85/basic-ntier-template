@@ -1,38 +1,70 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿<!-- NAVIGATION BAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-body shadow-sm">
+    <div class="container-lg">
+        <!-- BRAND -->
+        <a class="navbar-brand fw-semibold text-primary" asp-controller="Home" asp-action="Index">
+            BasicNtierTemplate
+        </a>
 
-<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
-    <div class="container">
-
-        <!-- TITLE -->
-        <a class="navbar-brand" asp-controller="Home" asp-action="Index">BasicNtierTemplate.Web.MVC</a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+        <!-- TOGGLER -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
                 aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <!-- NAVIGATION -->
         <div class="collapse navbar-collapse" id="mainNavbar">
-
-            <!-- LEFT -->
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
-
-                
-            </ul>
-
-            <!-- RIGHT -->
-            <ul class="navbar-nav">
-                <li class="dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="manageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage</a>
-                    <ul class="dropdown-menu" aria-labelledby="manageDropdown">
-                        <li><a class="dropdown-item" asp-controller="Administration" asp-action="ListUsers">Users?</a></li>
-                        <li><a class="dropdown-item" asp-controller="Administration" asp-action="ListRoles">Roles?</a></li>
-                        <li><a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword">Password?</a></li>
+            <!-- LEFT MENU -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Example">List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Example">Create</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="manageDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Manage
+                    </a>
+                    <ul class="dropdown-menu shadow-sm border-0" aria-labelledby="manageDropdown">
+                        <li><a class="dropdown-item" asp-controller="Home" asp-action="Example">Users</a></li>
+                        <li><a class="dropdown-item" asp-controller="Home" asp-action="Example">Roles</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" asp-controller="Home" asp-action="Example">Change Password</a></li>
                     </ul>
                 </li>
             </ul>
-        
+
+            <!-- RIGHT MENU -->
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                @if (true)
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="badge bg-primary me-1">User</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="userDropdown">
+                            <li>
+                                <form asp-controller="Home" asp-action="Example" method="post" class="px-3 py-2">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm w-100">
+                                        Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item"><a class="nav-link me-2" asp-controller="Registration" asp-action="Register">Register</a></li>
+                    <li class="nav-item"><a class="btn btn-primary" asp-controller="Authentication" asp-action="Login">Login</a></li>
+                }
+            </ul>
         </div>
     </div>
 </nav>
