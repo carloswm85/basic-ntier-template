@@ -19,24 +19,24 @@ namespace BasicNtierTemplate.Service.Services
             _mapper = mapper;
         }
 
-        public async Task<UserDto?> GetByIdAsync(Guid userId)
+        public async Task<ApplicationUserDto?> GetByIdAsync(Guid userId)
         {
             var user = await _userManager.Users
                 .FirstOrDefaultAsync(u => u.Id == userId.ToString());
 
-            return user is null ? null : _mapper.Map<UserDto>(user);
+            return user is null ? null : _mapper.Map<ApplicationUserDto>(user);
         }
 
-        public async Task<UserDto?> GetByEmailAsync(string email)
+        public async Task<ApplicationUserDto?> GetByEmailAsync(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
-            return user is null ? null : _mapper.Map<UserDto>(user);
+            return user is null ? null : _mapper.Map<ApplicationUserDto>(user);
         }
 
-        public async Task<IEnumerable<UserDto>> GetAllAsync()
+        public async Task<IEnumerable<ApplicationUserDto>> GetAllAsync()
         {
             var users = await _userManager.Users.ToListAsync();
-            return _mapper.Map<IEnumerable<UserDto>>(users);
+            return _mapper.Map<IEnumerable<ApplicationUserDto>>(users);
         }
 
         public async Task<Result> CreateAsync(CreateUserRequest request)
@@ -58,7 +58,7 @@ namespace BasicNtierTemplate.Service.Services
             if (!result.Succeeded)
                 return Result.Fail(string.Join("; ", result.Errors.Select(e => e.Description)));
 
-            return Result.Ok();
+            return Result.Ok(data: user.Id);
         }
 
         public async Task<Result> UpdateAsync(UpdateUserRequest request)
@@ -86,7 +86,7 @@ namespace BasicNtierTemplate.Service.Services
                     return Result.Fail(string.Join("; ", passResult.Errors.Select(e => e.Description)));
             }
 
-            return Result.Ok();
+            return Result.Ok(data: user.Id);
         }
 
         public async Task<Result> DeleteAsync(Guid userId)
@@ -97,7 +97,7 @@ namespace BasicNtierTemplate.Service.Services
 
             var result = await _userManager.DeleteAsync(user);
             return result.Succeeded
-                ? Result.Ok()
+                ? Result.Ok(data: user.Id)
                 : Result.Fail(string.Join("; ", result.Errors.Select(e => e.Description)));
         }
 
@@ -112,7 +112,7 @@ namespace BasicNtierTemplate.Service.Services
             {
                 activatable.IsActive = true;
                 await _userManager.UpdateAsync(user);
-                return Result.Ok();
+                return Result.Ok(data: user.Id);
             }
 
             return Result.Fail("User model does not support activation.");
@@ -128,7 +128,7 @@ namespace BasicNtierTemplate.Service.Services
             {
                 activatable.IsActive = false;
                 await _userManager.UpdateAsync(user);
-                return Result.Ok();
+                return Result.Ok(data: user.Id);
             }
 
             return Result.Fail("User model does not support deactivation.");

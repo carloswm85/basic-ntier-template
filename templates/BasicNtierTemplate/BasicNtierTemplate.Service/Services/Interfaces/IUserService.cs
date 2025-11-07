@@ -9,9 +9,9 @@ namespace BasicNtierTemplate.Service.Services.Interfaces
     /// </summary>
     public interface IUserService
     {
-        Task<UserDto?> GetByIdAsync(Guid userId);
-        Task<UserDto?> GetByEmailAsync(string email);
-        Task<IEnumerable<UserDto>> GetAllAsync();
+        Task<ApplicationUserDto?> GetByIdAsync(Guid userId);
+        Task<ApplicationUserDto?> GetByEmailAsync(string email);
+        Task<IEnumerable<ApplicationUserDto>> GetAllAsync();
         Task<Result> CreateAsync(CreateUserRequest request);
         Task<Result> UpdateAsync(UpdateUserRequest request);
         Task<Result> DeleteAsync(Guid userId);

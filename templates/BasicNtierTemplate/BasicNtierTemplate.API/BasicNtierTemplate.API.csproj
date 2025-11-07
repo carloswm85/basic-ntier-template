@@ -7,6 +7,8 @@
 	<SpaRoot>..\BasicNtierTemplate.Web.Angular</SpaRoot>
 	<SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
 	<SpaProxyServerUrl>https://localhost:60249</SpaProxyServerUrl>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

@@ -2,6 +2,7 @@ using System.Diagnostics;
 using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Data.Model.Identity;
 using BasicNtierTemplate.Repository;
+using BasicNtierTemplate.Service.Mappings;
 using BasicNtierTemplate.Service.Services;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using BasicNtierTemplate.Web.MVC.Services;
@@ -77,12 +78,18 @@ namespace BasicNtierTemplate.Web.MVC
 
                 builder.Services.AddScoped<IUnitOfWork, UnitOfWorkEF>();
 
+                builder.Services.AddAutoMapper(
+                    cfg => { },
+                    typeof(ApplicationUserProfile).Assembly
+                );
+
                 // Services from current project
                 builder.Services.AddScoped<IWeatherServiceExample, WeatherServiceExample>();
 
                 // Services from external project
                 builder.Services.AddScoped<IEmailService, EmailService>();
                 builder.Services.AddScoped<IRegistrationService, RegistrationService>();
+                builder.Services.AddScoped<IUserService, UserService>();
 
                 #endregion
 

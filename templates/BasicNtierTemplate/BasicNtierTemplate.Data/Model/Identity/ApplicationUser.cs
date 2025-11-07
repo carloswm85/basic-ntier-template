@@ -10,3 +10,27 @@ namespace BasicNtierTemplate.Data.Model.Identity
 
     }
 }
+
+// Inherited properties from IdentityUser:
+/* ✔️: Properties in ApplicationUserDto
+- Id ✔️
+- UserName ✔️
+- NormalizedUserName
+- Email ✔️
+- NormalizedEmail
+- EmailConfirmed ✔️
+- PasswordHash
+- SecurityStamp
+- ConcurrencyStamp
+- PhoneNumber ✔️
+- PhoneNumberConfirmed ✔️
+- TwoFactorEnabled ✔️
+- LockoutEnd
+- LockoutEnabled ✔️
+- AccessFailedCount ✔️
+*/
+// Also:
+/*
+- Roles
+- Claims
+*/

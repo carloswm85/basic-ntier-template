@@ -2,21 +2,21 @@
 {
     public sealed class Result
     {
-        public bool Success { get; }
-        public string? Error { get; }
+        public bool IsSuccess { get; }
+        public string? Data { get; } // Data can hold error message or other info
 
-        private Result(bool success, string? error = null)
+        private Result(bool success, string? data = null)
         {
-            Success = success;
-            Error = error;
+            IsSuccess = success;
+            Data = data;
         }
 
-        public static Result Ok() => new(true);
-        public static Result Fail(string error) => new(false, error);
+        public static Result Ok(string data) => new(true, data);
+        public static Result Fail(string data) => new(false, data);
 
-        public static implicit operator bool(Result result) => result.Success;
+        public static implicit operator bool(Result result) => result.IsSuccess;
 
-        public override string ToString() => Success ? "Success" : $"Error: {Error}";
+        public override string ToString() => IsSuccess ? "Success" : $"Error: {Data}";
     }
 
 }

@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Reflection;
 using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Data.Model.Identity;
 using BasicNtierTemplate.Repository;
@@ -85,7 +86,12 @@ namespace BasicNtierTemplate.API
                 builder.Services.AddEndpointsApiExplorer();
 
                 // Register Swagger generator for API documentation.
-                builder.Services.AddSwaggerGen();
+                builder.Services.AddSwaggerGen(options =>
+                {
+                    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                    options.IncludeXmlComments(xmlPath);
+                });
 
                 #endregion
 
