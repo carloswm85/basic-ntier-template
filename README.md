@@ -210,9 +210,9 @@ For additional information on this example, see: <https://learn.microsoft.com/en
 
 ```json
 {
-	"ConnectionStrings": {
-		"DefaultConnection": "Server=.;Database=BasicNtierTemplateData;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
-	}
+    "ConnectionStrings": {
+        "DefaultConnection": "Server=.;Database=BasicNtierTemplateData;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+    }
 }
 ```
 

@@ -1,82 +1,82 @@
 ﻿@using BasicNtierTemplate.Web.MVC.Models.ViewModels.Authorization
 @using BasicNtierTemplate.Web.MVC.Models.ViewModels.Register
-
 @model RegisterViewModel
 
 @{
     ViewBag.Title = "User Registration";
 }
 
-<div class="container py-3">
+<div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-8">
+        <div class="col-lg-5 col-md-7">
+
             <div class="card shadow-sm">
-                <div class="card-header text-center">
-                    <h4 class="mb-0">User Registration</h4>
+                <div class="card-header text-center py-3">
+                    <h4 class="fw-semibold mb-0">Create Your Account</h4>
+                    <span class="text-muted small d-block">It only takes a minute</span>
                 </div>
 
-                <!-- FORM -->
-                <div class="card-body">
-                    <form asp-controller ="Registration" asp-action="Register" method="post" novalidate>
+                <div class="card-body p-4">
+
+                    <form asp-controller="Registration" asp-action="Register" method="post" novalidate>
                         <div asp-validation-summary="All" class="text-danger"></div>
 
-                        <div class="mb-3">
-                            <label asp-for="FirstName" class="form-label"></label>
-                            <input asp-for="FirstName" class="form-control" />
+                        <div class="form-floating mb-3">
+                            <input asp-for="FirstName" class="form-control" placeholder=" " />
+                            <label asp-for="FirstName"></label>
                             <span asp-validation-for="FirstName" class="text-danger small"></span>
                         </div>
 
-                        <div class="mb-3">
-                            <label asp-for="LastName" class="form-label"></label>
-                            <input asp-for="LastName" class="form-control" />
+                        <div class="form-floating mb-3">
+                            <input asp-for="LastName" class="form-control" placeholder=" " />
+                            <label asp-for="LastName"></label>
                             <span asp-validation-for="LastName" class="text-danger small"></span>
                         </div>
 
-                        <div class="mb-3">
-                            <label asp-for="Email" class="form-label"></label>
-                            <input asp-for="Email" class="form-control" id="emailInput" />
+                        <div class="form-floating mb-3">
+                            <input asp-for="Email" class="form-control" id="emailInput" placeholder=" " />
+                            <label asp-for="Email"></label>
                             <span asp-validation-for="Email" class="text-danger small"></span>
                         </div>
 
-                        <div class="mb-3">
-                            <label asp-for="PhoneNumber" class="form-label"></label>
-                            <input asp-for="PhoneNumber" class="form-control" />
+                        <div class="form-floating mb-3">
+                            <input asp-for="PhoneNumber" class="form-control" placeholder=" " />
+                            <label asp-for="PhoneNumber"></label>
                             <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
                         </div>
 
-                        <div class="mb-3">
-                            <label asp-for="UserName" class="form-label"></label>
-                            <input asp-for="UserName" class="form-control" />
+                        <div class="form-floating mb-3">
+                            <input asp-for="UserName" class="form-control" placeholder=" " />
+                            <label asp-for="UserName"></label>
                             <span asp-validation-for="UserName" class="text-danger small"></span>
                         </div>
 
-                        <div class="mb-3">
-                            <label asp-for="Password" class="form-label"></label>
-                            <input asp-for="Password" class="form-control" type="password" />
+                        <div class="form-floating mb-3">
+                            <input asp-for="Password" type="password" class="form-control" placeholder=" " />
+                            <label asp-for="Password"></label>
                             <span asp-validation-for="Password" class="text-danger small"></span>
                         </div>
 
-                        <div class="mb-3">
-                            <label asp-for="ConfirmPassword" class="form-label"></label>
-                            <input asp-for="ConfirmPassword" class="form-control" type="password" />
+                        <div class="form-floating mb-3">
+                            <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder=" " />
+                            <label asp-for="ConfirmPassword"></label>
                             <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
                         </div>
 
-                        <div class="mb-3">
-                            <label asp-for="City" class="form-label"></label>
-                            <input asp-for="City" class="form-control" />
+                        <div class="form-floating mb-4">
+                            <input asp-for="City" class="form-control" placeholder=" " />
+                            <label asp-for="City"></label>
                         </div>
 
-                        <hr />
-
-                        <!-- BUTTON -->
-                        <button type="submit" class="btn btn-primary w-100">
-                            Register
+                        <button type="submit" class="btn btn-primary btn-lg w-100">
+                            Create Account
                         </button>
                     </form>
+
                 </div>
 
             </div>
+
         </div>
     </div>
 </div>

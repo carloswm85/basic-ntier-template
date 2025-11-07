@@ -1,4 +1,4 @@
-﻿using BasicNtierTemplate.Web.MVC.Models.ViewModels;
+﻿using BasicNtierTemplate.Web.MVC.Models.ViewModels.WeatherForecast;
 using BasicNtierTemplate.Web.MVC.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

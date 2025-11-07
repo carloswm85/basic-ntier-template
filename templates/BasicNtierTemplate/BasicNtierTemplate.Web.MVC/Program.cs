@@ -42,7 +42,7 @@ namespace BasicNtierTemplate.Web.MVC
                 // Configure Identity services
                 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
                 {
-                    options.Password.RequiredLength = 10;
+                    options.Password.RequiredLength = 6;
                     options.Password.RequiredUniqueChars = 3;
                     options.SignIn.RequireConfirmedEmail = true;
                     //options.Tokens.EmailConfirmationTokenProvider = "CustomEmailConfirmation";
