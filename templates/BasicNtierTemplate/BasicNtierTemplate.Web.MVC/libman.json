@@ -3,22 +3,27 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
+      "provider": "cdnjs",
       "library": "bootstrap@5.3.8",
       "destination": "wwwroot/lib/bootstrap/"
     },
     {
+      "provider": "cdnjs",
       "library": "jquery-validation-unobtrusive@4.0.0",
       "destination": "wwwroot/lib/jquery-validation-unobtrusive/"
     },
     {
+      "provider": "cdnjs",
       "library": "jquery-validate@1.21.0",
       "destination": "wwwroot/lib/jquery-validate/"
     },
     {
+      "provider": "cdnjs",
       "library": "jquery@3.7.1",
       "destination": "wwwroot/lib/jquery/"
     },
     {
+      "provider": "cdnjs",
       "library": "font-awesome@6.5.2",
       "destination": "wwwroot/lib/font-awesome/"
     }

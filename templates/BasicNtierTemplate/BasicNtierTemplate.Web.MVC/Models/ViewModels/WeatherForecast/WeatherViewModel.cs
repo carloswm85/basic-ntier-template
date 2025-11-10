@@ -4,8 +4,9 @@ namespace BasicNtierTemplate.Web.MVC.Models.ViewModels.WeatherForecast
 {
     public class WeatherViewModel
     {
-        public List<WeatherForecast> WeatherList { get; set; } = [];
+        public List<WeatherForecast>? WeatherList { get; set; } = [];
     }
+
     public class WeatherForecast
     {
         [Display(Name = "SAMPLE_DATE")]

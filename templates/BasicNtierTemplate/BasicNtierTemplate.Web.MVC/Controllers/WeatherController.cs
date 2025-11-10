@@ -21,21 +21,12 @@ namespace BasicNtierTemplate.Web.MVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            try
-            {
-                var weatherDataList = await _weatherService.GetWeatherForecastExample();
-                var weatherViewModel = new WeatherViewModel
-                {
-                    WeatherList = weatherDataList
-                };
+            var weatherViewModel = new WeatherViewModel();
 
-                return View(weatherViewModel);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Unexpected error occurred in HomeController.Index");
-                return View("Error");
-            }
+            var weatherDataList = await _weatherService.GetWeatherForecastExample();
+            weatherViewModel.WeatherList = weatherDataList;
+
+            return View(weatherViewModel);
         }
     }
 }
