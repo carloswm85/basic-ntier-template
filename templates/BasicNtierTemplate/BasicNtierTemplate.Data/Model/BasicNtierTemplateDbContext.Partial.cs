@@ -7,6 +7,10 @@ namespace BasicNtierTemplate.Data.Model;
 /// </summary>
 public partial class BasicNtierTemplateDbContext : DbContext
 {
+    public DbSet<Course> Courses { get; set; }
+    public DbSet<Enrollment> Enrollments { get; set; }
+    public DbSet<Student> Students { get; set; }
+
     /// <summary>
     /// Example content for the partial class to configure the model.
     /// 
@@ -21,16 +25,13 @@ public partial class BasicNtierTemplateDbContext : DbContext
         // Always call the base method first to ensure EF Core's default configurations are applied.
         base.OnModelCreating(modelBuilder);
 
+        #region Blog Example
+
+        // Blog DATA IS SEEDED when running the MVC Application or when applying migrations.
         // Starts the configuration for the 'Posteo' entity.
         modelBuilder.Entity<Posteo>()
-            // Defines that the 'Posteo' entity has *one* related 'Blog' entity.
-            // The navigation property from 'Posteo' to 'Blog' is 'p.blog'.
             .HasOne<Blog>(p => p.blog)
-            // Defines that the related 'Blog' entity has *many* 'Posteo' entities.
-            // The navigation property from 'Blog' to 'Posteo' is 'b.posteos'.
             .WithMany(b => b.Posteos)
-            // Specifies 'id_blog' in the 'Posteo' entity as the *foreign key*
-            // that links 'Posteo' back to the primary key of 'Blog'.
             .HasForeignKey(p => p.blogid);
 
         // Seed sample Blog data into the database when migrations are applied.
@@ -50,6 +51,16 @@ public partial class BasicNtierTemplateDbContext : DbContext
             new Posteo { id = 5, titulo = "Post C", contenido = "Content for Post C", blogid = 4 },
             new Posteo { id = 6, titulo = "Post D", contenido = "Content for Post D", blogid = 4 }
         );
+
+        #endregion
+
+        #region Contoso University Example
+
+        modelBuilder.Entity<Course>().ToTable("Course");
+        modelBuilder.Entity<Enrollment>().ToTable("Enrollment");
+        modelBuilder.Entity<Student>().ToTable("Student");
+
+        #endregion
     }
 }
 

@@ -14,6 +14,7 @@
 
         <!-- NAVIGATION -->
         <div class="collapse navbar-collapse" id="mainNavbar">
+
             <!-- LEFT MENU -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -25,26 +26,8 @@
             </ul>
 
             <!-- RIGHT MENU -->
-            <ul class="navbar-nav">
-                <li class="dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="manageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">University-Example</a>
-                    <ul class="dropdown-menu" aria-labelledby="manageDropdown">
-                        <li class="nav-item">
-                            <a class="dropdown-item" asp-controller="Students" asp-action="Index">Students</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="dropdown-item" asp-controller="Courses" asp-action="Index">Courses</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="dropdown-item" asp-controller="Instructors" asp-action="Index">Instructors</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="dropdown-item" asp-controller="Departments" asp-action="Index">Departments</a>
-                        </li>
-                        <li><a class="dropdown-item" asp-controller="Home" asp-action="Example">nowhere-here</a></li>
-                    </ul>
-                </li>
-            </ul>
+            @await Html.PartialAsync("_ContosoUniversityMenuPartial")
+
         </div>
     </div>
 </nav>

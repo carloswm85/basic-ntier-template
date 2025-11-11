@@ -13,21 +13,29 @@ namespace BasicNtierTemplate.Repository
         private IRepository<Blog>? _blogRepository;
         private IRepository<Posteo>? _postRepository;
 
-        #endregion
+        private IRepository<Student>? _studentRepository;
+        private IRepository<Course>? _courseRepository;
+        private IRepository<Enrollment>? _enrollmentRepository;
 
-        #region Dependency (Unity) Injection Constructor
+        #endregion
 
         public UnitOfWorkEF(BasicNtierTemplateDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        #endregion
-
-        #region Public Methods
+        #region Examples
 
         public IRepository<Blog> BlogRepository => _blogRepository ?? (_blogRepository = new Repository<Blog>(_dbContext));
         public IRepository<Posteo> PostRepository => _postRepository ?? (_postRepository = new Repository<Posteo>(_dbContext));
+
+        public IRepository<Student> StudentRepository => _studentRepository ?? (_studentRepository = new Repository<Student>(_dbContext));
+        public IRepository<Course> CourseRepository => _courseRepository ?? (_courseRepository = new Repository<Course>(_dbContext));
+        public IRepository<Enrollment> EnrollmentRepository => _enrollmentRepository ?? (_enrollmentRepository = new Repository<Enrollment>(_dbContext));
+
+        #endregion
+
+        #region Public Methods
 
         public void Dispose()
         {
