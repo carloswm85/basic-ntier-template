@@ -5,6 +5,7 @@ namespace BasicNtierTemplate.Repository
     public interface IUnitOfWork
     {
         void Save();
+        Task<int> SaveAsync();
         void Dispose();
         void CustomExec(string sqlQuery);
 
