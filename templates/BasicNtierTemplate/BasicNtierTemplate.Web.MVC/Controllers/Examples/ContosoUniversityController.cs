@@ -24,7 +24,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
 
         #region STUDENTS
 
-        // GET: /Contoso/Students
+        // GET: /contoso/students
         [HttpGet("students")]
         public async Task<IActionResult> StudentIndex()
         {
@@ -32,7 +32,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             return View(students);
         }
 
-        // GET: /Contoso/Details/5
+        // GET: /contoso/details/5
         [HttpGet("details/{id:int}")]
         public async Task<IActionResult> StudentDetails(int? id)
         {
@@ -45,7 +45,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             return View(student);
         }
 
-        // GET: /Contoso/StudentCreate
+        // GET: /contoso/create
         [AllowAnonymous]
         [HttpGet("create")]
         public IActionResult StudentCreate()
@@ -53,7 +53,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             return View();
         }
 
-        // POST: /Contoso/Create
+        // POST: /contoso/create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         // In this method: Use entity classes with model binding instead of view models.
@@ -80,7 +80,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             return View(student);
         }
 
-        // GET: /Contoso/Edit/5
+        // GET: /contoso/edit/5
         [HttpGet("edit/{id:int}")]
         public async Task<IActionResult> StudentEdit(int? id)
         {
@@ -93,9 +93,11 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             return View(student);
         }
 
-        // POST: /Contoso/Edit/5
+        // POST: /contoso/edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // TODO Is it possible to implement TryUpdateModelAsync or similar through the Service layer?
+        //      See - https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/crud?view=aspnetcore-8.0#recommended-httppost-edit-code-read-and-update
         [HttpPost("edit/{id:int}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> StudentEdit(int id, [Bind("Id,LastName,FirstMidName,EnrollmentDate")] Student student)
@@ -122,7 +124,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             return View(student);
         }
 
-        // GET: /Contoso/Delete/5
+        // GET: /contoso/delete/5
         // Display student before deletion.
         [HttpGet("delete/{id:int}")]
         public async Task<IActionResult> StudentDelete(int? id)
@@ -135,7 +137,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             return View(student);
         }
 
-        // POST: /Contoso/Delete/5
+        // POST: /contoso/delete/5
         [HttpPost("delete/{id:int}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> StudentDeleteConfirmed(int id)
