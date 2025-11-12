@@ -18,21 +18,21 @@
                     @Html.DisplayNameFor(model => model.LastName)
                 </dt>
                 <dd class="col-sm-9">
-                    @Model.LastName
+                    @Html.DisplayFor(model => model.LastName)
                 </dd>
 
                 <dt class="col-sm-3 fw-semibold text-secondary">
                     @Html.DisplayNameFor(model => model.FirstMidName)
                 </dt>
                 <dd class="col-sm-9">
-                    @Model.FirstMidName
+                    @Html.DisplayFor(model => model.FirstMidName)
                 </dd>
 
                 <dt class="col-sm-3 fw-semibold text-secondary">
                     @Html.DisplayNameFor(model => model.EnrollmentDate)
                 </dt>
                 <dd class="col-sm-9">
-                    @Model.EnrollmentDate.ToShortDateString()
+                    @Html.DisplayFor(model => model.EnrollmentDate)
                 </dd>
             </dl>
 
@@ -42,7 +42,7 @@
                 <i class="bi bi-book-fill me-2"></i> Enrollments
             </h5>
 
-            @if (Model.Enrollments.Count <= 0)
+            @if (Model.Enrollments == null || Model.Enrollments.Count <= 0)
             {
                 <div class="alert alert-info" role="alert">
                     <ul class="m-0">
@@ -77,10 +77,10 @@
         </div>
 
         <div class="card-footer text-end">
-            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-warning me-2">
+            <a asp-controller="contoso" asp-action="edit" asp-route-id="@Model.Id" class="btn btn-warning me-2">
                 <i class="bi bi-pencil-square"></i> Edit
             </a>
-            <a asp-action="Students" class="btn btn-sm btn-secondary">
+            <a asp-controller="contoso" asp-action="students" class="btn btn-secondary">
                 <i class="bi bi-arrow-left"></i> Back to List
             </a>
         </div>

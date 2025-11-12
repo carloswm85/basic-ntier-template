@@ -32,8 +32,10 @@
                     <span asp-validation-for="EnrollmentDate" class="text-danger"></span>
                 </div>
 
+                <hr />
+
                 <div class="d-flex justify-content-end">
-                    <a asp-action="Students" class="btn btn-secondary me-2">
+                    <a asp-controller="contoso" asp-action="students" class="btn btn-secondary me-2">
                         <i class="bi bi-arrow-left"></i> Back to List
                     </a>
                     <button type="submit" class="btn btn-success">

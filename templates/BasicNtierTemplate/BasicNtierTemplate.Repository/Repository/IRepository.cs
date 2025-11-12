@@ -1,16 +1,17 @@
 ﻿namespace BasicNtierTemplate.Repository
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<TEntity> where TEntity : class
     {
-        IQueryable<T> GetAll(bool cache = true);
-        T GetById(object id, bool cache = true);
-        void Add(T entity);
-        void AddRange(IEnumerable<T> entity);
-        void Update(T entity);
+        IQueryable<TEntity> GetAll(bool cache = true);
+        TEntity GetById(object id, bool cache = true);
+        Task<TEntity> GetByIdAsync(object id, bool cache = true);
+        void Add(TEntity entity);
+        void AddRange(IEnumerable<TEntity> entity);
+        void Update(TEntity entity);
         void Delete(int id);
         void Delete(Guid id);
-        void Delete(T entity);
-        void DeleteRange(IEnumerable<T> entity);
+        void Delete(TEntity entity);
+        void DeleteRange(IEnumerable<TEntity> entity);
         void DeleteRangeByIds(IQueryable<int> entityIds);
     }
 }

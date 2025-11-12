@@ -11,9 +11,9 @@ namespace BasicNtierTemplate.Service.Services.Interfaces
         #region Blog
 
         IEnumerable<BlogDto> GetBlogList();
-        BlogDto? GetBlogItem(int blogId);
-        int SaveBlog(BlogDto blogDto);
-        bool DeleteBlog(int blogId);
+        BlogDto? GetBlogItem(Guid blogId);
+        Guid? SaveBlog(BlogDto blogDto);
+        bool DeleteBlog(Guid blogId);
 
         #endregion
 
@@ -21,8 +21,8 @@ namespace BasicNtierTemplate.Service.Services.Interfaces
 
         IEnumerable<PostDto> GetPostList();
         PostDto? GetPostItem(int postId);
-        int SavePost(PostDto postDto);
-        bool DeletePost(int postId);
+        Guid? SavePost(PostDto postDto);
+        bool DeletePost(Guid postId);
 
         #endregion
     }

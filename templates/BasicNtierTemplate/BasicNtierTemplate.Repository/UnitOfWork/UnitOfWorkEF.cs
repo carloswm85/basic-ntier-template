@@ -48,7 +48,7 @@ namespace BasicNtierTemplate.Repository
             _dbContext.SaveChanges();
         }
 
-        public async Task<int> SaveAsync()
+        public async Task<int> SaveChangesAsync()
         {
             return await _dbContext.SaveChangesAsync();
         }

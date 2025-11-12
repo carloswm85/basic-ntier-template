@@ -1,25 +1,26 @@
 ﻿using BasicNtierTemplate.Data;
+using BasicNtierTemplate.Data.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace BasicNtierTemplate.Repository
 {
     //The reading is: It is a class, that takes a generic type, and implements an interface, AND this generic type is limited to be any class + entities interface.
-    public class Repository<T> : IRepository<T> where T : class, IEntity
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
     {
         #region Private fields
 
-        private readonly DbContext _context;
-        private readonly DbSet<T> _entities;
+        private readonly BasicNtierTemplateDbContext _context;
+        private readonly DbSet<TEntity> _entities;
 
         #endregion
 
         #region Constructors
 
         // TODO should DbContext be changed to BasicNtierTemplateDbContext?
-        public Repository(DbContext context)
+        public Repository(BasicNtierTemplateDbContext context)
         {
             _context = context;
-            _entities = context.Set<T>();
+            _entities = context.Set<TEntity>();
         }
 
         #endregion
@@ -28,21 +29,21 @@ namespace BasicNtierTemplate.Repository
 
         // TODO should I improve these methods?
 
-        public virtual IQueryable<T> GetAll(bool cache = true)
+        public virtual IQueryable<TEntity> GetAll(bool cache = true)
         {
             if (!cache)
             {
-                return _entities.AsNoTracking<T>();
+                return _entities.AsNoTracking<TEntity>();
             }
 
             return _entities;
         }
 
-        public virtual T GetById(object id, bool cache = true)
+        public virtual TEntity GetById(object id, bool cache = true)
         {
             if (!cache)
             {
-                _entities.AsNoTracking<T>();
+                _entities.AsNoTracking<TEntity>();
             }
 
             if (id.GetType().IsGenericType)
@@ -60,30 +61,52 @@ namespace BasicNtierTemplate.Repository
             return _entities.Find(id);
         }
 
-        public virtual void Add(T entity)
+        public virtual async Task<TEntity> GetByIdAsync(object id, bool cache = true)
+        {
+            if (!cache)
+            {
+                _entities.AsNoTracking<TEntity>();
+            }
+
+            if (id.GetType().IsGenericType)
+            {
+                var arrayKeys = new List<object>();
+
+                for (int i = 0; i < id.GetType().GetProperties().Length; i++)
+                {
+                    arrayKeys.Add(id.GetType().GetProperties()[i].GetValue(id));
+                }
+
+                return _entities.Find(arrayKeys.ToArray());
+            }
+
+            return _entities.Find(id);
+        }
+
+        public virtual void Add(TEntity entity)
         {
             _entities.Add(entity);
         }
-        public virtual void AddRange(IEnumerable<T> entities)
+        public virtual void AddRange(IEnumerable<TEntity> entities)
         {
             _entities.AddRange(entities);
         }
 
         public virtual void Delete(int id)
         {
-            T entity = _entities.Find(id);
+            TEntity entity = _entities.Find(id);
 
             Delete(entity);
         }
 
         public virtual void Delete(Guid id)
         {
-            T entity = _entities.Find(id);
+            TEntity entity = _entities.Find(id);
 
             Delete(entity);
         }
 
-        public virtual void Delete(T entity)
+        public virtual void Delete(TEntity entity)
         {
             if (_context.Entry(entity).State == EntityState.Detached)
             {
@@ -93,7 +116,7 @@ namespace BasicNtierTemplate.Repository
             _entities.Remove(entity);
         }
 
-        public virtual void Update(T entity)
+        public virtual void Update(TEntity entity)
         {
             var entry = _context.Entry(entity);
             var key = entity.ID;
@@ -115,7 +138,7 @@ namespace BasicNtierTemplate.Repository
         }
 
 
-        public virtual void DeleteRange(IEnumerable<T> entities)
+        public virtual void DeleteRange(IEnumerable<TEntity> entities)
         {
             entities = entities.Where(item => item.ID != null);
 
@@ -130,7 +153,7 @@ namespace BasicNtierTemplate.Repository
             var idList = entityIds.ToList();
 
             // Get name of 'entityIds' table
-            var tableName = _context.Entry(Activator.CreateInstance<T>()).Entity.GetType().Name;
+            var tableName = _context.Entry(Activator.CreateInstance<TEntity>()).Entity.GetType().Name;
 
             // Create comma-separated list of IDs
             var idString = string.Join(",", idList.Select(id => id.ToString()));

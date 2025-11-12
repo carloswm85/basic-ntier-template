@@ -3,18 +3,19 @@
         <a class="nav-link dropdown-toggle" href="#" id="manageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Contoso University</a>
         <ul class="dropdown-menu" aria-labelledby="manageDropdown">
             <li class="nav-item">
-                <a class="dropdown-item" asp-controller="ContosoUniversity" asp-action="Students">Students</a>
+                <a class="dropdown-item" asp-controller="contoso" asp-action="students">Students</a>
             </li>
             <li class="nav-item">
-                <a class="dropdown-item" asp-controller="Courses" asp-action="Index">Courses</a>
+                <a class="dropdown-item" asp-controller="contoso" asp-action="courses">Courses</a>
             </li>
             <li class="nav-item">
-                <a class="dropdown-item" asp-controller="Instructors" asp-action="Index">Instructors</a>
+                <a class="dropdown-item" asp-controller="contoso" asp-action="instructors">Instructors</a>
             </li>
             <li class="nav-item">
-                <a class="dropdown-item" asp-controller="Departments" asp-action="Index">Departments</a>
+                <a class="dropdown-item" asp-controller="contoso" asp-action="departments">Departments</a>
             </li>
-            <li><a class="dropdown-item" asp-controller="Home" asp-action="Example">nowhere-here</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" asp-controller="home" asp-action="example">nowhere-here</a></li>
         </ul>
     </li>
 </ul>

@@ -27,7 +27,7 @@ namespace BasicNtierTemplate.API.Controllers
 
         // GET: api/Blogs/5
         [HttpGet("blogs/{id}")]
-        public ActionResult<BlogDto> GetBlog(int id)
+        public ActionResult<BlogDto> GetBlog(Guid id)
         {
             var blog = _sampleService.GetBlogItem(id);
 
@@ -45,7 +45,7 @@ namespace BasicNtierTemplate.API.Controllers
         {
             var blogId = _sampleService.SaveBlog(blogDto);
 
-            if (blogDto.Id == 0)
+            if (blogDto.Id == Guid.Empty)
             {
                 return CreatedAtAction(nameof(GetBlog), new { id = blogId }, blogId);
             }
@@ -55,7 +55,7 @@ namespace BasicNtierTemplate.API.Controllers
 
         // DELETE: api/Blogs/5
         [HttpDelete("blogs/{id}")]
-        public ActionResult<bool> DeleteBlog(int id)
+        public ActionResult<bool> DeleteBlog(Guid id)
         {
             var result = _sampleService.DeleteBlog(id);
 
@@ -99,7 +99,7 @@ namespace BasicNtierTemplate.API.Controllers
         {
             var postId = _sampleService.SavePost(postDto);
 
-            if (postDto.Id == 0)
+            if (postDto.Id == Guid.Empty)
             {
                 return CreatedAtAction(nameof(GetPost), new { id = postId }, postId);
             }
@@ -109,7 +109,7 @@ namespace BasicNtierTemplate.API.Controllers
 
         // DELETE: api/Posts/5
         [HttpDelete("posts/{id}")]
-        public ActionResult<bool> DeletePost(int id)
+        public ActionResult<bool> DeletePost(Guid id)
         {
             var result = _sampleService.DeletePost(id);
 

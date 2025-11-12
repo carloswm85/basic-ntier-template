@@ -2,11 +2,11 @@
 {
     public partial class Posteo
     {
-        public int id { get; set; }
+        public Guid id { get; set; }
         public required string titulo { get; set; }
         public required string contenido { get; set; }
 
-        public int blogid { get; set; }
+        public Guid blogid { get; set; }
         public virtual Blog? blog { get; set; }
     }
 }

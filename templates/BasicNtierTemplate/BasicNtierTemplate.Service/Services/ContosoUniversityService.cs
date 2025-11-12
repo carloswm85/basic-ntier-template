@@ -19,7 +19,7 @@ namespace BasicNtierTemplate.Service.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Student?> GetStudentDetailsAsync(int id)
+        public async Task<Student?> GetStudentAsync(int id)
         {
             var student = await _unitOfWork.StudentRepository.GetAll()
                 .Include(s => s.Enrollments)
@@ -30,7 +30,7 @@ namespace BasicNtierTemplate.Service.Services
             return student;
         }
 
-        public async Task<List<Student>> GetStudentsAsync()
+        public async Task<List<Student>> GetStudentListAsync()
         {
             return await _unitOfWork.StudentRepository.GetAll().ToListAsync();
         }
@@ -40,7 +40,7 @@ namespace BasicNtierTemplate.Service.Services
             try
             {
                 _unitOfWork.StudentRepository.Add(student);
-                await _unitOfWork.SaveAsync();
+                await _unitOfWork.SaveChangesAsync();
 
             }
             catch (DbUpdateException dbuex)
@@ -48,6 +48,36 @@ namespace BasicNtierTemplate.Service.Services
                 _logger.LogError(dbuex, "An error occurred while saving the student.");
                 throw;
             }
+        }
+
+        public async Task<Student> UpdateStudent(Student student)
+        {
+            try
+            {
+                _unitOfWork.StudentRepository.Update(student);
+                await _unitOfWork.SaveChangesAsync();
+                return student;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+        }
+
+        public bool StudentExists(int id)
+        {
+            return _unitOfWork.StudentRepository.GetAll().Any(e => e.Id == id);
+        }
+
+        public async Task DeleteStudent(int id)
+        {
+            var student = await _unitOfWork.StudentRepository.GetByIdAsync(id);
+            if (student != null)
+            {
+                _unitOfWork.StudentRepository.Delete(student);
+            }
+
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

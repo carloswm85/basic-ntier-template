@@ -35,21 +35,26 @@ public partial class BasicNtierTemplateDbContext : DbContext
             .HasForeignKey(p => p.blogid);
 
         // Seed sample Blog data into the database when migrations are applied.
+        var blogId1 = Guid.NewGuid();
+        var blogId2 = Guid.NewGuid();
+        var blogId3 = Guid.NewGuid();
+        var blogId4 = Guid.NewGuid();
+
         modelBuilder.Entity<Blog>().HasData(
-            new Blog { id = 1, url = "https://example.com/blog1" },
-            new Blog { id = 2, url = "https://example.com/blog2" },
-            new Blog { id = 3, url = "https://example.com/blog3" },
-            new Blog { id = 4, url = "https://example.com/blog4" }
+            new Blog { id = blogId1, url = "https://example.com/blog1" },
+            new Blog { id = blogId2, url = "https://example.com/blog2" },
+            new Blog { id = blogId3, url = "https://example.com/blog3" },
+            new Blog { id = blogId4, url = "https://example.com/blog4" }
         );
 
         // Seed sample Post data and associate each post with a corresponding Blog using BlogId.
         modelBuilder.Entity<Posteo>().HasData(
-            new Posteo { id = 1, titulo = "Post 1", contenido = "Content for Post 1", blogid = 1 },
-            new Posteo { id = 2, titulo = "Post 2", contenido = "Content for Post 2", blogid = 1 },
-            new Posteo { id = 3, titulo = "Post A", contenido = "Content for Post A", blogid = 2 },
-            new Posteo { id = 4, titulo = "Post B", contenido = "Content for Post B", blogid = 3 },
-            new Posteo { id = 5, titulo = "Post C", contenido = "Content for Post C", blogid = 4 },
-            new Posteo { id = 6, titulo = "Post D", contenido = "Content for Post D", blogid = 4 }
+            new Posteo { id = Guid.NewGuid(), titulo = "Post 1", contenido = "Content for Post 1", blogid = blogId1 },
+            new Posteo { id = Guid.NewGuid(), titulo = "Post 2", contenido = "Content for Post 2", blogid = blogId1 },
+            new Posteo { id = Guid.NewGuid(), titulo = "Post A", contenido = "Content for Post A", blogid = blogId2 },
+            new Posteo { id = Guid.NewGuid(), titulo = "Post B", contenido = "Content for Post B", blogid = blogId3 },
+            new Posteo { id = Guid.NewGuid(), titulo = "Post C", contenido = "Content for Post C", blogid = blogId4 },
+            new Posteo { id = Guid.NewGuid(), titulo = "Post D", contenido = "Content for Post D", blogid = blogId4 }
         );
 
         #endregion

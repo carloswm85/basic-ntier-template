@@ -2,7 +2,7 @@
 {
     public partial class Blog
     {
-        public int id { get; set; }
+        public Guid id { get; set; }
         public required string url { get; set; }
 
         public virtual ICollection<Posteo>? Posteos { get; set; }

@@ -28,7 +28,7 @@ namespace BasicNtierTemplate.Service.Services
             return _mapper.Map<IEnumerable<BlogDto>>(blogs);
         }
 
-        public BlogDto? GetBlogItem(int blogId)
+        public BlogDto? GetBlogItem(Guid blogId)
         {
             var blog = _unitOfWork.BlogRepository.GetAll()
                 .Where(blog => blog.id == blogId)
@@ -44,9 +44,9 @@ namespace BasicNtierTemplate.Service.Services
 
         // 2. SAVE operations (create/update)
 
-        public int SaveBlog(BlogDto blogDto)
+        public Guid? SaveBlog(BlogDto blogDto)
         {
-            if (blogDto.Id == 0)
+            if (blogDto.Id == Guid.Empty)
             {
                 // Create new blog
                 var blog = _mapper.Map<Blog>(blogDto);
@@ -58,7 +58,7 @@ namespace BasicNtierTemplate.Service.Services
             {
                 // Update existing blog
                 var existingBlog = _unitOfWork.BlogRepository.GetById(blogDto.Id);
-                if (existingBlog == null) return 0;
+                if (existingBlog == null) return null;
 
                 _mapper.Map(blogDto, existingBlog);
                 _unitOfWork.BlogRepository.Update(existingBlog);
@@ -69,7 +69,7 @@ namespace BasicNtierTemplate.Service.Services
 
         // 3. DELETE operations
 
-        public bool DeleteBlog(int blogId)
+        public bool DeleteBlog(Guid blogId)
         {
             var blog = _unitOfWork.BlogRepository.GetById(blogId);
             if (blog == null) return false;
@@ -102,9 +102,9 @@ namespace BasicNtierTemplate.Service.Services
 
         // 2. SAVE operations (create/update)
 
-        public int SavePost(PostDto postDto)
+        public Guid? SavePost(PostDto postDto)
         {
-            if (postDto.Id == 0)
+            if (postDto.Id == Guid.Empty)
             {
                 // Create new post
                 var post = _mapper.Map<Posteo>(postDto);
@@ -116,7 +116,7 @@ namespace BasicNtierTemplate.Service.Services
             {
                 // Update existing post
                 var existingPost = _unitOfWork.PostRepository.GetById(postDto.Id);
-                if (existingPost == null) return 0;
+                if (existingPost == null) return null;
 
                 _mapper.Map(postDto, existingPost);
                 _unitOfWork.PostRepository.Update(existingPost);
@@ -127,7 +127,7 @@ namespace BasicNtierTemplate.Service.Services
 
         // 3. DELETE operations
 
-        public bool DeletePost(int postId)
+        public bool DeletePost(Guid postId)
         {
             var post = _unitOfWork.PostRepository.GetById(postId);
             if (post == null) return false;
