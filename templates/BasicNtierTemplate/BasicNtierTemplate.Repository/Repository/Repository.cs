@@ -29,9 +29,9 @@ namespace BasicNtierTemplate.Repository
 
         // TODO should I improve these methods?
 
-        public virtual IQueryable<TEntity> GetAll(bool cache = true)
+        public virtual IQueryable<TEntity> GetAll(bool asNoTracking = false)
         {
-            if (!cache)
+            if (asNoTracking)
             {
                 return _entities.AsNoTracking<TEntity>();
             }
@@ -39,9 +39,9 @@ namespace BasicNtierTemplate.Repository
             return _entities;
         }
 
-        public virtual TEntity GetById(object id, bool cache = true)
+        public virtual TEntity GetById(object id, bool asNoTracking = false)
         {
-            if (!cache)
+            if (asNoTracking)
             {
                 _entities.AsNoTracking<TEntity>();
             }
@@ -61,9 +61,9 @@ namespace BasicNtierTemplate.Repository
             return _entities.Find(id);
         }
 
-        public virtual async Task<TEntity> GetByIdAsync(object id, bool cache = true)
+        public virtual async Task<TEntity> GetByIdAsync(object id, bool asNoTracking = false)
         {
-            if (!cache)
+            if (asNoTracking)
             {
                 _entities.AsNoTracking<TEntity>();
             }

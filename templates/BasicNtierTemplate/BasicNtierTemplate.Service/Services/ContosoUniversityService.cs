@@ -19,8 +19,13 @@ namespace BasicNtierTemplate.Service.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Student?> GetStudentAsync(int id)
+        public async Task<Student?> GetStudentAsync(int id, bool asNoTracking = false)
         {
+            if (asNoTracking)
+            {
+                return await _unitOfWork.StudentRepository.GetByIdAsync(id: id, asNoTracking);
+            }
+
             var student = await _unitOfWork.StudentRepository.GetAll()
                 .Include(s => s.Enrollments)
                 .ThenInclude(e => e.Course)
@@ -69,15 +74,18 @@ namespace BasicNtierTemplate.Service.Services
             return _unitOfWork.StudentRepository.GetAll().Any(e => e.Id == id);
         }
 
-        public async Task DeleteStudentAsync(int id)
+        public async Task<Student?> DeleteStudentAsync(int id)
         {
-            var student = await _unitOfWork.StudentRepository.GetByIdAsync(id);
+            var student = await _unitOfWork.StudentRepository.GetByIdAsync(id: id, asNoTracking: true);
+
             if (student != null)
             {
                 _unitOfWork.StudentRepository.Delete(student);
+                await _unitOfWork.SaveChangesAsync();
+                return student;
             }
 
-            await _unitOfWork.SaveChangesAsync();
+            return null;
         }
     }
 }

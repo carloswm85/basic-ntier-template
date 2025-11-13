@@ -12,7 +12,7 @@
                     <h4 class="mb-0">Edit Student</h4>
                 </div>
                 <div class="card-body">
-                    <form asp-action="StudentEdit" novalidate>
+                    <form asp-controller="student" asp-action="edit" novalidate>
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
                         <input type="hidden" asp-for="Id" />
 
@@ -37,7 +37,7 @@
                         <hr />
 
                         <div class="d-flex justify-content-between">
-                            <a asp-controller="contoso" asp-action="students" class="btn btn-outline-secondary">
+                            <a asp-controller="student" asp-action="list" class="btn btn-outline-secondary">
                                 <i class="bi bi-arrow-left-circle"></i> Back to List
                             </a>
                             <button type="submit" class="btn btn-primary">

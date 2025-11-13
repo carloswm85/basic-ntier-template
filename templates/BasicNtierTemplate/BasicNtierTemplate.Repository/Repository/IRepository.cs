@@ -2,9 +2,9 @@
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        IQueryable<TEntity> GetAll(bool cache = true);
-        TEntity GetById(object id, bool cache = true);
-        Task<TEntity> GetByIdAsync(object id, bool cache = true);
+        IQueryable<TEntity> GetAll(bool asNoTracking = true);
+        TEntity GetById(object id, bool asNoTracking = false);
+        Task<TEntity> GetByIdAsync(object id, bool asNoTracking = false);
         void Add(TEntity entity);
         void AddRange(IEnumerable<TEntity> entity);
         void Update(TEntity entity);

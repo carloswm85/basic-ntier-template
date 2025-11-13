@@ -4,8 +4,8 @@ namespace BasicNtierTemplate.Service.Services.Interfaces
 {
     public interface IContosoUniversityService
     {
-        Task DeleteStudentAsync(int id);
-        Task<Student?> GetStudentAsync(int id);
+        Task<Student?> DeleteStudentAsync(int id);
+        Task<Student?> GetStudentAsync(int id, bool asNoTracking = false);
         Task<List<Student>> GetStudentListAsync();
         Task SaveStudentAsync(Student student);
         bool StudentExists(int id);

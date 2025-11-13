@@ -13,7 +13,10 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly IWeatherForecastService _weatherForecastService;
 
-        public WeatherForecastController(IWeatherForecastService weatherForecastService, ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(
+            IWeatherForecastService weatherForecastService,
+            ILogger<WeatherForecastController> logger
+        )
         {
             _logger = logger;
             _weatherForecastService = weatherForecastService;

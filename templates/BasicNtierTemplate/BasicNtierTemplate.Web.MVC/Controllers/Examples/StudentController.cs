@@ -3,37 +3,40 @@ using BasicNtierTemplate.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 
 namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
 {
-    [Route("contoso")]
-    public class ContosoUniversityController : Controller
+    [Route("student")]
+    public class StudentController : Controller
     {
-        private readonly ILogger<ContosoUniversityController> _logger;
+        private readonly ILogger<StudentController> _logger;
         private readonly IContosoUniversityService _contosoService;
 
-        public ContosoUniversityController(
-            IContosoUniversityService contosoUniversity,
-            ILogger<ContosoUniversityController> logger
+        public StudentController(
+            IContosoUniversityService contosoService,
+            ILogger<StudentController> logger
             )
         {
             _logger = logger;
-            _contosoService = contosoUniversity;
+            _contosoService = contosoService;
         }
 
-        #region STUDENTS
-
-        // GET: /contoso/students
-        [HttpGet("students")]
-        public async Task<IActionResult> StudentIndex()
+        // GET: /student/students
+        [HttpGet("list")]
+        public async Task<IActionResult> Index()
         {
             var students = await _contosoService.GetStudentListAsync();
+
+            if (students == null)
+                students = new List<Student>();
+
             return View(students);
         }
 
-        // GET: /contoso/details/5
+        // GET: /student/details/5
         [HttpGet("details/{id:int}")]
-        public async Task<IActionResult> StudentDetails(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
                 return NotFound();
@@ -46,21 +49,21 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             return View(student);
         }
 
-        // GET: /contoso/create
+        // GET: /student/create
         [AllowAnonymous]
         [HttpGet("create")]
-        public IActionResult StudentCreate()
+        public IActionResult Create()
         {
             return View();
         }
 
-        // POST: /contoso/create
+        // POST: /student/create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         // In this method: Use entity classes with model binding instead of view models.
         [HttpPost("create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> StudentCreate([Bind("Id,LastName,FirstMidName,EnrollmentDate")] Student student)
+        public async Task<IActionResult> Create([Bind("Id,LastName,FirstMidName,EnrollmentDate")] Student student)
         {
             if (!ModelState.IsValid)
                 return View(student);
@@ -68,7 +71,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             try
             {
                 await _contosoService.SaveStudentAsync(student);
-                return RedirectToAction(nameof(StudentIndex));
+                return RedirectToAction(nameof(Index));
             }
             catch (DbUpdateException ex)
             {
@@ -80,9 +83,9 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             }
         }
 
-        // GET: /contoso/edit/5
+        // GET: /student/edit/5
         [HttpGet("edit/{id:int}")]
-        public async Task<IActionResult> StudentEdit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
                 return NotFound();
@@ -95,12 +98,12 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             return View(student);
         }
 
-        // POST: /contoso/edit/5
+        // POST: /student/edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // POST: /contoso/edit/5
+        // POST: /student/edit/5
         [HttpPost("edit/{id:int}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> StudentEdit(int id, [Bind("Id,LastName,FirstMidName,EnrollmentDate")] Student student)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,LastName,FirstMidName,EnrollmentDate")] Student student)
         {
             if (id != student.Id)
                 return NotFound();
@@ -111,7 +114,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             try
             {
                 await _contosoService.UpdateStudentAsync(student);
-                return RedirectToAction(nameof(StudentIndex));
+                return RedirectToAction(nameof(Index));
             }
             catch (DbUpdateConcurrencyException ex)
             {
@@ -131,27 +134,49 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
         }
 
 
-        // GET: /contoso/delete/5
+        // GET: /student/delete/5
         // Display student before deletion.
         [HttpGet("delete/{id:int}")]
-        public async Task<IActionResult> StudentDelete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
                 return NotFound();
 
-            var student = await _contosoService.GetStudentAsync(id.Value);
+            var student = await _contosoService.GetStudentAsync(id: id.Value, asNoTracking: true);
 
             if (student == null) return NotFound();
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Delete failed. Try again, and if the problem persists " +
+                    "see your system administrator.";
+            }
+
             return View(student);
         }
 
-        // POST: /contoso/delete/5
+        // POST: /student/delete/5
         [HttpPost("delete/{id:int}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> StudentDeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _contosoService.DeleteStudentAsync(id);
-            return RedirectToAction(nameof(StudentIndex));
+            var student = await _contosoService.GetStudentAsync(id: id, asNoTracking: true);
+
+            if (student == null)
+                return RedirectToAction(nameof(Index));
+
+            try
+            {
+                await _contosoService.DeleteStudentAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError(ex, "An error occurred while deleting the student with ID {StudentId}.", id);
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+            }
+
         }
 
         // ADIITONAL METHODS CAN GO HERE
@@ -163,7 +188,8 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
          *  | **PATCH** | Partial modification | JSON Patch document | Update one or more fields only   |
          */
 
-        // PUT: /contoso/student/5
+        // Example, unused
+        // PUT: /student/student/5
         [HttpPut("student/{id}")]
         public async Task<IActionResult> UpdateStudent(int id, [FromBody] Student student)
         {
@@ -193,26 +219,5 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error updating data.");
             }
         }
-
-
-        #endregion
-
-        #region COURSES
-
-        // TODO
-
-        #endregion
-
-        #region INSTRUCTORS
-
-        // TODO
-
-        #endregion
-
-        #region DEPARTMENTS
-
-        // TODO
-
-        #endregion
     }
 }
