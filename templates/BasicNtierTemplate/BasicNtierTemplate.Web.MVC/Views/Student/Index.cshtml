@@ -5,14 +5,47 @@
 }
 
 <div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <!-- Header Row -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="mb-0">@ViewData["Title"]</h2>
+
         <a asp-controller="student" asp-action="create" class="btn btn-primary">
             <i class="bi bi-plus-lg me-1"></i> Create New
         </a>
     </div>
 
-    @if (Model.Count() == 0)
+    <!-- Search Form -->
+    <form asp-action="index" method="get" class="mb-4">
+        <div class="row g-2 align-items-end">
+            <div class="col-sm-4">
+                <label for="SearchString" class="form-label">Find by name</label>
+                <input type="text"
+                       id="SearchString"
+                       name="SearchString"
+                       value="@ViewData["CurrentFilter"]"
+                       class="form-control"
+                       placeholder="Enter name..." />
+            </div>
+
+            <!-- Search Button -->
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">
+                    Search
+                </button>
+            </div>
+
+            <!-- Clear Button -->
+            <div class="col-auto">
+                <a asp-action="index" class="btn btn-secondary">
+                    Clear
+                </a>
+            </div>
+        </div>
+    </form>
+
+    <!-- No Data Warning -->
+    @if (!Model.Any())
     {
         <div class="alert alert-warning" role="alert">
             <ul class="m-0">
@@ -22,25 +55,35 @@
     }
     else
     {
+        <!-- Table Card -->
         <div class="card shadow-sm">
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-hover mb-0 align-middle">
                         <thead class="table-light">
                             <tr>
-                                <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">
+                                        @Html.DisplayNameFor(model => model.LastName)
+                                    </a>
+                                </th>
                                 <th>@Html.DisplayNameFor(model => model.FirstMidName)</th>
-                                <th>@Html.DisplayNameFor(model => model.EnrollmentDate)</th>
+                                <th>
+                                    <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">
+                                        @Html.DisplayNameFor(model => model.EnrollmentDate)
+                                    </a>
+                                </th>
                                 <th class="text-end">Actions</th>
                             </tr>
                         </thead>
+
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>@Html.DisplayFor(modelItem => item.LastName)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.FirstMidName)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EnrollmentDate)</td>
+                                    <td>@item.LastName</td>
+                                    <td>@item.FirstMidName</td>
+                                    <td>@item.EnrollmentDate.ToShortDateString()</td>
                                     <td class="text-end">
                                         <a asp-action="edit" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary me-1">
                                             <i class="bi bi-pencil-square"></i> Edit
@@ -55,10 +98,10 @@
                                 </tr>
                             }
                         </tbody>
+
                     </table>
                 </div>
             </div>
         </div>
     }
-
 </div>

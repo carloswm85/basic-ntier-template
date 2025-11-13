@@ -3,7 +3,6 @@ using BasicNtierTemplate.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 
 namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
 {
@@ -24,12 +23,13 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
 
         // GET: /student/students
         [HttpGet("list")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-            var students = await _contosoService.GetStudentListAsync();
+            var students = await _contosoService.GetStudentListAsync(sortOrder, searchString);
 
-            if (students == null)
-                students = new List<Student>();
+            ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["CurrentFilter"] = searchString;
 
             return View(students);
         }

@@ -6,7 +6,8 @@ namespace BasicNtierTemplate.Service.Services.Interfaces
     {
         Task<Student?> DeleteStudentAsync(int id);
         Task<Student?> GetStudentAsync(int id, bool asNoTracking = false);
-        Task<List<Student>> GetStudentListAsync();
+        Task<IEnumerable<Student>> GetStudentListAsync();
+        Task<IEnumerable<Student>> GetStudentListAsync(string sortOrder, string searchString);
         Task SaveStudentAsync(Student student);
         bool StudentExists(int id);
         Task<Student> UpdateStudentAsync(Student student);

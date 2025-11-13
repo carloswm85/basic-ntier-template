@@ -35,9 +35,42 @@ namespace BasicNtierTemplate.Service.Services
             return student;
         }
 
-        public async Task<List<Student>> GetStudentListAsync()
+        public async Task<IEnumerable<Student>> GetStudentListAsync()
         {
             return await _unitOfWork.StudentRepository.GetAll().ToListAsync();
+        }
+
+        public async Task<IEnumerable<Student>> GetStudentListAsync(string sortOrder, string searchString)
+        {
+            var students = _unitOfWork.StudentRepository.GetAll(asNoTracking: true);
+
+            students = from s in students select s;
+
+            // SEARCH
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                students = students.Where(s => s.LastName.Contains(searchString)
+                                        || s.FirstMidName.Contains(searchString));
+            }
+
+            // SORTING
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    students = students.OrderByDescending(s => s.LastName);
+                    break;
+                case "Date":
+                    students = students.OrderBy(s => s.EnrollmentDate);
+                    break;
+                case "date_desc":
+                    students = students.OrderByDescending(s => s.EnrollmentDate);
+                    break;
+                default:
+                    students = students.OrderBy(s => s.LastName);
+                    break;
+            }
+
+            return students;
         }
 
         public async Task SaveStudentAsync(Student student)
