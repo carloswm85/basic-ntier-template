@@ -50,7 +50,7 @@ namespace BasicNtierTemplate.Service.Services
             }
         }
 
-        public async Task<Student> UpdateStudent(Student student)
+        public async Task<Student> UpdateStudentAsync(Student student)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace BasicNtierTemplate.Service.Services
                 await _unitOfWork.SaveChangesAsync();
                 return student;
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateException)
             {
                 throw;
             }
@@ -69,7 +69,7 @@ namespace BasicNtierTemplate.Service.Services
             return _unitOfWork.StudentRepository.GetAll().Any(e => e.Id == id);
         }
 
-        public async Task DeleteStudent(int id)
+        public async Task DeleteStudentAsync(int id)
         {
             var student = await _unitOfWork.StudentRepository.GetByIdAsync(id);
             if (student != null)

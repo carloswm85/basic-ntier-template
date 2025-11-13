@@ -1,5 +1,4 @@
-﻿using System.Net;
-using BasicNtierTemplate.Data.Model;
+﻿using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -36,11 +35,13 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
         [HttpGet("details/{id:int}")]
         public async Task<IActionResult> StudentDetails(int? id)
         {
-            if (id == null) return NotFound();
+            if (id == null)
+                return NotFound();
 
             var student = await _contosoService.GetStudentAsync(id.Value);
 
-            if (student == null) return NotFound();
+            if (student == null)
+                return NotFound();
 
             return View(student);
         }
@@ -61,75 +62,82 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> StudentCreate([Bind("Id,LastName,FirstMidName,EnrollmentDate")] Student student)
         {
-            if (ModelState.IsValid)
-                try
-                {
-                    if (ModelState.IsValid)
-                    {
-                        await _contosoService.SaveStudentAsync(student);
-                        return RedirectToAction(nameof(StudentIndex));
-                    }
-                }
-                catch (DbUpdateException ex)
-                {
-                    _logger.LogError(ex, "An error occurred while creating a new student.");
-                    ModelState.AddModelError("", "Unable to save changes. " +
-                        "Try again, and if the problem persists " +
-                        "see your system administrator.");
-                }
-            return View(student);
+            if (!ModelState.IsValid)
+                return View(student);
+
+            try
+            {
+                await _contosoService.SaveStudentAsync(student);
+                return RedirectToAction(nameof(StudentIndex));
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError(ex, "An error occurred while creating a new student.");
+                ModelState.AddModelError("", "Unable to save changes. " +
+                    "Try again, and if the problem persists " +
+                    "see your system administrator.");
+                return View(student);
+            }
         }
 
         // GET: /contoso/edit/5
         [HttpGet("edit/{id:int}")]
         public async Task<IActionResult> StudentEdit(int? id)
         {
-            if (id == null) return NotFound();
+            if (id == null)
+                return NotFound();
 
             var student = await _contosoService.GetStudentAsync(id.Value);
 
-            if (student == null) return NotFound();
+            if (student == null)
+                return NotFound();
 
             return View(student);
         }
 
         // POST: /contoso/edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        // TODO Is it possible to implement TryUpdateModelAsync or similar through the Service layer?
-        //      See - https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/crud?view=aspnetcore-8.0#recommended-httppost-edit-code-read-and-update
+        // POST: /contoso/edit/5
         [HttpPost("edit/{id:int}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> StudentEdit(int id, [Bind("Id,LastName,FirstMidName,EnrollmentDate")] Student student)
         {
-            if (id != student.Id) return NotFound();
-            if (!_contosoService.StudentExists(student.Id)) return NotFound();
+            if (id != student.Id)
+                return NotFound();
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(student);
+
+            try
             {
-                try
-                {
-                    await _contosoService.UpdateStudent(student);
-                    return RedirectToAction(nameof(StudentIndex));
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "An error occurred while editing the student with ID {StudentId}.", student.Id);
-                    ModelState.AddModelError("", "Unable to save changes. " +
-                        "Try again, and if the problem persists, " +
-                        "see your system administrator.");
-                    throw;
-                }
+                await _contosoService.UpdateStudentAsync(student);
+                return RedirectToAction(nameof(StudentIndex));
             }
-            return View(student);
+            catch (DbUpdateConcurrencyException ex)
+            {
+                if (!_contosoService.StudentExists(student.Id))
+                    return NotFound();
+
+                _logger.LogWarning(ex, "Concurrency conflict while updating student ID {StudentId}.", student.Id);
+                ModelState.AddModelError("", "The record you attempted to edit was modified by another user.");
+                return View(student);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while editing the student with ID {StudentId}.", student.Id);
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, contact your system administrator.");
+                return View(student);
+            }
         }
+
 
         // GET: /contoso/delete/5
         // Display student before deletion.
         [HttpGet("delete/{id:int}")]
         public async Task<IActionResult> StudentDelete(int? id)
         {
-            if (id == null) return NotFound();
+            if (id == null)
+                return NotFound();
 
             var student = await _contosoService.GetStudentAsync(id.Value);
 
@@ -142,9 +150,50 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> StudentDeleteConfirmed(int id)
         {
-            await _contosoService.DeleteStudent(id);
+            await _contosoService.DeleteStudentAsync(id);
             return RedirectToAction(nameof(StudentIndex));
         }
+
+        // ADIITONAL METHODS CAN GO HERE
+
+        /*
+         *  | Method    | Scope                | Request Body        | Example Use Case                 |
+         *  | --------- | -------------------- | ------------------- | -------------------------------- |
+         *  | **PUT**   | Full replacement     | Full entity         | Replace an entire student record |
+         *  | **PATCH** | Partial modification | JSON Patch document | Update one or more fields only   |
+         */
+
+        // PUT: /contoso/student/5
+        [HttpPut("student/{id}")]
+        public async Task<IActionResult> UpdateStudent(int id, [FromBody] Student student)
+        {
+            if (id != student.Id)
+                return BadRequest("Student ID mismatch.");
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                var existingStudent = await _contosoService.GetStudentAsync(id);
+                if (existingStudent == null)
+                    return NotFound();
+
+                // Replace all properties (full update)
+                existingStudent.FirstMidName = student.FirstMidName;
+                existingStudent.LastName = student.LastName;
+                existingStudent.EnrollmentDate = student.EnrollmentDate;
+
+                await _contosoService.SaveStudentAsync(existingStudent);
+                return NoContent(); // 204 - successful update
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError(ex, "Error updating student.");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error updating data.");
+            }
+        }
+
 
         #endregion
 
