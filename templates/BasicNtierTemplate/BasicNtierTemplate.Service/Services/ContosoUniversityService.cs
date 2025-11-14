@@ -41,7 +41,7 @@ namespace BasicNtierTemplate.Service.Services
             return await _unitOfWork.StudentRepository.GetAll().ToListAsync();
         }
 
-        public async Task<IEnumerable<Student>> GetStudentListAsync(
+        public async Task<PaginatedList<Student>> GetStudentListAsync(
             string currentFilter,
             int pageIndex,
             int pageSize,

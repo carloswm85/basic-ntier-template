@@ -1,6 +1,6 @@
-﻿@using BasicNtierTemplate.Service.Dtos
+﻿@using BasicNtierTemplate.Web.MVC.Models
 
-@model PaginatedList<BasicNtierTemplate.Data.Model.Student>
+@model PaginatedListViewModel<BasicNtierTemplate.Data.Model.Student>
 
 @{
     ViewData["Title"] = "Students";
@@ -36,14 +36,14 @@
                 {
                     string? url = @Url.Action("Index", new
                     {
+                        currentFilter = Model.CurrentFilter,
                         pageIndex = 1,
-                        currentFilter = ViewData["CurrentFilter"],
-                        searchString = ViewData["CurrentFilter"],
-                        sortOrder = ViewData["CurrentSort"],
                         pageSize = size,
+                        searchString = Model.CurrentFilter,
+                        sortOrder = Model.CurrentSort,
                     });
 
-                    if (ViewData["PageSize"]?.ToString() == size.ToString())
+                    if (Model.PageSize == size)
                     {
                         <option selected value="@url"> @size </option>
                     }
@@ -60,23 +60,25 @@
             <div class="row g-2 align-items-end">
                 <div class="col-auto">
                     <div class="input-group">
-                        <input type="hidden" name="sortOrder" value="@ViewData["CurrentSort"]" />
+                        <input type="hidden" name="sortOrder" value="@Model.CurrentSort" />
                         <input type="hidden" name="pageIndex" value="1" /> <!-- reset to page 1 on search -->
-                        <input type="hidden" name="pageSize" value="@ViewData["PageSize"]" />
+                        <input type="hidden" name="pageSize" value="@Model.PageSize" />
                         <input type="text"
                                id="SearchString"
                                name="SearchString"
-                               value="@ViewData["CurrentFilter"]"
-                               class="form-control @(string.IsNullOrEmpty(Convert.ToString(ViewData["CurrentFilter"])) ? "rounded-1" : "rounded-start-2")"
+                               value="@Model.CurrentFilter"
+                               class="form-control
+                                    @(string.IsNullOrEmpty(Convert.ToString(Model.CurrentFilter))
+                                        ? "rounded-1" : "rounded-start-2")"
                                placeholder="Enter name..." />
 
-                        @if (!string.IsNullOrEmpty(Convert.ToString(ViewData["CurrentFilter"])))
+                        @if (!string.IsNullOrEmpty(Convert.ToString(Model.CurrentFilter)))
                         {
                             <a asp-action="Index"
-                               asp-route-sortOrder="@ViewData["CurrentSort"]"
-                               asp-route-pageIndex="@(Model.PageIndex)"
+                               asp-route-sortOrder="@Model.CurrentSort"
+                               asp-route-pageIndex="@(Model.PaginatedList.PageIndex)"
                                asp-route-currentFilter=""
-                               asp-route-pageSize="@ViewData["PageSize"]"
+                               asp-route-pageSize="@Model.PageSize"
                                 class="btn btn-outline-secondary">
                                 <i class="bi bi-x-lg"></i>
                             </a>
@@ -101,7 +103,7 @@
     </div>
 
     <!-- No Data Warning -->
-    @if (!Model.Any())
+    @if (!Model.PaginatedList.Any())
     {
         <div class="alert alert-warning" role="alert">
             <i class="bi bi-exclamation-triangle me-2"></i>
@@ -120,27 +122,27 @@
                             <tr>
                                 <th>
                                     <a asp-action="Index"
-                                    asp-route-sortOrder="@ViewData["NameSortParm"]"
-                                    asp-route-pageIndex="@(Model.PageIndex)"
-                                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                                    asp-route-searchString="@ViewData["CurrentFilter"]"
-                                    asp-route-pageSize="@ViewData["PageSize"]">
-                                        @Html.DisplayNameFor(model => model[0].LastName)
+                                       asp-route-sortOrder="@Model.SortParamTwo"
+                                       asp-route-pageIndex="@(Model.PaginatedList.PageIndex)"
+                                       asp-route-currentFilter="@Model.CurrentFilter"
+                                       asp-route-searchString="@Model.CurrentFilter"
+                                       asp-route-pageSize="@Model.PageSize">
+                                        @Html.DisplayNameFor(model => model.PaginatedList[0].LastName)
                                     </a>
                                 </th>
                                 
                                 <th>
-                                    @Html.DisplayNameFor(model => model[0].FirstMidName)
+                                    @Html.DisplayNameFor(model => model.PaginatedList[0].FirstMidName)
                                 </th>
 
                                 <th>
                                     <a asp-action="Index"
-                                    asp-route-sortOrder="@ViewData["DateSortParm"]"
-                                    asp-route-pageIndex="@(Model.PageIndex)"
-                                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                                    asp-route-searchString="@ViewData["CurrentFilter"]"
-                                    asp-route-pageSize="@ViewData["PageSize"]">
-                                        @Html.DisplayNameFor(model => model[0].EnrollmentDate)
+                                       asp-route-sortOrder="@Model.SortParamOne"
+                                       asp-route-pageIndex="@(Model.PaginatedList.PageIndex)"
+                                       asp-route-currentFilter="@Model.CurrentFilter"
+                                       asp-route-searchString="@Model.CurrentFilter"
+                                       asp-route-pageSize="@Model.PageSize">
+                                        @Html.DisplayNameFor(model => model.PaginatedList[0].EnrollmentDate)
                                     </a>
                                 </th>
 
@@ -149,7 +151,7 @@
                         </thead>
 
                         <tbody>
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.PaginatedList)
                             {
                                 <tr>
                                     <td>@item.LastName</td>
@@ -157,16 +159,19 @@
                                     <td>@item.EnrollmentDate.ToShortDateString()</td>
 
                                     <td class="text-end">
-                                        <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary me-1">
-                                            <i class="bi bi-pencil-square"></i> Edit
+                                        <a asp-action="Edit" asp-route-id="@item.ID"
+                                            class="btn btn-sm btn-outline-primary me-1">
+                                                <i class="bi bi-pencil-square"></i> Edit
                                         </a>
 
-                                        <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-sm btn-outline-info me-1">
-                                            <i class="bi bi-eye"></i> Details
+                                        <a asp-action="Details" asp-route-id="@item.ID"
+                                            class="btn btn-sm btn-outline-info me-1">
+                                                <i class="bi bi-eye"></i> Details
                                         </a>
 
-                                        <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-outline-danger">
-                                            <i class="bi bi-trash"></i> Delete
+                                        <a asp-action="Delete" asp-route-id="@item.ID"
+                                            class="btn btn-sm btn-outline-danger">
+                                                <i class="bi bi-trash"></i> Delete
                                         </a>
                                     </td>
                                 </tr>
@@ -184,56 +189,57 @@
             <nav>
                 <ul class="pagination mb-0">
 
-                    <li class="page-item @(Model.PageIndex == 1 ? "disabled" : "")">
+                    <li class="page-item @(Model.PaginatedList.PageIndex == 1 ? "disabled" : "")">
                         <a class="page-link"
                            asp-action="Index"
-                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-sortOrder="@Model.CurrentSort"
                            asp-route-pageIndex="1"
-                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                           asp-route-searchString="@ViewData["CurrentFilter"]"
-                           asp-route-pageSize="@ViewData["PageSize"]">
+                           asp-route-currentFilter="@Model.CurrentFilter"
+                           asp-route-searchString="@Model.CurrentFilter"
+                           asp-route-pageSize="@Model.PageSize">
                             First
                         </a>
                     </li>
 
-                    <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+                    <li class="page-item @(Model.PaginatedList.HasPreviousPage ? "" : "disabled")">
                         <a class="page-link"
                            asp-action="Index"
-                           asp-route-sortOrder="@ViewData["CurrentSort"]"
-                           asp-route-pageIndex="@(Model.PageIndex - 1)"
-                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                           asp-route-searchString="@ViewData["CurrentFilter"]"
-                           asp-route-pageSize="@ViewData["PageSize"]">
+                           asp-route-sortOrder="@Model.CurrentSort"
+                           asp-route-pageIndex="@(Model.PaginatedList.PageIndex - 1)"
+                           asp-route-currentFilter="@Model.CurrentFilter"
+                           asp-route-searchString="@Model.CurrentFilter"
+                           asp-route-pageSize="@Model.PageSize">
                             Previous
                         </a>
                     </li>
 
                     <li class="page-item disabled">
                         <span class="page-link">
-                            Page @Model.PageIndex of @Model.TotalPages
+                            Page @Model.PaginatedList.PageIndex of @Model.PaginatedList.TotalPages
                         </span>
                     </li>
 
-                    <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+                    <li class="page-item @(Model.PaginatedList.HasNextPage ? "" : "disabled")">
                         <a class="page-link"
                            asp-action="Index"
-                           asp-route-sortOrder="@ViewData["CurrentSort"]"
-                           asp-route-pageIndex="@(Model.PageIndex + 1)"
-                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                           asp-route-searchString="@ViewData["CurrentFilter"]"
-                           asp-route-pageSize="@ViewData["PageSize"]">
+                           asp-route-sortOrder="@Model.CurrentSort"
+                           asp-route-pageIndex="@(Model.PaginatedList.PageIndex + 1)"
+                           asp-route-currentFilter="@Model.CurrentFilter"
+                           asp-route-searchString="@Model.CurrentFilter"
+                           asp-route-pageSize="@Model.PageSize">
                             Next
                         </a>
                     </li>
 
-                    <li class="page-item @(Model.PageIndex == Model.TotalPages ? "disabled" : "")">
+                    <li class="page-item 
+                        @(Model.PaginatedList.PageIndex == Model.PaginatedList.TotalPages ? "disabled" : "")">
                         <a class="page-link"
                            asp-action="Index"
-                           asp-route-sortOrder="@ViewData["CurrentSort"]"
-                           asp-route-pageIndex="@Model.TotalPages"
-                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                           asp-route-searchString="@ViewData["CurrentFilter"]"
-                           asp-route-pageSize="@ViewData["PageSize"]">
+                           asp-route-sortOrder="@Model.CurrentSort"
+                           asp-route-pageIndex="@Model.PaginatedList.TotalPages"
+                           asp-route-currentFilter="@Model.CurrentFilter"
+                           asp-route-searchString="@Model.CurrentFilter"
+                           asp-route-pageSize="@Model.PageSize">
                             Last
                         </a>
                     </li>
@@ -244,7 +250,9 @@
             <!-- Totals -->
             <div class="ms-3 text-muted">
                 <i class="bi bi-bar-chart-fill me-1"></i>
-                <b>@Model.TotalRecords</b> record(s) total, <b>@Model.FilteredCount</b> filtered, <b>@Model.Count</b> visible
+                <b>@Model.PaginatedList.TotalRecords</b> record(s) total, 
+                <b>@Model.PaginatedList.FilteredCount</b> filtered, 
+                <b>@Model.PaginatedList.Count</b> visible
             </div>
 
         </div>
