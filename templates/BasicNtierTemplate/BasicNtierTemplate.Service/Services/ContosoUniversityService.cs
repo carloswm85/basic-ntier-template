@@ -1,5 +1,6 @@
 ﻿using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Repository;
+using BasicNtierTemplate.Service.Dtos;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -40,11 +41,21 @@ namespace BasicNtierTemplate.Service.Services
             return await _unitOfWork.StudentRepository.GetAll().ToListAsync();
         }
 
-        public async Task<IEnumerable<Student>> GetStudentListAsync(string sortOrder, string searchString)
+        public async Task<IEnumerable<Student>> GetStudentListAsync(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? pageNumber
+        )
         {
             var students = _unitOfWork.StudentRepository.GetAll(asNoTracking: true);
-
             students = from s in students select s;
+
+            // PAGING
+            if (searchString != null)
+                pageNumber = 1;
+            else
+                searchString = currentFilter;
 
             // SEARCH
             if (!string.IsNullOrEmpty(searchString))
@@ -70,7 +81,9 @@ namespace BasicNtierTemplate.Service.Services
                     break;
             }
 
-            return students;
+            int pageSize = 10; // TODO Choose page size from frontend!
+            return await PaginatedList<Student>
+                .CreateAsync(students, pageNumber ?? 1, pageSize);
         }
 
         public async Task SaveStudentAsync(Student student)

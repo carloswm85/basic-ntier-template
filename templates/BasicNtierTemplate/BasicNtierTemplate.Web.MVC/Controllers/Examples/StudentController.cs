@@ -23,10 +23,18 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
 
         // GET: /student/students
         [HttpGet("list")]
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? pageNumber
+        )
         {
-            var students = await _contosoService.GetStudentListAsync(sortOrder, searchString);
+            var students = await _contosoService.GetStudentListAsync(
+                                                    sortOrder, currentFilter,
+                                                    searchString, pageNumber);
 
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
             ViewData["CurrentFilter"] = searchString;
