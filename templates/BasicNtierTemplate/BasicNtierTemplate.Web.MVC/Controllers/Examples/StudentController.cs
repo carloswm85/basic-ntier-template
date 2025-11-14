@@ -24,20 +24,21 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
         // GET: /student/students
         [HttpGet("list")]
         public async Task<IActionResult> Index(
-            string sortOrder,
-            string currentFilter,
-            string searchString,
-            int? pageNumber
+            string currentFilter = "",
+            int pageIndex = 1,
+            int pageSize = 10,
+            string searchString = "",
+            string sortOrder = ""
         )
         {
             var students = await _contosoService.GetStudentListAsync(
-                                                    sortOrder, currentFilter,
-                                                    searchString, pageNumber);
+                currentFilter, pageIndex, pageSize, searchString, sortOrder);
 
-            ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
             ViewData["CurrentFilter"] = searchString;
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["PageSize"] = pageSize;
 
             return View(students);
         }

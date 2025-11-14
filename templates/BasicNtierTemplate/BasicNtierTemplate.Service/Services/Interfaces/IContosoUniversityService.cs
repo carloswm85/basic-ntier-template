@@ -8,8 +8,8 @@ namespace BasicNtierTemplate.Service.Services.Interfaces
         Task<Student?> GetStudentAsync(int id, bool asNoTracking = false);
         Task<IEnumerable<Student>> GetStudentListAsync();
         Task<IEnumerable<Student>> GetStudentListAsync(
-            string sortOrder, string currentFilter,
-            string searchString, int? pageNumber);
+            string currentFilter, int pageIndex, int pageSize,
+            string searchString, string sortOrder);
         Task SaveStudentAsync(Student student);
         bool StudentExists(int id);
         Task<Student> UpdateStudentAsync(Student student);

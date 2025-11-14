@@ -42,18 +42,19 @@ namespace BasicNtierTemplate.Service.Services
         }
 
         public async Task<IEnumerable<Student>> GetStudentListAsync(
-            string sortOrder,
             string currentFilter,
+            int pageIndex,
+            int pageSize,
             string searchString,
-            int? pageNumber
+            string sortOrder
         )
         {
             var students = _unitOfWork.StudentRepository.GetAll(asNoTracking: true);
-            students = from s in students select s;
+            var totalRecords = students.Count();
 
             // PAGING
-            if (searchString != null)
-                pageNumber = 1;
+            if (searchString != currentFilter)
+                pageIndex = 1;
             else
                 searchString = currentFilter;
 
@@ -63,6 +64,7 @@ namespace BasicNtierTemplate.Service.Services
                 students = students.Where(s => s.LastName.Contains(searchString)
                                         || s.FirstMidName.Contains(searchString));
             }
+            var filteredCount = students.Count();
 
             // SORTING
             switch (sortOrder)
@@ -81,9 +83,8 @@ namespace BasicNtierTemplate.Service.Services
                     break;
             }
 
-            int pageSize = 10; // TODO Choose page size from frontend!
             return await PaginatedList<Student>
-                .CreateAsync(students, pageNumber ?? 1, pageSize);
+                .CreateAsync(students, pageIndex, pageSize, totalRecords, filteredCount);
         }
 
         public async Task SaveStudentAsync(Student student)

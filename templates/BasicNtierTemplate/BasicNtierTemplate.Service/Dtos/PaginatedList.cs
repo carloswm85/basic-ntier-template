@@ -35,10 +35,28 @@ namespace BasicNtierTemplate.Service.Dtos
         public int TotalPages { get; private set; }
 
         /// <summary>
+        /// Size of each page (usually 5, 10, 25, 50, or 100).
+        /// </summary>
+        public int PageSize { get; set; }
+
+        /// <summary>
+        /// Existing grand total records in the database.
+        /// </summary>
+        public int TotalRecords { get; set; }
+
+        /// <summary>
+        /// Records that have been filtered in total.
+        /// </summary>
+        public int FilteredCount { get; set; }
+
+        /// <summary>
         /// Creates a PaginatedList with the provided items and paging metadata.
         /// </summary>
-        public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
+        public PaginatedList(List<T> items, int count, int pageIndex
+            , int pageSize, int totalRecords, int filteredCount)
         {
+            FilteredCount = filteredCount;
+            TotalRecords = totalRecords;
             PageIndex = pageIndex;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
             AddRange(items);
@@ -61,6 +79,8 @@ namespace BasicNtierTemplate.Service.Dtos
         /// <param name="source">The queryable source to paginate.</param>
         /// <param name="pageIndex">The current page number (1-based).</param>
         /// <param name="pageSize">The number of items per page.</param>
+        /// <param name="totalRecords">Total existing records in the DB.</param>
+        /// <param name="totalFiltered">Count of items filtered using search capabilities.</param>
         /// <returns>
         /// A <see cref="Task{TResult}"/> whose result is a fully populated
         /// <see cref="PaginatedList{T}"/> instance containing:
@@ -69,7 +89,8 @@ namespace BasicNtierTemplate.Service.Dtos
         /// <br/>• Page index and total pages statistics  
         /// </returns>
         public static async Task<PaginatedList<T>> CreateAsync(
-            IQueryable<T> source, int pageIndex, int pageSize)
+            IQueryable<T> source, int pageIndex, int pageSize,
+            int totalRecords, int totalFiltered)
         {
             var count = await source.CountAsync();
             var items = await source
@@ -77,7 +98,8 @@ namespace BasicNtierTemplate.Service.Dtos
                 .Take(pageSize)
                 .ToListAsync();
 
-            return new PaginatedList<T>(items, count, pageIndex, pageSize);
+            return new PaginatedList<T>(items, count, pageIndex, pageSize,
+                totalRecords, totalFiltered);
         }
     }
 }

@@ -17,44 +17,88 @@
         </a>
     </div>
 
-    <!-- Search Form -->
-    <form asp-action="index" method="get" class="mb-4">
-        <div class="row g-2 align-items-end">
-            <div class="col-sm-4">
-                <label for="SearchString" class="form-label">Find by name</label>
+    <hr />
 
-                <div class="input-group">
-                    <input type="text"
-                           id="SearchString"
-                           name="SearchString"
-                           value="@ViewData["CurrentFilter"]"
-                           class="form-control"
-                           placeholder="Enter name..." />
+    <div class="d-flex justify-content-between">
+        <!-- Page Size Dropdown -->
+        <div class="mb-4">
+            <label for="PageSize" class="form-label fw-semibold">Page Size:</label>
 
-                    <!-- Clear inside input -->
-                    @if (!string.IsNullOrEmpty(Convert.ToString(ViewData["CurrentFilter"])))
+            <select id="PageSize"
+                    class="form-select d-inline-block w-auto"
+                    onchange="location = this.value;">
+
+                @{
+                    int[] sizes = new[] { 5, 10, 25, 50, 100 };
+                }
+
+                @foreach (var size in sizes)
+                {
+                    string? url = @Url.Action("Index", new
                     {
-                        <a asp-action="index"
-                           class="btn btn-outline-secondary">
-                            <i class="bi bi-x-lg"></i>
-                        </a>
+                        pageIndex = 1,
+                        currentFilter = ViewData["CurrentFilter"],
+                        searchString = ViewData["CurrentFilter"],
+                        sortOrder = ViewData["CurrentSort"],
+                        pageSize = size,
+                    });
+
+                    if (ViewData["PageSize"]?.ToString() == size.ToString())
+                    {
+                        <option selected value="@url"> @size </option>
                     }
-                </div>
-            </div>
-
-            <div class="col-auto">
-                <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-search me-1"></i> Search
-                </button>
-            </div>
-
-            <div class="col-auto">
-                <a asp-action="index" class="btn btn-secondary">
-                    Clear
-                </a>
-            </div>
+                    else
+                    {
+                        <option value="@url"> @size </option>
+                    }
+                }
+            </select>
         </div>
-    </form>
+
+        <!-- Search Form -->
+        <form asp-action="Index" method="get" class="mb-4">
+            <div class="row g-2 align-items-end">
+                <div class="col-auto">
+                    <div class="input-group">
+                        <input type="hidden" name="sortOrder" value="@ViewData["CurrentSort"]" />
+                        <input type="hidden" name="pageIndex" value="1" /> <!-- reset to page 1 on search -->
+                        <input type="hidden" name="pageSize" value="@ViewData["PageSize"]" />
+                        <input type="text"
+                               id="SearchString"
+                               name="SearchString"
+                               value="@ViewData["CurrentFilter"]"
+                               class="form-control @(string.IsNullOrEmpty(Convert.ToString(ViewData["CurrentFilter"])) ? "rounded-1" : "rounded-start-2")"
+                               placeholder="Enter name..." />
+
+                        @if (!string.IsNullOrEmpty(Convert.ToString(ViewData["CurrentFilter"])))
+                        {
+                            <a asp-action="Index"
+                               asp-route-sortOrder="@ViewData["CurrentSort"]"
+                               asp-route-pageIndex="@(Model.PageIndex)"
+                               asp-route-currentFilter=""
+                               asp-route-pageSize="@ViewData["PageSize"]"
+                                class="btn btn-outline-secondary">
+                                <i class="bi bi-x-lg"></i>
+                            </a>
+                        }
+                    </div>
+                </div>
+
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-search me-1"></i> Search
+                    </button>
+                </div>
+
+                <div class="col-auto">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        Reset Default
+                    </a>
+                </div>
+
+            </div>
+        </form>
+    </div>
 
     <!-- No Data Warning -->
     @if (!Model.Any())
@@ -71,25 +115,35 @@
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-hover mb-0 align-middle">
+
                         <thead class="table-light">
                             <tr>
                                 <th>
                                     <a asp-action="Index"
-                                       asp-route-sortOrder="@ViewData["NameSortParm"]"
-                                       asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                                    asp-route-sortOrder="@ViewData["NameSortParm"]"
+                                    asp-route-pageIndex="@(Model.PageIndex)"
+                                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                    asp-route-searchString="@ViewData["CurrentFilter"]"
+                                    asp-route-pageSize="@ViewData["PageSize"]">
                                         @Html.DisplayNameFor(model => model[0].LastName)
                                     </a>
                                 </th>
+                                
                                 <th>
                                     @Html.DisplayNameFor(model => model[0].FirstMidName)
                                 </th>
+
                                 <th>
                                     <a asp-action="Index"
-                                       asp-route-sortOrder="@ViewData["DateSortParm"]"
-                                       asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                                    asp-route-sortOrder="@ViewData["DateSortParm"]"
+                                    asp-route-pageIndex="@(Model.PageIndex)"
+                                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                    asp-route-searchString="@ViewData["CurrentFilter"]"
+                                    asp-route-pageSize="@ViewData["PageSize"]">
                                         @Html.DisplayNameFor(model => model[0].EnrollmentDate)
                                     </a>
                                 </th>
+
                                 <th class="text-end">Actions</th>
                             </tr>
                         </thead>
@@ -101,58 +155,99 @@
                                     <td>@item.LastName</td>
                                     <td>@item.FirstMidName</td>
                                     <td>@item.EnrollmentDate.ToShortDateString()</td>
-                                    <td class="text-end">
 
-                                        <a asp-action="edit" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary me-1">
+                                    <td class="text-end">
+                                        <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary me-1">
                                             <i class="bi bi-pencil-square"></i> Edit
                                         </a>
 
-                                        <a asp-action="details" asp-route-id="@item.ID" class="btn btn-sm btn-outline-info me-1">
+                                        <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-sm btn-outline-info me-1">
                                             <i class="bi bi-eye"></i> Details
                                         </a>
 
-                                        <a asp-action="delete" asp-route-id="@item.ID" class="btn btn-sm btn-outline-danger">
+                                        <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-outline-danger">
                                             <i class="bi bi-trash"></i> Delete
                                         </a>
-
                                     </td>
                                 </tr>
                             }
                         </tbody>
+
                     </table>
                 </div>
             </div>
         </div>
 
-        <!-- Pagination -->
-        <nav>
-            <ul class="pagination justify-content-center">
-                <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
-                    <a class="page-link"
-                       asp-action="Index"
-                       asp-route-sortOrder="@ViewData["CurrentSort"]"
-                       asp-route-pageNumber="@(Model.PageIndex - 1)"
-                       asp-route-currentFilter="@ViewData["CurrentFilter"]">
-                        Previous
-                    </a>
-                </li>
 
-                <li class="page-item disabled">
-                    <span class="page-link">
-                        Page @Model.PageIndex of @Model.TotalPages
-                    </span>
-                </li>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <!-- Pagination -->
+            <nav>
+                <ul class="pagination mb-0">
 
-                <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
-                    <a class="page-link"
-                       asp-action="Index"
-                       asp-route-sortOrder="@ViewData["CurrentSort"]"
-                       asp-route-pageNumber="@(Model.PageIndex + 1)"
-                       asp-route-currentFilter="@ViewData["CurrentFilter"]">
-                        Next
-                    </a>
-                </li>
-            </ul>
-        </nav>
+                    <li class="page-item @(Model.PageIndex == 1 ? "disabled" : "")">
+                        <a class="page-link"
+                           asp-action="Index"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-pageIndex="1"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           asp-route-searchString="@ViewData["CurrentFilter"]"
+                           asp-route-pageSize="@ViewData["PageSize"]">
+                            First
+                        </a>
+                    </li>
+
+                    <li class="page-item @(Model.HasPreviousPage ? "" : "disabled")">
+                        <a class="page-link"
+                           asp-action="Index"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-pageIndex="@(Model.PageIndex - 1)"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           asp-route-searchString="@ViewData["CurrentFilter"]"
+                           asp-route-pageSize="@ViewData["PageSize"]">
+                            Previous
+                        </a>
+                    </li>
+
+                    <li class="page-item disabled">
+                        <span class="page-link">
+                            Page @Model.PageIndex of @Model.TotalPages
+                        </span>
+                    </li>
+
+                    <li class="page-item @(Model.HasNextPage ? "" : "disabled")">
+                        <a class="page-link"
+                           asp-action="Index"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-pageIndex="@(Model.PageIndex + 1)"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           asp-route-searchString="@ViewData["CurrentFilter"]"
+                           asp-route-pageSize="@ViewData["PageSize"]">
+                            Next
+                        </a>
+                    </li>
+
+                    <li class="page-item @(Model.PageIndex == Model.TotalPages ? "disabled" : "")">
+                        <a class="page-link"
+                           asp-action="Index"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-pageIndex="@Model.TotalPages"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                           asp-route-searchString="@ViewData["CurrentFilter"]"
+                           asp-route-pageSize="@ViewData["PageSize"]">
+                            Last
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+            <!-- Totals -->
+            <div class="ms-3 text-muted">
+                <i class="bi bi-bar-chart-fill me-1"></i>
+                <b>@Model.TotalRecords</b> record(s) total, <b>@Model.FilteredCount</b> filtered, <b>@Model.Count</b> visible
+            </div>
+
+        </div>
+
     }
 </div>
