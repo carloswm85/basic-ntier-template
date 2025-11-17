@@ -134,5 +134,21 @@ namespace BasicNtierTemplate.Service.Services
 
             return null;
         }
+
+        public async Task<List<EnrollmentDateGroupDto>> GetEnrollmentDateDataAsync()
+        {
+            var students = _unitOfWork.StudentRepository.GetAll(asNoTracking: true);
+
+            IQueryable<EnrollmentDateGroupDto> data =
+                from student in students
+                group student by student.EnrollmentDate.Year into dateGroup
+                select new EnrollmentDateGroupDto()
+                {
+                    EnrollmentYear = dateGroup.Key,
+                    StudentCount = dateGroup.Count()
+                };
+
+            return await data.ToListAsync();
+        }
     }
 }

@@ -5,6 +5,8 @@ namespace BasicNtierTemplate.Service.Services.Interfaces
 {
     public interface IContosoUniversityService
     {
+        #region Student
+
         Task<Student?> DeleteStudentAsync(int id);
         Task<Student?> GetStudentAsync(int id, bool asNoTracking = false);
         Task<IEnumerable<Student>> GetStudentListAsync();
@@ -14,5 +16,8 @@ namespace BasicNtierTemplate.Service.Services.Interfaces
         Task SaveStudentAsync(Student student);
         bool StudentExists(int id);
         Task<Student> UpdateStudentAsync(Student student);
+        Task<List<EnrollmentDateGroupDto>> GetEnrollmentDateDataAsync();
+
+        #endregion
     }
 }

@@ -232,5 +232,11 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error updating data.");
             }
         }
+
+        public async Task<IActionResult> About()
+        {
+            var studentData = await _contosoService.GetEnrollmentDateDataAsync();
+            return View(studentData);
+        }
     }
 }
