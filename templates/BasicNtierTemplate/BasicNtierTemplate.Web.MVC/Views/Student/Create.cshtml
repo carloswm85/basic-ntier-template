@@ -1,4 +1,4 @@
-﻿@model BasicNtierTemplate.Data.Model.Student
+﻿@model BasicNtierTemplate.Service.Dtos.StudentDto
 
 @{
     ViewData["Title"] = "Create Student";
@@ -24,6 +24,12 @@
                     <label asp-for="FirstMidName" class="form-label fw-semibold"></label>
                     <input asp-for="FirstMidName" class="form-control" />
                     <span asp-validation-for="FirstMidName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="GovernmentId" class="form-label fw-semibold"></label> (only numbers)
+                    <input asp-for="GovernmentId" class="form-control" />
+                    <span asp-validation-for="GovernmentId" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">

@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using BasicNtierTemplate.Data.Datum;
 using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Repository;
 using BasicNtierTemplate.Service.Mappings;
@@ -47,11 +48,13 @@ namespace BasicNtierTemplate.API
 
                 builder.Services.AddAutoMapper(
                     cfg => { },
-                    typeof(SampleProfile).Assembly
+                    typeof(StudentProfile).Assembly,
+                    typeof(CourseProfile).Assembly,
+                    typeof(EnrollmentProfile).Assembly
                 );
 
                 // Register application services for dependency injection.
-                builder.Services.AddScoped<ISampleService, SampleService>(); // SAMPLE
+                builder.Services.AddScoped<IContosoUniversityService, ContosoUniversityService>(); // SAMPLE
 
                 // Add controller support (enables MVC-style controllers).
                 builder.Services.AddControllers().AddJsonOptions(options =>
@@ -99,6 +102,23 @@ namespace BasicNtierTemplate.API
                 app.MapControllers();
 
                 app.MapFallback(() => Results.NotFound("Endpoint not found."));
+
+                // Add Contoso University test data to the database
+                using (var scope = app.Services.CreateScope())
+                {
+                    var services = scope.ServiceProvider;
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    try
+                    {
+                        var context = services.GetRequiredService<BasicNtierTemplateDbContext>();
+                        DbInitializer.Initialize(context);
+                        logger.LogDebug("DB successfully initialized from the API layer.");
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogError(ex, "An error occurred while seeding the database from the API layer.");
+                    }
+                }
 
                 #endregion
 

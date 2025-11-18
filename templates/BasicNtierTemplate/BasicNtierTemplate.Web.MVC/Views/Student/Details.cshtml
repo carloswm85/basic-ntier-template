@@ -1,4 +1,4 @@
-﻿@model BasicNtierTemplate.Data.Model.Student
+﻿@model BasicNtierTemplate.Service.Dtos.StudentDto
 
 @{
     ViewData["Title"] = "Student Details";
@@ -26,6 +26,13 @@
                 </dt>
                 <dd class="col-sm-9">
                     @Html.DisplayFor(model => model.FirstMidName)
+                </dd>
+
+                <dt class="col-sm-3 fw-semibold text-secondary">
+                    @Html.DisplayNameFor(model => model.GovernmentIdFormatted)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.GovernmentIdFormatted)
                 </dd>
 
                 <dt class="col-sm-3 fw-semibold text-secondary">

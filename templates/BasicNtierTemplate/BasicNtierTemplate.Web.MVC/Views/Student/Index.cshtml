@@ -1,6 +1,6 @@
 ﻿@using BasicNtierTemplate.Web.MVC.Models
 
-@model PaginatedListViewModel<BasicNtierTemplate.Data.Model.Student>
+@model PaginatedListViewModel<BasicNtierTemplate.Service.Dtos.StudentDto>
 
 @{
     ViewData["Title"] = "Students";
@@ -146,6 +146,11 @@
                                     </a>
                                 </th>
 
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PaginatedList[0].GovernmentId)
+                                </th>
+
+
                                 <th class="text-end">Actions</th>
                             </tr>
                         </thead>
@@ -157,19 +162,20 @@
                                     <td>@item.LastName</td>
                                     <td>@item.FirstMidName</td>
                                     <td>@item.EnrollmentDate.ToShortDateString()</td>
+                                    <td>@item.GovernmentIdFormatted</td>
 
                                     <td class="text-end">
-                                        <a asp-action="Edit" asp-route-id="@item.ID"
+                                        <a asp-action="Edit" asp-route-id="@item.Id"
                                             class="btn btn-sm btn-outline-primary me-1">
                                                 <i class="bi bi-pencil-square"></i> Edit
                                         </a>
 
-                                        <a asp-action="Details" asp-route-id="@item.ID"
+                                        <a asp-action="Details" asp-route-id="@item.Id"
                                             class="btn btn-sm btn-outline-info me-1">
                                                 <i class="bi bi-eye"></i> Details
                                         </a>
 
-                                        <a asp-action="Delete" asp-route-id="@item.ID"
+                                        <a asp-action="Delete" asp-route-id="@item.Id"
                                             class="btn btn-sm btn-outline-danger">
                                                 <i class="bi bi-trash"></i> Delete
                                         </a>

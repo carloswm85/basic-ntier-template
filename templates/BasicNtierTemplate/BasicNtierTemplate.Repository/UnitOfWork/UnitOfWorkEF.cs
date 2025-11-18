@@ -10,9 +10,6 @@ namespace BasicNtierTemplate.Repository
         private readonly BasicNtierTemplateDbContext _dbContext;
         private bool _disposed = false;
 
-        private IRepository<Blog>? _blogRepository;
-        private IRepository<Posteo>? _postRepository;
-
         private IRepository<Student>? _studentRepository;
         private IRepository<Course>? _courseRepository;
         private IRepository<Enrollment>? _enrollmentRepository;
@@ -24,10 +21,7 @@ namespace BasicNtierTemplate.Repository
             _dbContext = dbContext;
         }
 
-        #region Examples
-
-        public IRepository<Blog> BlogRepository => _blogRepository ?? (_blogRepository = new Repository<Blog>(_dbContext));
-        public IRepository<Posteo> PostRepository => _postRepository ?? (_postRepository = new Repository<Posteo>(_dbContext));
+        #region Contoso University Example
 
         public IRepository<Student> StudentRepository => _studentRepository ?? (_studentRepository = new Repository<Student>(_dbContext));
         public IRepository<Course> CourseRepository => _courseRepository ?? (_courseRepository = new Repository<Course>(_dbContext));

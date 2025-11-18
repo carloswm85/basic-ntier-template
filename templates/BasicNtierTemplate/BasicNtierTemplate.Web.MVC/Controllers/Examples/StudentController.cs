@@ -1,4 +1,5 @@
 ﻿using BasicNtierTemplate.Data.Model;
+using BasicNtierTemplate.Service.Dtos;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using BasicNtierTemplate.Web.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -7,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
 {
-    [Route("student")]
+    [Route("Student")]
     public class StudentController : Controller
     {
         private readonly ILogger<StudentController> _logger;
@@ -23,7 +24,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
         }
 
         // GET: /student/students
-        [HttpGet("list")]
+        [HttpGet("List")]
         public async Task<IActionResult> Index(
             string currentFilter = "",
             int pageIndex = 1,
@@ -32,19 +33,29 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             string sortOrder = ""
         )
         {
-            var students = await _contosoService.GetStudentListAsync(
-                currentFilter, pageIndex, pageSize, searchString, sortOrder);
+            try
+            {
+                var students = await _contosoService.GetStudentListAsync(
+                    currentFilter, pageIndex, pageSize, searchString, sortOrder);
 
-            var studentsPagedViewModel = new PaginatedListViewModel<Student>(
-                paginatedList: students,
-                currentFilter: searchString,
-                currentSort: sortOrder,
-                sortParamOne: sortOrder == "Date" ? "date_desc" : "Date", // by date
-                sortParamTwo: string.IsNullOrEmpty(sortOrder) ? "name_desc" : "", // by last name
-                pageSize: pageSize
-                );
+                var studentsPagedViewModel = new PaginatedListViewModel<StudentDto>(
+                    paginatedList: students,
+                    currentFilter: searchString,
+                    currentSort: sortOrder,
+                    sortParamOne: sortOrder == "Date" ? "date_desc" : "Date", // by date
+                    sortParamTwo: string.IsNullOrEmpty(sortOrder) ? "name_desc" : "", // by last name
+                    pageSize: pageSize
+                    );
 
-            return View(studentsPagedViewModel);
+                return View(studentsPagedViewModel);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving the student list.");
+                throw;
+            }
+
         }
 
         // GET: /student/details/5
@@ -76,14 +87,14 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
         // In this method: Use entity classes with model binding instead of view models.
         [HttpPost("create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,LastName,FirstMidName,EnrollmentDate")] Student student)
+        public async Task<IActionResult> Create([Bind("Id,LastName,FirstMidName,GovernmentId,EnrollmentDate")] StudentDto student)
         {
             if (!ModelState.IsValid)
                 return View(student);
 
             try
             {
-                await _contosoService.SaveStudentAsync(student);
+                await _contosoService.CreateStudentAsync(student);
                 return RedirectToAction(nameof(Index));
             }
             catch (DbUpdateException ex)
@@ -111,38 +122,38 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             return View(student);
         }
 
-        // POST: /student/edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // To protect from overposting attacks, enable the specific properties
+        // you want to bind to.
         // POST: /student/edit/5
         [HttpPost("edit/{id:int}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,LastName,FirstMidName,EnrollmentDate")] Student student)
+        public async Task<IActionResult> Edit(int Id, [Bind("Id,LastName,FirstMidName,GovernmentId,EnrollmentDate")] StudentDto studentDto)
         {
-            if (id != student.Id)
+            if (Id != studentDto.Id)
                 return NotFound();
 
             if (!ModelState.IsValid)
-                return View(student);
+                return View(studentDto);
 
             try
             {
-                await _contosoService.UpdateStudentAsync(student);
+                await _contosoService.UpdateStudentAsync(Id, studentDto);
                 return RedirectToAction(nameof(Index));
             }
             catch (DbUpdateConcurrencyException ex)
             {
-                if (!_contosoService.StudentExists(student.Id))
+                if (!_contosoService.StudentExists(studentDto.Id))
                     return NotFound();
 
-                _logger.LogWarning(ex, "Concurrency conflict while updating student ID {StudentId}.", student.Id);
+                _logger.LogWarning(ex, "Concurrency conflict while updating student ID {StudentId}.", studentDto.Id);
                 ModelState.AddModelError("", "The record you attempted to edit was modified by another user.");
-                return View(student);
+                return View(studentDto);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while editing the student with ID {StudentId}.", student.Id);
+                _logger.LogError(ex, "An error occurred while editing the student with ID {StudentId}.", studentDto.Id);
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, contact your system administrator.");
-                return View(student);
+                return View(studentDto);
             }
         }
 
@@ -155,7 +166,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             if (id == null)
                 return NotFound();
 
-            var student = await _contosoService.GetStudentAsync(id: id.Value, asNoTracking: true);
+            var student = await _contosoService.GetStudentAsync(studentId: id.Value, asNoTracking: true);
 
             if (student == null) return NotFound();
 
@@ -174,7 +185,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var student = await _contosoService.GetStudentAsync(id: id, asNoTracking: true);
+            var student = await _contosoService.GetStudentAsync(studentId: id, asNoTracking: true);
 
             if (student == null)
                 return RedirectToAction(nameof(Index));
@@ -223,7 +234,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
                 existingStudent.LastName = student.LastName;
                 existingStudent.EnrollmentDate = student.EnrollmentDate;
 
-                await _contosoService.SaveStudentAsync(existingStudent);
+                await _contosoService.CreateStudentAsync(existingStudent);
                 return NoContent(); // 204 - successful update
             }
             catch (DbUpdateException ex)

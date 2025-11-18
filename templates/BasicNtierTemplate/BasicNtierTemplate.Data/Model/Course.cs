@@ -6,9 +6,9 @@ namespace BasicNtierTemplate.Data.Model
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
-        public string Title { get; set; }
+        public required string Title { get; set; }
         public int Credits { get; set; }
 
-        public ICollection<Enrollment> Enrollments { get; set; }
+        public ICollection<Enrollment>? Enrollments { get; set; } = [];
     }
 }

@@ -27,12 +27,12 @@ namespace BasicNtierTemplate.Service.Dtos
         /// <summary>
         /// Current page number (1-based).
         /// </summary>
-        public int PageIndex { get; private set; }
+        public int PageIndex { get; set; }
 
         /// <summary>
         /// Total number of pages available.
         /// </summary>
-        public int TotalPages { get; private set; }
+        public int TotalPages { get; set; }
 
         /// <summary>
         /// Size of each page (usually 5, 10, 25, 50, or 100).

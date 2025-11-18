@@ -1,5 +1,4 @@
-﻿using BasicNtierTemplate.Data.Model;
-using BasicNtierTemplate.Service.Dtos;
+﻿using BasicNtierTemplate.Service.Dtos;
 
 namespace BasicNtierTemplate.Service.Services.Interfaces
 {
@@ -7,15 +6,16 @@ namespace BasicNtierTemplate.Service.Services.Interfaces
     {
         #region Student
 
-        Task<Student?> DeleteStudentAsync(int id);
-        Task<Student?> GetStudentAsync(int id, bool asNoTracking = false);
-        Task<IEnumerable<Student>> GetStudentListAsync();
-        Task<PaginatedList<Student>> GetStudentListAsync(
+        Task<bool> DeleteStudentAsync(int studentId);
+        Task<StudentDto?> GetStudentAsync(int studentId, bool asNoTracking = false);
+        Task<IEnumerable<StudentDto>> GetStudentListAsync();
+        Task<PaginatedList<StudentDto>> GetStudentListAsync(
             string currentFilter, int pageIndex, int pageSize,
             string searchString, string sortOrder);
-        Task SaveStudentAsync(Student student);
-        bool StudentExists(int id);
-        Task<Student> UpdateStudentAsync(Student student);
+        Task<int> CreateStudentAsync(StudentDto student);
+        bool StudentExists(int studentId);
+        bool StudentExists(string governmentId);
+        Task<bool> UpdateStudentAsync(int studentId, StudentDto studentDto);
         Task<List<EnrollmentDateGroupDto>> GetEnrollmentDateDataAsync();
 
         #endregion

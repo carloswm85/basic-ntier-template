@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Mappings\PaginatedListProfile.cs" />
     <Compile Remove="Services\AdministrationService.cs" />
     <Compile Remove="Services\AuthService.cs" />
     <Compile Remove="Services\Interfaces\IAdministrationService.cs" />
     <Compile Remove="Services\Interfaces\IAuthService.cs" />
+    <Compile Remove="Services\SampleService.cs" />
   </ItemGroup>
 
   <ItemGroup>

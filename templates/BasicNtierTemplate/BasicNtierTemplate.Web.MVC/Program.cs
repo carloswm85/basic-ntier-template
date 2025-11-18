@@ -2,6 +2,7 @@ using System.Diagnostics;
 using BasicNtierTemplate.Data.Datum;
 using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Repository;
+using BasicNtierTemplate.Service.Mappings;
 using BasicNtierTemplate.Service.Services;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using BasicNtierTemplate.Web.MVC.Services;
@@ -61,6 +62,13 @@ namespace BasicNtierTemplate.Web.MVC
 
                 builder.Services.AddScoped<IUnitOfWork, UnitOfWorkEF>();
 
+                builder.Services.AddAutoMapper(
+                    cfg => { },
+                    typeof(StudentProfile).Assembly,
+                    typeof(CourseProfile).Assembly,
+                    typeof(EnrollmentProfile).Assembly
+                );
+
                 // Application services
                 builder.Services.AddScoped<IContosoUniversityService, ContosoUniversityService>();
 
@@ -117,15 +125,16 @@ namespace BasicNtierTemplate.Web.MVC
                 using (var scope = app.Services.CreateScope())
                 {
                     var services = scope.ServiceProvider;
+                    var logger = services.GetRequiredService<ILogger<Program>>();
                     try
                     {
                         var context = services.GetRequiredService<BasicNtierTemplateDbContext>();
                         DbInitializer.Initialize(context);
+                        logger.LogDebug("DB successfully initialized from the MVC layer.");
                     }
                     catch (Exception ex)
                     {
-                        var logger = services.GetRequiredService<ILogger<Program>>();
-                        logger.LogError(ex, "An error occurred while seeding the database.");
+                        logger.LogError(ex, "An error occurred while seeding the database from the MVC layer.");
                     }
                 }
 

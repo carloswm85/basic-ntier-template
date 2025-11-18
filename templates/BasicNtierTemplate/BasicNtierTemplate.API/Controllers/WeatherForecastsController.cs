@@ -1,10 +1,10 @@
-using BasicNtierTemplate.API.ApiModels;
+﻿using BasicNtierTemplate.API.ApiModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BasicNtierTemplate.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class WeatherForecastsController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -19,7 +19,8 @@ namespace BasicNtierTemplate.API.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
+        // ✔️ GET: /data
+        [HttpGet("data", Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
             var forecast = Enumerable.Range(1, 5).Select(index => new WeatherForecast

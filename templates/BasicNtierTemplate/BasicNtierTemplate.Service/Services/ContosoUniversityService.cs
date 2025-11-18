@@ -1,4 +1,5 @@
-﻿using BasicNtierTemplate.Data.Model;
+﻿using AutoMapper;
+using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Repository;
 using BasicNtierTemplate.Service.Dtos;
 using BasicNtierTemplate.Service.Services.Interfaces;
@@ -11,37 +12,48 @@ namespace BasicNtierTemplate.Service.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<ContosoUniversityService> _logger;
+        private readonly IMapper _mapper;
+
 
         public ContosoUniversityService(
             ILogger<ContosoUniversityService> logger,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork,
+            IMapper mapper
+        )
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
+
         }
 
-        public async Task<Student?> GetStudentAsync(int id, bool asNoTracking = false)
+        public async Task<StudentDto?> GetStudentAsync(int studentId, bool asNoTracking = false)
         {
+            Student? student;
+
             if (asNoTracking)
             {
-                return await _unitOfWork.StudentRepository.GetByIdAsync(id: id, asNoTracking);
+                student = await _unitOfWork.StudentRepository.GetByIdAsync(id: studentId, asNoTracking);
+                return _mapper.Map<StudentDto>(student);
+
             }
 
-            var student = await _unitOfWork.StudentRepository.GetAll()
+            student = await _unitOfWork.StudentRepository.GetAll()
                 .Include(s => s.Enrollments)
                 .ThenInclude(e => e.Course)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == studentId);
 
-            return student;
+            return _mapper.Map<StudentDto>(student);
         }
 
-        public async Task<IEnumerable<Student>> GetStudentListAsync()
+        public async Task<IEnumerable<StudentDto>> GetStudentListAsync()
         {
-            return await _unitOfWork.StudentRepository.GetAll().ToListAsync();
+            var students = await _unitOfWork.StudentRepository.GetAll().ToListAsync();
+            return _mapper.Map<IEnumerable<StudentDto>>(students);
         }
 
-        public async Task<PaginatedList<Student>> GetStudentListAsync(
+        public async Task<PaginatedList<StudentDto>> GetStudentListAsync(
             string currentFilter,
             int pageIndex,
             int pageSize,
@@ -83,17 +95,32 @@ namespace BasicNtierTemplate.Service.Services
                     break;
             }
 
-            return await PaginatedList<Student>
-                .CreateAsync(students, pageIndex, pageSize, totalRecords, filteredCount);
+            var count = await students.CountAsync();
+            var items = await students
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var studentsDto = _mapper.Map<List<StudentDto>>(items);
+
+            return new PaginatedList<StudentDto>(
+                items: studentsDto,
+                count: count,
+                pageIndex: pageIndex,
+                pageSize: pageSize,
+                totalRecords: totalRecords,
+                filteredCount: filteredCount
+            );
         }
 
-        public async Task SaveStudentAsync(Student student)
+        public async Task<int> CreateStudentAsync(StudentDto studentDto)
         {
             try
             {
+                var student = _mapper.Map<Student>(studentDto);
                 _unitOfWork.StudentRepository.Add(student);
                 await _unitOfWork.SaveChangesAsync();
-
+                return student.Id;
             }
             catch (DbUpdateException dbuex)
             {
@@ -102,37 +129,41 @@ namespace BasicNtierTemplate.Service.Services
             }
         }
 
-        public async Task<Student> UpdateStudentAsync(Student student)
+        public async Task<bool> UpdateStudentAsync(int studentId, StudentDto studentDto)
         {
-            try
-            {
-                _unitOfWork.StudentRepository.Update(student);
-                await _unitOfWork.SaveChangesAsync();
-                return student;
-            }
-            catch (DbUpdateException)
-            {
-                throw;
-            }
+            if (studentId <= 0 || studentDto == null)
+                return false;
+
+            studentDto.Id = studentId;
+            var student = _mapper.Map<Student>(studentDto);
+            _unitOfWork.StudentRepository.Update(student);
+            await _unitOfWork.SaveChangesAsync();
+            return true;
         }
 
-        public bool StudentExists(int id)
+        public bool StudentExists(int studentId)
         {
-            return _unitOfWork.StudentRepository.GetAll().Any(e => e.Id == id);
+            return _unitOfWork.StudentRepository.GetAll().Any(s => s.Id == studentId);
         }
 
-        public async Task<Student?> DeleteStudentAsync(int id)
+        public bool StudentExists(string governmentId)
         {
-            var student = await _unitOfWork.StudentRepository.GetByIdAsync(id: id, asNoTracking: true);
+            return _unitOfWork.StudentRepository.GetAll().Any(s => s.GovernmentId.Equals(governmentId));
+        }
 
-            if (student != null)
-            {
-                _unitOfWork.StudentRepository.Delete(student);
-                await _unitOfWork.SaveChangesAsync();
-                return student;
-            }
+        public async Task<bool> DeleteStudentAsync(int studentId)
+        {
+            if (studentId <= 0)
+                return false;
 
-            return null;
+            var student = await _unitOfWork.StudentRepository.GetByIdAsync(id: studentId, asNoTracking: true);
+
+            if (student == null)
+                return false;
+
+            _unitOfWork.StudentRepository.Delete(student);
+            await _unitOfWork.SaveChangesAsync();
+            return true;
         }
 
         public async Task<List<EnrollmentDateGroupDto>> GetEnrollmentDateDataAsync()
