@@ -43,13 +43,13 @@
 
 ### .NET Core
 
-| Current | .NET Core | .NET Core release type | EF Core |
-| ------- | --------- | ---------------------- | ------- |
-| ✅      | `8.0.100` | LTS                    | `8.0`   |
-|         | `9`       | STS                    | -       |
-|         | `10`      | pre-release            | -       |
+| Current | .NET Core | .NET Core release type | EF Core  |
+| ------- | --------- | ---------------------- | -------- |
+| ✅      | `8.0.100` | LTS                    | `8.0.22` |
+|         | `9`       | STS                    | -        |
+|         | `10`      | pre-release            | -        |
 
-- [.NET and .NET Core Support Policy](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core) ↗
+[.NET and .NET Core Support Policy](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core) ↗
 
 ### MVC
 
@@ -142,11 +142,13 @@ dotnet new basic-ntier-template -o "BasicNtierTemplateExample"
 
 ## Entity Framework Core
 
+Be sure you have the right tools: [Installation requirements](./docs/content/installation-requirements.md)
+
 ### Code-First
 
 - Using PowerShell:
 
-  - Inside the `BasicNtierTemplate.Data` project folder.
+  - Inside the `BasicNtierTemplate.Data` project folder run:
 
   ```powershell
   > dotnet ef migrations add InitialMigration
@@ -155,7 +157,7 @@ dotnet new basic-ntier-template -o "BasicNtierTemplateExample"
 
 - Using Package Manager Console:
 
-  - Set "Default Project" to `BasicNtierTemplate.Data`
+  - Set "Default Project" to `BasicNtierTemplate.Data`, and run:
 
   ```console
   PM> Add-Migration InitialMigration

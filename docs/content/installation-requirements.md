@@ -4,9 +4,18 @@
 
 - <https://dotnet.microsoft.com/en-us/download/dotnet>
 
-Specific version installation:
+Specific NET Core version installation:
 
 - Windows: `winget install Microsoft.DotNet.SDK.8 --version 8.0.100`
+
+For running EF Core migrations   correctly, get the correct tool versions:
+
+```pws
+> dotnet tool uninstall --global dotnet-ef
+> dotnet tool install --global dotnet-ef --version 8.0.22
+```
+
+---
 
 ## Angular Development
 
