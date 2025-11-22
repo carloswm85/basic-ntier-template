@@ -15,7 +15,7 @@ namespace BasicNtierTemplate.Web.MVC.Services
         {
             try
             {
-                var response = await _client.GetAsync("weatherforecasts");
+                var response = await _client.GetAsync("api/WeatherForecasts/data");
                 response.EnsureSuccessStatusCode();
                 var content = await response.Content.ReadAsStringAsync();
 

@@ -32,5 +32,18 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
 
             return View(weatherViewModel);
         }
+
+        public IActionResult ApiInstructions()
+        {
+            var instructions = @"
+                == Weather Forecast API Instructions ==
+
+                1. Run the BasicNtierTemplace.API project using your favorite method. 
+                    • In Visual Studio IDE, you can set both projects to run simultaneously at 'Configure Startup Projects' in the 'Search Feature' box.
+                2. Run the BasicNtierTemplace.Web.MVC at the same time.
+                3. You should be able to see the forecast data when both are running.
+                ";
+            return Ok(instructions);
+        }
     }
 }

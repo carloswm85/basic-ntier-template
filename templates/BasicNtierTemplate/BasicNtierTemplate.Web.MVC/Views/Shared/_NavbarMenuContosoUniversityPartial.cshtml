@@ -5,27 +5,19 @@
             Contoso University
         </a>
 
-        <ul class="dropdown-menu" aria-labelledby="manageDropdown">
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="manageDropdown">
             <li>
                 <a class="dropdown-item" asp-controller="Student" asp-action="List">Students</a>
             </li>
             <li>
-                <a class="dropdown-item" asp-controller="Course" asp-action="List">Courses</a>
-            </li>
-            <li>
-                <a class="dropdown-item" asp-controller="Instructor" asp-action="List">Instructors</a>
-            </li>
-            <li>
-                <a class="dropdown-item" asp-controller="Department" asp-action="List">Departments</a>
+                <a class="dropdown-item" asp-controller="Student" asp-action="Statistics">Students Statistics</a>
             </li>
 
             <li><hr class="dropdown-divider"></li>
 
             <li>
-                <a class="dropdown-item" asp-controller="Student" asp-action="About">About Contoso Students</a>
+                <a class="dropdown-item" asp-controller="Student" asp-action="AdditionalInstructions">About Contoso University example (and next steps)</a>
             </li>
-
-            <li><hr class="dropdown-divider"></li>
 
             <li>
                 <a class="dropdown-item" asp-controller="Home" asp-action="Example">Nowhere-here</a>

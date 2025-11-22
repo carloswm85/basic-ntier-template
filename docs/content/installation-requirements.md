@@ -15,6 +15,14 @@ For running EF Core migrations   correctly, get the correct tool versions:
 > dotnet tool install --global dotnet-ef --version 8.0.22
 ```
 
+Add correct packages:
+
+```powershell
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 8.0.22
+dotnet add package Microsoft.EntityFrameworkCore.Tools --version 8.0.22
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 8.0.22
+```
+
 ---
 
 ## Angular Development

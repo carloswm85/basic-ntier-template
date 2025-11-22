@@ -1,4 +1,4 @@
-﻿using BasicNtierTemplate.Service.Dtos;
+﻿using BasicNtierTemplate.Service.Models;
 
 namespace BasicNtierTemplate.Web.MVC.Models
 {

@@ -2,6 +2,6 @@
 {
     public partial class Course : IEntity
     {
-        public object ID => Id;
+        public object ID => CourseId;
     }
 }

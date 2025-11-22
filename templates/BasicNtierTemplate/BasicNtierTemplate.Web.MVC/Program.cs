@@ -64,9 +64,7 @@ namespace BasicNtierTemplate.Web.MVC
 
                 builder.Services.AddAutoMapper(
                     cfg => { },
-                    typeof(StudentProfile).Assembly,
-                    typeof(CourseProfile).Assembly,
-                    typeof(EnrollmentProfile).Assembly
+                    typeof(StudentProfile).Assembly
                 );
 
                 // Application services

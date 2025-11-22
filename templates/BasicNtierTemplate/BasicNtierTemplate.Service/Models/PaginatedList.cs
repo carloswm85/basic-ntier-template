@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace BasicNtierTemplate.Service.Dtos
+namespace BasicNtierTemplate.Service.Models
 {
     /// <summary>
     /// Creates a paginated subset of an <see cref="IQueryable{T}"/> source.

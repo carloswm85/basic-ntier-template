@@ -1,4 +1,5 @@
 ﻿using BasicNtierTemplate.Service.Dtos;
+using BasicNtierTemplate.Service.Models;
 
 namespace BasicNtierTemplate.Service.Services.Interfaces
 {

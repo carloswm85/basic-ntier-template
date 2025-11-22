@@ -14,7 +14,7 @@
     - [Code-First](#code-first)
     - [Database-First (Database Scaffolding, or Reverse Engineering)](#database-first-database-scaffolding-or-reverse-engineering)
       - [Additional Commands](#additional-commands)
-    - [Example: `Blog` and `Post` models](#example-blog-and-post-models)
+    - [Example: `Contoso University` Tutorial Example](#example-contoso-university-tutorial-example)
   - [Template Information](#template-information)
     - [Connection String](#connection-string)
     - [AutoMapper Use](#automapper-use)
@@ -198,11 +198,15 @@ Or using .NET Core CLI:
 dotnet ef dbcontext scaffold "Name=BasicNtierTemplateConnection" Microsoft.EntityFrameworkCore.SqlServer --output-dir Model --project BasicNtierTemplate.Data --startup-project BasicNtierTemplate.API --force --use-database-names --no-pluralize
 ```
 
-### Example: `Blog` and `Post` models
+---
 
-This template has a built in example case for use and testing of database, EF Core and API endpoints (with `Sample` service, repository, interfaces and API resource name).
+### Example: `Contoso University` Tutorial Example
 
-For additional information on this example, see: <https://learn.microsoft.com/en-us/ef/core/modeling/relationships>
+This template has a built in example case for use and testing of database, EF Core, API endpoints and MVC frontend.
+
+For additional information on this example, see the official tutorial: <https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/?view=aspnetcore-8.0>
+
+![alt text](./docs/img/contoso-db-diagram.png)
 
 ---
 
@@ -212,9 +216,9 @@ For additional information on this example, see: <https://learn.microsoft.com/en
 
 ```json
 {
-    "ConnectionStrings": {
-        "DefaultConnection": "Server=.;Database=BasicNtierTemplateData;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
-    }
+	"ConnectionStrings": {
+		"DefaultConnection": "Server=.;Database=BasicNtierTemplateData;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+	}
 }
 ```
 

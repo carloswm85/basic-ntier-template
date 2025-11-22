@@ -244,10 +244,64 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             }
         }
 
+        [HttpGet("Statistics")]
         public async Task<IActionResult> About()
         {
             var studentData = await _contosoService.GetEnrollmentDateDataAsync();
             return View(studentData);
+        }
+
+        [HttpGet("AdditionalInstructions")]
+        public IActionResult ContosoUniversityInstructions()
+        {
+            var instructions = @"
+                == INSTRUCTIONS FOR THE CONTOSO UNIVERSITY CONTENT ==
+
+                Link to tutorial: https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/?view=aspnetcore-8.0
+
+                - The tutorial is not completed in this example content on purpose.
+                - Sections COMPLETED are the following:
+                    1. Get started with EF Core in an ASP.NET MVC web app
+                    2. Implement CRUD Functionality
+                    3. Add sorting, filtering, and paging
+                    4. Apply migrations to the Contoso University sample
+                    5. Create a complex data model
+                - The following sections are NOT COMPLETED, the developer should complete them as an exercise:
+                    6. Read related data
+                    7. Update related data
+                    8. Handle concurrency
+                    9. Implement inheritance
+                    10. Learn about advanced scenarios
+                    
+                == SUGGESTED STEPS ==
+                
+                - General:
+                    • From point (5) all required models were included (in the code base and the database)
+                    • Review the model relationships, fix if necessary
+                    • Implement complete CRUD for all entities, only `Student` entity was completed
+                    • Instructions on how to do that are on points (6) to (10) from tutorial
+                - What you can do and where (these are just general guidelines, not all steps to take):
+                    A. Data Layer:
+                        • Separate database annotations (used for EF) from view annotations (used in MVC)
+                    B. Repository Layer:
+                        • Include missing repositories
+                    C. Service Layer:
+                        • Generate missing DTOs and mapping profiles
+                        • Add interfaces and services, you can use the StudentService as example
+                    D. API Layer:
+                        • Generate missing endpoints
+                    E. MVC Layer:
+                        • Generate controllers, view models and views for full CRUD (and listing)
+                            → Hint: VS (IDE) scaffolding engine can help to quicken this part of the development
+                        • View annotations from Data Layer should be moved here to the view models
+                        • For the sake of briefty, student view works directly with DTOs, you should change the code to work with view models
+                
+                == ADDITIONAL SUGGESTIONS ==
+                
+                - You can connect the API directly to MVC, instead of going directly from the Service layer to MVC
+                - Implement all the endpoints from the API in the Angular layer, or a mobile project
+                ";
+            return Ok(instructions);
         }
     }
 }

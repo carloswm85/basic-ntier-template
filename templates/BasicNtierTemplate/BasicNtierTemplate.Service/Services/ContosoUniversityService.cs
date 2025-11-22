@@ -2,6 +2,7 @@
 using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Repository;
 using BasicNtierTemplate.Service.Dtos;
+using BasicNtierTemplate.Service.Models;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -118,6 +119,10 @@ namespace BasicNtierTemplate.Service.Services
             try
             {
                 var student = _mapper.Map<Student>(studentDto);
+
+                student.GovernmentId = new string(student.GovernmentId
+                    .Where(char.IsDigit).ToArray());
+
                 _unitOfWork.StudentRepository.Add(student);
                 await _unitOfWork.SaveChangesAsync();
                 return student.Id;
@@ -136,6 +141,10 @@ namespace BasicNtierTemplate.Service.Services
 
             studentDto.Id = studentId;
             var student = _mapper.Map<Student>(studentDto);
+
+            student.GovernmentId = new string(student.GovernmentId
+                    .Where(char.IsDigit).ToArray());
+
             _unitOfWork.StudentRepository.Update(student);
             await _unitOfWork.SaveChangesAsync();
             return true;
