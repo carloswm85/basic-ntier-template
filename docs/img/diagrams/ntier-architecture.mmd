@@ -1,0 +1,43 @@
+%%{init: {
+    "theme": "dark",
+    "themeVariables": {
+        "lineColor": "#FF00FF"
+    }
+}}%%
+
+graph TB
+
+  %% ----------- LAYERS -----------
+  subgraph Data["🗄️  Data Layer"]
+    DB[("Database (SQL Server), Entity Models, Migrations, EF Core")]
+  end
+
+  subgraph Repository["📦  Repository Layer"]
+    REPO[Unit of Workd and Repository]
+  end
+
+  subgraph Service["⚙️  Service Layer"]
+    SVC[Service, Mapping, Contracts, DTOs]
+  end
+
+  %% Presentation Layer shifted to the side
+  subgraph Pres["🎨 Presentation Layer"]
+    subgraph API["🌐 API Layer"]
+        REST["RESTful API (HTTP Protocol)"]
+    end
+    subgraph Clients["💻 Client Applications"]
+      MVC[Web.MVC]
+      SPA[Web.Angular]
+    end
+
+  end
+
+  %% ----------- CONNECTIONS -----------
+  DB <--> REPO
+  REPO <--> SVC
+  SVC <--> REST
+  SVC <--> MVC
+  REST <--> MVC
+  REST <--> SPA
+
+  

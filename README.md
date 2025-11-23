@@ -1,10 +1,15 @@
 - [Basic Ntier Template](#basic-ntier-template)
   - [Version compatibility](#version-compatibility)
-    - [.NET Core](#net-core)
-    - [MVC](#mvc)
-    - [Angular](#angular)
+    - [Table: .NET Core](#table-net-core)
+    - [Table: MVC](#table-mvc)
+    - [Table: Angular](#table-angular)
   - [Installation Requirements](#installation-requirements)
-  - [Architecture](#architecture)
+  - [Solution Architecture](#solution-architecture)
+    - [Table: Architecture Layers](#table-architecture-layers)
+    - [Cross-Cutting Concerns For All Layers](#cross-cutting-concerns-for-all-layers)
+    - [Clean Architecture Layer Breakdown (Different Than Template Variant)](#clean-architecture-layer-breakdown-different-than-template-variant)
+      - [Key Mapping Notes: CA Vs N-Tier](#key-mapping-notes-ca-vs-n-tier)
+    - [Diagram: N-Tier Architecture](#diagram-n-tier-architecture)
     - [Notes](#notes)
   - [Template Installation](#template-installation)
     - [Nuget Installation](#nuget-installation)
@@ -15,12 +20,12 @@
     - [Database-First (Database Scaffolding, or Reverse Engineering)](#database-first-database-scaffolding-or-reverse-engineering)
       - [Additional Commands](#additional-commands)
     - [Example: `Contoso University` Tutorial Example](#example-contoso-university-tutorial-example)
-  - [Template Information](#template-information)
+  - [Configuration Information](#configuration-information)
     - [Connection String](#connection-string)
     - [AutoMapper Use](#automapper-use)
   - [Troubleshooting](#troubleshooting)
     - [HTTPS Developer Ccertificate](#https-developer-ccertificate)
-  - [Other Information](#other-information)
+  - [Education](#education)
     - [Readings](#readings)
     - [Video Tutorials](#video-tutorials)
     - [Other Custom .NET Solution Templates](#other-custom-net-solution-templates)
@@ -28,8 +33,6 @@
     - [Clean Architecture Information](#clean-architecture-information)
       - [Readings (CA)](#readings-ca)
       - [Video Tutorials (CA)](#video-tutorials-ca)
-  - [Videos](#videos)
-    - [Project Videos](#project-videos)
 
 ---
 
@@ -41,7 +44,7 @@
 
 ## Version compatibility
 
-### .NET Core
+### Table: .NET Core
 
 | Current | .NET Core | .NET Core release type | EF Core  |
 | ------- | --------- | ---------------------- | -------- |
@@ -51,7 +54,7 @@
 
 [.NET and .NET Core Support Policy](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core) ↗
 
-### MVC
+### Table: MVC
 
 | Current | Bootstrap | jQuery  | jQuery Validate | Jquery Validation Unobtrusive |
 | ------- | --------- | ------- | --------------- | ----------------------------- |
@@ -60,7 +63,7 @@
 - Used `libman.json` for client side libraries.
 - Bootstrap `+5.x` does not depend on `jQuery`.
 
-### Angular
+### Table: Angular
 
 | Current | Angular Version      | Node.js Version                       | TypeScript Version | RxJS Version         |
 | ------- | -------------------- | ------------------------------------- | ------------------ | -------------------- |
@@ -80,16 +83,72 @@
 
 ---
 
-## Architecture
+## Solution Architecture
 
-| Level | Layers        | Classification                     | Functionality                                          | Technology/Notes                                                   | Role                                                                             |
-| ----- | ------------- | ---------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
-| 1     | `Data`        | -                                  | Database schema, migrations, models                    | Entity Framework Core, Identity API integration                    | Define database schema, manage migrations, and entity mapping.                   |
-| 2     | `Repository`  | -                                  | Data access abstraction, caching, Unit of Work Pattern | Querying interfaces                                                | Abstract data access logic to decouple the service layer from EF Core specifics. |
-| 3     | `Service`     | Business logic                     | Logic, validation                                      | Business rules, support async methods                              | Implement business logic, enforce rules and validation.                          |
-| 4.a   | `API`         | Request handling, Dev presentation | RESTful API, documentation                             | Swagger/OpenAPI, versioning                                        | Expose business services as RESTful endpoints.                                   |
-| 4.b   | `Web.MVC`     | User presentation                  | Server-side rendering, UI logic                        | MVC design pattern, Razor syntax                                   | Traditional server-rendered UI using MVC and Razor Pages.                        |
-| 4.c   | `Web.Angular` | User presentation                  | Client-side SPA                                        | Angular SPA, with strong typing (TypeScript), Rest API integration | Modern client-side SPA experience.                                               |
+### Table: Architecture Layers
+
+| Level | Layers        | Classification                     | Role                                                                             | Functionality                                                              | Technology/Notes                                                                           | Dependencies       | Clean Architecture Equivalence (_approximate_)                                              |
+| ----- | ------------- | ---------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------ | ------------------------------------------------------------------------------------------- |
+| 1     | `Data`        | -                                  | Define database schema, manage migrations, and entity mapping.                   | Database schema, migrations, models, database seeding data                 | Entity Framework Core, Identity API, SQL Server/PostgreSQL                                 | `None`             | **Infrastructure Layer** (Persistence)                                                      |
+| 2     | `Repository`  | -                                  | Abstract data access logic to decouple the service layer from EF Core specifics. | Data access abstraction, caching, Unit of Work Pattern, Repository Pattern | IUserRepository, IProductRepository, Redis/In-Memory Cache                                 | `Data`             | **Infrastructure Layer** (Implementations) / **Application Layer** (Interfaces)             |
+| 3     | `Service`     | Business logic                     | Implement business logic, enforce rules and validation.                          | Business logic, validation, orchestration                                  | FluentValidation, async/await patterns, domain services                                    | `Repository`       | **Application Layer** (Use Cases/Application Services) + **Domain Layer** (Domain Services) |
+| 4.a   | `API`         | Request handling, Dev presentation | Expose business services as RESTful endpoints.                                   | RESTful API, documentation, API interface                                  | ASP\.NET Core Web API, Swagger/OpenAPI, API versioning, JWT authentication                 | `Service`          | **Presentation Layer** (API Controllers/Endpoints)                                          |
+| 4.b   | `Web.MVC`     | User presentation                  | Traditional server-rendered UI using MVC and Razor Pages.                        | Server-side rendering, UI logic, form handling                             | ASP\.NET Core MVC, Razor Pages, ViewModels, Tag Helpers                                    | `Service` or `API` | **Presentation Layer** (MVC Controllers/Views)                                              |
+| 4.c   | `Web.Angular` | User presentation                  | Modern client-side SPA experience.                                               | Client-side SPA, dynamic UI, state management                              | Angular (TypeScript), RxJS, HttpClient, REST API integration, Component-based architecture | `API`              | **Presentation Layer** (UI Components)                                                      |
+
+### Cross-Cutting Concerns For All Layers
+
+These span multiple layers:
+
+- **Logging**: Serilog, NLog (all layers)
+- **Authentication/Authorization**: ASP\.NET Core Identity, JWT (API, Web.MVC, Web.Angular)
+- **Error Handling**: Global exception filters, middleware (API, Web.MVC)
+- **Dependency Injection**: Built-in ASP\.NET Core DI container (all layers)
+
+### Clean Architecture Layer Breakdown (Different Than Template Variant)
+
+**Clean Architecture follows the Dependency Rule: dependencies point inward, toward the Domain.**
+
+`BasicNtierTemplate` is a Clean Architecture variant. For better understanding, we'll highlight here the similarities between the two.
+
+1. **Domain Layer (Core)** - Innermost layer, no dependencies
+
+   - Enterprise business rules
+   - Domain entities and value objects
+   - Domain services (part of `Service` layer)
+   - Domain events
+
+2. **Application Layer** - Depends only on Domain
+
+   - Application business rules
+   - Use cases / Application services (part of `Service` layer)
+   - Repository interfaces (defined here, implemented in Infrastructure)
+   - DTOs, validators, orchestration logic
+
+3. **Infrastructure Layer** - Depends on Application & Domain
+
+   - External concerns: database, file system, web services
+   - Equivalent to `Data` layer (EF Core, migrations, DbContext)
+   - Equivalent to `Repository` implementations
+   - Caching, logging, email services
+   - Third-party integrations
+
+4. **Presentation Layer** - Depends on Application
+   - User interface concerns
+   - Equivalent to `API`, `Web.MVC`, and `Web.Angular` layers
+   - Controllers, views, API endpoints
+   - Input validation, authentication/authorization middleware
+   - Presentation models (ViewModels, DTOs for API responses)
+
+#### Key Mapping Notes: CA Vs N-Tier
+
+- **`Service` layer spans two Clean Architecture layers**: Domain services belong to the Domain Layer, while application services (use cases) belong to the Application Layer.
+- **Repository pattern spans layers**: Interfaces are defined in the Application Layer, but implementations live in the Infrastructure Layer.
+- **Ntier Architecture is practical**: While Clean Architecture is more granular with 4 distinct layers, a 4-tier(ish) approach (`Data`/`Repository`/`Service`/`Presentation(API and Web)`) is a pragmatic implementation that achieves similar goals with less complexity for many applications.
+
+### Diagram: N-Tier Architecture
+
+- _Diagram made using [mermaid.js](https://mermaid.js.org/)_
 
 ![Basic Ntier Template Architecture Diagram](./docs/img/basic-ntier-template-architecture-diagram.png)
 
@@ -101,6 +160,8 @@
   - Define interfaces for repositories (e.g., IUserRepository) which support CRUD and query operations asynchronously.
   - Caching: Caching strategies, or as a decorator pattern, to optimize repeated data retrieval.
   - Unit of Work Pattern: Aggregate repository transactions ensuring atomicity.
+
+---
 
 ## Template Installation
 
@@ -202,23 +263,23 @@ dotnet ef dbcontext scaffold "Name=BasicNtierTemplateConnection" Microsoft.Entit
 
 ### Example: `Contoso University` Tutorial Example
 
-This template has a built in example case for use and testing of database, EF Core, API endpoints and MVC frontend.
-
-For additional information on this example, see the official tutorial: <https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/?view=aspnetcore-8.0>
+- This template has a built in example case for use and testing of database, EF Core, API endpoints and MVC frontend.
+- The example is partially completed.
+- For additional information on this example, see the official tutorial: <https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/?view=aspnetcore-8.0>
 
 ![alt text](./docs/img/contoso-db-diagram.png)
 
 ---
 
-## Template Information
+## Configuration Information
 
 ### Connection String
 
 ```json
 {
-	"ConnectionStrings": {
-		"DefaultConnection": "Server=.;Database=BasicNtierTemplateData;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
-	}
+  ConnectionStrings": {
+    "DefaultConnection": "Server=.;Database=BasicNtierTemplateData;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+  }
 }
 ```
 
@@ -247,7 +308,7 @@ _Remember to change it for secure production-ready version (with SQL login and s
 
 ### AutoMapper Use
 
-```console
+```terminal
 YourApp.Api/  (Presentation)
 ├── Program.cs  → builder.Services.AddAutoMapper()
 └── [References Service Layer]
@@ -276,7 +337,7 @@ YourApp.Data/  (Data Access)
 
 ---
 
-## Other Information
+## Education
 
 ### Readings
 
@@ -312,8 +373,6 @@ Average:
 
 - <https://marketplace.visualstudio.com/items?itemName=ErikEJ.EFCorePowerTools>
 
----
-
 ### Clean Architecture Information
 
 #### Readings (CA)
@@ -324,12 +383,3 @@ Average:
 
 1. [Clean Architecture with ASP.NET Core 3.0 - Jason Taylor - NDC Sydney 2019](https://www.youtube.com/watch?v=5OtUm1BLmG0)
 2. [💻 Clean Architecture (by Syntax Async)](https://www.youtube.com/playlist?list=PLlKSF1mm1dufAZmGexWGnORX-yKiGpFjM) playlist
-
----
-
-## Videos
-
-### Project Videos
-
-- [Week 4](https://youtu.be/RSQXpOOT220)
-- [Week 5](https://youtu.be/TAKPFr6R8Ac)
