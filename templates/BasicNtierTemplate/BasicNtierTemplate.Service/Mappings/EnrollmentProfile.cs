@@ -4,19 +4,16 @@ using BasicNtierTemplate.Service.Dtos;
 
 namespace BasicNtierTemplate.Service.Mappings
 {
-    public class StudentProfile : Profile
+    public class EnrollmentProfile : Profile
     {
-        public StudentProfile()
+        public EnrollmentProfile()
         {
             //CreateMap<ExampletDto, Example>()
             //    .ForMember(destination => destination.id, options => options.MapFrom(source => source.Id))
             //    .ForMember(dto => dto.some_field, opt => opt.MapFrom(src => src.SomeFiled))
             //    ;
 
-            CreateMap<Student, StudentDto>()
-                .ForMember(destination => destination.Enrollments, options => options.Ignore()) // With this line avoid reference loop
-                .ReverseMap()
-                ;
+            CreateMap<Enrollment, EnrollmentDto>().ReverseMap();
         }
     }
 }

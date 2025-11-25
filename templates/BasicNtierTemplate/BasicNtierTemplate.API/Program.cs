@@ -48,7 +48,9 @@ namespace BasicNtierTemplate.API
 
                 builder.Services.AddAutoMapper(
                     cfg => { },
-                    typeof(StudentProfile).Assembly
+                    typeof(StudentProfile).Assembly,
+                    typeof(CourseProfile).Assembly,
+                    typeof(EnrollmentProfile).Assembly
                 );
 
                 // Register application services for dependency injection.
