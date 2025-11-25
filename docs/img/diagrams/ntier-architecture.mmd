@@ -21,14 +21,16 @@ graph TB
   end
 
   %% Presentation Layer shifted to the side
-  subgraph Pres["🎨 Presentation Layer"]
+  subgraph Pres["👁️ Presentation Layer"]
     subgraph API["🌐 API Layer"]
         REST["RESTful API (HTTP Protocol)"]
     end
     subgraph Clients["💻 Client Applications"]
       MVC[Web.MVC]
       SPA[Web.Angular]
+      MOB["📱Independent Mobile Project (not part of this template)"]
     end
+    
 
   end
 
@@ -39,5 +41,6 @@ graph TB
   SVC <--> MVC
   REST <--> MVC
   REST <--> SPA
+  REST <--> MOB
 
   
