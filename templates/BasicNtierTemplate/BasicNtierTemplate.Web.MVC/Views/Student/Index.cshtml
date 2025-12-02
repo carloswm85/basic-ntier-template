@@ -69,7 +69,7 @@
                                value="@Model.CurrentFilter"
                                class="form-control
                                     @(string.IsNullOrEmpty(Convert.ToString(Model.CurrentFilter))
-                                        ? "rounded-1" : "rounded-start-2")"
+                                                                       ? "rounded-1" : "rounded-start-2")"
                                placeholder="Enter name..." />
 
                         @if (!string.IsNullOrEmpty(Convert.ToString(Model.CurrentFilter)))
@@ -79,7 +79,7 @@
                                asp-route-pageIndex="@(Model.PaginatedList.PageIndex)"
                                asp-route-currentFilter=""
                                asp-route-pageSize="@Model.PageSize"
-                                class="btn btn-outline-secondary">
+                               class="btn btn-outline-secondary">
                                 <i class="bi bi-x-lg"></i>
                             </a>
                         }
@@ -130,7 +130,7 @@
                                         @Html.DisplayNameFor(model => model.PaginatedList[0].LastName)
                                     </a>
                                 </th>
-                                
+
                                 <th>
                                     @Html.DisplayNameFor(model => model.PaginatedList[0].FirstMidName)
                                 </th>
@@ -161,23 +161,34 @@
                                 <tr>
                                     <td>@item.LastName</td>
                                     <td>@item.FirstMidName</td>
-                                    <td>@item.EnrollmentDate.ToShortDateString()</td>
+                                    @if (item.EnrollmentDate != null)
+                                    {
+                                        <td>
+                                            @item.EnrollmentDate.Value.ToString("d")
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            "No date"
+                                        </td>
+                                    }
                                     <td>@item.GovernmentIdFormatted</td>
 
                                     <td class="text-end">
                                         <a asp-action="Edit" asp-route-id="@item.Id"
-                                            class="btn btn-sm btn-outline-primary me-1">
-                                                <i class="bi bi-pencil-square"></i> Edit
+                                           class="btn btn-sm btn-outline-primary me-1">
+                                            <i class="bi bi-pencil-square"></i> Edit
                                         </a>
 
                                         <a asp-action="Details" asp-route-id="@item.Id"
-                                            class="btn btn-sm btn-outline-info me-1">
-                                                <i class="bi bi-eye"></i> Details
+                                           class="btn btn-sm btn-outline-info me-1">
+                                            <i class="bi bi-eye"></i> Details
                                         </a>
 
                                         <a asp-action="Delete" asp-route-id="@item.Id"
-                                            class="btn btn-sm btn-outline-danger">
-                                                <i class="bi bi-trash"></i> Delete
+                                           class="btn btn-sm btn-outline-danger">
+                                            <i class="bi bi-trash"></i> Delete
                                         </a>
                                     </td>
                                 </tr>
@@ -237,8 +248,8 @@
                         </a>
                     </li>
 
-                    <li class="page-item 
-                        @(Model.PaginatedList.PageIndex == Model.PaginatedList.TotalPages ? "disabled" : "")">
+                    <li class="page-item
+                            @(Model.PaginatedList.PageIndex == Model.PaginatedList.TotalPages ? "disabled" : "")">
                         <a class="page-link"
                            asp-action="Index"
                            asp-route-sortOrder="@Model.CurrentSort"
@@ -256,8 +267,8 @@
             <!-- Totals -->
             <div class="ms-3 text-muted">
                 <i class="bi bi-bar-chart-fill me-1"></i>
-                <b>@Model.PaginatedList.TotalRecords</b> record(s) total, 
-                <b>@Model.PaginatedList.FilteredCount</b> filtered, 
+                <b>@Model.PaginatedList.TotalRecords</b> record(s) total,
+                <b>@Model.PaginatedList.FilteredCount</b> filtered,
                 <b>@Model.PaginatedList.Count</b> visible
             </div>
 

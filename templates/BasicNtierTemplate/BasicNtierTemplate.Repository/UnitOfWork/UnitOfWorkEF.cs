@@ -1,5 +1,5 @@
 ﻿using BasicNtierTemplate.Data.Model;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace BasicNtierTemplate.Repository
 {
@@ -8,7 +8,7 @@ namespace BasicNtierTemplate.Repository
         #region Private Fields
 
         private readonly BasicNtierTemplateDbContext _dbContext;
-        private bool _disposed = false;
+        private IDbContextTransaction? _currentTransaction;
 
         private IRepository<Student>? _studentRepository;
         private IRepository<Course>? _courseRepository;
@@ -23,51 +23,44 @@ namespace BasicNtierTemplate.Repository
 
         #region Contoso University Example
 
-        public IRepository<Student> StudentRepository => _studentRepository ?? (_studentRepository = new Repository<Student>(_dbContext));
-        public IRepository<Course> CourseRepository => _courseRepository ?? (_courseRepository = new Repository<Course>(_dbContext));
-        public IRepository<Enrollment> EnrollmentRepository => _enrollmentRepository ?? (_enrollmentRepository = new Repository<Enrollment>(_dbContext));
+        public IRepository<Student> StudentRepository => _studentRepository ?? (_studentRepository = new RepositoryEF<Student>(_dbContext));
+        public IRepository<Course> CourseRepository => _courseRepository ?? (_courseRepository = new RepositoryEF<Course>(_dbContext));
+        public IRepository<Enrollment> EnrollmentRepository => _enrollmentRepository ?? (_enrollmentRepository = new RepositoryEF<Enrollment>(_dbContext));
 
         #endregion
 
-        #region Public Methods
 
-        public void Dispose()
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+            => await _dbContext.SaveChangesAsync(cancellationToken);
+
+        public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            if (_currentTransaction != null)
+                return;
+
+            _currentTransaction = await _dbContext.Database.BeginTransactionAsync(cancellationToken);
         }
 
-        public void Save()
+        public async Task CommitTransactionAsync(CancellationToken cancellationToken = default)
         {
-            _dbContext.SaveChanges();
+            if (_currentTransaction == null)
+                return;
+
+            await _currentTransaction.CommitAsync(cancellationToken);
+            await _currentTransaction.DisposeAsync();
+            _currentTransaction = null;
         }
 
-        public async Task<int> SaveChangesAsync()
+        public async Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
         {
-            return await _dbContext.SaveChangesAsync();
+            if (_currentTransaction == null)
+                return;
+
+            await _currentTransaction.RollbackAsync(cancellationToken);
+            await _currentTransaction.DisposeAsync();
+            _currentTransaction = null;
         }
 
-        public void CustomExec(string sqlQuery)
-        {
-            _dbContext.Database.ExecuteSqlRaw(sqlQuery);
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private void Dispose(bool disposing)
-        {
-            if (!_disposed)
-            {
-                if (disposing)
-                {
-                    _dbContext.Dispose();
-                }
-            }
-            _disposed = true;
-        }
-
-        #endregion
+        public void Dispose() => _dbContext.Dispose();
     }
 }

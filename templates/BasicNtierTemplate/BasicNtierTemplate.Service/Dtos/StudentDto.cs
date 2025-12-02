@@ -53,7 +53,7 @@ namespace BasicNtierTemplate.Service.Dtos
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Enrollment Date")]
         [DateRange("1950-01-01", 50, ErrorMessage = "Enrollment Date must be between 1950 and 50 years from now")]
-        public DateOnly EnrollmentDate { get; set; }
+        public DateOnly? EnrollmentDate { get; set; }
 
         [Display(Name = "Full Name")]
         public string FullName => $"{LastName}, {FirstMidName}";

@@ -11,7 +11,7 @@ namespace BasicNtierTemplate.Service.Services
 {
     public class ContosoUniversityService : IContosoUniversityService
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _uow;
         private readonly ILogger<ContosoUniversityService> _logger;
         private readonly IMapper _mapper;
 
@@ -23,7 +23,7 @@ namespace BasicNtierTemplate.Service.Services
         )
         {
             _logger = logger;
-            _unitOfWork = unitOfWork;
+            _uow = unitOfWork;
             _mapper = mapper;
 
         }
@@ -34,12 +34,12 @@ namespace BasicNtierTemplate.Service.Services
 
             if (asNoTracking)
             {
-                student = await _unitOfWork.StudentRepository.GetByIdAsync(id: studentId, asNoTracking);
+                student = await _uow.StudentRepository.GetByIdAsync(studentId);
                 return _mapper.Map<StudentDto>(student);
 
             }
 
-            student = await _unitOfWork.StudentRepository.GetAll()
+            student = await _uow.StudentRepository.Query()
                 .Include(s => s.Enrollments)
                 .ThenInclude(e => e.Course)
                 .AsNoTracking()
@@ -50,7 +50,7 @@ namespace BasicNtierTemplate.Service.Services
 
         public async Task<IEnumerable<StudentDto>> GetStudentListAsync()
         {
-            var students = await _unitOfWork.StudentRepository.GetAll().ToListAsync();
+            var students = await _uow.StudentRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<StudentDto>>(students);
         }
 
@@ -62,7 +62,7 @@ namespace BasicNtierTemplate.Service.Services
             string sortOrder
         )
         {
-            var students = _unitOfWork.StudentRepository.GetAll(asNoTracking: true);
+            var students = await _uow.StudentRepository.GetAllAsync();
             var totalRecords = students.Count();
 
             // PAGING
@@ -74,8 +74,12 @@ namespace BasicNtierTemplate.Service.Services
             // SEARCH
             if (!string.IsNullOrEmpty(searchString))
             {
-                students = students.Where(s => s.LastName.Contains(searchString)
-                                        || s.FirstMidName.Contains(searchString));
+                var term = searchString.Trim().ToUpper();
+
+                students = students.Where(s =>
+                    s.LastName.ToUpper().Contains(term) ||
+                    s.FirstMidName.ToUpper().Contains(term)
+                );
             }
             var filteredCount = students.Count();
 
@@ -96,11 +100,11 @@ namespace BasicNtierTemplate.Service.Services
                     break;
             }
 
-            var count = await students.CountAsync();
-            var items = await students
+            var count = students.Count();
+            var items = students
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize)
-                .ToListAsync();
+                .ToList();
 
             var studentsDto = _mapper.Map<List<StudentDto>>(items);
 
@@ -123,8 +127,8 @@ namespace BasicNtierTemplate.Service.Services
                 student.GovernmentId = new string(student.GovernmentId
                     .Where(char.IsDigit).ToArray());
 
-                _unitOfWork.StudentRepository.Add(student);
-                await _unitOfWork.SaveChangesAsync();
+                await _uow.StudentRepository.AddAsync(student);
+                await _uow.SaveChangesAsync();
                 return student.Id;
             }
             catch (DbUpdateException dbuex)
@@ -145,19 +149,19 @@ namespace BasicNtierTemplate.Service.Services
             student.GovernmentId = new string(student.GovernmentId
                     .Where(char.IsDigit).ToArray());
 
-            _unitOfWork.StudentRepository.Update(student);
-            await _unitOfWork.SaveChangesAsync();
+            _uow.StudentRepository.Update(student);
+            await _uow.SaveChangesAsync();
             return true;
         }
 
         public bool StudentExists(int studentId)
         {
-            return _unitOfWork.StudentRepository.GetAll().Any(s => s.Id == studentId);
+            return _uow.StudentRepository.Query().Any(s => s.Id == studentId);
         }
 
         public bool StudentExists(string governmentId)
         {
-            return _unitOfWork.StudentRepository.GetAll().Any(s => s.GovernmentId.Equals(governmentId));
+            return _uow.StudentRepository.Query().Any(s => s.GovernmentId.Equals(governmentId));
         }
 
         public async Task<bool> DeleteStudentAsync(int studentId)
@@ -165,19 +169,19 @@ namespace BasicNtierTemplate.Service.Services
             if (studentId <= 0)
                 return false;
 
-            var student = await _unitOfWork.StudentRepository.GetByIdAsync(id: studentId, asNoTracking: true);
+            var student = await _uow.StudentRepository.GetByIdAsync(studentId);
 
             if (student == null)
                 return false;
 
-            _unitOfWork.StudentRepository.Delete(student);
-            await _unitOfWork.SaveChangesAsync();
+            _uow.StudentRepository.Remove(student);
+            await _uow.SaveChangesAsync();
             return true;
         }
 
         public async Task<List<EnrollmentDateGroupDto>> GetEnrollmentDateDataAsync()
         {
-            var students = _unitOfWork.StudentRepository.GetAll(asNoTracking: true);
+            var students = _uow.StudentRepository.Query();
 
             IQueryable<EnrollmentDateGroupDto> data =
                 from student in students

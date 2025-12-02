@@ -2,12 +2,15 @@
 
 namespace BasicNtierTemplate.Repository
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
-        void Save();
-        Task<int> SaveChangesAsync();
-        void Dispose();
-        void CustomExec(string sqlQuery);
+        // === Persist all changes (SaveChanges)
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+
+        // === EF transaction helpers
+        Task BeginTransactionAsync(CancellationToken cancellationToken = default);
+        Task CommitTransactionAsync(CancellationToken cancellationToken = default);
+        Task RollbackTransactionAsync(CancellationToken cancellationToken = default);
 
         #region Contoso University Example
 

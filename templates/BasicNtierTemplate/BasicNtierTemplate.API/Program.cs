@@ -28,7 +28,9 @@ namespace BasicNtierTemplate.API
 
                 // Register DbContext with SQL Server as the database provider.
                 builder.Services.AddDbContext<BasicNtierTemplateDbContext>(options =>
-                    options.UseSqlServer(connectionString));
+                    options
+                    .UseLazyLoadingProxies() // Enable lazy loading of navigation properties
+                    .UseSqlServer(connectionString));
 
                 // CORS Configuration to allow requests from frontend applications (for production, configure appropriately).
                 /* Not required when running frontend and backend in the same solution with proper proxy setup
