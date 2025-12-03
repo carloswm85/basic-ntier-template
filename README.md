@@ -196,7 +196,11 @@ dotnet new basic-ntier-template -o "BasicNtierTemplateExample"
 ### Installation Commands
 
 ```powershell
--o # Custom solution name
+-o "../../MyFolder/BasicNtierTemplateExample2" # Custom solution name (and path, if included in the string)
+```
+
+```powershell
+--force # Force file generation, and override existing files if any
 ```
 
 ---
