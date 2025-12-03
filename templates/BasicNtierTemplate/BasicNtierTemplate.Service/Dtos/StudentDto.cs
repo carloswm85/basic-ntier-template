@@ -23,7 +23,7 @@ namespace BasicNtierTemplate.Service.Dtos
         [RegularExpression(@"^\d+$", ErrorMessage = "Government ID must contain only numbers")]
         [StringLength(20, MinimumLength = 7, ErrorMessage = "Government ID must be between 8 and 20 digits")]
         [Display(Name = "Government ID")]
-        public string GovernmentId { get; set; }
+        public string GovernmentId { get; set; } = string.Empty;
 
         public string GovernmentIdFormatted =>
             long.TryParse(GovernmentId, out long num)
@@ -39,14 +39,14 @@ namespace BasicNtierTemplate.Service.Dtos
         [RegularExpression(@"^[a-zA-ZÁÉÍÓÚÑáéíóúñüÜ][a-zA-ZÁÉÍÓÚÑáéíóúñüÜ\s'-]*$",
             ErrorMessage = "Last name must start with a letter and can only contain letters, spaces, hyphens, and apostrophes")]
         [Display(Name = "Last Name")]
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "First name is required")]
         [StringLength(80, MinimumLength = 2, ErrorMessage = "First Name must be between 2 and 80 characters")]
         [RegularExpression(@"^[a-zA-ZÁÉÍÓÚÑáéíóúñüÜ][a-zA-ZÁÉÍÓÚÑáéíóúñüÜ\s'-]*$",
             ErrorMessage = "First name must start with a letter and can only contain letters, spaces, hyphens, and apostrophes")]
         [Display(Name = "First Name")]
-        public string FirstMidName { get; set; }
+        public string FirstMidName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Enrollment date is required")]
         [DataType(DataType.Date)]
@@ -76,7 +76,7 @@ namespace BasicNtierTemplate.Service.Dtos
             _yearsIntoFuture = yearsIntoFuture;
         }
 
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
             if (value is DateOnly date)
             {

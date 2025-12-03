@@ -29,10 +29,10 @@
             <table class="table table-striped table-hover">
                 <thead class="table-dark">
                     <tr>
-                        <th>@Html.DisplayNameFor(m => m.WeatherList[0].Date)</th>
-                        <th>@Html.DisplayNameFor(m => m.WeatherList[0].TemperatureC)</th>
-                        <th>@Html.DisplayNameFor(m => m.WeatherList[0].TemperatureF)</th>
-                        <th>@Html.DisplayNameFor(m => m.WeatherList[0].Summary)</th>
+                        <th>@Html.DisplayNameFor(m => m.WeatherList!.First().Date)</th>
+                        <th>@Html.DisplayNameFor(m => m.WeatherList!.First().TemperatureC)</th>
+                        <th>@Html.DisplayNameFor(m => m.WeatherList!.First().TemperatureF)</th>
+                        <th>@Html.DisplayNameFor(m => m.WeatherList!.First().Summary)</th>
                     </tr>
                 </thead>
                 <tbody>
