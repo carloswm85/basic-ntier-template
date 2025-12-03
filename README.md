@@ -27,11 +27,11 @@
 
 ## 1. Available branches
 
-| Branch                     | Content                           | Status                                                  | Link                                                                                   |
-| -------------------------- | --------------------------------- | ------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `main`                     |                                   |                                                         | [🔗]()                                                                                 |
-| `dev-lightweight-netcore8` | NET Core 8 _without_ Identity API | FINISHED. It can be used for development.               | [🔗](https://github.com/carloswm85/basic-ntier-template/tree/dev-lightweight-netcore8) |
-| `dev-identity-netcore8`    | NET Core 8 _WITH_ Identity API    | UNFINISHED. `dev-lightweight-netcore8` + _Identity API_ | [🔗](https://github.com/carloswm85/basic-ntier-template/tree/dev-identity-netcore8)    |
+| Branch                     | Content                           | Status                                                | Link                                                                                                                                                                 |
+| -------------------------- | --------------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `main`                     | Stable, production-ready template | UNFINISHED. Base reference for all branches.            | [https://github.com/carloswm85/basic-ntier-template](https://github.com/carloswm85/basic-ntier-template)                                                             |
+| `dev-lightweight-netcore8` | NET Core 8 _without_ Identity API | FINISHED. It can be used for development.             | [https://github.com/carloswm85/basic-ntier-template/tree/dev-lightweight-netcore8](https://github.com/carloswm85/basic-ntier-template/tree/dev-lightweight-netcore8) |
+| `dev-identity-netcore8`    | NET Core 8 _WITH_ Identity API    | UNFINISHED. `dev-lightweight-netcore8` + Identity API | [https://github.com/carloswm85/basic-ntier-template/tree/dev-identity-netcore8](https://github.com/carloswm85/basic-ntier-template/tree/dev-identity-netcore8)       |
 
 `dev-*` is used for stable versions.
 
