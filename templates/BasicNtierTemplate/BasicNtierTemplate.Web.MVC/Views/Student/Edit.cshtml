@@ -1,0 +1,64 @@
+﻿@model BasicNtierTemplate.Service.Dtos.StudentDto
+
+@{
+    ViewData["Title"] = "Edit Student";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg rounded-3">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Edit Student</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-controller="student" asp-action="edit" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="mb-3">
+                            <label asp-for="LastName" class="form-label fw-semibold"></label>
+                            <input asp-for="LastName" class="form-control" placeholder="Enter last name" />
+                            <span asp-validation-for="LastName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="FirstMidName" class="form-label fw-semibold"></label>
+                            <input asp-for="FirstMidName" class="form-control" placeholder="Enter first or middle name" />
+                            <span asp-validation-for="FirstMidName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="GovernmentId" class="form-label fw-semibold"></label> (only numbers)
+                            <input asp-for="GovernmentId" class="form-control" />
+                            <span asp-validation-for="GovernmentId" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="EnrollmentDate" class="form-label fw-semibold"></label>
+                            <input asp-for="EnrollmentDate" class="form-control" type="date" />
+                            <span asp-validation-for="EnrollmentDate" class="text-danger small"></span>
+                        </div>
+
+                        <hr />
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-controller="student" asp-action="list" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left-circle"></i> Back to List
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save"></i> Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Reflection;
+using BasicNtierTemplate.Data.Datum;
 using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Data.Model.Identity;
 using BasicNtierTemplate.Repository;
@@ -30,7 +31,9 @@ namespace BasicNtierTemplate.API
 
                 // Register DbContext with SQL Server as the database provider.
                 builder.Services.AddDbContext<BasicNtierTemplateDbContext>(options =>
-                    options.UseSqlServer(connectionString));
+                    options
+                    //.UseLazyLoadingProxies() // Enable lazy loading of navigation properties
+                    .UseSqlServer(connectionString));
 
                 // TODO https://youtu.be/kC9qrUcy2Js?list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&t=199
                 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -66,12 +69,14 @@ namespace BasicNtierTemplate.API
 
                 builder.Services.AddAutoMapper(
                     cfg => { },
-                    typeof(SampleProfile).Assembly
+                    typeof(StudentProfile).Assembly,
+                    typeof(CourseProfile).Assembly,
+                    typeof(EnrollmentProfile).Assembly
                 );
 
                 // Register application services for dependency injection.
-                builder.Services.AddScoped<ISampleService, SampleService>(); // SAMPLE
-                                                                             // Identity Services
+                builder.Services.AddScoped<IContosoUniversityService, ContosoUniversityService>(); // SAMPLE
+
                 builder.Services.AddScoped<IEmailService, EmailService>();
                 builder.Services.AddScoped<IUserService, UserService>();
                 builder.Services.AddScoped<IRegistrationService, RegistrationService>();
@@ -131,6 +136,23 @@ namespace BasicNtierTemplate.API
                 app.MapControllers();
 
                 app.MapFallback(() => Results.NotFound("Endpoint not found."));
+
+                // Add Contoso University test data to the database
+                using (var scope = app.Services.CreateScope())
+                {
+                    var services = scope.ServiceProvider;
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    try
+                    {
+                        var context = services.GetRequiredService<BasicNtierTemplateDbContext>();
+                        DbInitializer.Initialize(context);
+                        logger.LogDebug("DB successfully initialized from the API layer.");
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogError(ex, "An error occurred while seeding the database from the API layer.");
+                    }
+                }
 
                 #endregion
 

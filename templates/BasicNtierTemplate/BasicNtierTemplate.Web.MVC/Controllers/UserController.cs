@@ -1,5 +1,4 @@
 ﻿using BasicNtierTemplate.Service.Contracts;
-using BasicNtierTemplate.Service.Dtos;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using BasicNtierTemplate.Web.MVC.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;

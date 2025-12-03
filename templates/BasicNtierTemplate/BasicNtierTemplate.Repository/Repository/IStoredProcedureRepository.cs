@@ -1,7 +1,10 @@
 ﻿namespace BasicNtierTemplate.Repository
 {
-    public interface IStoredProcedureRepository<T> where T : class
+    public interface IStoredProcedureRepository<TEntity> where TEntity : class
     {
-        IEnumerable<T> Exec(Dictionary<string, object> parameters);
+        Task<IEnumerable<TEntity>> ExecuteAsync(
+            string procedureName,
+            Dictionary<string, object> parameters,
+            CancellationToken cancellationToken = default);
     }
 }

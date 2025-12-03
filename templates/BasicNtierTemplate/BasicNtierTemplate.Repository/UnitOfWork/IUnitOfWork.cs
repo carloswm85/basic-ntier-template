@@ -2,14 +2,22 @@
 
 namespace BasicNtierTemplate.Repository
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
-        void Save();
-        void Dispose();
-        void CustomExec(string sqlQuery);
+        // === Persist all changes (SaveChanges)
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
-        IRepository<Blog> BlogRepository { get; }
-        IRepository<Posteo> PostRepository { get; }
+        // === EF transaction helpers
+        Task BeginTransactionAsync(CancellationToken cancellationToken = default);
+        Task CommitTransactionAsync(CancellationToken cancellationToken = default);
+        Task RollbackTransactionAsync(CancellationToken cancellationToken = default);
 
+        #region Contoso University Example
+
+        IRepository<Student> StudentRepository { get; }
+        IRepository<Course> CourseRepository { get; }
+        IRepository<Enrollment> EnrollmentRepository { get; }
+
+        #endregion
     }
 }

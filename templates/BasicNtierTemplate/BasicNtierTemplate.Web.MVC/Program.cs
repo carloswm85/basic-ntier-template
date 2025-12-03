@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using BasicNtierTemplate.Data.Datum;
 using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Data.Model.Identity;
 using BasicNtierTemplate.Repository;
@@ -22,7 +23,7 @@ namespace BasicNtierTemplate.Web.MVC
 
                 var builder = WebApplication.CreateBuilder(args);
 
-                #region Services Addition
+                #region Services Configuration
 
                 // Build the configuration by locating the appsettings.json file
                 // in the API project directory (1 directory level up from the current directory).
@@ -91,11 +92,24 @@ namespace BasicNtierTemplate.Web.MVC
                 builder.Services.AddScoped<IRegistrationService, RegistrationService>();
                 builder.Services.AddScoped<IUserService, UserService>();
 
+                builder.Services.AddAutoMapper(
+                    cfg => { },
+                    typeof(StudentProfile).Assembly,
+                    typeof(CourseProfile).Assembly,
+                    typeof(EnrollmentProfile).Assembly
+                );
+
+                // Application services
+                builder.Services.AddScoped<IContosoUniversityService, ContosoUniversityService>();
+
+                // MVC Services
+                builder.Services.AddScoped<IWeatherForecastService, WeatherForectastService>();
+
                 #endregion
 
                 var app = builder.Build();
 
-                #region Middleware Addition
+                #region Middleware Configuration
 
                 if (app.Environment.IsDevelopment())
                 {
@@ -137,6 +151,23 @@ namespace BasicNtierTemplate.Web.MVC
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}"
                 );
+
+                // Add Contoso University test data to the database
+                using (var scope = app.Services.CreateScope())
+                {
+                    var services = scope.ServiceProvider;
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    try
+                    {
+                        var context = services.GetRequiredService<BasicNtierTemplateDbContext>();
+                        DbInitializer.Initialize(context);
+                        logger.LogDebug("DB successfully initialized from the MVC layer.");
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogError(ex, "An error occurred while seeding the database from the MVC layer.");
+                    }
+                }
 
                 #endregion
 

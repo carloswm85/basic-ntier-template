@@ -23,9 +23,13 @@ namespace BasicNtierTemplate.Data.Model
         {
             // Build the configuration by locating the appsettings.json file
             // in the API project directory (1 directory level up from the current directory).
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "../BasicNtierTemplate.API");
+            // Go from /bin/Debug/netX.0/ back to the solution folder and into the API project
+            var basePath = Path.GetFullPath(
+                Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "BasicNtierTemplate.API")
+            );
+
             var configuration = new ConfigurationBuilder()
-                .SetBasePath(path)
+                .SetBasePath(basePath)
                 .AddJsonFile("appsettings.json", optional: false)
                 .Build();
 

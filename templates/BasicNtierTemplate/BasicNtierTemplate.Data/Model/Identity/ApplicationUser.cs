@@ -28,9 +28,7 @@ namespace BasicNtierTemplate.Data.Model.Identity
 - LockoutEnd
 - LockoutEnabled ✔️
 - AccessFailedCount ✔️
-*/
 // Also:
-/*
 - Roles
 - Claims
 */
