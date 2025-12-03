@@ -14,8 +14,8 @@ namespace BasicNtierTemplate.Data.Model
 
         [StringLength(50)]
         [Display(Name = "Office Location")]
-        public string Location { get; set; }
+        public string Location { get; set; } = string.Empty;
 
-        public Instructor Instructor { get; set; }
+        public Instructor Instructor { get; set; } = default!;
     }
 }

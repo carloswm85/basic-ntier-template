@@ -11,15 +11,19 @@ namespace BasicNtierTemplate.Data.Model
 
         [Required]
         [StringLength(50, MinimumLength = 3)]
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
 
         [Range(0, 5)]
         public int Credits { get; set; }
 
         public int DepartmentId { get; set; }
 
-        public Department Department { get; set; }
-        public ICollection<Enrollment> Enrollments { get; set; } // A course can have any number of students enrolled in it, so the Enrollments navigation property is a collection.
-        public ICollection<CourseAssignment> CourseAssignments { get; set; } // A course may be taught by multiple instructors, so the CourseAssignments navigation property is a collection.
+        public Department Department { get; set; } = default!;
+
+        // A course can have any number of students enrolled in it, so the Enrollments navigation property is a collection.
+        public ICollection<Enrollment> Enrollments { get; set; } = [];
+
+        // A course may be taught by multiple instructors, so the CourseAssignments navigation property is a collection.
+        public ICollection<CourseAssignment> CourseAssignments { get; set; } = [];
     }
 }

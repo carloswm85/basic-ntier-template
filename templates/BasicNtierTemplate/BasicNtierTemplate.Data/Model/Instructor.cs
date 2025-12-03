@@ -11,13 +11,13 @@ namespace BasicNtierTemplate.Data.Model
         [Required]
         [StringLength(50)]
         [Display(Name = "Last Name")]
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
         [Required]
         [Column("FirstName")]
         [StringLength(50)]
         [Display(Name = "First Name")]
-        public string FirstMidName { get; set; }
+        public string FirstMidName { get; set; } = string.Empty;
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -36,7 +36,7 @@ namespace BasicNtierTemplate.Data.Model
          * If you specify ICollection<T>, EF creates a HashSet<T> collection
          * by default.
          */
-        public ICollection<CourseAssignment> CourseAssignments { get; set; }
-        public OfficeAssignment OfficeAssignment { get; set; }
+        public ICollection<CourseAssignment> CourseAssignments { get; set; } = [];
+        public OfficeAssignment? OfficeAssignment { get; set; }
     }
 }

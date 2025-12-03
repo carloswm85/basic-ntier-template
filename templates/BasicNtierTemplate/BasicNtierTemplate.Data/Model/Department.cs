@@ -9,7 +9,7 @@ namespace BasicNtierTemplate.Data.Model
 
         [Required]
         [StringLength(50, MinimumLength = 3)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [DataType(DataType.Currency)]
         [Column(TypeName = "money")]
@@ -22,8 +22,8 @@ namespace BasicNtierTemplate.Data.Model
 
         public int? InstructorId { get; set; }
 
-        public Instructor Administrator { get; set; }
-        public ICollection<Course> Courses { get; set; }
+        public Instructor? Administrator { get; set; }
+        public ICollection<Course> Courses { get; set; } = [];
     }
 }
 
