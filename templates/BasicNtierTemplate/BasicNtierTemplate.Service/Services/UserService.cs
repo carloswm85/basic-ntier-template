@@ -2,6 +2,7 @@
 using BasicNtierTemplate.Data.Model.Identity;
 using BasicNtierTemplate.Service.Contracts;
 using BasicNtierTemplate.Service.Dtos;
+using BasicNtierTemplate.Service.Models;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +38,70 @@ namespace BasicNtierTemplate.Service.Services
         {
             var users = await _userManager.Users.ToListAsync();
             return _mapper.Map<IEnumerable<ApplicationUserDto>>(users);
+        }
+
+        public async Task<PaginatedList<ApplicationUserDto>> GetUsersPaginatedListAsync(
+            string currentFilter,
+            int pageIndex,
+            int pageSize,
+            string searchString,
+            string sortOrder
+        )
+        {
+            var users = _userManager.Users.AsQueryable();
+            var totalRecords = users.Count();
+
+            // PAGING
+            if (searchString != currentFilter)
+                pageIndex = 1;
+            else
+                searchString = currentFilter;
+
+            // SEARCH
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                var term = searchString.Trim().ToUpper();
+
+                users = users.Where(u =>
+                    u.LastName.ToUpper().Contains(term) ||
+                    u.FirstName.ToUpper().Contains(term)
+                );
+            }
+            var filteredCount = users.Count();
+
+            // SORTING
+            switch (sortOrder)
+            {
+                case "last_name_desc":
+                    users = users.OrderByDescending(s => s.LastName);
+                    break;
+                case "username":
+                    users = users.OrderBy(s => s.UserName);
+                    break;
+                case "username_desc":
+                    users = users.OrderByDescending(s => s.UserName);
+                    break;
+                default: // case: ""
+                    users = users.OrderBy(s => s.LastName);
+                    break;
+            }
+
+            var count = users.Count();
+            var items = users
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            var usersDto = _mapper.Map<List<ApplicationUserDto>>(items);
+
+            return new PaginatedList<ApplicationUserDto>(
+                items: usersDto,
+                count: count,
+                pageIndex: pageIndex,
+                pageSize: pageSize,
+                totalRecords: totalRecords,
+                filteredCount: filteredCount
+            );
         }
 
         public async Task<Result> CreateAsync(CreateUserRequest request)

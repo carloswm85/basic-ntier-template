@@ -1,11 +1,14 @@
 ﻿using BasicNtierTemplate.Service.Contracts;
+using BasicNtierTemplate.Service.Dtos;
 using BasicNtierTemplate.Service.Services.Interfaces;
+using BasicNtierTemplate.Web.MVC.Models;
 using BasicNtierTemplate.Web.MVC.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BasicNtierTemplate.Web.MVC.Controllers
 {
+    [Route("User")]
     public class UserController : Controller
     {
         private readonly IUserService _userService;
@@ -38,11 +41,28 @@ namespace BasicNtierTemplate.Web.MVC.Controllers
             throw new NotImplementedException();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> List()
+        [HttpGet("List")]
+        public async Task<IActionResult> List(
+            string currentFilter = "",
+            int pageIndex = 1,
+            int pageSize = 10,
+            string searchString = "",
+            string sortOrder = ""
+        )
         {
-            var users = await _userService.GetAllAsync();
-            return View(users);
+            var users = await _userService.GetUsersPaginatedListAsync(
+                currentFilter, pageIndex, pageSize, searchString, sortOrder);
+
+            var usersPaginateViewModel = new PaginatedListViewModel<ApplicationUserDto>(
+                paginatedList: users,
+                currentFilter: searchString,
+                currentSort: sortOrder,
+                sortParamOne: string.IsNullOrEmpty(sortOrder) ? "last_name_desc" : "",
+                sortParamTwo: sortOrder == "username" ? "username_desc" : "username",
+                pageSize: pageSize
+            );
+
+            return View(usersPaginateViewModel);
         }
 
         [HttpGet]
@@ -93,6 +113,12 @@ namespace BasicNtierTemplate.Web.MVC.Controllers
         public Task<bool> ExistsByEmailAsync(string email)
         {
             throw new NotImplementedException();
+        }
+
+        [HttpGet("Placeholder")]
+        public IActionResult Placeholder(Guid id)
+        {
+            return Ok("Nothing to see here");
         }
     }
 }

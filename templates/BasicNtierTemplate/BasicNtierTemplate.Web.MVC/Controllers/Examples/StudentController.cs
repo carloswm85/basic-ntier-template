@@ -35,10 +35,10 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
         {
             try
             {
-                var students = await _contosoService.GetStudentListAsync(
+                var students = await _contosoService.GetStudentsPaginatedListAsync(
                     currentFilter, pageIndex, pageSize, searchString, sortOrder);
 
-                var studentsPagedViewModel = new PaginatedListViewModel<StudentDto>(
+                var studentsPaginatedViewModel = new PaginatedListViewModel<StudentDto>(
                     paginatedList: students,
                     currentFilter: searchString,
                     currentSort: sortOrder,
@@ -47,8 +47,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
                     pageSize: pageSize
                     );
 
-                return View(studentsPagedViewModel);
-
+                return View(studentsPaginatedViewModel);
             }
             catch (Exception ex)
             {

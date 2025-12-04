@@ -54,7 +54,7 @@ namespace BasicNtierTemplate.Service.Services
             return _mapper.Map<IEnumerable<StudentDto>>(students);
         }
 
-        public async Task<PaginatedList<StudentDto>> GetStudentListAsync(
+        public async Task<PaginatedList<StudentDto>> GetStudentsPaginatedListAsync(
             string currentFilter,
             int pageIndex,
             int pageSize,

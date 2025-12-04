@@ -20,12 +20,12 @@ namespace BasicNtierTemplate.Web.MVC.Models
             int pageSize
         )
         {
-            this.PaginatedList = paginatedList;
-            this.CurrentFilter = currentFilter;
-            this.CurrentSort = currentSort;
-            this.SortParamOne = sortParamOne;
-            this.SortParamTwo = sortParamTwo;
-            this.PageSize = pageSize;
+            PaginatedList = paginatedList;
+            CurrentFilter = currentFilter;
+            CurrentSort = currentSort;
+            SortParamOne = sortParamOne;
+            SortParamTwo = sortParamTwo;
+            PageSize = pageSize;
         }
     }
 }

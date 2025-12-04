@@ -1,5 +1,6 @@
 ﻿using BasicNtierTemplate.Service.Contracts;
 using BasicNtierTemplate.Service.Dtos;
+using BasicNtierTemplate.Service.Models;
 
 namespace BasicNtierTemplate.Service.Services.Interfaces
 {
@@ -12,6 +13,11 @@ namespace BasicNtierTemplate.Service.Services.Interfaces
         Task<ApplicationUserDto?> GetByIdAsync(Guid userId);
         Task<ApplicationUserDto?> GetByEmailAsync(string email);
         Task<IEnumerable<ApplicationUserDto>> GetAllAsync();
+
+        Task<PaginatedList<ApplicationUserDto>> GetUsersPaginatedListAsync(
+            string currentFilter, int pageIndex, int pageSize,
+            string searchString, string sortOrder);
+
         Task<Result> CreateAsync(CreateUserRequest request);
         Task<Result> UpdateAsync(UpdateUserRequest request);
         Task<Result> DeleteAsync(Guid userId);

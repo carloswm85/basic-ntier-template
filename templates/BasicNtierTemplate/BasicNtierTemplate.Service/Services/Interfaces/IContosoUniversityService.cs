@@ -10,7 +10,7 @@ namespace BasicNtierTemplate.Service.Services.Interfaces
         Task<bool> DeleteStudentAsync(int studentId);
         Task<StudentDto?> GetStudentAsync(int studentId, bool asNoTracking = false);
         Task<IEnumerable<StudentDto>> GetStudentListAsync();
-        Task<PaginatedList<StudentDto>> GetStudentListAsync(
+        Task<PaginatedList<StudentDto>> GetStudentsPaginatedListAsync(
             string currentFilter, int pageIndex, int pageSize,
             string searchString, string sortOrder);
         Task<int> CreateStudentAsync(StudentDto student);
