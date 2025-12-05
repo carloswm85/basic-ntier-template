@@ -1,5 +1,6 @@
 ﻿using BasicNtierTemplate.Service.Contracts;
 using BasicNtierTemplate.Service.Dtos;
+using BasicNtierTemplate.Service.Models;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using BasicNtierTemplate.Web.MVC.Models;
 using BasicNtierTemplate.Web.MVC.Models.ViewModels;
@@ -57,8 +58,10 @@ namespace BasicNtierTemplate.Web.MVC.Controllers
                 paginatedList: users,
                 currentFilter: searchString,
                 currentSort: sortOrder,
-                sortParamOne: string.IsNullOrEmpty(sortOrder) ? "last_name_desc" : "",
-                sortParamTwo: sortOrder == "username" ? "username_desc" : "username",
+                sortColumnOne: string.IsNullOrEmpty(sortOrder)
+                    ? CurrentSort.LastNameDesc : CurrentSort.LastNameAsc,
+                sortColumnTwo: sortOrder == CurrentSort.UsernameAsc
+                    ? CurrentSort.UsernameDesc : CurrentSort.UsernameAsc,
                 pageSize: pageSize
             );
 

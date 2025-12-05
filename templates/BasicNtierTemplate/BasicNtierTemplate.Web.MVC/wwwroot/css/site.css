@@ -20,3 +20,10 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.btn-fixed {
+    min-width: 80px;
+    max-width: 80px;
+    white-space: nowrap;
+    text-align: center;
+}

@@ -72,16 +72,16 @@ namespace BasicNtierTemplate.Service.Services
             // SORTING
             switch (sortOrder)
             {
-                case "last_name_desc":
+                case CurrentSort.LastNameDesc:
                     users = users.OrderByDescending(s => s.LastName);
                     break;
-                case "username":
+                case CurrentSort.UsernameAsc:
                     users = users.OrderBy(s => s.UserName);
                     break;
-                case "username_desc":
+                case CurrentSort.UsernameDesc:
                     users = users.OrderByDescending(s => s.UserName);
                     break;
-                default: // case: ""
+                default:
                     users = users.OrderBy(s => s.LastName);
                     break;
             }
