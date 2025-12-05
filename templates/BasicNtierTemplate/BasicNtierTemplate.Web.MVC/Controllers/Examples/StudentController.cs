@@ -1,5 +1,6 @@
 ﻿using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Service.Dtos;
+using BasicNtierTemplate.Service.Models;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using BasicNtierTemplate.Web.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -42,10 +43,12 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
                     paginatedList: students,
                     currentFilter: searchString,
                     currentSort: sortOrder,
-                    sortParamOne: sortOrder == "Date" ? "date_desc" : "Date", // by date
-                    sortParamTwo: string.IsNullOrEmpty(sortOrder) ? "name_desc" : "", // by last name
+                    sortColumnOne: string.IsNullOrEmpty(sortOrder)
+                        ? CurrentSort.LastNameDesc : CurrentSort.LastNameAsc,
+                    sortColumnTwo: sortOrder == CurrentSort.DateAsc
+                        ? CurrentSort.DateDesc : CurrentSort.DateAsc,
                     pageSize: pageSize
-                    );
+                );
 
                 return View(studentsPaginatedViewModel);
             }
