@@ -2,6 +2,7 @@
 using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Repository;
 using BasicNtierTemplate.Service.Dtos;
+using BasicNtierTemplate.Service.Enums;
 using BasicNtierTemplate.Service.Models;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -59,7 +60,7 @@ namespace BasicNtierTemplate.Service.Services
             int pageIndex,
             int pageSize,
             string searchString,
-            string sortOrder
+            CurrentSort currentSort
         )
         {
             var students = await _uow.StudentRepository.GetAllAsync();
@@ -84,21 +85,20 @@ namespace BasicNtierTemplate.Service.Services
             var filteredCount = students.Count();
 
             // SORTING
-            switch (sortOrder)
+            students = currentSort.SortParameter switch
             {
-                case "name_desc":
-                    students = students.OrderByDescending(s => s.LastName);
-                    break;
-                case "Date":
-                    students = students.OrderBy(s => s.EnrollmentDate);
-                    break;
-                case "date_desc":
-                    students = students.OrderByDescending(s => s.EnrollmentDate);
-                    break;
-                default:
-                    students = students.OrderBy(s => s.LastName);
-                    break;
-            }
+                SortParameter.Surname =>
+                    currentSort.SortOrder == SortOrder.Descending
+                        ? students.OrderByDescending(s => s.LastName)
+                        : students.OrderBy(s => s.LastName),
+
+                SortParameter.Date =>
+                    currentSort.SortOrder == SortOrder.Descending
+                        ? students.OrderByDescending(s => s.EnrollmentDate)
+                        : students.OrderBy(s => s.EnrollmentDate),
+
+                _ => students // default to
+            };
 
             var count = students.Count();
             var items = students

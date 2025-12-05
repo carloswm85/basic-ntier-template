@@ -1,5 +1,6 @@
 ﻿using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Service.Dtos;
+using BasicNtierTemplate.Service.Enums;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using BasicNtierTemplate.Web.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -30,22 +31,22 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             int pageIndex = 1,
             int pageSize = 10,
             string searchString = "",
-            string sortOrder = ""
+            CurrentSort currentSort = default!
         )
         {
             try
             {
                 var students = await _contosoService.GetStudentListAsync(
-                    currentFilter, pageIndex, pageSize, searchString, sortOrder);
+                    currentFilter, pageIndex, pageSize, searchString, currentSort);
 
                 var studentsPagedViewModel = new PaginatedListViewModel<StudentDto>(
                     paginatedList: students,
                     currentFilter: searchString,
-                    currentSort: sortOrder,
-                    sortParamOne: sortOrder == "Date" ? "date_desc" : "Date", // by date
-                    sortParamTwo: string.IsNullOrEmpty(sortOrder) ? "name_desc" : "", // by last name
-                    pageSize: pageSize
-                    );
+                    pageSize: pageSize,
+                    currentSortCombination: currentSort,
+                    sortColumnOne: currentSort,
+                    sortColumnTwo: currentSort
+                );
 
                 return View(studentsPagedViewModel);
 

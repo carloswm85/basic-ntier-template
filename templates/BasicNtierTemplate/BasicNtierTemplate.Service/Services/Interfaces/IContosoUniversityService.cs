@@ -1,4 +1,5 @@
 ﻿using BasicNtierTemplate.Service.Dtos;
+using BasicNtierTemplate.Service.Enums;
 using BasicNtierTemplate.Service.Models;
 
 namespace BasicNtierTemplate.Service.Services.Interfaces
@@ -12,7 +13,7 @@ namespace BasicNtierTemplate.Service.Services.Interfaces
         Task<IEnumerable<StudentDto>> GetStudentListAsync();
         Task<PaginatedList<StudentDto>> GetStudentListAsync(
             string currentFilter, int pageIndex, int pageSize,
-            string searchString, string sortOrder);
+            string searchString, CurrentSort currentSort);
         Task<int> CreateStudentAsync(StudentDto student);
         bool StudentExists(int studentId);
         bool StudentExists(string governmentId);

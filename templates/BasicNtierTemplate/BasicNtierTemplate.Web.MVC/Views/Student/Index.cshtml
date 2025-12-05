@@ -1,4 +1,5 @@
-﻿@using BasicNtierTemplate.Web.MVC.Models
+﻿@using BasicNtierTemplate.Service.Enums
+@using BasicNtierTemplate.Web.MVC.Models
 
 @model PaginatedListViewModel<BasicNtierTemplate.Service.Dtos.StudentDto>
 
@@ -40,7 +41,7 @@
                         pageIndex = 1,
                         pageSize = size,
                         searchString = Model.CurrentFilter,
-                        sortOrder = Model.CurrentSort,
+                        currentSort = Model.CurrentSortCombination
                     });
 
                     if (Model.PageSize == size)
@@ -60,7 +61,7 @@
             <div class="row g-2 align-items-end">
                 <div class="col-auto">
                     <div class="input-group">
-                        <input type="hidden" name="sortOrder" value="@Model.CurrentSort" />
+                        <input type="hidden" name="currentSort" value="@Model.CurrentSortCombination" />
                         <input type="hidden" name="pageIndex" value="1" /> <!-- reset to page 1 on search -->
                         <input type="hidden" name="pageSize" value="@Model.PageSize" />
                         <input type="text"
@@ -75,7 +76,7 @@
                         @if (!string.IsNullOrEmpty(Convert.ToString(Model.CurrentFilter)))
                         {
                             <a asp-action="Index"
-                               asp-route-sortOrder="@Model.CurrentSort"
+                               asp-route-currentSort="@Model.CurrentSortCombination"
                                asp-route-pageIndex="@(Model.PaginatedList.PageIndex)"
                                asp-route-currentFilter=""
                                asp-route-pageSize="@Model.PageSize"
@@ -122,7 +123,7 @@
                             <tr>
                                 <th>
                                     <a asp-action="Index"
-                                       asp-route-sortOrder="@Model.SortParamTwo"
+                                       asp-route-currentSort="@(new CurrentSort(SortParameter.Surname, Model.SortColumnTwo.SortOrder == SortOrder.Ascending ? SortOrder.Ascending : SortOrder.Descending))"
                                        asp-route-pageIndex="@(Model.PaginatedList.PageIndex)"
                                        asp-route-currentFilter="@Model.CurrentFilter"
                                        asp-route-searchString="@Model.CurrentFilter"
@@ -137,7 +138,7 @@
 
                                 <th>
                                     <a asp-action="Index"
-                                       asp-route-sortOrder="@Model.SortParamOne"
+                                       asp-route-sortOrder="@Model.SortColumnTwo"
                                        asp-route-pageIndex="@(Model.PaginatedList.PageIndex)"
                                        asp-route-currentFilter="@Model.CurrentFilter"
                                        asp-route-searchString="@Model.CurrentFilter"
@@ -209,7 +210,7 @@
                     <li class="page-item @(Model.PaginatedList.PageIndex == 1 ? "disabled" : "")">
                         <a class="page-link"
                            asp-action="Index"
-                           asp-route-sortOrder="@Model.CurrentSort"
+                           asp-route-currentSort="@Model.CurrentSortCombination"
                            asp-route-pageIndex="1"
                            asp-route-currentFilter="@Model.CurrentFilter"
                            asp-route-searchString="@Model.CurrentFilter"
@@ -221,7 +222,7 @@
                     <li class="page-item @(Model.PaginatedList.HasPreviousPage ? "" : "disabled")">
                         <a class="page-link"
                            asp-action="Index"
-                           asp-route-sortOrder="@Model.CurrentSort"
+                           asp-route-currentSort="@Model.CurrentSortCombination"
                            asp-route-pageIndex="@(Model.PaginatedList.PageIndex - 1)"
                            asp-route-currentFilter="@Model.CurrentFilter"
                            asp-route-searchString="@Model.CurrentFilter"
@@ -239,7 +240,7 @@
                     <li class="page-item @(Model.PaginatedList.HasNextPage ? "" : "disabled")">
                         <a class="page-link"
                            asp-action="Index"
-                           asp-route-sortOrder="@Model.CurrentSort"
+                           asp-route-currentSort="@Model.CurrentSortCombination"
                            asp-route-pageIndex="@(Model.PaginatedList.PageIndex + 1)"
                            asp-route-currentFilter="@Model.CurrentFilter"
                            asp-route-searchString="@Model.CurrentFilter"
@@ -252,7 +253,7 @@
                             @(Model.PaginatedList.PageIndex == Model.PaginatedList.TotalPages ? "disabled" : "")">
                         <a class="page-link"
                            asp-action="Index"
-                           asp-route-sortOrder="@Model.CurrentSort"
+                           asp-route-currentSort="@Model.CurrentSortCombination"
                            asp-route-pageIndex="@Model.PaginatedList.TotalPages"
                            asp-route-currentFilter="@Model.CurrentFilter"
                            asp-route-searchString="@Model.CurrentFilter"
