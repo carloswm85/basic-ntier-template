@@ -86,13 +86,13 @@ namespace BasicNtierTemplate.Service.Services
             // SORTING
             switch (sortOrder)
             {
-                case "name_desc":
+                case CurrentSort.LastNameDesc:
                     students = students.OrderByDescending(s => s.LastName);
                     break;
-                case "Date":
+                case CurrentSort.DateAsc:
                     students = students.OrderBy(s => s.EnrollmentDate);
                     break;
-                case "date_desc":
+                case CurrentSort.DateDesc:
                     students = students.OrderByDescending(s => s.EnrollmentDate);
                     break;
                 default:

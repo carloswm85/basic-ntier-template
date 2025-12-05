@@ -122,7 +122,7 @@
                             <tr>
                                 <th>
                                     <a asp-action="Index"
-                                       asp-route-sortOrder="@Model.SortParamTwo"
+                                       asp-route-sortOrder="@Model.SortColumnOne"
                                        asp-route-pageIndex="@(Model.PaginatedList.PageIndex)"
                                        asp-route-currentFilter="@Model.CurrentFilter"
                                        asp-route-searchString="@Model.CurrentFilter"
@@ -137,7 +137,7 @@
 
                                 <th>
                                     <a asp-action="Index"
-                                       asp-route-sortOrder="@Model.SortParamOne"
+                                       asp-route-sortOrder="@Model.SortColumnTwo"
                                        asp-route-pageIndex="@(Model.PaginatedList.PageIndex)"
                                        asp-route-currentFilter="@Model.CurrentFilter"
                                        asp-route-searchString="@Model.CurrentFilter"
