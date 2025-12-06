@@ -22,12 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BasicNtierTemplate.Data\BasicNtierTemplate.Data.csproj" />
-    <ProjectReference Include="..\BasicNtierTemplate.Repository\BasicNtierTemplate.Repository.csproj" />
+    <PackageReference Include="AutoMapper" Version="15.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="15.0.1" />
+    <ProjectReference Include="..\BasicNtierTemplate.Data\BasicNtierTemplate.Data.csproj" />
+    <ProjectReference Include="..\BasicNtierTemplate.Repository\BasicNtierTemplate.Repository.csproj" />
   </ItemGroup>
 
 </Project>

@@ -150,12 +150,18 @@
                                 <th class="text-end">Actions</th>
                             </tr>
                         </thead>
+                        @{
+                            int rowNumber = 1;
 
+                        }
                         <tbody>
                             @foreach (var item in Model.PaginatedList)
                             {
                                 <tr>
-                                    <th>1</th>
+                                    <th>@{
+                                            <span>@rowNumber</span>
+                                            rowNumber++;
+                                        }</th>
                                     <td>@item.LastName</td>
                                     <td>@item.FirstName</td>
                                     <td>@item.UserName</td>
@@ -170,15 +176,15 @@
                                         </span>
                                     </td>
                                     <td class="d-flex flex-row">
-                                        <a asp-action="Placeholder" asp-route-id="@item.Id"
+                                        <a asp-action="Edit" asp-route-id="@item.Id"
                                            class="btn btn-sm btn-outline-primary btn-fixed me-1 ms-auto">
                                             <i class="bi bi-pencil-square"></i> Edit
                                         </a>
-                                        <a asp-action="Placeholder" asp-route-id="@item.Id"
+                                        <a asp-action="Details" asp-route-id="@item.Id"
                                            class="btn btn-sm btn-outline-info btn-fixed me-1">
                                             <i class="bi bi-eye"></i> Details
                                         </a>
-                                        <a asp-action="Placeholder" asp-route-id="@item.Id"
+                                        <a asp-action="Delete" asp-route-id="@item.Id"
                                            class="btn btn-sm btn-outline-danger btn-fixed">
                                             <i class="bi bi-trash"></i> Delete
                                         </a>

@@ -6,6 +6,7 @@ using BasicNtierTemplate.Repository;
 using BasicNtierTemplate.Service.Mappings;
 using BasicNtierTemplate.Service.Services;
 using BasicNtierTemplate.Service.Services.Interfaces;
+using BasicNtierTemplate.Web.MVC.Mappings;
 using BasicNtierTemplate.Web.MVC.Services;
 using BasicNtierTemplate.Web.MVC.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -94,7 +95,7 @@ namespace BasicNtierTemplate.Web.MVC
 
                 builder.Services.AddAutoMapper(
                     cfg => { },
-                    typeof(StudentProfile).Assembly,
+                    typeof(UserProfile).Assembly,
                     typeof(CourseProfile).Assembly,
                     typeof(EnrollmentProfile).Assembly
                 );

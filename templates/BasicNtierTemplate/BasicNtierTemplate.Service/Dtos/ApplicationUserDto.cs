@@ -8,10 +8,9 @@
         public string UserName { get; set; } = default!;
         public string FirstName { get; set; } = default!;
         public string LastName { get; set; } = default!;
-        public string FullName => $"{FirstName} {LastName}";
         public string City { get; set; } = default!;
 
-        public string? Email { get; set; }
+        public string Email { get; set; } = default!;
         public bool EmailConfirmed { get; set; }
         public bool IsActive { get; set; }
 

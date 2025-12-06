@@ -10,19 +10,20 @@ namespace BasicNtierTemplate.Service.Services.Interfaces
     /// </summary>
     public interface IUserService
     {
-        Task<ApplicationUserDto?> GetByIdAsync(Guid userId);
-        Task<ApplicationUserDto?> GetByEmailAsync(string email);
-        Task<IEnumerable<ApplicationUserDto>> GetAllAsync();
+        Task<ApplicationUserDto?> GetUserByIdAsync(string userId);
+        Task<ApplicationUserDto?> GetUserByEmailAsync(string email);
+        Task<IEnumerable<ApplicationUserDto>> GetAllUsersAsync();
 
         Task<PaginatedList<ApplicationUserDto>> GetUsersPaginatedListAsync(
             string currentFilter, int pageIndex, int pageSize,
             string searchString, string sortOrder);
 
-        Task<Result> CreateAsync(CreateUserRequest request);
-        Task<Result> UpdateAsync(UpdateUserRequest request);
-        Task<Result> DeleteAsync(Guid userId);
-        Task<Result> ActivateAsync(Guid userId);
-        Task<Result> DeactivateAsync(Guid userId);
-        Task<bool> ExistsByEmailAsync(string email);
+        Task<OperationResult> CreateUserAsync(CreateUserCommand request);
+        Task<OperationResult> UpdateUserAsync(UpdateUserRequest request);
+        Task<OperationResult> UpdateUserAsync(ApplicationUserDto userDto);
+        Task<OperationResult> DeleteUserAsync(string userId);
+        Task<OperationResult> ActivateUserAsync(string userId);
+        Task<OperationResult> DeactivateUserAsync(string userId);
+        Task<bool> ExistsUserByEmailAsync(string email);
     }
 }

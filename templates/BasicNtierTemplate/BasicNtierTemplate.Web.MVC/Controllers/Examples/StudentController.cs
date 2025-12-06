@@ -24,7 +24,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             _contosoService = contosoService;
         }
 
-        // GET: /student/students
+        // GET: /Student/List
         [HttpGet("List")]
         public async Task<IActionResult> Index(
             string currentFilter = "",
@@ -60,8 +60,8 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
 
         }
 
-        // GET: /student/details/5
-        [HttpGet("details/{id:int}")]
+        // GET: /Student/Details/5
+        [HttpGet("Details/{id:int}")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -75,19 +75,19 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             return View(student);
         }
 
-        // GET: /student/create
+        // GET: /Student/Create
         [AllowAnonymous]
-        [HttpGet("create")]
+        [HttpGet("Create")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: /student/create
+        // POST: /Student/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         // In this method: Use entity classes with model binding instead of view models.
-        [HttpPost("create")]
+        [HttpPost("Create")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,LastName,FirstMidName,GovernmentId,EnrollmentDate")] StudentDto student)
         {
@@ -109,8 +109,8 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             }
         }
 
-        // GET: /student/edit/5
-        [HttpGet("edit/{id:int}")]
+        // GET: /Student/Edit/5
+        [HttpGet("Edit/{id:int}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -126,8 +126,8 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
 
         // To protect from overposting attacks, enable the specific properties
         // you want to bind to.
-        // POST: /student/edit/5
-        [HttpPost("edit/{id:int}")]
+        // POST: /Student/Edit/5
+        [HttpPost("Edit/{id:int}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int Id, [Bind("Id,LastName,FirstMidName,GovernmentId,EnrollmentDate")] StudentDto studentDto)
         {
@@ -147,22 +147,21 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
                 if (!_contosoService.StudentExists(studentDto.Id))
                     return NotFound();
 
-                _logger.LogWarning(ex, "Concurrency conflict while updating student ID {StudentId}.", studentDto.Id);
+                _logger.LogWarning(ex, "Concurrency conflict while updating student ID {0}.", studentDto.Id);
                 ModelState.AddModelError("", "The record you attempted to edit was modified by another user.");
                 return View(studentDto);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while editing the student with ID {StudentId}.", studentDto.Id);
+                _logger.LogError(ex, "An error occurred while editing the student with ID {0}.", studentDto.Id);
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, contact your system administrator.");
                 return View(studentDto);
             }
         }
 
-
-        // GET: /student/delete/5
+        // GET: /Student/Delete/5
         // Display student before deletion.
-        [HttpGet("delete/{id:int}")]
+        [HttpGet("Delete/{id:int}")]
         public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
@@ -182,8 +181,8 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             return View(student);
         }
 
-        // POST: /student/delete/5
-        [HttpPost("delete/{id:int}")]
+        // POST: /Student/Delete/5
+        [HttpPost("Delete/{id:int}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
@@ -199,7 +198,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogError(ex, "An error occurred while deleting the student with ID {StudentId}.", id);
+                _logger.LogError(ex, "An error occurred while deleting the student with ID {0}.", id);
                 return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
             }
 
@@ -215,8 +214,8 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
          */
 
         // Example, unused
-        // PUT: /student/student/5
-        [HttpPut("student/{id}")]
+        // PUT: /Student/Student/5
+        [HttpPut("Student/{id}")]
         public async Task<IActionResult> UpdateStudent(int id, [FromBody] Student student)
         {
             if (id != student.Id)

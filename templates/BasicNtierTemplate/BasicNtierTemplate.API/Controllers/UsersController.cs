@@ -44,7 +44,7 @@ namespace BasicNtierTemplate.API.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<IEnumerable<ApplicationUserDto>>> GetAll()
         {
-            var users = await _userService.GetAllAsync();
+            var users = await _userService.GetAllUsersAsync();
             return Ok(users);
         }
 
@@ -57,7 +57,7 @@ namespace BasicNtierTemplate.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ApplicationUserDto>> GetById(Guid userId)
         {
-            var user = await _userService.GetByIdAsync(userId);
+            var user = await _userService.GetUserByIdAsync(userId.ToString());
 
             if (user == null)
                 return NotFound(new { message = "User not found" });
@@ -76,7 +76,7 @@ namespace BasicNtierTemplate.API.Controllers
             if (string.IsNullOrWhiteSpace(email))
                 return BadRequest(new { message = "Email is required" });
 
-            var user = await _userService.GetByEmailAsync(email);
+            var user = await _userService.GetUserByEmailAsync(email);
 
             if (user == null)
                 return NotFound(new { message = "User not found" });
@@ -94,7 +94,7 @@ namespace BasicNtierTemplate.API.Controllers
             if (string.IsNullOrWhiteSpace(email))
                 return BadRequest(new { message = "Email is required" });
 
-            var exists = await _userService.ExistsByEmailAsync(email);
+            var exists = await _userService.ExistsUserByEmailAsync(email);
             return Ok(exists);
         }
 
@@ -104,9 +104,9 @@ namespace BasicNtierTemplate.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> Create([FromBody] CreateUserRequest request)
+        public async Task<ActionResult> Create([FromBody] CreateUserCommand request)
         {
-            var result = await _userService.CreateAsync(request);
+            var result = await _userService.CreateUserAsync(request);
 
             if (!result.IsSuccess)
                 return BadRequest(result);
@@ -131,7 +131,7 @@ namespace BasicNtierTemplate.API.Controllers
             // Ensure the userId in the route matches the request (if applicable)
             // This depends on your UpdateUserRequest structure
 
-            var result = await _userService.UpdateAsync(request);
+            var result = await _userService.UpdateUserAsync(request);
 
             if (!result.IsSuccess)
                 return BadRequest(result);
@@ -148,7 +148,7 @@ namespace BasicNtierTemplate.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> Delete(Guid userId)
         {
-            var result = await _userService.DeleteAsync(userId);
+            var result = await _userService.DeleteUserAsync(userId.ToString());
 
             if (!result.IsSuccess)
                 return BadRequest(result);
@@ -165,7 +165,7 @@ namespace BasicNtierTemplate.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> Activate(Guid userId)
         {
-            var result = await _userService.ActivateAsync(userId);
+            var result = await _userService.ActivateUserAsync(userId.ToString());
 
             if (!result.IsSuccess)
                 return BadRequest(result);
@@ -182,7 +182,7 @@ namespace BasicNtierTemplate.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> Deactivate(Guid userId)
         {
-            var result = await _userService.DeactivateAsync(userId);
+            var result = await _userService.DeactivateUserAsync(userId.ToString());
 
             if (!result.IsSuccess)
                 return BadRequest(result);

@@ -20,21 +20,21 @@ namespace BasicNtierTemplate.Service.Services
             _mapper = mapper;
         }
 
-        public async Task<ApplicationUserDto?> GetByIdAsync(Guid userId)
+        public async Task<ApplicationUserDto?> GetUserByIdAsync(string userId)
         {
             var user = await _userManager.Users
-                .FirstOrDefaultAsync(u => u.Id == userId.ToString());
+                .FirstOrDefaultAsync(u => u.Id == userId);
 
             return user is null ? null : _mapper.Map<ApplicationUserDto>(user);
         }
 
-        public async Task<ApplicationUserDto?> GetByEmailAsync(string email)
+        public async Task<ApplicationUserDto?> GetUserByEmailAsync(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
             return user is null ? null : _mapper.Map<ApplicationUserDto>(user);
         }
 
-        public async Task<IEnumerable<ApplicationUserDto>> GetAllAsync()
+        public async Task<IEnumerable<ApplicationUserDto>> GetAllUsersAsync()
         {
             var users = await _userManager.Users.ToListAsync();
             return _mapper.Map<IEnumerable<ApplicationUserDto>>(users);
@@ -104,10 +104,10 @@ namespace BasicNtierTemplate.Service.Services
             );
         }
 
-        public async Task<Result> CreateAsync(CreateUserRequest request)
+        public async Task<OperationResult> CreateUserAsync(CreateUserCommand request)
         {
-            if (await ExistsByEmailAsync(request.Email))
-                return Result.Fail("A user with this email already exists.");
+            if (await ExistsUserByEmailAsync(request.Email))
+                return OperationResult.Fail("A user with this email already exists.");
 
             var user = new ApplicationUser
             {
@@ -118,19 +118,19 @@ namespace BasicNtierTemplate.Service.Services
                 UserName = request.UserName
             };
 
-            var result = await _userManager.CreateAsync(user, request.Password);
+            var result = await _userManager.CreateAsync(user);
 
             if (!result.Succeeded)
-                return Result.Fail(string.Join("; ", result.Errors.Select(e => e.Description)));
+                return OperationResult.Fail(string.Join("; ", result.Errors.Select(e => e.Description)));
 
-            return Result.Ok(data: user.Id);
+            return OperationResult.Ok(data: user.Id);
         }
 
-        public async Task<Result> UpdateAsync(UpdateUserRequest request)
+        public async Task<OperationResult> UpdateUserAsync(UpdateUserRequest request)
         {
             var user = await _userManager.FindByIdAsync(request.Id.ToString());
             if (user == null)
-                return Result.Fail("User not found.");
+                return OperationResult.Fail("User not found.");
 
             if (!string.IsNullOrWhiteSpace(request.Email))
                 user.Email = request.Email;
@@ -140,7 +140,7 @@ namespace BasicNtierTemplate.Service.Services
 
             var updateResult = await _userManager.UpdateAsync(user);
             if (!updateResult.Succeeded)
-                return Result.Fail(string.Join("; ", updateResult.Errors.Select(e => e.Description)));
+                return OperationResult.Fail(string.Join("; ", updateResult.Errors.Select(e => e.Description)));
 
             if (!string.IsNullOrWhiteSpace(request.Password))
             {
@@ -148,58 +148,97 @@ namespace BasicNtierTemplate.Service.Services
                 var passResult = await _userManager.ResetPasswordAsync(user, token, request.Password);
 
                 if (!passResult.Succeeded)
-                    return Result.Fail(string.Join("; ", passResult.Errors.Select(e => e.Description)));
+                    return OperationResult.Fail(string.Join("; ", passResult.Errors.Select(e => e.Description)));
             }
 
-            return Result.Ok(data: user.Id);
+            return OperationResult.Ok(data: user.Id);
         }
 
-        public async Task<Result> DeleteAsync(Guid userId)
+        public async Task<OperationResult> UpdateUserAsync(ApplicationUserDto userDto)
         {
-            var user = await _userManager.FindByIdAsync(userId.ToString());
+            var user = await _userManager.FindByIdAsync(userDto.Id.ToString());
             if (user == null)
-                return Result.Fail("User not found.");
+                return OperationResult.Fail("User not found.");
+
+            var errors = new List<IdentityError>();
+
+            if (!string.IsNullOrWhiteSpace(userDto.Email) && user.Email != userDto.Email)
+            {
+                var result = await _userManager.SetEmailAsync(user, userDto.Email);
+                if (!result.Succeeded)
+                    errors.AddRange(result.Errors);
+            }
+
+            if (!string.IsNullOrWhiteSpace(userDto.UserName) && user.UserName != userDto.UserName)
+            {
+                var result = await _userManager.SetUserNameAsync(user, userDto.UserName);
+                if (!result.Succeeded)
+                    errors.AddRange(result.Errors);
+            }
+
+            if (errors.Any())
+                return OperationResult.Fail(string.Join("; ", errors.Select(e => e.Description)));
+
+            user.City = userDto.City;
+            user.FirstName = userDto.FirstName;
+            user.LastName = userDto.LastName;
+
+            var updateResult = await _userManager.UpdateAsync(user);
+
+
+            if (!updateResult.Succeeded)
+                return OperationResult.Fail(string.Join("; ", updateResult.Errors.Select(e => e.Description)));
+
+            return OperationResult.Ok(data: user.Id);
+        }
+
+
+        public async Task<OperationResult> DeleteUserAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+                return OperationResult.Fail("User not found.");
 
             var result = await _userManager.DeleteAsync(user);
             return result.Succeeded
-                ? Result.Ok(data: user.Id)
-                : Result.Fail(string.Join("; ", result.Errors.Select(e => e.Description)));
+                ? OperationResult.Ok(data: user.Id)
+                : OperationResult.Fail(string.Join("; ", result.Errors.Select(e => e.Description)));
         }
 
-        public async Task<Result> ActivateAsync(Guid userId)
+        public async Task<OperationResult> ActivateUserAsync(string userId)
         {
-            var user = await _userManager.FindByIdAsync(userId.ToString());
+            var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
-                return Result.Fail("User not found.");
+                return OperationResult.Fail("User not found.");
 
             // Example: custom IsActive field on ApplicationUser (extend IdentityUser)
             if (user is IActivatable activatable)
             {
                 activatable.IsActive = true;
                 await _userManager.UpdateAsync(user);
-                return Result.Ok(data: user.Id);
+                return OperationResult.Ok(data: user.Id);
             }
 
-            return Result.Fail("User model does not support activation.");
+            return OperationResult.Fail("User model does not support activation.");
         }
 
-        public async Task<Result> DeactivateAsync(Guid userId)
+        public async Task<OperationResult> DeactivateUserAsync(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());
             if (user == null)
-                return Result.Fail("User not found.");
+                return OperationResult.Fail("User not found.");
 
             if (user is IActivatable activatable)
             {
                 activatable.IsActive = false;
                 await _userManager.UpdateAsync(user);
-                return Result.Ok(data: user.Id);
+                return OperationResult.Ok(data: user.Id);
             }
 
-            return Result.Fail("User model does not support deactivation.");
+            return OperationResult.Fail("User model does not support deactivation.");
         }
 
-        public async Task<bool> ExistsByEmailAsync(string email)
+        public async Task<bool> ExistsUserByEmailAsync(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
             return user != null;
