@@ -1,4 +1,4 @@
-﻿@model BasicNtierTemplate.Service.Dtos.StudentDto
+﻿@model BasicNtierTemplate.Service.Dtos.Contoso.StudentDto
 
 @{
     ViewData["Title"] = "Create Student";
@@ -52,9 +52,3 @@
         </div>
     </div>
 </div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}

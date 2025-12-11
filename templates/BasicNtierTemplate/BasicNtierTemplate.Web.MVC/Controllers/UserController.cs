@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BasicNtierTemplate.Service.Contracts;
-using BasicNtierTemplate.Service.Dtos;
+using BasicNtierTemplate.Service.Dtos.User;
 using BasicNtierTemplate.Service.Models;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using BasicNtierTemplate.Web.MVC.Models;
@@ -44,7 +44,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers
             var users = await _userService.GetUsersPaginatedListAsync(
                 currentFilter, pageIndex, pageSize, searchString, sortOrder);
 
-            var usersPaginateViewModel = new PaginatedListViewModel<ApplicationUserDto>(
+            var usersPaginateViewModel = new PaginatedListViewModel<ListedApplicationUserDto>(
                 paginatedList: users,
                 currentFilter: searchString,
                 currentSort: sortOrder,
@@ -190,7 +190,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers
             if (!ModelState.IsValid)
                 return View(userVm);
 
-            var newUser = _mapper.Map<CreateUserCommand>(userVm);
+            var newUser = _mapper.Map<CreateUserRequest>(userVm);
 
             try
             {

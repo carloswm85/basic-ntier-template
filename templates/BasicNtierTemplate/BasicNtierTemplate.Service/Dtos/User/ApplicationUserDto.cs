@@ -1,4 +1,4 @@
-﻿namespace BasicNtierTemplate.Service.Dtos
+﻿namespace BasicNtierTemplate.Service.Dtos.User
 {
     public class ApplicationUserDto
     {

@@ -1,5 +1,5 @@
 ﻿using BasicNtierTemplate.Data.Model;
-using BasicNtierTemplate.Service.Dtos;
+using BasicNtierTemplate.Service.Dtos.Contoso;
 using BasicNtierTemplate.Service.Models;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using BasicNtierTemplate.Web.MVC.Models;

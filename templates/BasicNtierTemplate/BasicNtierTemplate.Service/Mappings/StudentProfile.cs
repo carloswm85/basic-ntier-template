@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BasicNtierTemplate.Data.Model;
-using BasicNtierTemplate.Service.Dtos;
+using BasicNtierTemplate.Service.Dtos.Contoso;
 
 namespace BasicNtierTemplate.Service.Mappings
 {

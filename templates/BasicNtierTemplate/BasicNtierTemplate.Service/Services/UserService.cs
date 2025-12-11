@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BasicNtierTemplate.Data.Model.Identity;
 using BasicNtierTemplate.Service.Contracts;
-using BasicNtierTemplate.Service.Dtos;
+using BasicNtierTemplate.Service.Dtos.User;
 using BasicNtierTemplate.Service.Models;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -40,7 +40,7 @@ namespace BasicNtierTemplate.Service.Services
             return _mapper.Map<IEnumerable<ApplicationUserDto>>(users);
         }
 
-        public async Task<PaginatedList<ApplicationUserDto>> GetUsersPaginatedListAsync(
+        public async Task<PaginatedList<ListedApplicationUserDto>> GetUsersPaginatedListAsync(
             string currentFilter,
             int pageIndex,
             int pageSize,
@@ -92,9 +92,9 @@ namespace BasicNtierTemplate.Service.Services
                 .Take(pageSize)
                 .ToList();
 
-            var usersDto = _mapper.Map<List<ApplicationUserDto>>(items);
+            var usersDto = _mapper.Map<List<ListedApplicationUserDto>>(items);
 
-            return new PaginatedList<ApplicationUserDto>(
+            return new PaginatedList<ListedApplicationUserDto>(
                 items: usersDto,
                 count: count,
                 pageIndex: pageIndex,
@@ -104,7 +104,7 @@ namespace BasicNtierTemplate.Service.Services
             );
         }
 
-        public async Task<OperationResult> CreateUserAsync(CreateUserCommand request)
+        public async Task<OperationResult> CreateUserAsync(CreateUserRequest request)
         {
             if (await ExistsUserByEmailAsync(request.Email))
                 return OperationResult.Fail("A user with this email already exists.");

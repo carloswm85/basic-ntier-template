@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Repository;
-using BasicNtierTemplate.Service.Dtos;
+using BasicNtierTemplate.Service.Dtos.Contoso;
 using BasicNtierTemplate.Service.Models;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;

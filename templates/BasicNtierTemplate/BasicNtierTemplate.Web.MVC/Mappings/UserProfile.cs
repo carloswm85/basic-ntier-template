@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using BasicNtierTemplate.Service.Contracts;
-using BasicNtierTemplate.Service.Dtos;
+using BasicNtierTemplate.Service.Dtos.User;
 using BasicNtierTemplate.Web.MVC.Models.ViewModels;
 
 namespace BasicNtierTemplate.Web.MVC.Mappings
@@ -10,7 +9,6 @@ namespace BasicNtierTemplate.Web.MVC.Mappings
         public UserProfile()
         {
             CreateMap<ApplicationUserDto, UserViewModel>().ReverseMap();
-            CreateMap<UserViewModel, CreateUserCommand>().ReverseMap();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using BasicNtierTemplate.Data.Enums;
 
-namespace BasicNtierTemplate.Service.Dtos
+namespace BasicNtierTemplate.Service.Dtos.Contoso
 {
     public class EnrollmentDto
     {

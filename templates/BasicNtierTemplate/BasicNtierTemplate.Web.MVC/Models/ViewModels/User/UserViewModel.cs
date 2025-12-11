@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using BasicNtierTemplate.Service.Dtos;
+using BasicNtierTemplate.Service.Dtos.User;
 using BasicNtierTemplate.Web.MVC.Models.ViewModels;
 
 namespace BasicNtierTemplate.Web.MVC.Models.ViewModels
@@ -26,7 +26,7 @@ namespace BasicNtierTemplate.Web.MVC.Models.ViewModels
 
         [Display(Name = "Full Name")]
         [StringLength(200)]
-        public string? FullName { get; set; }
+        public string? FullName => $"{FirstName} {LastName}";
 
         [Required]
         [Display(Name = "City")]
@@ -85,7 +85,6 @@ public static class UserExtensions
         {
             Id = user.Id,
             UserName = user.UserName!,
-            FullName = $"{user.FirstName} {user.LastName}".Trim(),
             Email = user.Email,
             EmailConfirmed = user.EmailConfirmed,
             PhoneNumber = user.PhoneNumber,

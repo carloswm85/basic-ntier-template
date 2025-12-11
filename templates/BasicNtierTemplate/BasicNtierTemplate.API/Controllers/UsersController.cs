@@ -1,5 +1,5 @@
 ﻿using BasicNtierTemplate.Service.Contracts;
-using BasicNtierTemplate.Service.Dtos;
+using BasicNtierTemplate.Service.Dtos.User;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -104,7 +104,7 @@ namespace BasicNtierTemplate.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> Create([FromBody] CreateUserCommand request)
+        public async Task<ActionResult> Create([FromBody] CreateUserRequest request)
         {
             var result = await _userService.CreateUserAsync(request);
 

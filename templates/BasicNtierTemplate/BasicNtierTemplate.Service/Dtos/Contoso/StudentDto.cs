@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BasicNtierTemplate.Service.Dtos
+namespace BasicNtierTemplate.Service.Dtos.Contoso
 {
     /// <summary>
     /// This is a bad use of DTOs, but it's for demonstration purposes only.

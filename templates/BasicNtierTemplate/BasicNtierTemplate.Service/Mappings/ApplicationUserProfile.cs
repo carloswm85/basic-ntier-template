@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BasicNtierTemplate.Data.Model.Identity;
-using BasicNtierTemplate.Service.Dtos;
+using BasicNtierTemplate.Service.Dtos.User;
 
 namespace BasicNtierTemplate.Service.Mappings
 {
@@ -8,11 +8,10 @@ namespace BasicNtierTemplate.Service.Mappings
     {
         public ApplicationUserProfile()
         {
-            // Entity -> DTO
             CreateMap<ApplicationUser, ApplicationUserDto>().ReverseMap();
-
-            // DTO -> Entity
             CreateMap<ApplicationUserDto, ApplicationUser>().ReverseMap();
+
+            CreateMap<ApplicationUser, ListedApplicationUserDto>();
         }
     }
 }

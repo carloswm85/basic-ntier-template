@@ -56,7 +56,6 @@
                                 </label>
                                 <input asp-for="FirstName" class="form-control" placeholder="Enter first name" />
                                 <span asp-validation-for="FirstName" class="text-danger small"></span>
-                                <small class="text-muted">User's first name (max 100 characters)</small>
                             </div>
 
                             <div class="col-md-6">
@@ -65,7 +64,6 @@
                                 </label>
                                 <input asp-for="LastName" class="form-control" placeholder="Enter full name" />
                                 <span asp-validation-for="LastName" class="text-danger small"></span>
-                                <small class="text-muted">User's first name (max 100 characters)</small>
                             </div>
 
                             <div class="col-md-6">
@@ -74,7 +72,6 @@
                                 </label>
                                 <input asp-for="City" class="form-control" placeholder="Enter city name" />
                                 <span asp-validation-for="City" class="text-danger small"></span>
-                                <small class="text-muted">City (max 100 characters)</small>
                             </div>
                         </div>
                     </div>
@@ -256,9 +253,3 @@
         </div>
     </div>
 </div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
