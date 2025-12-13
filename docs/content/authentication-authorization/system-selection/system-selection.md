@@ -56,15 +56,66 @@
 
 ## Answer 1
 
-My question:
+My question: Explain the following diagram.
+My requirements: Web application for use over the internet. The same application has a mobile version with offline capabilities.
 
-> Explain.
->
-> ![alt](../../img/identity-management-decision-flow.png)
->
-> Source: <https://learn.microsoft.com/en-us/aspnet/core/security/how-to-choose-identity-solution?view=aspnetcore-8.0>
->
-> My requirements: Web application for use over the internet. The same application has a mobile version with offline capabilities.
+```mermaid
+---
+title: "- Identity Management Decision Flow - "
+config:
+  theme: dark
+---
+flowchart LR
+  %% Border container
+  subgraph BORDER[" "]
+    direction LR
+
+    %% Nodes
+    A([What identity solution is right for me?]):::start
+
+    B{Do external apps access your protected APIs?}:::decision
+    C{Does your app have Internet access all the time?}:::decision
+    D{Does your app need to support single sign on?}:::decision
+    E{Does your app have a mobile or desktop client?}:::decision
+    H{Are you required to store user data on your own servers?}:::decision
+
+    F([Cookie-based identity preferred over tokens<br/>mobile or desktop<br/>ASP.NET Core Identity]):::identity
+    G([Cookie-based identity<br/>web<br/>ASP.NET Core Identity]):::identity
+    I([Self-host, installed or container<br/>OIDC server]):::oidcSelf
+    J([Cloud or managed OIDC server]):::oidcCloud
+
+    %% Flow
+    A --> B
+
+    B -- YES --> C
+    B -- NO --> D
+
+    D -- YES --> C
+    D -- NO --> E
+
+    E -- YES --> F
+    E -- NO --> G
+
+    C -- YES --> H
+    C -- NO --> I
+
+    H -- YES --> I
+    H -- NO --> J
+  end
+
+  %% Border style
+  classDef border fill:none,stroke:#555,stroke-width:2px;
+  class BORDER border;
+
+  %% Dark theme styles
+  classDef start fill:#1f6f3f,stroke:#2ecc71,stroke-width:2px,color:#eafff3;
+  classDef decision fill:#0f3a52,stroke:#3498db,stroke-width:2px,color:#e6f2ff;
+  classDef identity fill:#5a2d0c,stroke:#e67e22,stroke-width:2px,color:#fff2e6;
+  classDef oidcSelf fill:#5b1b1b,stroke:#e74c3c,stroke-width:2px,color:#ffecec;
+  classDef oidcCloud fill:#3b235c,stroke:#9b59b6,stroke-width:2px,color:#f4ecff;
+```
+
+Source: <https://learn.microsoft.com/en-us/aspnet/core/security/how-to-choose-identity-solution?view=aspnetcore-8.0>
 
 ### 🧩 Your scenario
 
@@ -207,23 +258,22 @@ OpenIddict is an **excellent choice** for your scenario! You need a centralized 
 
 ### Architecture Overview
 
-```terminal
-┌─────────────────────────────────────┐
-│   OpenIddict Server (Web API)      │
-│   - ASP.NET Core Identity           │
-│   - User Management                 │
-│   - Token Generation                │
-│   - Authorization Endpoints         │
-└─────────────────────────────────────┘
-           │
-           │ OIDC/OAuth2
-           │
-    ┌──────┴──────┬──────────┬──────────┐
-    │             │          │          │
-┌───▼────┐  ┌────▼───┐  ┌───▼────┐  ┌──▼─────┐
-│Angular │  │ Razor  │  │Flutter │  │  APIs  │
-│  SPA   │  │.NET FW │  │  App   │  │Resource│
-└────────┘  └────────┘  └────────┘  └────────┘
+```mermaid
+---
+config:
+  theme: dark
+---
+flowchart TB
+    OIDC["OpenIddict Server<br>(Web API):
+      - ASP.NET Core Identity
+      - User Management
+      - Token Generation
+      - Authorization Endpoints"]
+
+    OIDC -->|OIDC / OAuth2| Angular["Angular SPA"]
+    OIDC -->|OIDC / OAuth2| Razor["Razor .NET"]
+    OIDC -->|OIDC / OAuth2| Flutter["Flutter App"]
+    OIDC -->|OIDC / OAuth2| APIs["APIs (Resource Server)"]
 ```
 
 ### Implementation

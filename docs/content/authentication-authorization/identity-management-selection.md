@@ -1,22 +1,22 @@
 - [Choose an identity management solution](#choose-an-identity-management-solution)
-	- [Overview](#overview)
-	- [Basic identity management with ASP.NET Core Identity](#basic-identity-management-with-aspnet-core-identity)
-	- [Determine if an OIDC server is needed](#determine-if-an-oidc-server-is-needed)
-		- [Cookies](#cookies)
-		- [Tokens](#tokens)
-		- [OIDC Justification](#oidc-justification)
-		- [In Short: ASP.NET Core Identity VS OIDC Server](#in-short-aspnet-core-identity-vs-oidc-server)
-	- [Disconnected scenarios](#disconnected-scenarios)
-	- [Decide where user data such as sign-ins are stored](#decide-where-user-data-such-as-sign-ins-are-stored)
-	- [Choosing: Identity vs OIDC server](#choosing-identity-vs-oidc-server)
+  - [Overview](#overview)
+  - [Basic identity management with ASP.NET Core Identity](#basic-identity-management-with-aspnet-core-identity)
+  - [Determine if an OIDC server is needed](#determine-if-an-oidc-server-is-needed)
+    - [Cookies](#cookies)
+    - [Tokens](#tokens)
+    - [OIDC Justification](#oidc-justification)
+    - [In Short: ASP.NET Core Identity VS OIDC Server](#in-short-aspnet-core-identity-vs-oidc-server)
+  - [Disconnected scenarios](#disconnected-scenarios)
+  - [Decide where user data such as sign-ins are stored](#decide-where-user-data-such-as-sign-ins-are-stored)
+  - [Choosing: Identity vs OIDC server](#choosing-identity-vs-oidc-server)
 - [Scaling ASP.NET Core Identity into an OIDC provider](#scaling-aspnet-core-identity-into-an-oidc-provider)
-	- [How to turn ASP.NET Core Identity into an OIDC provider](#how-to-turn-aspnet-core-identity-into-an-oidc-provider)
-		- [1) Duende IdentityServer (recommended, enterprise-grade)](#1-duende-identityserver-recommended-enterprise-grade)
-		- [2) OpenIddict (fully free \& open-source)](#2-openiddict-fully-free--open-source)
-		- [3) Older options (not recommended)](#3-older-options-not-recommended)
-	- [Typical Architecture](#typical-architecture)
-	- [Scaling considerations](#scaling-considerations)
-	- [Final Answer](#final-answer)
+  - [How to turn ASP.NET Core Identity into an OIDC provider](#how-to-turn-aspnet-core-identity-into-an-oidc-provider)
+    - [1) Duende IdentityServer (recommended, enterprise-grade)](#1-duende-identityserver-recommended-enterprise-grade)
+    - [2) OpenIddict (fully free \& open-source)](#2-openiddict-fully-free--open-source)
+    - [3) Older options (not recommended)](#3-older-options-not-recommended)
+  - [Typical Architecture](#typical-architecture)
+  - [Scaling considerations](#scaling-considerations)
+  - [Final Answer](#final-answer)
 - [Next steps](#next-steps)
 
 ---
@@ -186,7 +186,52 @@ If the data is stored on your servers, you'll most likely need to choose an inst
 
 Use the following diagram to help you decide whether to use the ASP\.NET Core Identity system or an OIDC server for authentication and authorization:
 
-![Identity management decision flow](../../img/identity-management-decision-flow.png)
+```mermaid
+---
+title: Identity Management Decision Flow
+config:
+  theme: dark
+---
+flowchart LR
+  %% Nodes
+  A([What identity solution is right for me?]):::start
+
+  B{Do external apps access your protected APIs?}:::decision
+  C{Does your app have Internet access all the time?}:::decision
+  D{Does your app need to support single sign on?}:::decision
+  E{Does your app have a mobile or desktop client?}:::decision
+  H{Are you required to store user data on your own servers?}:::decision
+
+  F([Cookie-based identity preferred over tokens<br/>mobile or desktop<br/>ASP.NET Core Identity]):::identity
+  G([Cookie-based identity<br/>web<br/>ASP.NET Core Identity]):::identity
+  I([Self-host, installed or container<br/>OIDC server]):::oidcSelf
+  J([Cloud or managed OIDC server]):::oidcCloud
+
+  %% Flow
+  A --> B
+
+  B -- YES --> C
+  B -- NO --> D
+
+  D -- YES --> C
+  D -- NO --> E
+
+  E -- YES --> F
+  E -- NO --> G
+
+  C -- YES --> H
+  C -- NO --> I
+
+  H -- YES --> I
+  H -- NO --> J
+
+  %% Dark theme styles
+  classDef start fill:#1f6f3f,stroke:#2ecc71,stroke-width:2px,color:#eafff3;
+  classDef decision fill:#0f3a52,stroke:#3498db,stroke-width:2px,color:#e6f2ff;
+  classDef identity fill:#5a2d0c,stroke:#e67e22,stroke-width:2px,color:#fff2e6;
+  classDef oidcSelf fill:#5b1b1b,stroke:#e74c3c,stroke-width:2px,color:#ffecec;
+  classDef oidcCloud fill:#3b235c,stroke:#9b59b6,stroke-width:2px,color:#f4ecff;
+```
 
 The following table lists some of the things to consider when choosing your identity management solution.
 
@@ -226,12 +271,22 @@ You must integrate an OIDC server framework:
 
 ## Typical Architecture
 
-```terminal
-ASP.NET Core Identity  →  User Store (DB, EF Core, etc.)
-           ↑
-OIDC Layer (OpenIddict or Duende IdentityServer)
-           ↑
-Applications consuming OIDC tokens
+```mermaid
+---
+config:
+  theme: dark
+---
+flowchart LR
+    A["ASP.NET Core Identity"]
+    B["User Store<br/>(DB / EF Core / Custom Store)"]
+    C["OIDC Layer<br/>(OpenIddict or Duende IdentityServer)"]
+    D["OIDC Endpoints (/authorize, /token, /userinfo)"]
+    E["Applications consuming OIDC tokens<br> (Web Apps, SPAs, Mobile, APIs)"]
+
+    A --> B
+    C --> B
+    D --> C
+    E --> D
 ```
 
 Identity handles **users**.

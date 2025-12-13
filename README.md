@@ -150,7 +150,54 @@ These span multiple layers:
 
 - _Diagram made using [mermaid.js](https://mermaid.js.org/)_
 
-![Basic Ntier Template Architecture Diagram](./docs/img/basic-ntier-template-architecture-diagram.png)
+```mermaid
+---
+title: "- Basic Ntier Template Architecture Diagram -"
+config:
+  theme: dark
+  themeVariables:
+    {
+      "lineColor": "#FF00FF"
+    }
+---
+flowchart
+  direction TB
+
+  %% ----------- LAYERS -----------
+  subgraph Data["🗄️  Data Layer"]
+    DB[("Database (SQL Server), Entity Models, Migrations, EF Core")]
+  end
+
+  subgraph Repository["📦  Repository Layer"]
+    REPO[Unit of Workd and Repository]
+  end
+
+  subgraph Service["⚙️  Service Layer"]
+    SVC[Service, Mapping, Contracts, DTOs]
+  end
+
+  %% Presentation Layer shifted to the side
+  subgraph Pres["👁️ Presentation Layer"]
+    subgraph API["🌐 API Layer"]
+        REST["RESTful API (HTTP Protocol)"]
+    end
+    subgraph Clients["💻 Client Applications"]
+      MVC[Web.MVC]
+      SPA[Web.Angular]
+      MOB["📱Independent Mobile Project (not part of this template)"]
+    end
+
+  end
+
+  %% ----------- CONNECTIONS -----------
+  DB <--> REPO
+  REPO <--> SVC
+  SVC <--> REST
+  SVC <--> MVC
+  REST <--> MVC
+  REST <--> SPA
+  REST <--> MOB
+```
 
 ### Notes
 
@@ -281,9 +328,9 @@ dotnet ef dbcontext scaffold "Name=BasicNtierTemplateConnection" Microsoft.Entit
 
 ```json
 {
-    "ConnectionStrings": {
-        "DefaultConnection": "Server=.;Database=BasicNtierTemplateDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
-    }
+	"ConnectionStrings": {
+		"DefaultConnection": "Server=.;Database=BasicNtierTemplateDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+	}
 }
 ```
 

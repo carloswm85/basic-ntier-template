@@ -1,11 +1,14 @@
-%%{init: {
-    "theme": "dark",
-    "themeVariables": {
-        "lineColor": "#FF00FF"
+---
+title: "- Basic Ntier Template Architecture Diagram -"
+config:
+  theme: dark
+  themeVariables:
+    {
+      "lineColor": "#FF00FF"
     }
-}}%%
-
-graph TB
+---
+flowchart
+  direction TB
 
   %% ----------- LAYERS -----------
   subgraph Data["🗄️  Data Layer"]
@@ -30,7 +33,6 @@ graph TB
       SPA[Web.Angular]
       MOB["📱Independent Mobile Project (not part of this template)"]
     end
-    
 
   end
 
@@ -42,5 +44,3 @@ graph TB
   REST <--> MVC
   REST <--> SPA
   REST <--> MOB
-
-  
