@@ -53,15 +53,15 @@ namespace BasicNtierTemplate.Web.MVC
                     options.Password.RequireUppercase = false;
                     options.Password.RequireLowercase = false;
                     // 
+                    options.SignIn.RequireConfirmedAccount = false;
                     options.SignIn.RequireConfirmedEmail = true;
                     // Lockout settings
-
-                    // https://youtu.be/jHRWR36UC2s?list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU
                     options.Lockout.MaxFailedAccessAttempts = 5;
                     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
                 })
-                    .AddEntityFrameworkStores<BasicNtierTemplateDbContext>()
-                    .AddDefaultTokenProviders();
+                .AddEntityFrameworkStores<BasicNtierTemplateDbContext>()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI(); // Add this if you need default Identity UI pages
 
                 // Configure HttpClient with base address from configuration
                 builder.Services.AddHttpClient("ApiClient", client =>
@@ -151,6 +151,7 @@ namespace BasicNtierTemplate.Web.MVC
 
                 app.UseRouting();
 
+                app.UseAuthentication();
                 app.UseAuthorization();
                 app.UseRequestLocalization();
 
@@ -158,6 +159,8 @@ namespace BasicNtierTemplate.Web.MVC
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}"
                 );
+
+                app.MapRazorPages();
 
                 // Add Contoso University test data to the database
                 using (var scope = app.Services.CreateScope())
@@ -182,7 +185,13 @@ namespace BasicNtierTemplate.Web.MVC
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex, "MVC: Stopped program because of exception");
+                // Use proper logging
+                var logger = LoggerFactory.Create(config =>
+                {
+                    config.AddConsole();
+                }).CreateLogger<Program>();
+
+                logger.LogCritical(ex, "MVC: Application failed to start");
                 throw;
             }
         }

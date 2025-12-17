@@ -23,35 +23,10 @@
             @await Html.PartialAsync("_navbarMenuUsersPartial")
             @await Html.PartialAsync("_navbarMenuContosoUniversityPartial")
 
+            <div class="me-auto"></div>
+
             <!-- RIGHT MENU -->
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                @if (signInManager != null && signInManager.IsSignedIn(User))
-                {
-                    <span class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            @User.Identity!.Name
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <form asp-controller="Authentication" asp-action="Logout" method="post" class="px-3 py-2">
-                                    <button type="submit" class="btn btn-outline-danger btn-sm w-100">
-                                        Logout
-                                    </button>
-                                </form>
-                            </li>
-                        </ul>
-                    </span>
-                }
-                else
-                {
-                    <li class="nav-item"><a class="nav-link me-2" asp-controller="Registration" asp-action="Register">Register</a></li>
-                    <li class="nav-item"><a class="btn btn-primary" asp-controller="Authentication" asp-action="Login">Login</a></li>
-                }
-            </ul>
+            @await Html.PartialAsync("_LoginPartial")
         </div>
     </div>
 </nav>
