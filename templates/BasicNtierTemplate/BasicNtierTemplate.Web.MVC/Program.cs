@@ -45,10 +45,16 @@ namespace BasicNtierTemplate.Web.MVC
                 // Configure Identity services
                 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
                 {
+                    // Password policy
                     options.Password.RequiredLength = 6;
-                    options.Password.RequiredUniqueChars = 3;
+                    options.Password.RequiredUniqueChars = 2;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireLowercase = false;
+                    // 
                     options.SignIn.RequireConfirmedEmail = true;
-                    //options.Tokens.EmailConfirmationTokenProvider = "CustomEmailConfirmation";
+                    // Lockout settings
 
                     // https://youtu.be/jHRWR36UC2s?list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU
                     options.Lockout.MaxFailedAccessAttempts = 5;
