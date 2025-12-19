@@ -9,6 +9,7 @@ using BasicNtierTemplate.Service.Services.Interfaces;
 using BasicNtierTemplate.Web.MVC.Mappings;
 using BasicNtierTemplate.Web.MVC.Services;
 using BasicNtierTemplate.Web.MVC.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,7 @@ namespace BasicNtierTemplate.Web.MVC
 
                 #region Services Configuration
 
+                // === EF CORE CONFIGURATION ===
                 // Build the configuration by locating the appsettings.json file
                 // in the API project directory (1 directory level up from the current directory).
                 var path = Path.Combine(Directory.GetCurrentDirectory(), "../BasicNtierTemplate.API");
@@ -42,28 +44,57 @@ namespace BasicNtierTemplate.Web.MVC
                 builder.Services.AddDbContext<BasicNtierTemplateDbContext>(options =>
                     options.UseSqlServer(connectionString));
 
-                // Configure Identity services
-                builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+                // === IDENTITY API CONFIGURATION ===
+                // Configure Identity services (IdentityOptions) and Entity Framework stores.
+                // Calls: AddIdentity, AddDefaultUI,AddDefaultTokenProviders
+                builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
                 {
-                    // Password policy
+                    // Default Password settings
+                    options.Password.RequireDigit = true;
+                    options.Password.RequireLowercase = true;
+                    options.Password.RequireNonAlphanumeric = true;
+                    options.Password.RequireUppercase = true;
                     options.Password.RequiredLength = 6;
-                    options.Password.RequiredUniqueChars = 2;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireDigit = false;
-                    options.Password.RequireUppercase = false;
-                    options.Password.RequireLowercase = false;
-                    // 
-                    options.SignIn.RequireConfirmedAccount = false;
-                    options.SignIn.RequireConfirmedEmail = true;
-                    // Lockout settings
-                    options.Lockout.MaxFailedAccessAttempts = 5;
-                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
-                })
-                .AddEntityFrameworkStores<BasicNtierTemplateDbContext>()
-                .AddDefaultTokenProviders()
-                .AddDefaultUI(); // Add this if you need default Identity UI pages
+                    options.Password.RequiredUniqueChars = 1;
 
-                // Configure HttpClient with base address from configuration
+                    // Default SignIn settings
+                    options.SignIn.RequireConfirmedEmail = false;
+                    options.SignIn.RequireConfirmedPhoneNumber = false;
+
+                    // Default Lockout settings
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                    options.Lockout.MaxFailedAccessAttempts = 5;
+                    options.Lockout.AllowedForNewUsers = true;
+
+                    // Default User settings
+                    options.User.AllowedUserNameCharacters =
+                            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                    options.User.RequireUniqueEmail = false;
+
+                })
+                    .AddEntityFrameworkStores<BasicNtierTemplateDbContext>();
+
+                // Cookie settings
+                builder.Services.ConfigureApplicationCookie(options =>
+                {
+                    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                    options.Cookie.Name = "YourAppCookieName";
+                    options.Cookie.HttpOnly = true;
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                    options.LoginPath = "/Identity/Account/Login";
+                    // ReturnUrlParameter requires 
+                    //using Microsoft.AspNetCore.Authentication.Cookies;
+                    options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                    options.SlidingExpiration = true;
+                });
+
+                // Force Identity's security stamp to be validated every minute.
+                builder.Services.Configure<SecurityStampValidatorOptions>(o =>
+                                   o.ValidationInterval = TimeSpan.FromMinutes(1));
+
+
+                // === HTTP CLIENT CONFIGURATION ===
+                // Configure HttpClient with base address from configuration setting
                 builder.Services.AddHttpClient("ApiClient", client =>
                 {
                     var apiBaseUrl = builder.Configuration["ApiBaseUrl"];
@@ -86,11 +117,6 @@ namespace BasicNtierTemplate.Web.MVC
 
                 builder.Services.AddScoped<IUnitOfWork, UnitOfWorkEF>();
 
-                builder.Services.AddAutoMapper(
-                    cfg => { },
-                    typeof(ApplicationUserProfile).Assembly
-                );
-
                 // Services from current project
                 builder.Services.AddScoped<IWeatherServiceExample, WeatherServiceExample>();
 
@@ -101,6 +127,7 @@ namespace BasicNtierTemplate.Web.MVC
 
                 builder.Services.AddAutoMapper(
                     cfg => { },
+                    typeof(ApplicationUserProfile).Assembly,
                     typeof(UserProfile).Assembly,
                     typeof(CourseProfile).Assembly,
                     typeof(EnrollmentProfile).Assembly

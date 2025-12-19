@@ -11,7 +11,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers
             return View();
         }
 
-        [AllowAnonymous]
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();

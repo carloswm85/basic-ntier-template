@@ -36,17 +36,24 @@ namespace BasicNtierTemplate.API
                     .UseSqlServer(connectionString));
 
                 // TODO https://youtu.be/kC9qrUcy2Js?list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU&t=199
-                builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+                builder.Services.AddIdentityApiEndpoints<ApplicationUser>(options =>
                 {
-                    options.Password.RequireDigit = true;
-                    options.Password.RequireUppercase = true;
-                    options.Password.RequireLowercase = true;
+                    // Password policy
                     options.Password.RequiredLength = 6;
-                    options.SignIn.RequireConfirmedEmail = false;
-                    //options.Tokens.EmailConfirmationTokenProvider = "CustomEmailConfirmation";
-                    // TODO https://youtu.be/jHRWR36UC2s?list=PL6n9fhu94yhVkdrusLaQsfERmL_Jh4XmU
+                    options.Password.RequiredUniqueChars = 2;
+                    options.Password.RequireDigit = true;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireLowercase = false;
+
+                    // Lockout
                     options.Lockout.MaxFailedAccessAttempts = 5;
-                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                    options.Lockout.AllowedForNewUsers = true;
+
+                    // User / Sign-in
+                    options.User.RequireUniqueEmail = true;
+                    options.SignIn.RequireConfirmedEmail = false;
                 })
                     .AddEntityFrameworkStores<BasicNtierTemplateDbContext>()
                     .AddDefaultTokenProviders();
@@ -96,6 +103,7 @@ namespace BasicNtierTemplate.API
                     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                     options.IncludeXmlComments(xmlPath);
+                    options.CustomSchemaIds(type => type.FullName!.Replace("+", "."));
                 });
 
                 #endregion
@@ -131,6 +139,8 @@ namespace BasicNtierTemplate.API
                 // Enable authorization middleware (validates user access).
                 app.UseAuthentication();
                 app.UseAuthorization();
+
+                app.MapIdentityApi<ApplicationUser>();
 
                 // Map controllers to endpoints (routes controllers’ actions to HTTP requests).
                 app.MapControllers();
