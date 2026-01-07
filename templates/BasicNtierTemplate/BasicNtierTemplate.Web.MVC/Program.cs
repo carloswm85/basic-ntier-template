@@ -2,7 +2,7 @@ using System.Diagnostics;
 using BasicNtierTemplate.Data.Datum;
 using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Repository;
-using BasicNtierTemplate.Service.Mappings;
+using BasicNtierTemplate.Service.Mappings.ContosoUniversity;
 using BasicNtierTemplate.Service.Services;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using BasicNtierTemplate.Web.MVC.Services;

@@ -1,5 +1,6 @@
 ﻿using BasicNtierTemplate.Data.Enums;
 using BasicNtierTemplate.Data.Model;
+using BasicNtierTemplate.Data.Model.ContosoUniversity;
 
 namespace BasicNtierTemplate.Data.Datum
 {

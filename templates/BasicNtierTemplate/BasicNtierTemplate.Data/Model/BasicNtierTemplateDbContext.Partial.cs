@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BasicNtierTemplate.Data.Model.ContosoUniversity;
+using Microsoft.EntityFrameworkCore;
 
 namespace BasicNtierTemplate.Data.Model;
 

@@ -6,11 +6,15 @@
 
 Specific NET Core version installation:
 
-- Windows: `winget install Microsoft.DotNet.SDK.8 --version 8.0.100`
+- In Windows:
 
-For running EF Core migrations   correctly, get the correct tool versions:
+  ```powershell
+  winget install Microsoft.DotNet.SDK.8 --version 8.0.100
+  ```
 
-```pws
+For running EF Core migrations correctly, get the correct tool versions:
+
+```powershell
 > dotnet tool uninstall --global dotnet-ef
 > dotnet tool install --global dotnet-ef --version 8.0.22
 ```
@@ -29,18 +33,20 @@ dotnet add package Microsoft.EntityFrameworkCore.Design --version 8.0.22
 
 ### Install Node
 
-- <https://nodejs.org/en/download>
+- Install: <https://nodejs.org/en/download>
 - Or better:
+
   - In Mac/Linux: <https://github.com/nvm-sh/nvm>
   - In Windows: <https://github.com/coreybutler/nvm-windows/>
+
     - Usage:
 
-       ```console
-       > nvm list
-       > nvm install lts
-       > nvm install 19
-       > nvm use 19
-       ```
+      ```console
+      > nvm list
+      > nvm install lts
+      > nvm install 19
+      > nvm use 19
+      ```
 
 You can install multiple Node versions.
 
@@ -51,4 +57,5 @@ Commands:
 ```console
 > npm install -g @angular/cli@19.2.0
 > ng version
+> ng serve
 ```

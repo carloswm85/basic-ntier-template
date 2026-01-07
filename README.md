@@ -36,7 +36,10 @@
 
 ---
 
-> **🛑 STILL UNDER DEVELOPMENT - USE WITH CAUTION 🛑**
+> Status:
+>
+> - This is a working .NET Core 8 and Angular 19 solution.
+> - Documentation may be disorganized.
 
 # Basic Ntier Template
 
@@ -46,11 +49,11 @@
 
 ### Table: .NET Core
 
-| Current | .NET Core | .NET Core release type | EF Core  |
-| ------- | --------- | ---------------------- | -------- |
-| ✅      | `8.0.100` | LTS                    | `8.0.22` |
-|         | `9`       | STS                    | -        |
-|         | `10`      | pre-release            | -        |
+| Current | .NET Core | .NET Core release type        | EF Core  |
+| ------- | --------- | ----------------------------- | -------- |
+|         | `10`      | LTS (ends: November 14, 2028) | -        |
+|         | `9`       | STS (ends: November 10, 2026) | -        |
+| ✅      | `8.0.100` | LTS (ends: November 10, 2026) | `8.0.22` |
 
 [.NET and .NET Core Support Policy](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core) ↗
 
@@ -65,15 +68,11 @@
 
 ### Table: Angular
 
-| Current | Angular Version      | Node.js Version                       | TypeScript Version | RxJS Version         |
-| ------- | -------------------- | ------------------------------------- | ------------------ | -------------------- |
-|         | `20.2.x` or `20.3.x` | `^20.19.0` or `^22.12.0` or `^24.0.0` | `>=5.9.0 <6.0.0`   | `^6.5.3` or `^7.4.0` |
-|         | `20.0.x` or `20.1.x` | `^20.19.0` or `^22.12.0` or `^24.0.0` | `>=5.8.0 <5.9.0`   | `^6.5.3` or `^7.4.0` |
-| ✅      | `19.2.x`             | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.5.0 <5.9.0`   | `^6.5.3` or `^7.4.0` |
-|         | `19.1.x`             | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.5.0 <5.8.0`   | `^6.5.3` or `^7.4.0` |
-|         | `19.0.x`             | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.5.0 <5.7.0`   | `^6.5.3` or `^7.4.0` |
-|         | `18.1.x` or `18.2.x` | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.4.0 <5.6.0`   | `^6.5.3` or `^7.4.0` |
-|         | `18.0.x`             | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.4.0 <5.5.0`   | `^6.5.3` or `^7.4.0` |
+| Current | Angular Version      | Angular Release Type   | Node.js Version                       | TypeScript Version | RxJS Version         | Status                                   |
+| ------- | -------------------- | ---------------------- | ------------------------------------- | ------------------ | -------------------- | ---------------------------------------- |
+|         | `20.2.x` or `20.3.x` | LTS (ends: 2026-11-28) | `^20.19.0` or `^22.12.0` or `^24.0.0` | `>=5.9.0 <6.0.0`   | `^6.5.3` or `^7.4.0` | -                                        |
+| ✅      | `19.2.x`             | LTS (ends: 2026-05-19) | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.5.0 <5.9.0`   | `^6.5.3` or `^7.4.0` | Only with basic development setup added. |
+|         | `18.1.x` or `18.2.x` | Out of support         | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.4.0 <5.6.0`   | `^6.5.3` or `^7.4.0` | Not available.                           |
 
 ---
 
@@ -148,9 +147,56 @@ These span multiple layers:
 
 ### Diagram: N-Tier Architecture
 
-- _Diagram made using [mermaid.js](https://mermaid.js.org/)_
+_Diagram made using [mermaid.js](https://mermaid.js.org/)_
 
-![Basic Ntier Template Architecture Diagram](./docs/img/basic-ntier-template-architecture-diagram.png)
+```mermaid
+---
+title: "- Basic Ntier Template Architecture Diagram -"
+config:
+  theme: dark
+  themeVariables:
+    {
+      "lineColor": "#FF00FF"
+    }
+---
+flowchart
+  direction TB
+
+  %% ----------- LAYERS -----------
+  subgraph Data["🗄️  Data Layer"]
+    DB[("Database (SQL Server), Entity Models, Migrations, EF Core")]
+  end
+
+  subgraph Repository["📦  Repository Layer"]
+    REPO[Unit of Workd and Repository]
+  end
+
+  subgraph Service["⚙️  Service Layer"]
+    SVC[Service, Mapping, Contracts, DTOs]
+  end
+
+  %% Presentation Layer shifted to the side
+  subgraph Pres["👁️ Presentation Layer"]
+    subgraph API["🌐 API Layer"]
+        REST["RESTful API (HTTP Protocol)"]
+    end
+    subgraph Clients["💻 Client Applications"]
+      MVC[Web.MVC]
+      SPA[Web.Angular]
+      MOB["📱Independent Mobile Project (not part of this template)"]
+    end
+
+  end
+
+  %% ----------- CONNECTIONS -----------
+  DB <--> REPO
+  REPO <--> SVC
+  SVC <--> REST
+  SVC <--> MVC
+  REST <--> MVC
+  REST <--> SPA
+  REST <--> MOB
+```
 
 ### Notes
 
@@ -167,7 +213,7 @@ These span multiple layers:
 
 ### Nuget Installation
 
-TODO
+// TODO
 
 ### Local Repository Installation
 
@@ -196,11 +242,11 @@ dotnet new basic-ntier-template -o "BasicNtierTemplateExample"
 ### Installation Commands
 
 ```powershell
--o "../../MyFolder/BasicNtierTemplateExample2" # Custom solution name (and path, if included in the string)
+dotnet new basic-ntier-template -o "../../MyFolder/BasicNtierTemplateExample2" # Custom solution name (and path, if included in the string)
 ```
 
 ```powershell
---force # Force file generation, and override existing files if any
+dotnet new basic-ntier-template -o  "BasicNtierTemplateExample3" --force # Force file generation, and override existing files if any
 ```
 
 ---
@@ -281,9 +327,9 @@ dotnet ef dbcontext scaffold "Name=BasicNtierTemplateConnection" Microsoft.Entit
 
 ```json
 {
-  ConnectionStrings": {
-    "DefaultConnection": "Server=.;Database=BasicNtierTemplateData;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
-  }
+	"ConnectionStrings": {
+		"DefaultConnection": "Server=.;Database=BasicNtierTemplateDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+	}
 }
 ```
 

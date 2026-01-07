@@ -1,8 +1,9 @@
 using System.Diagnostics;
+using System.Reflection;
 using BasicNtierTemplate.Data.Datum;
 using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Repository;
-using BasicNtierTemplate.Service.Mappings;
+using BasicNtierTemplate.Service.Mappings.ContosoUniversity;
 using BasicNtierTemplate.Service.Services;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +30,7 @@ namespace BasicNtierTemplate.API
                 // Register DbContext with SQL Server as the database provider.
                 builder.Services.AddDbContext<BasicNtierTemplateDbContext>(options =>
                     options
-                    .UseLazyLoadingProxies() // Enable lazy loading of navigation properties
+                    //.UseLazyLoadingProxies() // Enable lazy loading of navigation properties
                     .UseSqlServer(connectionString));
 
                 // CORS Configuration to allow requests from frontend applications (for production, configure appropriately).
@@ -68,7 +69,13 @@ namespace BasicNtierTemplate.API
                 builder.Services.AddEndpointsApiExplorer();
 
                 // Register Swagger generator for API documentation.
-                builder.Services.AddSwaggerGen();
+                builder.Services.AddSwaggerGen(options =>
+                {
+                    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                    options.IncludeXmlComments(xmlPath);
+                    options.CustomSchemaIds(type => type.FullName!.Replace("+", "."));
+                });
 
                 #endregion
 
