@@ -3,6 +3,7 @@
   - [Angular Development](#angular-development)
     - [Install Node](#install-node)
     - [Install Angular](#install-angular)
+    - [Visual Studio Set-Up](#visual-studio-set-up)
 
 ---
 
@@ -67,3 +68,7 @@ Commands:
 > ng version
 > ng serve
 ```
+
+### Visual Studio Set-Up
+
+?

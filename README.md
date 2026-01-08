@@ -9,10 +9,9 @@
 
 ---
 
-| #   | STATUS                                                        |
-| --- | ------------------------------------------------------------- |
-| 1   | This is a **WORKING** .NET Core 8 and Angular 19 solution.    |
-| 2   | Out of maintenance in favor of latest LTS framework versions. |
+| #   | STATUS                                                                |
+| --- | --------------------------------------------------------------------- |
+| 1   | This is a **UNDER DEVELOPMENT** .NET Core 10 and Angular 20 solution. |
 
 ---
 
