@@ -4,4 +4,4 @@
 
 # Angular Dependencies
 
-None,
+None.

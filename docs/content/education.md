@@ -1,4 +1,11 @@
-- [Education](#education) - [Readings](#readings) - [Video Tutorials](#video-tutorials) - [Other Custom .NET Solution Templates](#other-custom-net-solution-templates) - [Recommended Tools](#recommended-tools) - [Clean Architecture Information](#clean-architecture-information) - [Readings (CA)](#readings-ca) - [Video Tutorials (CA)](#video-tutorials-ca)
+- [Educational Resources](#educational-resources)
+  - [Readings](#readings)
+  - [Video Tutorials](#video-tutorials)
+  - [Other Custom .NET Solution Templates](#other-custom-net-solution-templates)
+  - [Recommended Tools](#recommended-tools)
+  - [Clean Architecture Information](#clean-architecture-information)
+    - [Readings (CA)](#readings-ca)
+    - [Video Tutorials (CA)](#video-tutorials-ca)
 
 ---
 

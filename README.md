@@ -1,7 +1,7 @@
 - [Basic Ntier Template](#basic-ntier-template)
   - [Version compatibility](#version-compatibility)
     - [Table: .NET Core](#table-net-core)
-  - [Identity API](#identity-api)
+    - [Table: Identity API](#table-identity-api)
     - [Table: MVC](#table-mvc)
     - [Table: Angular](#table-angular)
   - [Content](#content)
@@ -26,13 +26,13 @@
 
 | Current | .NET Core | .NET Core release type        | EF Core  | Status            |
 | ------- | --------- | ----------------------------- | -------- | ----------------- |
-|         | `10`      | LTS (ends: November 14, 2028) | -        | -                 |
-|         | `9`       | STS (ends: November 10, 2026) | -        | -                 |
-| ✅      | `8.0.100` | LTS (ends: November 10, 2026) | `8.0.22` | Fully functional. |
+| ✅      | `10`      | LTS (ends: November 14, 2028) | -        | Under development |
+|         | `9`       | STS (ends: November 10, 2026) | -        | Skipped           |
+|         | `8.0.100` | LTS (ends: November 10, 2026) | `8.0.22` | Fully functional  |
 
 [.NET and .NET Core Support Policy](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core) ↗
 
-## Identity API
+### Table: Identity API
 
 | Current | Identity API (compatible with this EF Core) | Status      |
 | ------- | ------------------------------------------- | ----------- |
@@ -42,9 +42,9 @@
 
 ### Table: MVC
 
-| Current | Bootstrap | jQuery  | jQuery Validate | Jquery Validation Unobtrusive | Status            |
-| ------- | --------- | ------- | --------------- | ----------------------------- | ----------------- |
-| ✅      | `5.3.8`   | `3.7.1` | `1.21.0`        | `4.0.0`                       | Fully functional. |
+| Current | Bootstrap | jQuery  | jQuery Validate | Jquery Validation Unobtrusive | Status           |
+| ------- | --------- | ------- | --------------- | ----------------------------- | ---------------- |
+| ✅      | `5.3.8`   | `3.7.1` | `1.21.0`        | `4.0.0`                       | Fully functional |
 
 - Used `libman.json` for client side libraries.
 - Bootstrap `+5.x` does not depend on `jQuery`.
@@ -53,9 +53,9 @@
 
 | Current | Angular Version      | Angular Release Type   | Node.js Version                       | TypeScript Version | RxJS Version         | Status                                   |
 | ------- | -------------------- | ---------------------- | ------------------------------------- | ------------------ | -------------------- | ---------------------------------------- |
-|         | `20.2.x` or `20.3.x` | LTS (ends: 2026-11-28) | `^20.19.0` or `^22.12.0` or `^24.0.0` | `>=5.9.0 <6.0.0`   | `^6.5.3` or `^7.4.0` | -                                        |
-| ✅      | `19.2.x`             | LTS (ends: 2026-05-19) | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.5.0 <5.9.0`   | `^6.5.3` or `^7.4.0` | Only with basic development setup added. |
-|         | `18.1.x` or `18.2.x` | Out of support         | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.4.0 <5.6.0`   | `^6.5.3` or `^7.4.0` | Not available.                           |
+| ✅      | `20.2.x` or `20.3.x` | LTS (ends: 2026-11-28) | `^20.19.0` or `^22.12.0` or `^24.0.0` | `>=5.9.0 <6.0.0`   | `^6.5.3` or `^7.4.0` | Under development                        |
+|         | `19.2.x`             | LTS (ends: 2026-05-19) | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.5.0 <5.9.0`   | `^6.5.3` or `^7.4.0` | Only with basic development setup added. |
+|         | `18.1.x` or `18.2.x` | Out of support         | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.4.0 <5.6.0`   | `^6.5.3` or `^7.4.0` | Not available                            |
 
 ---
 
