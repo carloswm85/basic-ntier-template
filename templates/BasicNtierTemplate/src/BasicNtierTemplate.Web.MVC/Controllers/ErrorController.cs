@@ -16,25 +16,37 @@ namespace BasicNtierTemplate.Web.MVC.Controllers
         [Route("Error/{statusCode}")]
         public IActionResult HttpStatusCodeHandler(int statusCode)
         {
-            var statusCodeResult = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
+            var statusCodeData = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
+
+            ViewBag.OriginalPath = statusCodeData?.OriginalPath;
+            ViewBag.OriginalQueryString = statusCodeData?.OriginalQueryString;
 
             switch (statusCode)
             {
+                case 403:
+                    ViewBag.ErrorMessage = "You don't have permission to access this resource.";
+                    ViewBag.ErrorTitle = "Forbidden";
+                    return View("Error");
                 case 404:
                     ViewBag.ErrorMessage = "Sorry, the resource you requested could not be found.";
-                    logger.LogWarning($"{statusCode} Error Ocurred. Path = {statusCodeResult!.OriginalPath}" +
-                        $" and QueryString = {statusCodeResult.OriginalQueryString ?? "no-query-string"}");
+                    logger.LogWarning($"{statusCode} Error Ocurred. Path = {statusCodeData!.OriginalPath}" +
+                        $" and QueryString = {statusCodeData.OriginalQueryString ?? "no-query-string"}");
                     break;
                 case 405:
                     // A 405 status code, also known as "Method Not Allowed", is an HTTP response code that a server
                     // sends when a client requests a method that the resource doesn't support.
                     ViewBag.ErrorMessage = "Sorry, the resource you requested could not be found.";
-                    logger.LogWarning($"405 Error Ocurred. Path = {statusCodeResult!.OriginalPath}" +
-                        $" and QueryString = {statusCodeResult.OriginalQueryString ?? "no-query-string"}");
+                    logger.LogWarning($"405 Error Ocurred. Path = {statusCodeData!.OriginalPath}" +
+                        $" and QueryString = {statusCodeData.OriginalQueryString ?? "no-query-string"}");
                     break;
+                case 500:
+                    ViewBag.ErrorMessage = "An internal server error occurred.";
+                    ViewBag.ErrorTitle = "Server Error";
+                    return View("Error");
                 default:
-                    ViewBag.ErrorMessage = $"Status code has occured: {statusCode}";
-                    break;
+                    ViewBag.ErrorMessage = "An error occurred processing your request.";
+                    ViewBag.ErrorTitle = "Error";
+                    return View("Error");
             }
 
             return View("NotFound");
@@ -55,13 +67,6 @@ namespace BasicNtierTemplate.Web.MVC.Controllers
             // Return a view showing a custom error page
             // TODO: Create the CustomError view?
             return View("CustomError");
-        }
-
-        [Route("Error/ProxyServerError")]
-        [AllowAnonymous]
-        public IActionResult ProxyServerError()
-        {
-            return View();
         }
     }
 }

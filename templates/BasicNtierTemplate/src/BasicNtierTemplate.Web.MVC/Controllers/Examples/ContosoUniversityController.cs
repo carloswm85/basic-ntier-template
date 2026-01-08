@@ -57,7 +57,6 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
                 _logger.LogError(ex, "An error occurred while retrieving the student list.");
                 throw;
             }
-
         }
 
         // GET: /ContosoUniversity/Details/5
