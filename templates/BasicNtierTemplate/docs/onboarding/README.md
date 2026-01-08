@@ -62,17 +62,17 @@
 ## Content
 
 - Section 1:
-  - [Solution Artchitecture](./docs/content/architecture.md)
-  - [Template Installation And Use](./docs/content/template-use.md)
-  - [Troubleshooting](./docs/content/troubleshooting.md)
+  - [Solution Artchitecture](./architecture.md)
+  - [Template Installation And Use](./template-use.md)
+  - [Troubleshooting](./troubleshooting.md)
 - Section 2:
-  - [Development Set-Up](./docs/content/development-setup.md)
+  - [Development Set-Up](./development-setup.md)
   - Dependencies:
-    - [NET Core](./docs/content/dependencies-net-core.md)
-      - [Identity API](./docs/content/identity-api/identity-api.md)
-    - [Angular](./docs/content/dependencies-angular.md)
+    - [NET Core](./dependencies-net-core.md)
+      - [Identity API](./identity-api.md)
+    - [Angular](./dependencies-angular.md)
 - Section 3:
-  - [Education](./docs/content/education.md)
+  - [Education](./education.md)
 
 ---
 
@@ -82,4 +82,4 @@
 - The example is partially completed.
 - For additional information on this example, see the official tutorial: <https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/?view=aspnetcore-8.0>
 
-![alt text](./docs/img/contoso-db-diagram.png)
+![alt text](./img/contoso-db-diagram.png)
