@@ -1,4 +1,4 @@
-![logo](./docs/img/logo.png)
+![logo](./docs/img/banner.png)
 
 # Basic N-Tier Template
 
