@@ -23,8 +23,9 @@ export class AppComponent implements OnInit {
     this.getForecasts();
   }
 
-  getForecasts() {
-    this.http.get<WeatherForecast[]>('/WeatherForecast').subscribe(
+    getForecasts() {
+        this.http.get<WeatherForecast[]>('api/WeatherForecasts/data').subscribe(
+
       (result) => {
         this.forecasts = result;
         console.log(">>> RESULT!");
@@ -33,7 +34,7 @@ export class AppComponent implements OnInit {
       (error) => {
         console.error(error);
       }
-    );
+        );
   }
 
   title = 'basicntiertemplate.client';
