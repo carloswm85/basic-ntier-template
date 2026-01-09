@@ -3,7 +3,9 @@
   - [Angular Development](#angular-development)
     - [Install Node](#install-node)
     - [Install Angular](#install-angular)
-    - [Running SPA from NET Core](#running-spa-from-net-core)
+    - [Run the Application](#run-the-application)
+      - [(a) Running SPA in ASP.NET Core (Together)](#a-running-spa-in-aspnet-core-together)
+      - [(b) Running SPA and ASP.NET Core Separately](#b-running-spa-and-aspnet-core-separately)
 
 ---
 
@@ -40,8 +42,6 @@ dotnet add package Microsoft.EntityFrameworkCore.Design --version 8.0.22
 
 ## Angular Development
 
-- Angular development set-up in NET Core is explained at [](troubleshooting.md)
-
 ### Install Node
 
 - Install: <https://nodejs.org/en/download>
@@ -71,12 +71,19 @@ Commands:
 > ng serve
 ```
 
-### Running SPA from NET Core
+### Run the Application
+
+For Angular development you have 2 options:
+
+1. Run both projects together from ASP.NET Core.
+2. Run the `BasicNtierTemplate.API` project separately from the `BasicNtierTemplate.Web.Angular` poject.
+
+#### (a) Running SPA in ASP.NET Core (Together)
 
 1. Install the dependency:
 
 ```terminal
-dotnet add package Microsoft.AspNetCore.SpaProxy --version 10.0.1
+dotnet add package Microsoft.AspNetCore.SpaProxy
 ```
 
 2. At `BasicNtierTemplate.API\Properties\launchSettings.json`, uncomment lines:
@@ -100,3 +107,9 @@ dotnet add package Microsoft.AspNetCore.SpaProxy --version 10.0.1
 Working demo page, fetching data from API layer to Angular layer:
 
 ![Working endpoing](../img/angular-working-endpoint.png)
+
+#### (b) Running SPA and ASP.NET Core Separately
+
+- Run `BasicNtierTemplate.API` without following the previous steps.
+- Run the Angular app from its root folder using `ng serve` using your favorite IDE or editor.
+
