@@ -69,7 +69,7 @@
   - [Development Set-Up](./content/development-setup.md)
   - Dependencies:
     - [NET Core](./content/dependencies-net-core.md)
-      - [Identity API](./content/identity-api/identity-api.md)
+      - [Identity API](./content/identity-api.md)
     - [Angular](./content/dependencies-angular.md)
 - Section 3:
   - [Education](./content/education.md)
