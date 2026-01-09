@@ -78,7 +78,7 @@
           "defaultConfiguration": "development",
           "options": {
             "proxyConfig": "src/proxy.conf.js",
-            "port": 60249,
+            "port": 6024,
           }
         },
         "extract-i18n": {

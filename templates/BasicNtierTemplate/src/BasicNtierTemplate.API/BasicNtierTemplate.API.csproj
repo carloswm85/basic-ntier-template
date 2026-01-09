@@ -4,11 +4,13 @@
 	<TargetFramework>net10.0</TargetFramework>
 	<Nullable>enable</Nullable>
 	<ImplicitUsings>enable</ImplicitUsings>
-	<SpaRoot>..\BasicNtierTemplate.Web.Angular</SpaRoot>
-	<SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
-	<SpaProxyServerUrl>https://localhost:60249</SpaProxyServerUrl>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	<NoWarn>$(NoWarn);1591</NoWarn>
+	<!-- Angular Project
+	<SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
+	<SpaRoot>..\BasicNtierTemplate.Web.Angular</SpaRoot>
+	<SpaProxyServerUrl>https://localhost:5021</SpaProxyServerUrl>
+	-->
   </PropertyGroup>
 
   <ItemGroup>
