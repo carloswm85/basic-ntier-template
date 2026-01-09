@@ -9,10 +9,10 @@
 
 ---
 
-| #   | STATUS                                                                |
-| --- | --------------------------------------------------------------------- |
-| 1   | This is a **UNDER DEVELOPMENT** .NET Core 10 and Angular 20 solution. |
-| 2   | You can find previous functional versions in the repository branches. |
+| #   | STATUS                                                        |
+| --- | ------------------------------------------------------------- |
+| 1   | This is a **WORKING** .NET Core 8 and Angular 19 solution.    |
+| 2   | Out of maintenance in favor of latest LTS framework versions. |
 
 ---
 
@@ -62,17 +62,17 @@
 ## Content
 
 - Section 1:
-  - [Solution Artchitecture](./content/architecture.md)
-  - [Template Installation And Use](./content/template-use.md)
-  - [Troubleshooting](./content/troubleshooting.md)
+  - [Solution Artchitecture](./docs/content/architecture.md)
+  - [Template Installation And Use](./docs/content/template-use.md)
+  - [Troubleshooting](./docs/content/troubleshooting.md)
 - Section 2:
-  - [Development Set-Up](./content/development-setup.md)
+  - [Development Set-Up](./docs/content/development-setup.md)
   - Dependencies:
-    - [NET Core](./content/dependencies-net-core.md)
-      - [Identity API](./content/identity-api/identity-api.md)
-    - [Angular](./content/dependencies-angular.md)
+    - [NET Core](./docs/content/dependencies-net-core.md)
+      - [Identity API](./docs/content/identity-api/identity-api.md)
+    - [Angular](./docs/content/dependencies-angular.md)
 - Section 3:
-  - [Education](./content/education.md)
+  - [Education](./docs/content/education.md)
 
 ---
 
@@ -82,4 +82,4 @@
 - The example is partially completed.
 - For additional information on this example, see the official tutorial: <https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/?view=aspnetcore-8.0>
 
-![alt text](./img/contoso-db-diagram.png)
+![alt text](./docs/img/contoso-db-diagram.png)
