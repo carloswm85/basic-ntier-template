@@ -3,7 +3,7 @@
   - [Angular Development](#angular-development)
     - [Install Node](#install-node)
     - [Install Angular](#install-angular)
-    - [Visual Studio Set-Up](#visual-studio-set-up)
+    - [Running SPA from NET Core](#running-spa-from-net-core)
 
 ---
 
@@ -40,6 +40,8 @@ dotnet add package Microsoft.EntityFrameworkCore.Design --version 8.0.22
 
 ## Angular Development
 
+- Angular development set-up in NET Core is explained at [](troubleshooting.md)
+
 ### Install Node
 
 - Install: <https://nodejs.org/en/download>
@@ -69,6 +71,32 @@ Commands:
 > ng serve
 ```
 
-### Visual Studio Set-Up
+### Running SPA from NET Core
 
-?
+1. Install the dependency:
+
+```terminal
+dotnet add package Microsoft.AspNetCore.SpaProxy --version 10.0.1
+```
+
+2. At `BasicNtierTemplate.API\Properties\launchSettings.json`, uncomment lines:
+
+```json
+"ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
+```
+
+3. At `BasicNtierTemplate.API\BasicNtierTemplate.API.csproj` uncomment:
+
+```xml
+<!-- Angular Project
+-->
+<SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
+<SpaRoot>..\BasicNtierTemplate.Web.Angular</SpaRoot>
+<SpaProxyServerUrl>https://localhost:5021</SpaProxyServerUrl>
+```
+
+4. When debugging `BasicNtierTemplate.API`, the Angular SPA will be launched (`BasicNtierTemplate.Web.Angular`).
+
+Working demo page, fetching data from API layer to Angular layer:
+
+![Working endpoing](../img/angular-working-endpoint.png)
