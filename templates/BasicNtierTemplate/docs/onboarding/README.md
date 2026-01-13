@@ -63,7 +63,7 @@
 
 - Section 1:
   - [Solution Artchitecture](./content/architecture.md)
-  - [Template Installation And Use](./content/template-use.md)
+  - [Template Installation and Use](./content/template-use.md)
   - [Troubleshooting](./content/troubleshooting.md)
 - Section 2:
   - [Development Set-Up](./content/development-setup.md)

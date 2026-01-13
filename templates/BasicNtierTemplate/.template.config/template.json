@@ -27,11 +27,11 @@
 			"type": "parameter",
 			"datatype": "choice",
 			"replaces": "{{TargetFramework}}",
-			"defaultValue": "net8.0",
+			"defaultValue": "net10.0",
 			"choices": [
 				{
-					"displayName": ".NET 8.0 (LTS, Current default)",
-					"choice": "net8.0"
+					"displayName": ".NET 10.0 (LTS, Current default)",
+					"choice": "net10.0"
 				}
 			],
 			"description": "The target framework for the projects."

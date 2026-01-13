@@ -20,22 +20,22 @@ Specific NET Core version installation:
 - In Windows:
 
   ```powershell
-  winget install Microsoft.DotNet.SDK.8 --version 8.0.100
+  winget install Microsoft.DotNet.SDK.10
   ```
 
 For running EF Core migrations correctly, get the correct tool versions:
 
 ```powershell
 > dotnet tool uninstall --global dotnet-ef
-> dotnet tool install --global dotnet-ef --version 8.0.22
+> dotnet tool install --global dotnet-ef
 ```
 
 Add correct packages:
 
 ```powershell
-dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 8.0.22
-dotnet add package Microsoft.EntityFrameworkCore.Tools --version 8.0.22
-dotnet add package Microsoft.EntityFrameworkCore.Design --version 8.0.22
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+dotnet add package Microsoft.EntityFrameworkCore.Design
 ```
 
 ---
@@ -112,4 +112,3 @@ Working demo page, fetching data from API layer to Angular layer:
 
 - Run `BasicNtierTemplate.API` without following the previous steps.
 - Run the Angular app from its root folder using `ng serve` using your favorite IDE or editor.
-
