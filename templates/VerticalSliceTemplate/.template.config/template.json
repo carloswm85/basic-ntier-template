@@ -1,0 +1,63 @@
+{
+	"$schema": "http://json.schemastore.org/template",
+	"author": "Carlos W. Mercado",
+	"classifications": [
+		"Solution",
+		"Clean Architect Variant",
+		"VSA",
+		"Vertical Slice architecture"
+	],
+	"identity": "Vertical.Slice.Template.CSharp",
+	"groupIdentity": "Vertical.Slice.Template",
+	"name": "Vertical Slice Template (C#)",
+	"shortName": "vertical-slice-template",
+	"sourceName": "VerticalSliceTemplate",
+	"defaultName": "VerticalSliceProject",
+	"tags": {
+		"language": "C#",
+		"type": "solution",
+		"platform": "web"
+	},
+	"preferNameDirectory": true,
+	"description": "A basic solution template with Vertical Slice Architecture.",
+	"symbols": {
+		"TargetFramework": {
+			"type": "parameter",
+			"datatype": "choice",
+			"replaces": "{{TargetFramework}}",
+			"defaultValue": "net10.0",
+			"choices": [
+				{
+					"displayName": ".NET 10.0 (LTS, Current default)",
+					"choice": "net10.0"
+				}
+			],
+			"description": "The target framework for the solution."
+		}
+	},
+	"sources": [
+		{
+			"source": "./",
+			"target": "./",
+			"exclude": [
+				"**/[Bb]in/**",
+				"**/[Oo]bj/**",
+				"**/.vs/**",
+				"**/.git/**",
+				"**/.template.config/**"
+			]
+		}
+	],
+	"postActions": [
+		{
+			"actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+			"manualInstructions": [
+				{
+					"text": "Run 'dotnet restore'"
+				}
+			],
+			"continueOnError": true,
+			"description": "Restore NuGet packages"
+		}
+	]
+}
