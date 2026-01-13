@@ -9,10 +9,9 @@
 
 ---
 
-| #   | STATUS                                                                |
-| --- | --------------------------------------------------------------------- |
-| 1   | This is a **UNDER DEVELOPMENT** .NET Core 10 and Angular 20 solution. |
-| 2   | You can find previous functional versions in the repository branches. |
+| #   | STATUS                                                          |
+| --- | --------------------------------------------------------------- |
+| 1   | This is a **READY TO USE** .NET Core 8 and Angular 19 solution. |
 
 ---
 
@@ -24,17 +23,17 @@
 
 ### Table: .NET Core
 
-| Current | .NET Core | .NET Core release type        | EF Core  | Status            |
-| ------- | --------- | ----------------------------- | -------- | ----------------- |
-| ✅      | `10`      | LTS (ends: November 14, 2028) | -        | Under development |
-|         | `9`       | STS (ends: November 10, 2026) | -        | Skipped           |
-|         | `8.0.100` | LTS (ends: November 10, 2026) | `8.0.22` | Fully functional  |
+| Version | .NET Core | .NET Core release type    | EF Core  | Status            |
+| ------- | --------- | ------------------------- | -------- | ----------------- |
+|         | `10`      | LTS (ends: Nov. 14, 2028) | -        | Under development |
+|         | `9`       | STS (ends: Nov. 10, 2026) | -        | Skipped           |
+| ✅      | `8.0.100` | LTS (ends: Nov. 10, 2026) | `8.0.22` | Ready to use      |
 
 [.NET and .NET Core Support Policy](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core) ↗
 
 ### Table: Identity API
 
-| Current | Identity API (compatible with this EF Core) | Status      |
+| Version | Identity API (compatible with this EF Core) | Status      |
 | ------- | ------------------------------------------- | ----------- |
 | ❌      | `8.0.21`                                    | Unsupported |
 
@@ -42,7 +41,7 @@
 
 ### Table: MVC
 
-| Current | Bootstrap | jQuery  | jQuery Validate | Jquery Validation Unobtrusive | Status           |
+| Version | Bootstrap | jQuery  | jQuery Validate | Jquery Validation Unobtrusive | Status           |
 | ------- | --------- | ------- | --------------- | ----------------------------- | ---------------- |
 | ✅      | `5.3.8`   | `3.7.1` | `1.21.0`        | `4.0.0`                       | Fully functional |
 
@@ -51,11 +50,11 @@
 
 ### Table: Angular
 
-| Current | Angular Version      | Angular Release Type   | Node.js Version                       | TypeScript Version | RxJS Version         | Status                                   |
+| Version | Angular Version      | Angular Release Type   | Node.js Version                       | TypeScript Version | RxJS Version         | Status                                   |
 | ------- | -------------------- | ---------------------- | ------------------------------------- | ------------------ | -------------------- | ---------------------------------------- |
-| ✅      | `20.2.x` or `20.3.x` | LTS (ends: 2026-11-28) | `^20.19.0` or `^22.12.0` or `^24.0.0` | `>=5.9.0 <6.0.0`   | `^6.5.3` or `^7.4.0` | Under development                        |
+|         | `20.2.x` or `20.3.x` | LTS (ends: 2026-11-28) | `^20.19.0` or `^22.12.0` or `^24.0.0` | `>=5.9.0 <6.0.0`   | `^6.5.3` or `^7.4.0` | Under development                        |
 |         | `19.2.x`             | LTS (ends: 2026-05-19) | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.5.0 <5.9.0`   | `^6.5.3` or `^7.4.0` | Only with basic development setup added. |
-|         | `18.1.x` or `18.2.x` | Out of support         | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.4.0 <5.6.0`   | `^6.5.3` or `^7.4.0` | Not available                            |
+| ✅      | `18.1.x` or `18.2.x` | Out of support         | `^18.19.1` or `^20.11.1` or `^22.0.0` | `>=5.4.0 <5.6.0`   | `^6.5.3` or `^7.4.0` | Not available                            |
 
 ---
 
