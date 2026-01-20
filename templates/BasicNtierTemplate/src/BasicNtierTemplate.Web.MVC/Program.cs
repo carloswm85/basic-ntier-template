@@ -24,7 +24,7 @@ namespace BasicNtierTemplate.Web.MVC
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<StartUp>();
                 });
     }
 }

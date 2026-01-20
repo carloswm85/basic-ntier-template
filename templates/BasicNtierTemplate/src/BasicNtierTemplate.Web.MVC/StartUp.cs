@@ -10,15 +10,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BasicNtierTemplate.Web.MVC
 {
-    public class Startup
+    public class StartUp
     {
-        public Startup(IWebHostEnvironment env)
+        public StartUp(IWebHostEnvironment env)
         {
             // Build the configuration by locating the appsettings.json file
             // in the API project directory (1 directory level up from the current directory).
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "../BasicNtierTemplate.API");
             var builder = new ConfigurationBuilder()
-                .SetBasePath(path)
+                .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
@@ -44,13 +43,12 @@ namespace BasicNtierTemplate.Web.MVC
             // Configure HttpClient with base address from configuration
             services.AddHttpClient("ApiClient", (provider, client) =>
             {
-                var config = provider.GetRequiredService<IConfiguration>();
-                var baseUrl = config["ApiBaseUrl"];
-
-                if (string.IsNullOrWhiteSpace(baseUrl))
+                var apiBaseUrl = Configuration["ApiBaseUrl"];
+                if (string.IsNullOrWhiteSpace(apiBaseUrl))
+                {
                     throw new InvalidOperationException("ApiBaseUrl configuration is missing or empty.");
-
-                client.BaseAddress = new Uri(baseUrl);
+                }
+                client.BaseAddress = new Uri(apiBaseUrl);
             });
 
 
@@ -134,7 +132,7 @@ namespace BasicNtierTemplate.Web.MVC
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                var logger = services.GetRequiredService<ILogger<Startup>>();
+                var logger = services.GetRequiredService<ILogger<StartUp>>();
                 try
                 {
                     var context = services.GetRequiredService<BasicNtierTemplateDbContext>();
