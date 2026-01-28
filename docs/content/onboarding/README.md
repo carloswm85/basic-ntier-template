@@ -22,6 +22,8 @@
 
 ## Version compatibility
 
+- ✅ is latest version.
+
 ### Table: .NET Core
 
 | Current | .NET Core | .NET Core release type        | EF Core  | Status            |
@@ -34,9 +36,10 @@
 
 ### Table: Identity API
 
-| Current | Identity API (compatible with this EF Core) | Status      |
-| ------- | ------------------------------------------- | ----------- |
-| ❌      | `8.0.21`                                    | Unsupported |
+| Current | Identity API (compatible with this EF Core) | Status           |
+| ------- | ------------------------------------------- | ---------------- |
+| ✅      | `10.0.1`                                    | Fully functional |
+| ❌      | `8.0.21`                                    | Unsupported      |
 
 [Official Documentation on Identity API](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-8.0&tabs=visual-studio) ↗
 
