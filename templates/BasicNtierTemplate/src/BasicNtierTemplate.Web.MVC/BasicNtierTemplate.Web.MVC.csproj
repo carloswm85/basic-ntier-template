@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BasicNtierTemplate.API\BasicNtierTemplate.API.csproj" />
+    <ProjectReference Include="..\BasicNtierTemplate.Web.API\BasicNtierTemplate.Web.API.csproj" />
     <ProjectReference Include="..\BasicNtierTemplate.Data\BasicNtierTemplate.Data.csproj" />
     <ProjectReference Include="..\BasicNtierTemplate.Service\BasicNtierTemplate.Service.csproj" />
   </ItemGroup>

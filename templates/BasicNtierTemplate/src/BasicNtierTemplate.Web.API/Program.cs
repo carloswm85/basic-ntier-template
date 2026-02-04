@@ -8,7 +8,7 @@ using BasicNtierTemplate.Service.Services;
 using BasicNtierTemplate.Service.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace BasicNtierTemplate.API
+namespace BasicNtierTemplate.Web.API
 {
     public class Program
     {
@@ -107,7 +107,7 @@ namespace BasicNtierTemplate.API
                 // Not required when running frontend and backend in the same solution with proper proxy setup
                 // app.UseCors("AllowFrontend");
 
-                // Map controllers to endpoints (routes controllers’ actions to HTTP requests).
+                // Map controllers to endpoints (routes controllersï¿½ actions to HTTP requests).
                 app.MapControllers();
 
                 app.MapFallback(() => Results.NotFound("Endpoint not found."));

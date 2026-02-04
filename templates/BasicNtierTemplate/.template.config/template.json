@@ -63,7 +63,7 @@
 	],
 	"primaryOutputs": [
 		{
-			"path": "BasicNtierTemplate.API/BasicNtierTemplate.API.csproj"
+			"path": "BasicNtierTemplate.Web.API/BasicNtierTemplate.Web.API.csproj"
 		},
 		{
 			"path": "BasicNtierTemplate.Service/BasicNtierTemplate.Service.csproj"

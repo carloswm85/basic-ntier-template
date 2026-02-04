@@ -46,10 +46,8 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
 
 - Install: <https://nodejs.org/en/download>
 - Or better:
-
   - In Mac/Linux: <https://github.com/nvm-sh/nvm>
   - In Windows: <https://github.com/coreybutler/nvm-windows/>
-
     - Usage:
 
       ```console
@@ -76,7 +74,7 @@ Commands:
 For Angular development you have 2 options:
 
 1. Run both projects together from ASP.NET Core.
-2. Run the `BasicNtierTemplate.API` project separately from the `BasicNtierTemplate.Web.Angular` poject.
+2. Run the `BasicNtierTemplate.Web.API` project separately from the `BasicNtierTemplate.Web.Angular` poject.
 
 #### (a) Running SPA in ASP.NET Core (Together)
 
@@ -86,13 +84,13 @@ For Angular development you have 2 options:
 dotnet add package Microsoft.AspNetCore.SpaProxy
 ```
 
-2. At `BasicNtierTemplate.API\Properties\launchSettings.json`, uncomment lines:
+2. At `BasicNtierTemplate.Web.API\Properties\launchSettings.json`, uncomment lines:
 
 ```json
 "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
 ```
 
-3. At `BasicNtierTemplate.API\BasicNtierTemplate.API.csproj` uncomment:
+3. At `BasicNtierTemplate.Web.API\BasicNtierTemplate.Web.API.csproj` uncomment:
 
 ```xml
 <!-- Angular Project
@@ -102,7 +100,7 @@ dotnet add package Microsoft.AspNetCore.SpaProxy
 <SpaProxyServerUrl>https://localhost:5021</SpaProxyServerUrl>
 ```
 
-4. When debugging `BasicNtierTemplate.API`, the Angular SPA will be launched (`BasicNtierTemplate.Web.Angular`).
+4. When debugging `BasicNtierTemplate.Web.API`, the Angular SPA will be launched (`BasicNtierTemplate.Web.Angular`).
 
 Working demo page, fetching data from API layer to Angular layer:
 
@@ -110,5 +108,5 @@ Working demo page, fetching data from API layer to Angular layer:
 
 #### (b) Running SPA and ASP.NET Core Separately
 
-- Run `BasicNtierTemplate.API` without following the previous steps.
+- Run `BasicNtierTemplate.Web.API` without following the previous steps.
 - Run the Angular app from its root folder using `ng serve` using your favorite IDE or editor.

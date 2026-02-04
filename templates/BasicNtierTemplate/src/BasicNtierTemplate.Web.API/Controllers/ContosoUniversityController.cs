@@ -2,7 +2,7 @@
 using BasicNtierTemplate.Service.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BasicNtierTemplate.API.Controllers
+namespace BasicNtierTemplate.Web.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

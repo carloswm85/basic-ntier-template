@@ -25,7 +25,7 @@ namespace BasicNtierTemplate.Data.Model
             // in the API project directory (1 directory level up from the current directory).
             // Go from /bin/Debug/netX.0/ back to the solution folder and into the API project
             var basePath = Path.GetFullPath(
-                Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "BasicNtierTemplate.API")
+                Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "BasicNtierTemplate.Web.API")
             );
 
             var configuration = new ConfigurationBuilder()

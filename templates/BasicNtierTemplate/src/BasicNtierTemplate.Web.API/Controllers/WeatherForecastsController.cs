@@ -1,7 +1,7 @@
-﻿using BasicNtierTemplate.API.ApiModels;
+﻿using BasicNtierTemplate.Web.API.ApiModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BasicNtierTemplate.API.Controllers
+namespace BasicNtierTemplate.Web.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

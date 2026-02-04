@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="src/BasicNtierTemplate.API/BasicNtierTemplate.API.csproj" />
+  <Project Path="src/BasicNtierTemplate.Web.API/BasicNtierTemplate.Web.API.csproj" />
   <Project Path="src/BasicNtierTemplate.Data/BasicNtierTemplate.Data.csproj" />
   <Project Path="src/BasicNtierTemplate.Repository/BasicNtierTemplate.Repository.csproj" />
   <Project Path="src/BasicNtierTemplate.Service/BasicNtierTemplate.Service.csproj" />
