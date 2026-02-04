@@ -1,0 +1,46 @@
+[
+  {
+    "Name": "Web API + MVC",
+    "Projects": [
+      {
+        "Path": "src\\BasicNtierTemplate.Web.API\\BasicNtierTemplate.Web.API.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "src\\BasicNtierTemplate.Web.MVC\\BasicNtierTemplate.Web.MVC.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
+      }
+    ]
+  },
+  {
+    "Name": "Web API (Headless)",
+    "Projects": [
+      {
+        "Path": "src\\BasicNtierTemplate.Web.API\\BasicNtierTemplate.Web.API.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      }
+    ]
+  },
+  {
+    "Name": "Web MVC",
+    "Projects": [
+      {
+        "Path": "src\\BasicNtierTemplate.Web.MVC\\BasicNtierTemplate.Web.MVC.csproj",
+        "Action": "Start"
+      }
+    ]
+  },
+  {
+    "Name": "Web API + Angular",
+    "Projects": [
+      {
+        "Path": "src\\BasicNtierTemplate.Web.API\\BasicNtierTemplate.Web.API.csproj",
+        "Action": "Start",
+        "DebugTarget": "https + SPA"
+      }
+    ]
+  }
+]
