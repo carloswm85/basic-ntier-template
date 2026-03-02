@@ -8,7 +8,7 @@ const target = env.ASPNETCORE_HTTPS_PORT
 
 const PROXY_CONFIG = [
     {
-        context: ["/api/WeatherForecasts/data"],
+        context: ["/api/v1/"],
         proxyTimeout: 10000,
         target: target,
         secure: false,
@@ -18,9 +18,9 @@ const PROXY_CONFIG = [
     },
 ];
 
-//console.log(`\nenv.ASPNETCORE_HTTPS_PORT: ${env.ASPNETCORE_HTTPS_PORT}\n`);
-//console.log(`\nenv.ASPNETCORE_URLS: ${env.ASPNETCORE_URLS}\n\n`);
-//console.log(`\nCurrent target: ${target}\n`);
-//console.log("\nCurrent PROXY_CONFIG:\n", PROXY_CONFIG, "\n");
+console.log(`Current Web API target: ${target}/swagger/index.html`);
+console.log(`env.ASPNETCORE_HTTPS_PORT variable: ${env.ASPNETCORE_HTTPS_PORT}`);
+console.log(`env.ASPNETCORE_URLS variable: ${env.ASPNETCORE_URLS}`);
+console.log("\nCurrent PROXY_CONFIG value:\n", PROXY_CONFIG, "\n");
 
 module.exports = PROXY_CONFIG;

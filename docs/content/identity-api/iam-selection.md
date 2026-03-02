@@ -25,7 +25,7 @@
 
 ---
 
-# Choose an identity management solution
+# Choose An Identity Management Solution
 
 ## Overview
 
@@ -149,6 +149,13 @@ Identity = user/accounts system
 OIDC server = identity provider with endpoints like `/authorize`, `/token`, `/userinfo`, `/jwks`, etc.
 
 Identity does **not** include these OIDC endpoints.
+
+| Characteristic     | ASP\.NET Core Identity                         | IdentityServer/Duende IdentityServer                   |
+| ------------------ | ---------------------------------------------- | ------------------------------------------------------ |
+| Main Purpose       | User and role management                       | Identity provider (OAuth2 / OpenID Connect)            |
+| Scope              | Local (within the same project)                | Distributed (centralized authentication)               |
+| Issues JWT tokens? | Not directly                                   | Yes, as an Authorization Server                        |
+| When to use it?    | Medium-sized apps, monoliths, or internal APIs | Apps with multiple clients or federated authentication |
 
 ---
 
@@ -300,7 +307,6 @@ Using Identity + OpenIddict/IdentityServer you get:
 
 - Horizontal scalability (stateless tokens + distributed cache)
 - Support for:
-
   - Authorization Code flow with PKCE
   - Client credentials
   - Refresh tokens

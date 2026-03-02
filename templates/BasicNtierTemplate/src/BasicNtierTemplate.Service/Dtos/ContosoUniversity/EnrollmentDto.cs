@@ -1,4 +1,4 @@
-﻿using BasicNtierTemplate.Data.Enums;
+﻿using BasicNtierTemplate.Data.Constants;
 
 namespace BasicNtierTemplate.Service.Dtos.ContosoUniversity
 {

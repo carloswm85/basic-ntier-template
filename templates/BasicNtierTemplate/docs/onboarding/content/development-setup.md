@@ -1,8 +1,9 @@
 - [Development Set-Up](#development-set-up)
   - [NET Core Development](#net-core-development)
-  - [Angular Development](#angular-development)
+  - [Angular Development (installation and upgrade)](#angular-development-installation-and-upgrade)
     - [Install Node](#install-node)
     - [Install Angular](#install-angular)
+      - [Upgrade Angular Project](#upgrade-angular-project)
     - [Run the Application](#run-the-application)
       - [(a) Running SPA in ASP.NET Core (Together)](#a-running-spa-in-aspnet-core-together)
       - [(b) Running SPA and ASP.NET Core Separately](#b-running-spa-and-aspnet-core-separately)
@@ -40,7 +41,7 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
 
 ---
 
-## Angular Development
+## Angular Development (installation and upgrade)
 
 ### Install Node
 
@@ -50,7 +51,7 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
   - In Windows: <https://github.com/coreybutler/nvm-windows/>
     - Usage:
 
-      ```console
+      ```powershell
       > nvm list
       > nvm install lts
       > nvm install 19
@@ -63,10 +64,24 @@ You can install multiple Node versions.
 
 Commands:
 
-```console
+```powershell
 > npm install -g @angular/cli@19.2.0
 > ng version
 > ng serve
+```
+
+#### Upgrade Angular Project
+
+```powershell
+> nvm list
+> nvm use 22.20.0 # select target Node version
+> npm uninstall -g @angular/cli
+> npm install -g @angular/cli@20.2.0
+> ng version
+> node -v
+> npx ng update @angular/core@20.2.0 @angular/cli@20.2.0
+> Remove-Item node_modules -Recurse -Force
+> npm install
 ```
 
 ### Run the Application
@@ -80,7 +95,7 @@ For Angular development you have 2 options:
 
 1. Install the dependency:
 
-```terminal
+```powershell
 dotnet add package Microsoft.AspNetCore.SpaProxy
 ```
 

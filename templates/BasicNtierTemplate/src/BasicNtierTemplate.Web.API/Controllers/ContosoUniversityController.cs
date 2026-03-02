@@ -1,11 +1,18 @@
-﻿using BasicNtierTemplate.Service.Dtos.ContosoUniversity;
-using BasicNtierTemplate.Service.Services.Interfaces;
+﻿using System.Diagnostics;
+using Asp.Versioning;
+using BasicNtierTemplate.Service.Dtos.ContosoUniversity;
+using BasicNtierTemplate.Service.Services.ExampleServices.Interfaces;
+using BasicNtierTemplate.Web.API.Constants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BasicNtierTemplate.Web.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
+    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class ContosoUniversityController : ControllerBase
     {
         private readonly IContosoUniversityService _contosoService;
@@ -17,18 +24,71 @@ namespace BasicNtierTemplate.Web.API.Controllers
 
         #region Student
 
-        // ✔️ GET: api/students
+        //
+        // ✅ GET: api/students
+        //
+        /// <summary>
+        /// Retrieves the list of students. ⚠️ CACHED response example (60 seconds, with constant settings).
+        /// </summary>
+        /// <remarks>
+        /// Response is cached on the client for 60 seconds.
+        /// </remarks>
+        /// <returns>
+        /// Returns a <see cref="StatusCodes.Status200OK"/> response containing the list of students
+        /// or <see cref="StatusCodes.Status403Forbidden"/> if the request is not authorized.
+        /// </returns>
+        /// <response code="200">Student list retrieved successfully.</response>
+        /// <response code="403">Access forbidden.</response>
         [HttpGet("students")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [MapToApiVersion("1.0")]
+        //[ResponseCache(Duration = 60)]
+        //[ResponseCache(CacheProfileName = "Default60Sec")]
+        [ResponseCache(CacheProfileName = CacheProfiles.Default60Sec)]
+        [ProducesResponseType(typeof(IEnumerable<StudentDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Obsolete("This medhos is obsolete. Use \"students\" endpoint from 'v2'")]
         public async Task<ActionResult> GetStudents()
         {
+            Debug.WriteLine($"Getting students... Time: {DateTime.Now}");
             var students = await _contosoService.GetStudentListAsync();
+            Debug.WriteLine($"Sending students, with caching.");
             return Ok(students);
         }
 
-        // ✔️ GET: api/students/5
-        [HttpGet("students/{studentId:int})", Name = "GetStudent")]
+        //
+        // ✅ GET: api/students
+        //
+        /// <summary>
+        /// Retrieves the list of students. ⚠️ CACHED response example (60 seconds, with constant settings).
+        /// </summary>
+        /// <remarks>
+        /// Response is cached on the client for 60 seconds.
+        /// </remarks>
+        /// <returns>
+        /// Returns a <see cref="StatusCodes.Status200OK"/> response containing the list of students
+        /// or <see cref="StatusCodes.Status403Forbidden"/> if the request is not authorized.
+        /// </returns>
+        /// <response code="200">Student list retrieved successfully.</response>
+        /// <response code="403">Access forbidden.</response>
+        [HttpGet("students")]
+        [AllowAnonymous] // ← Add this explicitly
+        [MapToApiVersion("2.0")]
+        [ResponseCache(CacheProfileName = CacheProfiles.Default60Sec)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult> GetStudentsOrderedByDescendingId()
+        {
+            Debug.WriteLine($"Getting students... Time: {DateTime.Now}");
+            var students = await _contosoService.GetStudentListAsync();
+            students = students.OrderByDescending(s => s.Id).ToList();
+            Debug.WriteLine($"Sending students, with caching.");
+            return Ok(students);
+        }
+
+        //
+        // ✅ GET: api/students/5
+        //
+        [HttpGet("students/{studentId:int}", Name = "GetStudent")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -43,7 +103,9 @@ namespace BasicNtierTemplate.Web.API.Controllers
             return Ok(studentDto);
         }
 
-        // ✔️ POST: api/students
+        //
+        // ✅ POST: api/students
+        //
         [HttpPost("students")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -72,7 +134,9 @@ namespace BasicNtierTemplate.Web.API.Controllers
             return CreatedAtRoute("GetStudent", new { studentId = createdStudent!.Id }, createdStudent);
         }
 
-        // ✔️ PUT: api/students
+        //
+        // ✅ PUT: api/students
+        //
         [HttpPut("students/{studentId:int}", Name = "UpdateStudent")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -99,7 +163,9 @@ namespace BasicNtierTemplate.Web.API.Controllers
             return NoContent();
         }
 
-        // ✔️ DELETE: api/students/5
+        //
+        // ✅ DELETE: api/students/5
+        //
         [HttpDelete("students/{studentId:int}", Name = "DeleteStudent")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

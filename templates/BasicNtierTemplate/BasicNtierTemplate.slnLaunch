@@ -20,7 +20,7 @@
       {
         "Path": "src\\BasicNtierTemplate.Web.API\\BasicNtierTemplate.Web.API.csproj",
         "Action": "Start",
-        "DebugTarget": "https"
+        "DebugTarget": "http"
       }
     ]
   },

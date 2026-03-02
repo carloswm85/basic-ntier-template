@@ -3,11 +3,11 @@ using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Repository;
 using BasicNtierTemplate.Service.Dtos.ContosoUniversity;
 using BasicNtierTemplate.Service.Models;
-using BasicNtierTemplate.Service.Services.Interfaces;
+using BasicNtierTemplate.Service.Services.ExampleServices.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace BasicNtierTemplate.Service.Services
+namespace BasicNtierTemplate.Service.Services.ExampleServices
 {
     public class ContosoUniversityService : IContosoUniversityService
     {

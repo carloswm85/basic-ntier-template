@@ -1,7 +1,7 @@
 ﻿using BasicNtierTemplate.Service.Dtos.ContosoUniversity;
 using BasicNtierTemplate.Service.Models;
 
-namespace BasicNtierTemplate.Service.Services.Interfaces
+namespace BasicNtierTemplate.Service.Services.ExampleServices.Interfaces
 {
     public interface IContosoUniversityService
     {

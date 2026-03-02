@@ -1,7 +1,7 @@
 using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Service.Dtos.ContosoUniversity;
 using BasicNtierTemplate.Service.Models;
-using BasicNtierTemplate.Service.Services.Interfaces;
+using BasicNtierTemplate.Service.Services.ExampleServices.Interfaces;
 using BasicNtierTemplate.Web.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

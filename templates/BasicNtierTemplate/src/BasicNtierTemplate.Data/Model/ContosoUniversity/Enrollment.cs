@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using BasicNtierTemplate.Data.Enums;
+using BasicNtierTemplate.Data.Constants;
 
 namespace BasicNtierTemplate.Data.Model
 {
