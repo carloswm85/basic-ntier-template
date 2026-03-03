@@ -20,6 +20,8 @@
 
 <https://github.com/carloswm85/basic-ntier-template>
 
+---
+
 ## Version compatibility
 
 ### Table: .NET Core

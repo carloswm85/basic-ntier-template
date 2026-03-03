@@ -1,7 +1,7 @@
 - [Template Installation And Use](#template-installation-and-use)
-	- [From Nuget](#from-nuget)
-	- [From Local Repository](#from-local-repository)
-	- [Using The Template](#using-the-template)
+  - [From Nuget](#from-nuget)
+  - [From Local Repository](#from-local-repository)
+  - [Using The Template](#using-the-template)
 
 ---
 
@@ -38,9 +38,11 @@ dotnet new basic-ntier-template -o "BasicNtierTemplateExample"
 ## Using The Template
 
 ```powershell
-dotnet new basic-ntier-template -o "../../MyFolder/BasicNtierTemplateExample2" # Custom solution name (and path, if included in the string)
+# Custom solution name (and path, if included in the string)
+dotnet new basic-ntier-template -o "../../MyFolder/BasicNtierTemplateExample2"
 ```
 
 ```powershell
-dotnet new basic-ntier-template -o  "BasicNtierTemplateExample3" --force # Force file generation, and override existing files if any
+# Force file generation, and override existing files if any
+dotnet new basic-ntier-template -o  "BasicNtierTemplateExample3" --force
 ```

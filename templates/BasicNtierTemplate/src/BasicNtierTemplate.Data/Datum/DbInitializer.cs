@@ -10,21 +10,24 @@ public static class DbInitializer
 {
     public static async Task Initialize(IServiceProvider serviceProvider, string testUserPw)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(testUserPw);
+
         var dbContext = serviceProvider.GetRequiredService<BasicNtierTemplateDbContext>();
 
-        // Look for any students.
+        // #1 — Migrate handles creation
+        await dbContext.Database.MigrateAsync();
+
+        // #2 — Check AFTER migration so the table exists
         if (dbContext.Students.Any())
         {
-            return; // DB has been seeded
+            return; // DB has already been seeded
         }
 
-        dbContext.Database.Migrate();
-        dbContext.Database.EnsureCreated();
 
-        SeedDB(dbContext);
+        await SeedDB(dbContext);
     }
 
-    private static void SeedDB(BasicNtierTemplateDbContext dbContext)
+    private static async Task SeedDB(BasicNtierTemplateDbContext dbContext)
     {
         // === CONTOSO UNIVERSITY SEEDING FOR CRUD EXAMPLE
         IEnumerable<Student> students = GetStudents();
