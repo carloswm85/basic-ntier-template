@@ -9,7 +9,7 @@
 	],
 	"identity": "Vertical.Slice.Template.CSharp",
 	"groupIdentity": "Vertical.Slice.Template",
-	"name": "Vertical Slice Template (C#)",
+	"name": "DTK Vertical Slice Template (C#)",
 	"shortName": "vertical-slice-template",
 	"sourceName": "VerticalSliceTemplate",
 	"defaultName": "VerticalSliceProject",

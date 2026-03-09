@@ -11,7 +11,7 @@
 	],
 	"identity": "Basic.Ntier.Template.CSharp",
 	"groupIdentity": "Basic.Ntier.Template",
-	"name": "Basic N-Tier Template (C#)",
+	"name": "DTK Basic N-Tier Template (C#)",
 	"shortName": "basic-ntier-template",
 	"sourceName": "BasicNtierTemplate",
 	"defaultName": "BasicNtierProject",
