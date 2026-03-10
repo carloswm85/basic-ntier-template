@@ -10,4 +10,4 @@
 
 # Vertical Slice Template
 
-<https://github.com/carloswm85/dotnet-template-kit>
+<https://github.com/carloswm85/dotnet-template-kit/tree/main/templates/VerticalSliceTemplate>
