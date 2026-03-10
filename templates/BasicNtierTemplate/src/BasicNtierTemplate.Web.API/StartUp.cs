@@ -31,7 +31,7 @@ public class Startup
 
         // DbContext
         services.AddDbContext<BasicNtierTemplateDbContext>(options =>
-            options.UseSqlServer(connectionString));
+            options.UseSqlServer(connectionString, sql => sql.EnableRetryOnFailure()));
 
         // Caching (optional, but can improve performance for certain scenarios)
         services.AddDistributedMemoryCache();
