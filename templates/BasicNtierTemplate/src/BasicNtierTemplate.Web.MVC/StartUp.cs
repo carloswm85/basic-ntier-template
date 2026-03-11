@@ -7,8 +7,6 @@ using BasicNtierTemplate.Service.Services.ExampleServices;
 using BasicNtierTemplate.Service.Services.ExampleServices.Interfaces;
 using BasicNtierTemplate.Web.MVC.Services;
 using BasicNtierTemplate.Web.MVC.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace BasicNtierTemplate.Web.MVC;
@@ -62,13 +60,7 @@ public class StartUp
         services.AddLocalization(options => options.ResourcesPath = "Resources");
 
         services
-            .AddControllersWithViews(config =>
-            {
-                var policy = new AuthorizationPolicyBuilder()
-                                    .RequireAuthenticatedUser()
-                                    .Build();
-                config.Filters.Add(new AuthorizeFilter(policy));
-            })
+            .AddControllersWithViews()
             .AddViewLocalization()
             .AddDataAnnotationsLocalization()
             .AddXmlDataContractSerializerFormatters();
