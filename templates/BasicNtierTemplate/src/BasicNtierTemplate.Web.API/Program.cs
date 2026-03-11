@@ -1,4 +1,3 @@
-using BasicNtierTemplate.Data.Constants;
 using BasicNtierTemplate.Data.Datum;
 using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Web.API;
@@ -40,11 +39,7 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var db = serviceProvider.GetRequiredService<BasicNtierTemplateDbContext>();
-
-        // Set password with the Secret Manager tool.
-        //  `dotnet user-secrets set "SeedUserPW" "!Abc123Antartica" --project .\src\BasicNtierTemplate.Web.MVC\`
-        var testUserPw = app.Configuration.GetValue<string>("SeedUserPW") ?? ApplicationConstants.TestPassword;
-        await DbInitializer.Initialize(serviceProvider, testUserPw);
+        await DbInitializer.Initialize(serviceProvider);
 
         startupLogger.LogInformation("Database successfully initialized.");
     }

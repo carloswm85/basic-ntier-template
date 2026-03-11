@@ -8,10 +8,8 @@ namespace BasicNtierTemplate.Data.Datum;
 
 public static class DbInitializer
 {
-    public static async Task Initialize(IServiceProvider serviceProvider, string testUserPw)
+    public static async Task Initialize(IServiceProvider serviceProvider)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(testUserPw);
-
         var dbContext = serviceProvider.GetRequiredService<BasicNtierTemplateDbContext>();
 
         // #1 — Migrate handles creation

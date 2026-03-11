@@ -1,5 +1,4 @@
-﻿using BasicNtierTemplate.Data.Constants;
-using BasicNtierTemplate.Data.Datum;
+﻿using BasicNtierTemplate.Data.Datum;
 using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Repository;
 using BasicNtierTemplate.Service.Mappings.ContosoUniversity;
@@ -33,7 +32,7 @@ public class StartUp
 
     // === SERVICES
     // This method gets called by the runtime. Use this method to add services to the container.
-    public async void ConfigureServices(IServiceCollection services)
+    public void ConfigureServices(IServiceCollection services)
     {
         #region Services Configuration
 
@@ -84,7 +83,7 @@ public class StartUp
 
     // === REQUEST PIPELINE
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public async void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+    public async Task Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
     {
         #region Middleware Configuration
 
@@ -139,10 +138,7 @@ public class StartUp
             var logger = serviceProvider.GetRequiredService<ILogger<StartUp>>();
             try
             {
-                // Set password with the Secret Manager tool.
-                //  `dotnet user-secrets set "SeedUserPW" "!Abc123Antartica" --project .\src\BasicNtierTemplate.Web.MVC\`
-                var testUserPw = Configuration.GetValue<string>("SeedUserPW") ?? ApplicationConstants.TestPassword;
-                await DbInitializer.Initialize(serviceProvider, testUserPw);
+                await DbInitializer.Initialize(serviceProvider);
 
                 logger.LogDebug("DB successfully initialized from the MVC layer.");
             }
