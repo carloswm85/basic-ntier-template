@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace BasicNtierTemplate.Service.Dtos.ContosoUniversity
 {
@@ -34,13 +35,6 @@ namespace BasicNtierTemplate.Service.Dtos.ContosoUniversity
                 })
                 : GovernmentId; // Fallback to original value
 
-        [Required(ErrorMessage = "Last name is required")]
-        [StringLength(80, MinimumLength = 2, ErrorMessage = "Last Name must be between 2 and 80 characters")]
-        [RegularExpression(@"^[a-zA-ZÁÉÍÓÚÑáéíóúñüÜ][a-zA-ZÁÉÍÓÚÑáéíóúñüÜ\s'-]*$",
-            ErrorMessage = "Last name must start with a letter and can only contain letters, spaces, hyphens, and apostrophes")]
-        [Display(Name = "Last Name")]
-        public string LastName { get; set; } = string.Empty;
-
         [Required(ErrorMessage = "First name is required")]
         [StringLength(80, MinimumLength = 2, ErrorMessage = "First Name must be between 2 and 80 characters")]
         [RegularExpression(@"^[a-zA-ZÁÉÍÓÚÑáéíóúñüÜ][a-zA-ZÁÉÍÓÚÑáéíóúñüÜ\s'-]*$",
@@ -48,15 +42,26 @@ namespace BasicNtierTemplate.Service.Dtos.ContosoUniversity
         [Display(Name = "First Name")]
         public string FirstMidName { get; set; } = string.Empty;
 
+        [Required(ErrorMessage = "Last name is required")]
+        [StringLength(80, MinimumLength = 2, ErrorMessage = "Last Name must be between 2 and 80 characters")]
+        [RegularExpression(@"^[a-zA-ZÁÉÍÓÚÑáéíóúñüÜ][a-zA-ZÁÉÍÓÚÑáéíóúñüÜ\s'-]*$",
+            ErrorMessage = "Last name must start with a letter and can only contain letters, spaces, hyphens, and apostrophes")]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; } = string.Empty;
+
+        [Display(Name = "Full Name")]
+        public string FullName => $"{LastName}, {FirstMidName}";
+
+        public string? ImgUrl { get; set; }
+        public string? ImgUrlLocal { get; set; }
+        public IFormFile? Image { get; set; }
+
         [Required(ErrorMessage = "Enrollment date is required")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Enrollment Date")]
         [DateRange("1950-01-01", 50, ErrorMessage = "Enrollment Date must be between 1950 and 50 years from now")]
         public DateOnly? EnrollmentDate { get; set; }
-
-        [Display(Name = "Full Name")]
-        public string FullName => $"{LastName}, {FirstMidName}";
 
         public List<EnrollmentDto> Enrollments { get; set; } = [];
     }
