@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Testing/">
+    <Project Path="testing/BasicNtierTemplate.Testing.Services.Unit/BasicNtierTemplate.Testing.Services.Unit.csproj" Id="ce2677fd-82dc-4c75-8034-6e26c0d8dfad" />
+  </Folder>
   <Project Path="src/BasicNtierTemplate.Data/BasicNtierTemplate.Data.csproj" />
   <Project Path="src/BasicNtierTemplate.Repository/BasicNtierTemplate.Repository.csproj" />
   <Project Path="src/BasicNtierTemplate.Service/BasicNtierTemplate.Service.csproj" />
