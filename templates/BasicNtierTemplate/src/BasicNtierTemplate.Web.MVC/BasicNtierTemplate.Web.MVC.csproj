@@ -19,4 +19,8 @@
     <ProjectReference Include="..\BasicNtierTemplate.Service\BasicNtierTemplate.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\defaults\" />
+  </ItemGroup>
+
 </Project>

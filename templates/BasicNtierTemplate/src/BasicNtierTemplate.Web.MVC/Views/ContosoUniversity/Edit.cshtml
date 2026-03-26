@@ -13,9 +13,36 @@
                     <h4 class="mb-0">Edit Student</h4>
                 </div>
                 <div class="card-body">
-                    <form asp-controller="ContosoUniversity" asp-action="edit" novalidate>
+
+                    <form asp-controller="ContosoUniversity"
+                          asp-action="edit"
+                          method="post"
+                          enctype="multipart/form-data"
+                          novalidate>
+
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
                         <input type="hidden" asp-for="Id" />
+
+                        <!-- Current Image Preview -->
+                        <div class="mb-3 text-center">
+                            <img id="previewImage"
+                                 src="@(Model?.ImgUrl ?? "/images/defaults/default-student.png")"
+                                 onerror="this.src='/images/defaults/default-student.png';"
+                                 class="img-thumbnail"
+                                 style="max-width: 150px;" />
+                        </div>
+
+                        <!-- Replace Image -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Replace Image</label>
+                            <input asp-for="Image"
+                                   type="file"
+                                   class="form-control"
+                                   accept="image/*"
+                                   onchange="previewFile(event)" />
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                        </div>
 
                         <div class="mb-3">
                             <label asp-for="LastName" class="form-label fw-semibold"></label>
@@ -51,7 +78,9 @@
                                 <i class="bi bi-save"></i> Save Changes
                             </button>
                         </div>
+
                     </form>
+
                 </div>
             </div>
         </div>
@@ -62,4 +91,15 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
+    <script>
+        function previewFile(event) {
+            const input = event.target;
+            const preview = document.getElementById('previewImage');
+
+            if (input.files && input.files[0]) {
+                preview.src = URL.createObjectURL(input.files[0]);
+            }
+        }
+    </script>
 }

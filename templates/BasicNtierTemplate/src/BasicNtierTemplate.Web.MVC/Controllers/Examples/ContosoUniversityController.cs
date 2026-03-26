@@ -2,6 +2,7 @@ using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Service.Dtos.ContosoUniversity;
 using BasicNtierTemplate.Service.Models;
 using BasicNtierTemplate.Service.Services.ExampleServices.Interfaces;
+using BasicNtierTemplate.Web.MVC.Constants;
 using BasicNtierTemplate.Web.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,8 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             _logger = logger;
             _contosoService = contosoService;
         }
+
+        #region Students
 
         // GET: /ContosoUniversity/List
         [HttpGet("List")]
@@ -88,14 +91,16 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
         // In this method: Use entity classes with model binding instead of view models.
         [HttpPost("Create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,LastName,FirstMidName,GovernmentId,EnrollmentDate")] StudentDto student)
+        public async Task<IActionResult> Create([FromForm] StudentDto studentDto)
         {
             if (!ModelState.IsValid)
-                return View(student);
+                return View(studentDto);
 
             try
             {
-                await _contosoService.CreateStudentAsync(student);
+                studentDto = await UploadStudentImage(studentDto);
+
+                await _contosoService.CreateStudentAsync(studentDto);
                 return RedirectToAction(nameof(Index));
             }
             catch (DbUpdateException ex)
@@ -104,7 +109,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
                 ModelState.AddModelError("", "Unable to save changes. " +
                     "Try again, and if the problem persists " +
                     "see your system administrator.");
-                return View(student);
+                return View(studentDto);
             }
         }
 
@@ -128,7 +133,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
         // POST: /ContosoUniversity/Edit/5
         [HttpPost("Edit/{id:int}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int Id, [Bind("Id,LastName,FirstMidName,GovernmentId,EnrollmentDate")] StudentDto studentDto)
+        public async Task<IActionResult> Edit(int Id, [FromForm] StudentDto studentDto)
         {
             if (Id != studentDto.Id)
                 return NotFound();
@@ -138,6 +143,8 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
 
             try
             {
+                studentDto = await UploadStudentImage(studentDto);
+
                 await _contosoService.UpdateStudentAsync(Id, studentDto);
                 return RedirectToAction(nameof(Index));
             }
@@ -213,7 +220,7 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
          *  | **PATCH** | Partial modification | JSON Patch document | Update one or more fields only   |
          */
 
-        // Example, unused
+        // THIS IS JUST AN EXAMPLE, unused
         // PUT: /ContosoUniversity/Student/5
         [HttpPut("Student/{id}")]
         public async Task<IActionResult> UpdateStudent(int id, [FromBody] Student student)
@@ -226,16 +233,18 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
 
             try
             {
-                var existingStudent = await _contosoService.GetStudentAsync(id);
-                if (existingStudent == null)
+                var studentDto = await _contosoService.GetStudentAsync(id);
+                if (studentDto == null)
                     return NotFound();
 
                 // Replace all properties (full update)
-                existingStudent.FirstMidName = student.FirstMidName;
-                existingStudent.LastName = student.LastName;
-                existingStudent.EnrollmentDate = student.EnrollmentDate;
+                studentDto.FirstMidName = student.FirstMidName;
+                studentDto.LastName = student.LastName;
+                studentDto.EnrollmentDate = student.EnrollmentDate;
 
-                await _contosoService.CreateStudentAsync(existingStudent);
+                studentDto = await UploadStudentImage(studentDto);
+
+                await _contosoService.CreateStudentAsync(studentDto);
                 return NoContent(); // 204 - successful update
             }
             catch (DbUpdateException ex)
@@ -251,6 +260,8 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
             var studentData = await _contosoService.GetEnrollmentDateDataAsync();
             return View(studentData);
         }
+
+        #endregion
 
         [HttpGet("AdditionalInstructions")]
         public IActionResult ContosoUniversityInstructions()
@@ -303,6 +314,41 @@ namespace BasicNtierTemplate.Web.MVC.Controllers.Examples
                 - Implement all the endpoints from the API in the Angular layer, or a mobile project
                 ";
             return Ok(instructions);
+        }
+
+        private async Task<StudentDto> UploadStudentImage(StudentDto studentDto)
+        {
+            var request = HttpContext.Request;
+            var baseUrl = $"{request.Scheme}://{request.Host.Value}{request.PathBase.Value}";
+
+            if (studentDto.Image != null)
+            {
+                var folder = "students";
+                var imageFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", folder);
+
+                string fileName = studentDto.Id + Guid.NewGuid().ToString() + Path.GetExtension(studentDto.Image.FileName);
+
+                if (!Directory.Exists(imageFolder))
+                    Directory.CreateDirectory(imageFolder);
+
+                var filePath = Path.Combine(imageFolder, fileName);
+                FileInfo file = new FileInfo(filePath);
+
+                if (file.Exists) file.Delete();
+
+                using var fileStream = new FileStream(filePath, FileMode.Create);
+                await studentDto.Image.CopyToAsync(fileStream); // Copy file to target stream
+
+                studentDto.ImgUrl = $"{baseUrl}/images/{folder}/{fileName}";
+                studentDto.ImgUrlLocal = filePath;
+            }
+            else
+            {
+                studentDto.ImgUrl = DefaultImages.Student;
+                studentDto.ImgUrlLocal = null; // optional
+            }
+
+            return studentDto;
         }
     }
 }

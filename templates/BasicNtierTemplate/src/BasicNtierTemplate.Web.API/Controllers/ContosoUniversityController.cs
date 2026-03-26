@@ -22,7 +22,7 @@ namespace BasicNtierTemplate.Web.API.Controllers
             _contosoService = contosoService;
         }
 
-        #region Student
+        #region Students
 
         //
         // ✅ GET: api/students
@@ -112,7 +112,7 @@ namespace BasicNtierTemplate.Web.API.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> CreateStudent([FromBody] StudentDto studentDto)
+        public async Task<ActionResult> CreateStudent([FromForm] StudentDto studentDto)
         {
             if (studentDto == null)
                 return BadRequest(ModelState);
@@ -122,6 +122,8 @@ namespace BasicNtierTemplate.Web.API.Controllers
                 ModelState.AddModelError("CustomError", "Student already exists");
                 return BadRequest(ModelState);
             }
+
+            studentDto = await UploadStudentImage(studentDto);
 
             var studentIdResult = await _contosoService.CreateStudentAsync(studentDto);
             if (studentIdResult == 0)
@@ -143,7 +145,7 @@ namespace BasicNtierTemplate.Web.API.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> UpdateStudent(int studentId, [FromBody] StudentDto studentDto)
+        public async Task<ActionResult> UpdateStudent(int studentId, [FromForm] StudentDto studentDto)
         {
             if (studentDto == null)
                 return BadRequest(ModelState);
@@ -153,6 +155,8 @@ namespace BasicNtierTemplate.Web.API.Controllers
                 ModelState.AddModelError("CustomError", $"Student with government id {studentDto.GovernmentId} does not exist");
                 return BadRequest(ModelState);
             }
+
+            studentDto = await UploadStudentImage(studentDto);
 
             if (!await _contosoService.UpdateStudentAsync(studentId, studentDto))
             {
@@ -182,5 +186,40 @@ namespace BasicNtierTemplate.Web.API.Controllers
         }
 
         #endregion
+
+        private async Task<StudentDto> UploadStudentImage(StudentDto studentDto)
+        {
+            var request = HttpContext.Request;
+            var baseUrl = $"{request.Scheme}://{request.Host.Value}{request.PathBase.Value}";
+
+            if (studentDto.Image != null)
+            {
+                var folder = "students";
+                var imageFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", folder);
+
+                string fileName = studentDto.Id + Guid.NewGuid().ToString() + Path.GetExtension(studentDto.Image.FileName);
+
+                if (!Directory.Exists(imageFolder))
+                    Directory.CreateDirectory(imageFolder);
+
+                var filePath = Path.Combine(imageFolder, fileName);
+                FileInfo file = new FileInfo(filePath);
+
+                if (file.Exists) file.Delete();
+
+                using var fileStream = new FileStream(filePath, FileMode.Create);
+                await studentDto.Image.CopyToAsync(fileStream); // Copy file to target stream
+
+                studentDto.ImgUrl = $"{baseUrl}/images/{folder}/{fileName}";
+                studentDto.ImgUrlLocal = filePath;
+            }
+            else
+            {
+                studentDto.ImgUrl = DefaultImages.Student;
+                studentDto.ImgUrlLocal = null; // optional
+            }
+
+            return studentDto;
+        }
     }
 }

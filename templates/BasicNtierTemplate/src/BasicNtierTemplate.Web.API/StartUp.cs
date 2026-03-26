@@ -160,8 +160,9 @@ public class Startup
     // ------------------------------------------------------------
     public void ConfigurePipeline(IApplicationBuilder app, IWebHostEnvironment env)
     {
+        app.UseStaticFiles();
         // HTTPS early in pipeline
-        // app.UseHttpsRedirection(); // DELETE?
+        // app.UseHttpsRedirection(); // TODO: DELETE this line?
 
         // Swagger
         if (env.IsDevelopment())

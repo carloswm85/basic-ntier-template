@@ -14,6 +14,15 @@
         </div>
 
         <div class="card-body">
+
+            <!-- Image Section -->
+            <div class="text-center mb-4">
+                <img src="@(Model?.ImgUrl ?? "/images/defaults/default-student.png")"
+                     onerror="this.src='/images/defaults/default-student.png';"
+                     class="img-thumbnail"
+                     style="max-width: 180px;" />
+            </div>
+
             <dl class="row mb-0">
                 <dt class="col-sm-3 fw-semibold text-secondary">
                     @Html.DisplayNameFor(model => model.LastName)
@@ -76,8 +85,6 @@
                                     <td>@Html.DisplayFor(modelItem => item.Grade)</td>
                                 </tr>
                             }
-
-
                         </tbody>
                     </table>
                 </div>

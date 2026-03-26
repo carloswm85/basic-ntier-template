@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using Microsoft.AspNetCore.Http;
 
 namespace BasicNtierTemplate.Service.Dtos.ContosoUniversity
@@ -70,6 +71,7 @@ namespace BasicNtierTemplate.Service.Dtos.ContosoUniversity
     /// Custom validation attribute for DateOnly range validation.
     /// Allows specifying a start date and years into the future from current date.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     public class DateRangeAttribute : ValidationAttribute
     {
         private readonly DateOnly _minDate;
@@ -77,7 +79,7 @@ namespace BasicNtierTemplate.Service.Dtos.ContosoUniversity
 
         public DateRangeAttribute(string minDate, int yearsIntoFuture)
         {
-            _minDate = DateOnly.Parse(minDate);
+            _minDate = DateOnly.Parse(minDate, CultureInfo.InvariantCulture);
             _yearsIntoFuture = yearsIntoFuture;
         }
 

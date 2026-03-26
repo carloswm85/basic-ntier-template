@@ -13,7 +13,7 @@ namespace BasicNtierTemplate.Service.Services.ExampleServices.Interfaces
         Task<PaginatedList<StudentDto>> GetStudentsPaginatedListAsync(
             string currentFilter, int pageIndex, int pageSize,
             string searchString, string sortOrder);
-        Task<int> CreateStudentAsync(StudentDto student);
+        Task<int> CreateStudentAsync(StudentDto studentDto);
         bool StudentExists(int studentId);
         bool StudentExists(string governmentId);
         Task<bool> UpdateStudentAsync(int studentId, StudentDto studentDto);
