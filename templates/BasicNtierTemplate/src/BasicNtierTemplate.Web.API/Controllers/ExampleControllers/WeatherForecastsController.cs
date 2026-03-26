@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BasicNtierTemplate.Web.API.Controllers;
+namespace BasicNtierTemplate.Web.API.Controllers.ExampleControllers;
 
 /// <summary>
 /// Provides sample weather forecast data.
