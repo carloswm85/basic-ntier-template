@@ -15,12 +15,13 @@
 
         <div class="card-body">
 
-            <!-- Image Section -->
+            <!-- Image Preview (Default or Existing) -->
             <div class="text-center mb-4">
-                <img src="@(Model?.ImgUrl ?? "/images/defaults/default-student.png")"
-                     onerror="this.src='/images/defaults/default-student.png';"
-                     class="img-thumbnail"
-                     style="max-width: 180px;" />
+                <img
+                    src="@(string.IsNullOrEmpty(Model?.ImgUrl) ? Url.Content("~/images/defaults/default-student.png") : Url.Content(Model.ImgUrl))"
+                    onerror="this.src='@Url.Content("~/images/defaults/default-student.png")';"
+                    class="img-thumbnail"
+                    style="max-width: 180px;" />
             </div>
 
             <dl class="row mb-0">

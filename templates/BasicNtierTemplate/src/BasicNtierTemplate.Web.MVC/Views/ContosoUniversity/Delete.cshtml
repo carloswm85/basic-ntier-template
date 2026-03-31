@@ -16,6 +16,15 @@
                 <div class="card-body">
                     <h5 class="text-danger mb-4">Are you sure you want to delete this student?</h5>
 
+                    <!-- Image Preview (Default or Existing) -->
+                    <div class="mb-3 text-center">
+                        <img id="previewImage"
+                             src="@(string.IsNullOrEmpty(Model?.ImgUrl) ? Url.Content("~/images/defaults/default-student.png") : Url.Content(Model.ImgUrl))"
+                             onerror="this.src='@Url.Content("~/images/defaults/default-student.png")';"
+                             class="img-thumbnail"
+                             style="max-width: 150px;" />
+                    </div>
+
                     <dl class="row">
                         <dt class="col-sm-4 fw-semibold text-secondary">
                             @Html.DisplayNameFor(model => model.LastName)

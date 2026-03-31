@@ -20,9 +20,10 @@
                 <!-- Image Preview (Default or Existing) -->
                 <div class="mb-3 text-center">
                     <img id="previewImage"
-                         src="@(Model?.ImgUrl ?? "/images/defaults/default-student.png")"
-                         class="img-thumbnail"
-                         style="max-width: 150px;" />
+                        src="@(string.IsNullOrEmpty(Model?.ImgUrl) ? Url.Content("~/images/defaults/default-student.png") : Url.Content(Model.ImgUrl))"
+                        onerror="this.src='@Url.Content("~/images/defaults/default-student.png")';"
+                        class="img-thumbnail"
+                        style="max-width: 150px;" />
                 </div>
 
                 <!-- Upload Image -->
