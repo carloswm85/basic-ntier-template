@@ -2,7 +2,6 @@ using BasicNtierTemplate.Data.Model;
 using BasicNtierTemplate.Service.Dtos.ContosoUniversity;
 using BasicNtierTemplate.Service.Models;
 using BasicNtierTemplate.Service.Services.ExampleServices.Interfaces;
-using BasicNtierTemplate.Web.MVC.Constants;
 using BasicNtierTemplate.Web.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -98,7 +97,7 @@ public class ContosoUniversityController : Controller
 
         try
         {
-            studentDto = await UploadStudentImage(studentDto);
+            studentDto = await UploadImage(studentDto, "students");
 
             await _contosoService.CreateStudentAsync(studentDto);
             return RedirectToAction(nameof(Index));
@@ -143,7 +142,8 @@ public class ContosoUniversityController : Controller
 
         try
         {
-            studentDto = await UploadStudentImage(studentDto);
+            if (studentDto.Image != null)
+                studentDto = await UploadImage(studentDto, "students");
 
             await _contosoService.UpdateStudentAsync(Id, studentDto);
             return RedirectToAction(nameof(Index));
@@ -242,7 +242,7 @@ public class ContosoUniversityController : Controller
             studentDto.LastName = student.LastName;
             studentDto.EnrollmentDate = student.EnrollmentDate;
 
-            studentDto = await UploadStudentImage(studentDto);
+            studentDto = await UploadImage(studentDto, "students");
 
             await _contosoService.CreateStudentAsync(studentDto);
             return NoContent(); // 204 - successful update
@@ -316,38 +316,40 @@ public class ContosoUniversityController : Controller
         return Ok(instructions);
     }
 
-    private async Task<StudentDto> UploadStudentImage(StudentDto studentDto)
+    // REFACTOR
+    private async Task<dynamic> UploadImage(dynamic imageContainer, string folderName)
     {
-        var request = HttpContext.Request;
-        var baseUrl = $"{request.Scheme}://{request.Host.Value}{request.PathBase.Value}";
-
-        if (studentDto.Image != null)
+        if (imageContainer.Image != null)
         {
-            var folder = "students";
-            var imageFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", folder);
+            var imageFolder = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "wwwroot",
+                "images",
+                folderName
+            );
 
-            string fileName = studentDto.Id + Guid.NewGuid().ToString() + Path.GetExtension(studentDto.Image.FileName);
-
+            // Ensure directory exists
             if (!Directory.Exists(imageFolder))
                 Directory.CreateDirectory(imageFolder);
 
+            // Generate filename
+            string fileName = $"{imageContainer.Id}_{Guid.NewGuid()}{Path.GetExtension(imageContainer.Image.FileName)}";
+
             var filePath = Path.Combine(imageFolder, fileName);
-            FileInfo file = new FileInfo(filePath);
 
-            if (file.Exists) file.Delete();
-
+            // Save file
             using var fileStream = new FileStream(filePath, FileMode.Create);
-            await studentDto.Image.CopyToAsync(fileStream); // Copy file to target stream
+            await imageContainer.Image.CopyToAsync(fileStream);
 
-            studentDto.ImgUrl = $"{baseUrl}/images/{folder}/{fileName}";
-            studentDto.ImgUrlLocal = filePath;
+            // ✅ Store ONLY relative path
+            imageContainer.ImagePath = $"/images/{folderName}/{fileName}";
         }
         else
         {
-            studentDto.ImgUrl = DefaultImages.Student;
-            studentDto.ImgUrlLocal = null; // optional
+            // ✅ Also relative
+            imageContainer.ImagePath = $"/images/defaults/default-{folderName}.png";
         }
 
-        return studentDto;
+        return imageContainer;
     }
 }

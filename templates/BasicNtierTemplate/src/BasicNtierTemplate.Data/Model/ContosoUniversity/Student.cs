@@ -14,8 +14,7 @@ namespace BasicNtierTemplate.Data.Model
         [NotMapped]  // Explicitly mark as not mapped to DB
         public string FullName => $"{LastName}, {FirstMidName}";
 
-        public string? ImgUrl { get; set; }
-        public string? ImgUrlLocal { get; set; }
+        public string? ImagePath { get; set; }
 
         public DateOnly EnrollmentDate { get; set; }
 

@@ -53,8 +53,7 @@ namespace BasicNtierTemplate.Service.Dtos.ContosoUniversity
         [Display(Name = "Full Name")]
         public string FullName => $"{LastName}, {FirstMidName}";
 
-        public string? ImgUrl { get; set; }
-        public string? ImgUrlLocal { get; set; }
+        public string? ImagePath { get; set; }
         public IFormFile? Image { get; set; }
 
         [Required(ErrorMessage = "Enrollment date is required")]

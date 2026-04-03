@@ -17,9 +17,10 @@
 
             <!-- Image Preview (Default or Existing) -->
             <div class="text-center mb-4">
-                <img
-                    src="@(string.IsNullOrEmpty(Model?.ImgUrl) ? Url.Content("~/images/defaults/default-student.png") : Url.Content(Model.ImgUrl))"
-                    onerror="this.src='@Url.Content("~/images/defaults/default-student.png")';"
+                <img src="@(string.IsNullOrEmpty(Model?.ImagePath)
+                        ? Url.Content("~/images/defaults/default-students.png")
+                        : Url.Content(Model.ImagePath))"
+                    alt="Student profile"
                     class="img-thumbnail"
                     style="max-width: 180px;" />
             </div>
@@ -60,7 +61,7 @@
                 <i class="bi bi-book-fill me-2"></i> Enrollments
             </h5>
 
-            @if (Model.Enrollments == null || Model.Enrollments.Count <= 0)
+            @if (Model!.Enrollments == null || Model.Enrollments.Count <= 0)
             {
                 <div class="alert alert-info" role="alert">
                     <ul class="m-0">

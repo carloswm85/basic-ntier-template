@@ -210,13 +210,11 @@ public class ContosoUniversityController : ControllerBase
             using var fileStream = new FileStream(filePath, FileMode.Create);
             await studentDto.Image.CopyToAsync(fileStream); // Copy file to target stream
 
-            studentDto.ImgUrl = $"{baseUrl}/images/{folder}/{fileName}";
-            studentDto.ImgUrlLocal = filePath;
+            studentDto.ImagePath = $"{baseUrl}/images/{folder}/{fileName}";
         }
         else
         {
-            studentDto.ImgUrl = DefaultImages.Student;
-            studentDto.ImgUrlLocal = null; // optional
+            studentDto.ImagePath = DefaultImages.Student;
         }
 
         return studentDto;

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BasicNtierTemplate.Data.Migrations
 {
     [DbContext(typeof(BasicNtierTemplateDbContext))]
-    [Migration("20260304131518_InitialMigration")]
+    [Migration("20260403160743_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -178,6 +178,9 @@ namespace BasicNtierTemplate.Data.Migrations
 
                     b.Property<string>("GovernmentId")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")

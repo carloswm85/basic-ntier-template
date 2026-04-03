@@ -19,10 +19,12 @@
                     <!-- Image Preview (Default or Existing) -->
                     <div class="mb-3 text-center">
                         <img id="previewImage"
-                             src="@(string.IsNullOrEmpty(Model?.ImgUrl) ? Url.Content("~/images/defaults/default-student.png") : Url.Content(Model.ImgUrl))"
-                             onerror="this.src='@Url.Content("~/images/defaults/default-student.png")';"
-                             class="img-thumbnail"
-                             style="max-width: 150px;" />
+                            src="@(string.IsNullOrEmpty(Model?.ImagePath)
+                                ? Url.Content("~/images/defaults/default-students.png")
+                                : Url.Content(Model.ImagePath))"
+                            alt="Student profile"
+                            class="img-thumbnail"
+                            style="max-width: 150px;" />
                     </div>
 
                     <dl class="row">
@@ -66,3 +68,17 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const img = document.getElementById("previewImage");
+
+            if (img) {
+                img.addEventListener("error", function () {
+                    this.src = '/images/defaults/default-students.png';
+                });
+            }
+        });
+    </script>
+}
