@@ -41,7 +41,7 @@ public class ContosoUniversityController : Controller
             var students = await _contosoService.GetStudentsPaginatedListAsync(
                 currentFilter, pageIndex, pageSize, searchString, sortOrder);
 
-            var studentsPaginatedViewModel = new PaginatedListViewModel<StudentDto>(
+            var paginatedListViewModel = new PaginatedListViewModel<StudentDto>(
                 paginatedList: students,
                 currentFilter: searchString,
                 currentSort: sortOrder,
@@ -52,7 +52,7 @@ public class ContosoUniversityController : Controller
                 pageSize: pageSize
             );
 
-            return View(studentsPaginatedViewModel);
+            return View(paginatedListViewModel);
         }
         catch (Exception ex)
         {

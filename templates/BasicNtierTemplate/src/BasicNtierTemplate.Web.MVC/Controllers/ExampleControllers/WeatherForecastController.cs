@@ -24,13 +24,13 @@ public class WeatherForecastController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var weatherViewModel = new WeatherViewModel();
+        var viewModel = new WeatherViewModel();
 
         var weatherDataList = await _weatherForecastService.GetWeatherForecastExample();
         _logger.LogInformation("Fetched {Count} weather forecast entries.", weatherDataList?.Count ?? 0);
-        weatherViewModel.WeatherList = weatherDataList;
+        viewModel.WeatherList = weatherDataList;
 
-        return View(weatherViewModel);
+        return View(viewModel);
     }
 
     public IActionResult ApiInstructions()
