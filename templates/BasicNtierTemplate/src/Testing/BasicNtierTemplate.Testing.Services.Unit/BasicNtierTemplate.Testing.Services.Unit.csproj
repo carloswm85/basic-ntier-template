@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\BasicNtierTemplate.Service\BasicNtierTemplate.Service.csproj" />
+    <ProjectReference Include="..\..\BasicNtierTemplate.Service\BasicNtierTemplate.Service.csproj" />
   </ItemGroup>
 
 </Project>
