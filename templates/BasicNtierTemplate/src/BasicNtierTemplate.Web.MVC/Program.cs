@@ -2,8 +2,10 @@ using System.Diagnostics;
 
 namespace BasicNtierTemplate.Web.MVC;
 
-public static class Program
+public partial class Program
 {
+    protected Program() { }
+
     public static void Main(string[] args)
     {
         try
