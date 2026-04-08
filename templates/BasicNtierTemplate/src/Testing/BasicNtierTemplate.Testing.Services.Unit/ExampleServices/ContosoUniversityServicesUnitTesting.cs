@@ -7,9 +7,9 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 
-namespace BasicNtierTemplate.Testing.Unit.Services.ExampleServices;
+namespace BasicNtierTemplate.Testing.Unit.ExampleServices;
 
-public class ContosoUniversityUnitTestingServices
+public class ContosoUniversityServicesUnitTesting
 {
     [Fact]
     public async Task GetStudentAsync_AsNoTracking_ReturnsMappedStudentDto()
