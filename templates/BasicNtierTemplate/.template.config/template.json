@@ -63,16 +63,16 @@
 	],
 	"primaryOutputs": [
 		{
-			"path": "src/BasicNtierTemplate.Web.API/BasicNtierTemplate.Web.API.csproj"
+			"path": "solution/BasicNtierTemplate.Web.API/BasicNtierTemplate.Web.API.csproj"
 		},
 		{
-			"path": "src/BasicNtierTemplate.Service/BasicNtierTemplate.Service.csproj"
+			"path": "solution/BasicNtierTemplate.Service/BasicNtierTemplate.Service.csproj"
 		},
 		{
-			"path": "src/BasicNtierTemplate.Repository/BasicNtierTemplate.Repository.csproj"
+			"path": "solution/BasicNtierTemplate.Repository/BasicNtierTemplate.Repository.csproj"
 		},
 		{
-			"path": "src/BasicNtierTemplate.Data/BasicNtierTemplate.Data.csproj"
+			"path": "solution/BasicNtierTemplate.Data/BasicNtierTemplate.Data.csproj"
 		}
 	],
 	"postActions": [

@@ -12,7 +12,7 @@
 
 ```terminal
 MyApp.sln
-src/
+solution/
   MyApp.Domain/
     Entities/
     ValueObjects/
