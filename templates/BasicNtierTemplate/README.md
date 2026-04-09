@@ -1,9 +1,9 @@
-- [NetCoreContosoUniversityApp Solution](#netcorecontosouniversityapp-solution)
+- [BasicNtierTemplate Solution](#basicntiertemplate-solution)
 
 ---
 
-# NetCoreContosoUniversityApp Solution
+# BasicNtierTemplate Solution
 
-Based on template: <https://github.com/carloswm85/dotnet-template-kit> (look for correct branch)
+Based on template: <https://github.com/carloswm85/dotnet-template-kit/tree/main/templates/BasicNtierTemplate> (look for correct branch)
 
 Find documentation reference at: [./docs/onboarding/README.md](./docs/onboarding/README.md)
