@@ -1,0 +1,6 @@
+services:
+  basicntiertemplate.web.mvc:
+    image: ${DOCKER_REGISTRY-}basicntiertemplatewebmvc2
+    build:
+      context: .
+      dockerfile: solution/BasicNtierTemplate.Web.MVC/Dockerfile
