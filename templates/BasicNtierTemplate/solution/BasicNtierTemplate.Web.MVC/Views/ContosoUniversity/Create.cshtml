@@ -21,7 +21,7 @@
                 <div class="mb-3 text-center">
                     <img id="previewImage"
                         src="@(string.IsNullOrEmpty(Model?.ImagePath)
-                            ? Url.Content("~/images/defaults/default-students.png")
+                            ? Url.Content("~/images/defaults/default-person.png")
                             : Url.Content(Model.ImagePath))"
                         alt="Student profile"
                         class="img-thumbnail"
@@ -100,7 +100,7 @@
 
             if (img) {
                 img.addEventListener("error", function () {
-                    this.src = '/images/defaults/default-students.png';
+                    this.src = '/images/defaults/default-person.png';
                 });
             }
         });

@@ -18,7 +18,7 @@
             <!-- Image Preview (Default or Existing) -->
             <div class="text-center mb-4">
                 <img src="@(string.IsNullOrEmpty(Model?.ImagePath)
-                        ? Url.Content("~/images/defaults/default-students.png")
+                        ? Url.Content("~/images/defaults/default-person.png")
                         : Url.Content(Model.ImagePath))"
                     alt="Student profile"
                     class="img-thumbnail"
