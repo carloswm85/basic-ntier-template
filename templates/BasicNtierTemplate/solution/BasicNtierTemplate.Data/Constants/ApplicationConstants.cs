@@ -3,5 +3,5 @@
 public static class ApplicationConstants
 {
     // Other variables
-    public static readonly string TestPassword = "AppUserTestPass!123";
+    public static readonly string TestPassword = "Password!123";
 }
