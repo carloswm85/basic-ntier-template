@@ -1,0 +1,6 @@
+
+# Ignore frontend libraries
+wwwroot/lib
+
+# KEEP content in wwwroot/images/defaults, but ignore everything else in wwwroot/images
+!wwwroot/images/defaults
