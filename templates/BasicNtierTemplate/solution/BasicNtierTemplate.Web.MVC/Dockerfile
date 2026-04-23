@@ -7,6 +7,10 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
+# Environment variables for development.
+# These can be overridden when running the container in production or when running from VS in regular mode (Default when not using the Debug configuration)
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV ConnectionStrings__DefaultConnection="Server=sqlserver;Database=BasicNtierTemplateDb;User Id=sa;Password=YourStrongPassword123!;TrustServerCertificate=True"
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
