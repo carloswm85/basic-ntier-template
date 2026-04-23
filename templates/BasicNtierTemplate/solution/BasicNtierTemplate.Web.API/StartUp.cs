@@ -26,8 +26,8 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         // Connection string validation (fail fast)
-        var connectionString = Configuration.GetConnectionString("BasicNtierTemplateConnection")
-            ?? throw new InvalidOperationException("Missing connection string 'BasicNtierTemplateConnection'.");
+        var connectionString = Configuration.GetConnectionString("DefaultConnection")
+            ?? throw new InvalidOperationException("Missing connection string 'DefaultConnection'.");
 
         // DbContext
         services.AddDbContext<BasicNtierTemplateDbContext>(options =>

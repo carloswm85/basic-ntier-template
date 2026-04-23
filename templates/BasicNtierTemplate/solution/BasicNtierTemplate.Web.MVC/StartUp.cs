@@ -36,9 +36,9 @@ public class StartUp
     {
         #region Services Configuration
 
-        // Connection string "BasicNtierTemplateConnection" is pulled from configuration (appsettings.json).
-        var connectionString = Configuration.GetConnectionString("BasicNtierTemplateConnection")
-            ?? throw new InvalidOperationException("Connection string 'BasicNtierTemplateConnection' not found.");
+        // Connection string "DefaultConnection" is pulled from configuration (appsettings.json).
+        var connectionString = Configuration.GetConnectionString("DefaultConnection")
+            ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
         // Register DbContext with SQL Server as the database provider.
         services.AddDbContext<BasicNtierTemplateDbContext>(options =>
