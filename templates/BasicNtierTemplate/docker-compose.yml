@@ -8,6 +8,8 @@ services:
       - sqlserver
     environment:
       ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=BasicNtierTemplateDb;User Id=sa;Password=Password!123;TrustServerCertificate=True;"
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_URLS: "http://+:8080"
     ports:
       - "8080:8080"
 

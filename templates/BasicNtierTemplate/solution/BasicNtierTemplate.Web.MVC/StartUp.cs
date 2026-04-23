@@ -116,7 +116,11 @@ public class StartUp
         }
 
         app.UseStaticFiles();
-        app.UseHttpsRedirection();
+
+        // Only redirect to HTTPS when NOT running in a container
+        if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER")))
+            app.UseHttpsRedirection();
+
         app.UseRouting();
         app.UseRequestLocalization();
 
