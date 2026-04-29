@@ -461,7 +461,7 @@ public class Startup
 
 Project examples:
 
-- nTier: <https://github.com/carloswm85/basic-ntier-template>
+- nTier: <https://github.com/carloswm85/dotnet-template-kit>
 - DDD: ???
 - Vertical Slice: ???
 - Clear Architecture: <https://github.com/jasontaylordev/CleanArchitecture>

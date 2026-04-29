@@ -4,6 +4,6 @@
 
 # VerticalSliceTemplate Solution
 
-Based on template: <https://github.com/carloswm85/basic-ntier-template>
+Based on template: <https://github.com/carloswm85/dotnet-template-kit>
 
 Find documentation reference at: [./docs/content/onboarding/README.md](./docs/onboarding/README.md)

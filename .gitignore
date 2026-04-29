@@ -449,5 +449,5 @@ FodyWeavers.xsd
 # Additional instructions
 
 *.bak
-/templates/BasicNtierTemplate/solution/BasicNtierTemplate.Web.MVC/wwwroot/lib/bootstrap/css/bootstrap-grid.css
-/templates/BasicNtierTemplate/solution/BasicNtierTemplate.Web.MVC/wwwroot/lib/bootstrap/css/bootstrap-grid.min.css
+/templates/ComplexNtierTemplate/solution/ComplexNtierTemplate.Web.MVC/wwwroot/lib/bootstrap/css/bootstrap-grid.css
+/templates/ComplexNtierTemplate/solution/ComplexNtierTemplate.Web.MVC/wwwroot/lib/bootstrap/css/bootstrap-grid.min.css
