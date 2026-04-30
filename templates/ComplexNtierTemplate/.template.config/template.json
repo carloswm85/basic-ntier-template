@@ -8,9 +8,9 @@
 		"API",
 		"Web"
 	],
-	"identity": "Basic.Ntier.Template.CSharp",
-	"groupIdentity": "Basic.Ntier.Template",
-	"name": "DTK Basic N-Tier Template (C#)",
+	"identity": "Complex.Ntier.Template.CSharp",
+	"groupIdentity": "Complex.Ntier.Template",
+	"name": "DTK Complex N-Tier Template (C#)",
 	"shortName": "complex-ntier-template",
 	"sourceName": "ComplexNtierTemplate",
 	"defaultName": "ComplexNtierProject",
@@ -20,7 +20,7 @@
 		"platform": "web"
 	},
 	"preferNameDirectory": true,
-	"description": "A basic solution template with N-Tier architecture.",
+	"description": "A complex solution template with N-Tier architecture.",
 	"symbols": {
 		"TargetFramework": {
 			"type": "parameter",
