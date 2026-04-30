@@ -6,6 +6,8 @@ using ComplexNtierTemplate.Service.Services.ExampleServices;
 using ComplexNtierTemplate.Service.Services.ExampleServices.Interfaces;
 using ComplexNtierTemplate.Web.MVC.Services;
 using ComplexNtierTemplate.Web.MVC.Services.Interfaces;
+using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
 
 namespace ComplexNtierTemplate.Web.MVC;
@@ -142,7 +144,21 @@ public class StartUp
             {
                 await DbInitializer.Initialize(serviceProvider);
 
-                logger.LogDebug("DB successfully initialized from the MVC layer.");
+                logger.LogInformation("Database successfully initialized (Web MVC).");
+
+                if (env.IsDevelopment())
+                {
+                    var server = app.ApplicationServices.GetRequiredService<IServer>();
+                    var addresses = server.Features.Get<IServerAddressesFeature>();
+
+                    if (addresses != null)
+                    {
+                        foreach (var address in addresses.Addresses)
+                        {
+                            logger.LogInformation("MVC application running at: {Address}", address);
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {

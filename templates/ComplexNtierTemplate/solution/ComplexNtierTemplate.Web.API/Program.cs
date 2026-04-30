@@ -1,19 +1,21 @@
 using ComplexNtierTemplate.Data.Datum;
 using ComplexNtierTemplate.Data.Model;
 using ComplexNtierTemplate.Web.API;
+using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // ------------------------------------------------------------
 // Logging
 // ------------------------------------------------------------
-var startupLogger = LoggerFactory.Create(logging =>
+var logger = LoggerFactory.Create(logging =>
 {
     logging.AddConsole();
     logging.AddDebug();
 }).CreateLogger("Startup");
 
-startupLogger.LogInformation("API starting...");
+logger.LogInformation("API starting...");
 
 // ------------------------------------------------------------
 // Build app & middleware
@@ -41,11 +43,25 @@ using (var scope = app.Services.CreateScope())
         var db = serviceProvider.GetRequiredService<ComplexNtierTemplateDbContext>();
         await DbInitializer.Initialize(serviceProvider);
 
-        startupLogger.LogInformation("Database successfully initialized.");
+        logger.LogInformation("Database successfully initialized (Web API).");
+
+        if (app.Environment.IsDevelopment())
+        {
+            app.Lifetime.ApplicationStarted.Register(() =>
+            {
+                var server = app.Services.GetRequiredService<IServer>();
+                var addresses = server.Features.Get<IServerAddressesFeature>()?.Addresses;
+
+                foreach (var address in addresses ?? [])
+                {
+                    logger.LogInformation("Web API running at: {Address}/swagger/index.html", address);
+                }
+            });
+        }
     }
     catch (Exception ex)
     {
-        startupLogger.LogError(ex, "Database initialization failed.");
+        logger.LogError(ex, "Database initialization failed.");
     }
 }
 
