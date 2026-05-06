@@ -1,0 +1,46 @@
+[
+  {
+    "Name": "Web API + MVC",
+    "Projects": [
+      {
+        "Path": "solution\\ComplexNLayerTemplate.Web.API\\ComplexNLayerTemplate.Web.API.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "solution\\ComplexNLayerTemplate.Web.MVC\\ComplexNLayerTemplate.Web.MVC.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
+      }
+    ]
+  },
+  {
+    "Name": "Web API (Headless)",
+    "Projects": [
+      {
+        "Path": "solution\\ComplexNLayerTemplate.Web.API\\ComplexNLayerTemplate.Web.API.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
+      }
+    ]
+  },
+  {
+    "Name": "Web MVC",
+    "Projects": [
+      {
+        "Path": "solution\\ComplexNLayerTemplate.Web.MVC\\ComplexNLayerTemplate.Web.MVC.csproj",
+        "Action": "Start"
+      }
+    ]
+  },
+  {
+    "Name": "Web API + Angular",
+    "Projects": [
+      {
+        "Path": "solution\\ComplexNLayerTemplate.Web.API\\ComplexNLayerTemplate.Web.API.csproj",
+        "Action": "Start",
+        "DebugTarget": "https + SPA"
+      }
+    ]
+  }
+]

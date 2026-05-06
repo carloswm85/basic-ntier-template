@@ -1,8 +1,8 @@
-- [Architectural Design: Layer Boundaries and Contracts Between `Presentation` and `Service` Tiers - Example use: `UserCreate*`](#architectural-design-layer-boundaries-and-contracts-between-presentation-and-service-tiers---example-use-usercreate)
+- [Architectural Design: Layer Boundaries and Contracts Between `Presentation` and `Service` Layers - Example use: `UserCreate*`](#architectural-design-layer-boundaries-and-contracts-between-presentation-and-service-tiers---example-use-usercreate)
   - [What Contracts Are: Different types of DTOs](#what-contracts-are-different-types-of-dtos)
     - [Other Types of DTOs](#other-types-of-dtos)
   - [Where To Use Them Between Layers](#where-to-use-them-between-layers)
-    - [Example: Contracts For N-Tier Project](#example-contracts-for-n-tier-project)
+    - [Example: Contracts For N-Layer Project](#example-contracts-for-n-layer-project)
   - [Naming Conventions For Contracts](#naming-conventions-for-contracts)
     - [Example Naming Table](#example-naming-table)
     - [Example: `CreateUserRequest` vs `UserViewModel`](#example-createuserrequest-vs-userviewmodel)
@@ -14,7 +14,7 @@
 
 ---
 
-# Architectural Design: Layer Boundaries and Contracts Between `Presentation` and `Service` Tiers - Example use: `UserCreate*`
+# Architectural Design: Layer Boundaries and Contracts Between `Presentation` and `Service` Layers - Example use: `UserCreate*`
 
 > Contracts define the _public surface_ of any layer.
 
@@ -24,7 +24,7 @@
 
 - Contracts are the data shapes and message types that define layers talk to each other (API/MVC ↔ Application/Service), independently of the database or UI details.
 - They are usually simple, serializable classes that carry input (commands/requests) and output (results/responses) for each use case, such as “CreateUser\*” (which is, for example, `CreateUserCommand`).
-- In an N‑Tier or Clean Architecture, contract classes are often called _DTOs_ (Data Transfer Objects) or _messages_, and they live in a project that both the Web and Service layers can reference.
+- In an N‑Layer or Clean Architecture, contract classes are often called _DTOs_ (Data Transfer Objects) or _messages_, and they live in a project that both the Web and Service layers can reference.
 - Their main goal is to isolate the inner domain and persistence model from what the outer world (controllers, clients) see, so changes in entities or EF models do not break controllers or clients as long as the contract stays compatible.
 
 Typical patterns to consider:
@@ -84,7 +84,7 @@ Even though **Commands** and **Requests** may look similar structurally:
 - The controller maps incoming HTTP JSON into a contract (e.g., `CreateUserRequest`), passes it to an application/service method, and receives a contract back (e.g., `CreateUserResponse`).
 - The service layer can then map between contracts and domain models internally using manual mapping or tools like AutoMapper.
 
-### Example: Contracts For N-Tier Project
+### Example: Contracts For N-Layer Project
 
 > This project follows an opinionated implementation of contracts.
 

@@ -76,7 +76,7 @@ Notice:
 - The **command handler** takes a `CreateUserCommand` and returns only what is needed to confirm the write (e.g., `Guid` or a small result object).
 - The **query handler** takes a `GetUserByIdQuery` and returns a **read‑optimized DTO**, never modifying data.
 
-## Example 2 – Controller wiring in an n‑tier app
+## Example 2 – Controller Wiring in an N‑Layer App
 
 ```csharp
 [ApiController]

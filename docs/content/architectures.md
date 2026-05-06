@@ -24,13 +24,13 @@
 
 Warning quote:
 
-> Started monolithic, scaled to N-Tier, then realized Vertical Slice fit our feature-driven teams way better. CQRS + MediatR came later when reporting became bottleneck. The "evolution path" is spot-on—jumping straight to microservices kills velocity. Know your domain first, evolve deliberately. The worst architecture choice isn't the pattern; it's picking one without understanding why.
+> Started monolithic, scaled to N-Layer, then realized Vertical Slice fit our feature-driven teams way better. CQRS + MediatR came later when reporting became bottleneck. The "evolution path" is spot-on—jumping straight to microservices kills velocity. Know your domain first, evolve deliberately. The worst architecture choice isn't the pattern; it's picking one without understanding why.
 
 ## Common Architectures
 
 ### Descriptive Table
 
-| Feature              | n-Tier Architecture                    | Vertical Slice Architecture      | Onion Architecture                 | Clean Architecture          | Hexagonal Architecture             | Microservices Architecture                 |
+| Feature              | N-Layer Architecture                    | Vertical Slice Architecture      | Onion Architecture                 | Clean Architecture          | Hexagonal Architecture             | Microservices Architecture                 |
 | -------------------- | -------------------------------------- | -------------------------------- | ---------------------------------- | --------------------------- | ---------------------------------- | ------------------------------------------ |
 | **#**                | (a)                                    | (b)                              | (c)                                | (d)                         | (e)                                | (f)                                        |
 | **Achronym**         | `NTA`                                  | `VSA`                            | `ONA`                              | `CA`                        | `HXA`                              | `MSA`                                      |
@@ -49,7 +49,7 @@ Warning quote:
 
 | #   | Architecture       | Pros                                                                                           | Cons                                                                                              |
 | --- | ------------------ | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| (a) | **n-Tier**         | Simple to understand; clear technical separation; fast for CRUD applications                   | Tight coupling between layers; feature changes touch many files; harder to scale large domains    |
+| (a) | **N-Layer**         | Simple to understand; clear technical separation; fast for CRUD applications                   | Tight coupling between layers; feature changes touch many files; harder to scale large domains    |
 | (b) | **Vertical Slice** | Feature cohesion; localized changes; easier parallel development; good maintainability         | Possible code duplication; weaker shared domain model; can become inconsistent without discipline |
 | (c) | **Onion**          | Domain isolation; strong separation of concerns; highly testable; good for rich business rules | Higher setup cost; complexity for small apps; infrastructure leaks can still happen               |
 | (d) | **Clean**          | Clear separation; framework independence; highly testable; works well with CQRS                | Over-engineering risk; steeper learning curve; requires strict discipline                         |
@@ -58,7 +58,7 @@ Warning quote:
 
 Quick reading:
 
-- **n-Tier** favors **simplicity**
+- **N-Layer** favors **simplicity**
 - **Vertical Slice** favors **feature ownership**
 - **Onion / Clean / Hexagonal** favor **domain isolation**
 - **Microservices** favor **deployment independence**
@@ -67,14 +67,14 @@ The main tradeoff is usually:
 
 ```text id="pk4r2m"
 Simplicity  <---------------------------->  Flexibility
-n-Tier      Vertical      Clean/Hex       Microservices
+N-Layer      Vertical      Clean/Hex       Microservices
 ```
 
 ### Simplified Way to Think
 
 | #   | Architecture                    | Explanation                                             |
 | --- | ------------------------------- | ------------------------------------------------------- |
-| (a) | **n-Tier Architecture**         | Organized by technical layers                           |
+| (a) | **N-Layer Architecture**         | Organized by technical layers                           |
 | (b) | **Vertical Slice Architecture** | Organize by business feature                            |
 | (c) | **Onion Architecture**          | **domain-centric layering**                             |
 | (d) | **Clean Architecture**          | Onion with **explicit use cases** (CQRS style)          |
@@ -86,7 +86,7 @@ Clean, Onion, and Hexagonal are usually considered closely related because they 
 ### Mental Models
 
 ```terminal
-=== (a) n-Tier: Stacked technical layers ===
+=== (a) N-Layer: Stacked technical layers ===
 UI
 Business
 Data
@@ -272,7 +272,7 @@ CQRS and MediatR are especially common in Clean and Onion implementations.
 
 | #   | Architecture       | Common .NET Stack                                              |
 | --- | ------------------ | -------------------------------------------------------------- |
-| (a) | **n-Tier**         | ASP\.NET MVC + EF Core + Services                              |
+| (a) | **N-Layer**         | ASP\.NET MVC + EF Core + Services                              |
 | (b) | **Vertical Slice** | ASP\.NET Core + MediatR + Minimal APIs                         |
 | (c) | **Onion**          | ASP\.NET Core + EF Core + Repository + CQRS + MediatR          |
 | (d) | **Clean**          | ASP\.NET Core + MediatR + FluentValidation + EF Core + Serilog |
