@@ -27,7 +27,7 @@
 | #      | Name                                          | Status | When to Use (recommendation)                                                                                                                                                 | Docs                                                                     |
 | ------ | --------------------------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | `CNA`  | **Clean Architecture**                        | 🟠     | Domain-rich applications, teams prioritizing testability and strict dependency rules.                                                                                        | [README.md](./templates/CleanArchitectureTemplate/README.md)             |
-| `BNLA` | **Basic N-Layer Architecture**                | 🟡     | Small to medium projects, learning/prototyping, simple CRUD apps with limited business complexity.                                                                           | [README.md](./templates/BasicNLayerTemplate/README.md)                   |
+| `BNLA` | **Basic N-Layer Architecture**                | 🟢     | Small to medium projects, learning/prototyping, simple CRUD apps with limited business complexity.                                                                           | [README.md](./templates/BasicNLayerTemplate/README.md)                   |
 | `CNLA` | **Complex N-Layer Architecture**              | 🟢     | Enterprise applications, large teams, long-term maintainability. N-Layer Architecture with Unit of Work and Repository design patterns. It also includes an Angular project. | [README.md](./templates/ComplexNLayerTemplate/README.md)                 |
 | `HGA`  | **Hexagonal Architecture** (Ports & Adapters) | 🟠     | Systems with multiple I/O adapters (REST, CLI, messaging), high infrastructure replaceability need.                                                                          | [README.md](./templates/HexagonalArchitectureTemplate/README.md)         |
 | `MMA`  | **Modular Monolithic Architecture**           | 🟡     | APIs with many independent endpoints, microservices, modular monoliths.                                                                                                      | [README.md](./templates/ModularMonolithicArchitectureTemplate/README.md) |
@@ -41,10 +41,10 @@
 
 ### 1.1 Recommended Learning Path
 
-| #   | Architecture | Note                                    |
-| --- | ------------ | --------------------------------------- |
-| 1   | `MMA`        |                                         |
-| 2   | `BNLA`       | `CNLA` is equivalent, only more complex |
+| #   | Architecture | Note                                   |
+| --- | ------------ | -------------------------------------- |
+| 1   | `MMA`        |                                        |
+| 2   | `BNLA`       | `CNLA` is equivalent, but more complex |
 
 The other architecture will be listed once they are finished.
 
