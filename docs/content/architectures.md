@@ -1,4 +1,4 @@
-- [NET Core Architecture](#net-core-architecture)
+- [NET Core Architectures](#net-core-architectures)
   - [Common Architectures](#common-architectures)
     - [Descriptive Table](#descriptive-table)
   - [Pros and Cons Table](#pros-and-cons-table)
@@ -20,7 +20,7 @@
 
 ---
 
-# NET Core Architecture
+# NET Core Architectures
 
 Warning quote:
 

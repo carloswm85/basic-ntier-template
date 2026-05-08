@@ -3,24 +3,24 @@
 	"author": "Carlos W. Mercado",
 	"classifications": [
 		"Solution",
-		"N-Tier",
+		"N-Layer",
 		"N-Layer",
 		"API",
 		"Web"
 	],
-	"identity": "Complex.Ntier.Template.CSharp",
-	"groupIdentity": "Complex.Ntier.Template",
-	"name": "DTK Complex N-Tier Template (C#)",
-	"shortName": "complex-ntier-template",
-	"sourceName": "ComplexNtierTemplate",
-	"defaultName": "ComplexNtierProject",
+	"identity": "Complex.NLayer.Template.CSharp",
+	"groupIdentity": "Complex.NLayer.Template",
+	"name": "DTK Complex N-Layer Template (C#)",
+	"shortName": "complex-nlayer-template",
+	"sourceName": "ComplexNLayerTemplate",
+	"defaultName": "ComplexNLayerProject",
 	"tags": {
 		"language": "C#",
 		"type": "solution",
 		"platform": "web"
 	},
 	"preferNameDirectory": true,
-	"description": "A complex solution template with N-Tier architecture.",
+	"description": "A complex solution template with N-Layer architecture.",
 	"symbols": {
 		"TargetFramework": {
 			"type": "parameter",
@@ -62,16 +62,16 @@
 	],
 	"primaryOutputs": [
 		{
-			"path": "solution/ComplexNtierTemplate.Web.API/ComplexNtierTemplate.Web.API.csproj"
+			"path": "solution/ComplexNLayerTemplate.Web.API/ComplexNLayerTemplate.Web.API.csproj"
 		},
 		{
-			"path": "solution/ComplexNtierTemplate.Service/ComplexNtierTemplate.Service.csproj"
+			"path": "solution/ComplexNLayerTemplate.Service/ComplexNLayerTemplate.Service.csproj"
 		},
 		{
-			"path": "solution/ComplexNtierTemplate.Repository/ComplexNtierTemplate.Repository.csproj"
+			"path": "solution/ComplexNLayerTemplate.Repository/ComplexNLayerTemplate.Repository.csproj"
 		},
 		{
-			"path": "solution/ComplexNtierTemplate.Data/ComplexNtierTemplate.Data.csproj"
+			"path": "solution/ComplexNLayerTemplate.Data/ComplexNLayerTemplate.Data.csproj"
 		}
 	],
 	"postActions": [

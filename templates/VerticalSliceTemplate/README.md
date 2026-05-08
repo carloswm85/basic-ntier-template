@@ -4,6 +4,6 @@
 
 # VerticalSliceTemplate Solution
 
-Based on template: <https://github.com/carloswm85/dotnet-template-kit>
+Based on Vertical Slice Architecture template: <https://github.com/carloswm85/dotnet-template-kit/>
 
-Find documentation reference at: [./docs/content/onboarding/README.md](./docs/onboarding/README.md)
+Find documentation reference for this template project at: [./docs/onboarding/README.md](./docs/onboarding/README.md)

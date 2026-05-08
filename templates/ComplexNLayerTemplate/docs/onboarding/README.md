@@ -9,16 +9,14 @@
 
 ---
 
-| #   | STATUS                                                                |
-| --- | --------------------------------------------------------------------- |
-| 1   | This is a **UNDER DEVELOPMENT** .NET Core 10 and Angular 20 solution. |
-| 2   | You can find previous functional versions in the repository branches. |
+| STATUS                                                                |
+| --------------------------------------------------------------------- |
+| .NET Core 10 and Angular 20 solution.                                 |
+| You can find previous functional versions in the repository branches. |
 
 ---
 
 # Complex NLayer Template
-
-<https://github.com/carloswm85/complex-nlayer-template>
 
 ---
 
