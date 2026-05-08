@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/tests/">
+    <Project Path="solution/tests/BasicNLayerTemplate.Tests.Integration/BasicNLayerTemplate.Tests.Integration.csproj" Id="c790a793-aaa4-478f-8824-c475a11de900" />
+    <Project Path="solution/tests/BasicNLayerTemplate.Tests.Unit/BasicNLayerTemplate.Tests.Unit.csproj" Id="ce2677fd-82dc-4c75-8034-6e26c0d8dfad" />
+  </Folder>
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
+  <Project Path="solution/BasicNLayerTemplate.Infrastructure/BasicNLayerTemplate.Infrastructure.csproj" />
+  <Project Path="solution/BasicNLayerTemplate.ApplicationCore/BasicNLayerTemplate.ApplicationCore.csproj" />
+  <Project Path="solution/BasicNLayerTemplate.API/BasicNLayerTemplate.API.csproj" />
+  <Project Path="solution/BasicNLayerTemplate.Web/BasicNLayerTemplate.Web.csproj" />
+</Solution>

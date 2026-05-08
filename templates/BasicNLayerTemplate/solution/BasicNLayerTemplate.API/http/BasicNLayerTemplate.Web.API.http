@@ -1,0 +1,57 @@
+@BasicNLayerTemplate.Server_HostAddress = http://localhost:5018
+
+###
+
+### Weather forecast endpoint
+GET {{BasicNLayerTemplate.Server_HostAddress}}/api/WeatherForecasts/data
+Accept: application/json
+
+###
+
+### Get all students
+GET {{BasicNLayerTemplate.Server_HostAddress}}/api/ContosoUniversity/students
+Accept: application/json
+
+###
+
+### Get student by Id
+@studentId = 1
+GET {{BasicNLayerTemplate.Server_HostAddress}}/api/ContosoUniversity/students/{{studentId}}
+Accept: application/json
+
+###
+
+### Create student
+POST {{BasicNLayerTemplate.Server_HostAddress}}/api/ContosoUniversity/students
+Content-Type: application/json
+
+{
+  "firstMidName": "John",
+  "lastName": "Doe",
+  "governmentId": "123456789",
+  "enrollmentDate": "2026-01-01",
+  "Enrollments": []
+}
+
+
+###
+
+### Update student
+@studentId = 1
+PUT {{BasicNLayerTemplate.Server_HostAddress}}/api/ContosoUniversity/students/{{studentId}}
+Content-Type: application/json
+
+{
+  "firstMidName": "John New",
+  "lastName": "Doe Old",
+  "governmentId": "123456789",
+  "enrollmentDate": "2026-01-01"
+}
+
+###
+
+### Delete student
+@studentId = 99
+DELETE {{BasicNLayerTemplate.Server_HostAddress}}/api/ContosoUniversity/students/{{studentId}}
+
+###

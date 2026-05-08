@@ -1,0 +1,89 @@
+{
+	"$schema": "http://json.schemastore.org/template",
+	"author": "Carlos W. Mercado",
+	"classifications": [
+		"Solution",
+		"N-Layer",
+		"N-Layer",
+		"API",
+		"Web"
+	],
+	"identity": "Complex.NLayer.Template.CSharp",
+	"groupIdentity": "Complex.NLayer.Template",
+	"name": "DTK Complex N-Layer Template (C#)",
+	"shortName": "complex-nlayer-template",
+	"sourceName": "ComplexNLayerTemplate",
+	"defaultName": "ComplexNLayerProject",
+	"tags": {
+		"language": "C#",
+		"type": "solution",
+		"platform": "web"
+	},
+	"preferNameDirectory": true,
+	"description": "A complex solution template with N-Layer architecture.",
+	"symbols": {
+		"TargetFramework": {
+			"type": "parameter",
+			"datatype": "choice",
+			"replaces": "{{TargetFramework}}",
+			"defaultValue": "net10.0",
+			"choices": [
+				{
+					"displayName": ".NET 10.0 (LTS, Current default)",
+					"choice": "net10.0"
+				}
+			],
+			"description": "The target framework for the projects."
+		},
+		"IncludeDocs": {
+			"type": "parameter",
+			"description": "Include explanatory documentation",
+			"datatype": "bool",
+			"defaultValue": "false"
+		},
+		"SolutionGuid": {
+			"type": "generated",
+			"generator": "guid",
+			"replaces": "11111111-1111-1111-1111-111111111111"
+		}
+	},
+	"sources": [
+		{
+			"source": "./",
+			"target": "./",
+			"exclude": [
+				"**/[Bb]in/**",
+				"**/[Oo]bj/**",
+				"**/.vs/**",
+				"**/.git/**",
+				"**/.template.config/**"
+			]
+		}
+	],
+	"primaryOutputs": [
+		{
+			"path": "solution/ComplexNLayerTemplate.Web.API/ComplexNLayerTemplate.Web.API.csproj"
+		},
+		{
+			"path": "solution/ComplexNLayerTemplate.Service/ComplexNLayerTemplate.Service.csproj"
+		},
+		{
+			"path": "solution/ComplexNLayerTemplate.Repository/ComplexNLayerTemplate.Repository.csproj"
+		},
+		{
+			"path": "solution/ComplexNLayerTemplate.Data/ComplexNLayerTemplate.Data.csproj"
+		}
+	],
+	"postActions": [
+		{
+			"actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+			"manualInstructions": [
+				{
+					"text": "Run 'dotnet restore'"
+				}
+			],
+			"continueOnError": true,
+			"description": "Restore NuGet packages"
+		}
+	]
+}

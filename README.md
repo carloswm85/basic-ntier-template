@@ -1,8 +1,10 @@
-- [Dotnet Template Kit](#dotnet-template-kit)
+- [DotNet Template Kit](#dotnet-template-kit)
   - [1. Available Templates](#1-available-templates)
-    - [1.1 Possible Projects](#11-possible-projects)
-  - [2. Available branches](#2-available-branches)
-  - [3. Documentation](#3-documentation)
+    - [1.1 Recommended Learning Path](#11-recommended-learning-path)
+  - [2. Available Branches](#2-available-branches)
+  - [3. Additional Documentation](#3-additional-documentation)
+    - [DKT Documentation](#dkt-documentation)
+    - [Architecture](#architecture)
 
 ---
 
@@ -10,46 +12,70 @@
 
 ---
 
-# Dotnet Template Kit
+# DotNet Template Kit
 
 <https://github.com/carloswm85/dotnet-template-kit>
+
+**Introduction**:
+
+- Dot Net solution templates for different architectures.
 
 ---
 
 ## 1. Available Templates
 
-| #     | Architecture                               | Status    | Description                                                                                                                                                                                                                                  | Structure Characteristics                                                                                                            | When to Use (recommendation)                                            | Docs                                                     |
-| ----- | ------------------------------------------ | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------- | -------------------------------------------------------- |
-| `NTA` | **N-Tier (Layered / Entire Architecture)** | 🟢Working | Classic layered architecture separating concerns into **Domain, Application, Infrastructure, and API**. Each layer depends only on the layer below it, enforcing strict boundaries and maintainability. Common in enterprise `.NET` systems. | Clear horizontal layers. Logic flows **API → Application → Domain → Infrastructure**. Strong separation of concerns and testability. | Enterprise applications, large teams, long-term maintainability.        | [README.md](./templates/BasicNtierTemplate/README.md)    |
-| `VSA` | **Vertical Slice Architecture**            | 🟡Planned | Organizes code **by feature instead of by layer**. Each feature contains its own handlers, DTOs, validation, and logic. Often implemented with **CQRS + MediatR**. Reduces cross-project dependencies and improves modularity.               | Structure grouped by **features** (e.g., `Users`, `Orders`). Each feature encapsulates its own behavior and dependencies.            | APIs with many independent endpoints, microservices, modular monoliths. | [README.md](./templates/VerticalSliceTemplate/README.md) |
+| #      | Name                                          | Status | When to Use (recommendation)                                                                                                                                                 | Docs                                                                     |
+| ------ | --------------------------------------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `CNA`  | **Clean Architecture**                        | 🟠     | Domain-rich applications, teams prioritizing testability and strict dependency rules.                                                                                        | [README.md](./templates/CleanArchitectureTemplate/README.md)             |
+| `BNLA` | **Basic N-Layer Architecture**                | 🟢     | Small to medium projects, learning/prototyping, simple CRUD apps with limited business complexity.                                                                           | [README.md](./templates/BasicNLayerTemplate/README.md)                   |
+| `CNLA` | **Complex N-Layer Architecture**              | 🟢     | Enterprise applications, large teams, long-term maintainability. N-Layer Architecture with Unit of Work and Repository design patterns. It also includes an Angular project. | [README.md](./templates/ComplexNLayerTemplate/README.md)                 |
+| `HGA`  | **Hexagonal Architecture** (Ports & Adapters) | 🟠     | Systems with multiple I/O adapters (REST, CLI, messaging), high infrastructure replaceability need.                                                                          | [README.md](./templates/HexagonalArchitectureTemplate/README.md)         |
+| `MMA`  | **Modular Monolithic Architecture**           | 🟡     | APIs with many independent endpoints, microservices, modular monoliths.                                                                                                      | [README.md](./templates/ModularMonolithicArchitectureTemplate/README.md) |
+| `ONA`  | **Onion Architecture**                        | 🟠     | DDD-aligned projects, complex domain logic needing strong layer isolation and inversion of control.                                                                          | [README.md](./templates/OnionArchitectureTemplate/README.md)             |
+| `VSA`  | **Vertical Slice Architecture**               | 🟡     | APIs with many independent endpoints, microservices, modular monoliths.                                                                                                      | [README.md](./templates/VerticalSliceTemplate/README.md)                 |
 
-### 1.1 Possible Projects
+🟠 = Planned
+🟡 = In Progress
+🟢 = Finished
+🔴 = Blocked/Unfinished
 
-| Architecture                     | Status     | Description                                                                                                                                                                                                                                                     | Structure Characteristics                                                                                                                             | When to Use                                                                                                              |
-| -------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| **Clean Architecture**           | 🟠Proposal | Architecture centered on the **dependency rule**, where inner layers (Domain and Application) must not depend on outer layers (Infrastructure or UI). Popularized by Robert C. Martin. Focuses on long-term maintainability and independence from frameworks.   | Concentric layers with **Domain at the core**, surrounded by Application, Infrastructure, and Presentation. Dependencies always point inward.         | Enterprise systems, long-lived applications, teams enforcing strong architectural boundaries.                            |
-| **Hexagonal (Ports & Adapters)** | 🟠Proposal | Also known as **Ports and Adapters**, this architecture isolates business logic from external systems by defining **ports (interfaces)** and **adapters (implementations)**. The core application communicates with the outside world only through these ports. | Central application core with adapters for external systems such as databases, APIs, and message brokers. Promotes strong decoupling and testability. | Systems integrating multiple external services, applications requiring high testability and infrastructure independence. |
-| **Onion Architecture**           | 🟠Proposal | Domain-centric architecture where the **domain model sits at the center**, surrounded by layers that depend on it. Similar to Clean Architecture but more focused on domain-driven design principles.                                                           | Concentric layers: **Domain → Application Services → Infrastructure → Presentation**. Dependencies move toward the center.                            | Domain-driven systems, complex business logic, applications emphasizing domain modeling.                                 |
-| **Modular Monolith**             | 🟠Proposal | A single deployable application divided into **well-defined internal modules** with strict boundaries and communication rules. Each module encapsulates its own logic and data access.                                                                          | Codebase organized into modules (e.g., `Users`, `Billing`, `Orders`). Modules communicate through defined interfaces or events.                       | Medium to large systems that need modularity but do not require full microservices complexity.                           |
-| **Minimal API Architecture**     | 🟠Proposal | Lightweight API architecture built using `.NET` **Minimal APIs**, focusing on simplicity and minimal ceremony. Eliminates controllers in favor of direct endpoint mapping.                                                                                      | Flat structure with endpoint definitions in `Program.cs` or feature files. Uses lightweight dependency injection and minimal boilerplate.             | Microservices, prototypes, small APIs, high-performance lightweight services.                                            |
-| **CQRS Architecture**            | 🟠Proposal | Separates **command (write)** operations from **query (read)** operations, allowing each side to evolve independently and optimize performance. Often combined with event sourcing.                                                                             | Distinct models for reads and writes, separate handlers, and sometimes separate data stores. Often implemented with libraries like MediatR.           | Systems requiring scalability, complex workflows, or high read/write performance.                                        |
-| **Event-Driven Architecture**    | 🟠Proposal | System components communicate through **events** rather than direct calls. Events represent state changes and are processed asynchronously by other components.                                                                                                 | Uses message brokers or event buses. Producers publish events, consumers react to them independently.                                                 | Distributed systems, microservices, systems needing high scalability and loose coupling.                                 |
+### 1.1 Recommended Learning Path
 
----
+| #   | Architecture | Note                                   |
+| --- | ------------ | -------------------------------------- |
+| 1   | `MMA`        |                                        |
+| 2   | `BNLA`       | `CNLA` is equivalent, but more complex |
 
-## 2. Available branches
-
-| Nº  | Branch                      | Content/Stack                                                                    | Status                                       | Link                                                                                   |
-| --- | --------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------- |
-| A   | `main`                      | Documentation only                                                               | Reference to all branches, and documentation | [🔗](https://github.com/carloswm85/dotnet-template-kit)                                |
-| B   | `dev-lightweight-netcore8`  | NET Core 8 with N-Tier architecture **+** MVC **+** Web API **+** Angular 19     | FINISHED ✅                                  | [🔗](https://github.com/carloswm85/dotnet-template-kit/tree/dev-netcore08-lightweight) |
-| C   | `dev-lightweight-netcore10` | NET Core 10 with N-Tier architecture **+** MVC **+** Web API **+** Angular 20    | FINISHED ✅                                  | [🔗](https://github.com/carloswm85/dotnet-template-kit/tree/dev-netcore10-lightweight) |
-| D   | `dev-identity-netcore10`    | `dev-lightweight-netcore10` **+** Identity API implementation in MVC and Web API | FINISHED ✅                                  | [🔗](https://github.com/carloswm85/dotnet-template-kit/tree/dev-netcore10-identity)    |
-
-`dev-*` is used for stable versions.
+The other architecture will be listed once they are finished.
 
 ---
 
-## 3. Documentation
+## 2. Available Branches
 
-- [./docs/content/onboarding/README.md](./docs/content/onboarding/README.md)
+| Branch                       | Content/Stack                                                                                                                                        | Status | Link                                                                                    |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------- |
+| `main`                       | NET Core 10 solution templates, production ready content only                                                                                        | 🟢     | [🔗](https://github.com/carloswm85/dotnet-template-kit/)                                |
+| `dkt-netcore10`              | NET Core 10 content                                                                                                                                  | 🟢     | [🔗](https://github.com/carloswm85/dotnet-template-kit/tree/dkt-netcore10)              |
+| `dkt-netcore10-identity-api` | NET Core 10 content, `CNLA` only, with [Identity API](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity) implementation | 🟢     | [🔗](https://github.com/carloswm85/dotnet-template-kit/tree/dkt-netcore10-identity-api) |
+| `dkt-netcore8`               | NET Core 8 content, `CNLA` only                                                                                                                      | 🟢     | [🔗](https://github.com/carloswm85/dotnet-template-kit/tree/dkt-netcore8)               |
+
+`dev-*` is used for development versions.
+
+---
+
+## 3. Additional Documentation
+
+### DKT Documentation
+
+- [README.md](./docs/README.md)
+
+### Architecture
+
+- Microsoft documentation:
+  - <https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/>
+  - <https://learn.microsoft.com/en-us/azure/architecture/>
+- Architectures:
+  - Modular Monolithic:
+    - ?
+  - Clean Architecture:
+    - ?
