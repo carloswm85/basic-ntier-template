@@ -34,16 +34,13 @@
 | `ONA`  | **Onion Architecture**                        | 🟠     | DDD-aligned projects, complex domain logic needing strong layer isolation and inversion of control.                                                                          | [README.md](./templates/OnionArchitectureTemplate/README.md)             |
 | `VSA`  | **Vertical Slice Architecture**               | 🟡     | APIs with many independent endpoints, microservices, modular monoliths.                                                                                                      | [README.md](./templates/VerticalSliceTemplate/README.md)                 |
 
-🟠 = Planned
-🟡 = In Progress
-🟢 = Finished
-🔴 = Blocked/Unfinished
+🟠 = Planned, 🟡 = In Progress, 🟢 = Finished, 🔴 = Blocked/Unfinished
 
 ### 1.1 Recommended Learning Path
 
 | #   | Architecture | Note                                   |
 | --- | ------------ | -------------------------------------- |
-| 1   | `MMA`        |                                        |
+| 1   | `MMA`        | -                                      |
 | 2   | `BNLA`       | `CNLA` is equivalent, but more complex |
 
 The other architecture will be listed once they are finished.
@@ -75,7 +72,17 @@ The other architecture will be listed once they are finished.
   - <https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/>
   - <https://learn.microsoft.com/en-us/azure/architecture/>
 - Architectures:
-  - Modular Monolithic:
+  - **Clean Architecture**
     - ?
-  - Clean Architecture:
+  - **Basic N-Layer Architecture**
+    - ?
+  - **Complex N-Layer Architecture**
+    - ?
+  - **Hexagonal Architecture** (Ports & Adapters)\*\*
+    - ?
+  - **Modular Monolithic Architecture**
+    - ?
+  - **Onion Architecture**
+    - ?
+  - **Vertical Slice Architecture**
     - ?
