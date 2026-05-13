@@ -62,6 +62,9 @@
 	],
 	"primaryOutputs": [
 		{
+			"path": "solution/ComplexNLayerTemplate.Web.MVC/ComplexNLayerTemplate.Web.MVC.csproj"
+		},
+		{
 			"path": "solution/ComplexNLayerTemplate.Web.API/ComplexNLayerTemplate.Web.API.csproj"
 		},
 		{
