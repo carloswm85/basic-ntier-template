@@ -3,22 +3,22 @@
 	"author": "Carlos W. Mercado",
 	"classifications": [
 		"Solution",
-		"Monolithic",
+		"Monolith",
 		"Modular"
 	],
-	"identity": "Modular.Monolithic.Template.CSharp",
-	"groupIdentity": "Modular.Monolithic.Template",
-	"name": "DTK Modular Monolithic Template (C#)",
-	"shortName": "modular-monolithic-template",
-	"sourceName": "ModularMonolithicTemplate",
-	"defaultName": "ModularMonolithicProject",
+	"identity": "Modular.Monolith.Template.CSharp",
+	"groupIdentity": "Modular.Monolith.Template",
+	"name": "DTK Modular Monolith Template (C#)",
+	"shortName": "modular-monolith-template",
+	"sourceName": "ModularMonolithTemplate",
+	"defaultName": "ModularMonolithProject",
 	"tags": {
 		"language": "C#",
 		"type": "solution",
 		"platform": "web"
 	},
 	"preferNameDirectory": true,
-	"description": "A modular solution template with Modular Monolithic Architecture.",
+	"description": "A modular solution template with Modular Monolith Architecture.",
 	"symbols": {
 		"TargetFramework": {
 			"type": "parameter",
@@ -60,16 +60,7 @@
 	],
 	"primaryOutputs": [
 		{
-			"path": "solution/ModularMonolithicTemplate.Web.API/ModularMonolithicTemplate.Web.API.csproj"
-		},
-		{
-			"path": "solution/ModularMonolithicTemplate.Service/ModularMonolithicTemplate.Service.csproj"
-		},
-		{
-			"path": "solution/ModularMonolithicTemplate.Repository/ModularMonolithicTemplate.Repository.csproj"
-		},
-		{
-			"path": "solution/ModularMonolithicTemplate.Data/ModularMonolithicTemplate.Data.csproj"
+			"path": "solution/ModularMonolithTemplate.Module/ModularMonolithTemplate.Module.csproj"
 		}
 	],
 	"postActions": [

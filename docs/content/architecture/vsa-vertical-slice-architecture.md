@@ -1,21 +1,16 @@
 - [Vertical Slice Architecture (VSA) — A Deeper Look](#vertical-slice-architecture-vsa--a-deeper-look)
-	- [Why the Vertical Slice approach matters](#why-the-vertical-slice-approach-matters)
+  - [Why the Vertical Slice approach matters](#why-the-vertical-slice-approach-matters)
 - [Key Characteristics of Vertical Slice Architecture](#key-characteristics-of-vertical-slice-architecture)
 - [Example Slice Layout](#example-slice-layout)
 - [VSA vs Traditional Layered Architecture — Conceptual Comparison](#vsa-vs-traditional-layered-architecture--conceptual-comparison)
 - [Advantages and Trade-offs](#advantages-and-trade-offs)
-	- [Benefits](#benefits)
-	- [Trade-offs](#trade-offs)
-- [Structuring Vertical Slices Effectively](#structuring-vertical-slices-effectively)
-		- [1. **Use Case per Handler**](#1-use-case-per-handler)
-		- [2. **Feature folders**](#2-feature-folders)
-		- [3. **CQRS with Mediation**](#3-cqrs-with-mediation)
-		- [4. **Local Data Access**](#4-local-data-access)
-		- [5. **Pipeline Behaviors**](#5-pipeline-behaviors)
+  - [Benefits](#benefits)
+  - [Trade-offs](#trade-offs)
+- [Structuring Vertical Slices Effectively](#structuring-vertical-slices-effectively) - [1. **Use Case per Handler**](#1-use-case-per-handler) - [2. **Feature folders**](#2-feature-folders) - [3. **CQRS with Mediation**](#3-cqrs-with-mediation) - [4. **Local Data Access**](#4-local-data-access) - [5. **Pipeline Behaviors**](#5-pipeline-behaviors)
 - [When should you consider Vertical Slices?](#when-should-you-consider-vertical-slices)
 - [Future-forward thinking](#future-forward-thinking)
 - [Final Thoughts](#final-thoughts)
-	- [Readings](#readings)
+  - [Readings](#readings)
 
 ---
 
@@ -93,7 +88,7 @@ Each use-case is self-contained. This makes finding change points trivial.
 | **Parallel Development**    | Easier (team per feature)                            | Harder (teams share service/repo layers)             |
 | **Fit for CQRS**            | Natural                                              | Requires adaptation                                  |
 | **Refactoring Cost**        | Low per slice                                        | High across layers                                   |
-| **Scalability of Codebase** | Modular growth                                       | Monolithic growth                                    |
+| **Scalability of Codebase** | Modular growth                                       | Monolith growth                                      |
 
 ---
 

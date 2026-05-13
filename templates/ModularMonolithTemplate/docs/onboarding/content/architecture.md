@@ -1,18 +1,18 @@
-- [Modular Monolithic Architecture](#modular-monolithic-architecture)
-	- [What is a monolithic application?](#what-is-a-monolithic-application)
-	- [All-in-one applications](#all-in-one-applications)
+- [Modular Monolith Architecture](#modular-monolith-architecture)
+  - [What Is A Monolithic Application?](#what-is-a-monolithic-application)
+  - [All-In-One Applications](#all-in-one-applications)
 
 ---
 
-# Modular Monolithic Architecture
+# Modular Monolith Architecture
 
 <https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures>
 
-## What is a monolithic application?
+## What Is A Monolithic Application?
 
 A monolithic application is one that is entirely self-contained, in terms of its behavior. It may interact with other services or data stores in the course of performing its operations, but the core of its behavior runs within its own process and the entire application is typically deployed as a single unit. If such an application needs to scale horizontally, typically the entire application is duplicated across multiple servers or virtual machines.
 
-## All-in-one applications
+## All-In-One Applications
 
 The smallest possible number of projects for an application architecture is one. In this architecture, the entire logic of the application is contained in a single project, compiled to a single assembly, and deployed as a single unit.
 
