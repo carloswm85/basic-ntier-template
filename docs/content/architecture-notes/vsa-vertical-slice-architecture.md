@@ -184,7 +184,7 @@ Vertical Slices align with several modern trends:
 | **Microservices**              | High — slices can become services naturally     |
 | **Event-driven architectures** | High — slices produce/consume events            |
 | **CQRS & ES**                  | High synergy                                    |
-| **Modular Monoliths**          | VSA is the most common modular monolith pattern |
+| **Simple Monoliths**           | VSA is the most common modular monolith pattern |
 | **Cloud-native development**   | Helps isolate deployment concerns               |
 
 As systems grow, slices become candidates for service extraction, reducing rewrite cost.

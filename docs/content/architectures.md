@@ -17,7 +17,7 @@ Warning quote:
 
 | #      | Name                                          | When to Use (recommendation)                                                                                                                                                         |
 | ------ | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `MMA`  | **Modular Monolith Architecture**             | APIs with many independent business modules, large monoliths needing clear boundaries, systems expected to evolve gradually toward distributed architectures.                        |
+| `SMA`  | **Simple Monolith Architecture**              | APIs with many independent business modules, large monoliths needing clear boundaries, systems expected to evolve gradually toward distributed architectures.                        |
 | `BNLA` | **Basic N-Layer Architecture**                | Small to medium projects, learning/prototyping, simple CRUD apps with limited business complexity.                                                                                   |
 | `CNLA` | **Complex N-Layer Architecture**              | Enterprise applications, large teams, long-term maintainability. N-Layer Architecture with **Unit of Work** and **Repository** design patterns. It also includes an Angular project. |
 | `VSA`  | **Vertical Slice Architecture**               | APIs with many independent endpoints, microservices, modular monoliths.                                                                                                              |
@@ -28,9 +28,9 @@ Warning quote:
 
 ### Comparative Table
 
-| Feature              | Modular Monolith Architecture                                     | N-Layer Architecture                    | Vertical Slice Architecture      | Clean Architecture                       | Hexagonal Architecture                    | Onion Architecture                     | Microservices Architecture                                                |
+| Feature              | Simple Monolith Architecture                                      | N-Layer Architecture                    | Vertical Slice Architecture      | Clean Architecture                       | Hexagonal Architecture                    | Onion Architecture                     | Microservices Architecture                                                |
 | -------------------- | ----------------------------------------------------------------- | --------------------------------------- | -------------------------------- | ---------------------------------------- | ----------------------------------------- | -------------------------------------- | ------------------------------------------------------------------------- |
-| **Acronym**          | `MMA`                                                             | `BNLA` and `CNLA`                       | `VSA`                            | `CNA`                                    | `HXA`                                     | `ONA`                                  | `MSA`                                                                     |
+| **Acronym**          | `SMA`                                                             | `BNLA` and `CNLA`                       | `VSA`                            | `CNA`                                    | `HXA`                                     | `ONA`                                  | `MSA`                                                                     |
 | **Origin**           | Domain-driven modular monolith movement (2015+)                   | Traditional enterprise systems (1990s)  | Modern .NET community (2018+)    | Uncle Bob (2012)                         | Alistair Cockburn (2005)                  | Jeffrey Palermo (2008)                 | Martin Fowler / James Lewis coined the term (2014); concept predates this |
 | **Core Focus**       | Modular business boundaries inside one deployable unit            | Technical layers                        | Feature-based slices             | Domain + Use Cases                       | Ports & Adapters                          | Domain-centric layers                  | Independently deployable services                                         |
 | **External Systems** | Shared infrastructure with isolated modules                       | Data layer / service layer              | Embedded per feature             | Infrastructure outer ring                | Adapters (DB, UI, API)                    | Infrastructure outer layer             | Each service owns integrations                                            |
@@ -70,7 +70,7 @@ Warning quote:
 
 | Architecture  | Pros                                                                                                                                        | Cons                                                                                                                    |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `MMA`         | Strong modularity without distributed complexity; easier refactoring toward microservices; good team ownership; simpler deployment than MSA | Requires strict module boundaries; shared database can create coupling; horizontal scaling requires extracting services |
+| `SMA`         | Strong modularity without distributed complexity; easier refactoring toward microservices; good team ownership; simpler deployment than MSA | Requires strict module boundaries; shared database can create coupling; horizontal scaling requires extracting services |
 | `BNLA`/`CNLA` | Simple to understand; clear technical separation; fast for CRUD applications                                                                | Tight coupling between layers; feature changes touch many files; harder to scale large domains                          |
 | `VSA`         | Feature cohesion; localized changes; easier parallel development; good maintainability                                                      | Possible code duplication; weaker shared domain model; can become inconsistent without discipline                       |
 | `CNA`         | Clear separation; framework independence; highly testable; works well with CQRS                                                             | Over-engineering risk; steeper learning curve; requires strict discipline                                               |
@@ -80,7 +80,7 @@ Warning quote:
 
 Quick reading:
 
-- **Modular Monolith** favors **modularity without distributed complexity**
+- **Simple Monolith** favors **modularity without distributed complexity**
 - **N-Layer** favors **simplicity**
 - **Vertical Slice** favors **feature ownership**
 - **Onion / Clean / Hexagonal** favor **domain isolation**
@@ -90,14 +90,14 @@ The main tradeoff is usually:
 
 ```terminal
 Simplicity  <----------------------------------------------->  Flexibility
-N-Layer    Vertical Slice    Modular Monolith    Clean/Hex    Microservices
+N-Layer    Vertical Slice    Simple Monolith    Clean/Hex    Microservices
 ```
 
 ### Simplified Way to Think
 
 | Architecture  | Explanation                                                     |
 | ------------- | --------------------------------------------------------------- |
-| `MMA`         | One deployable application split into isolated business modules |
+| `SMA`         | One deployable application split into isolated business modules |
 | `BNLA`/`CNLA` | Organized by technical layers                                   |
 | `VSA`         | Organize by business feature                                    |
 | `CNA`         | Onion with **explicit use cases** (CQRS style)                  |
@@ -110,7 +110,7 @@ Clean, Onion, and Hexagonal are usually considered closely related because they 
 ### Mental Models
 
 ```terminal
-=== `MMA`: Multiple business modules inside one application ===
+=== `SMA`: Multiple business modules inside one application ===
 Sales Module
 Inventory Module
 Billing Module
