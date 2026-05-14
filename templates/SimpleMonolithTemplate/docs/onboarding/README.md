@@ -1,0 +1,7 @@
+- [Simple Monolith Application](#simple-monolith-application)
+
+---
+
+# Simple Monolith Application
+
+- [Architecture](./content/architecture.md)
