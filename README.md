@@ -49,12 +49,12 @@ The other architecture will be listed once they are finished.
 
 ## 2. Available Branches
 
-| Branch                   | Content/Stack                                                                                                                                        | Status | Link                                                                                    |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------- |
-| `main`                   | NET Core 10 solution templates, production ready content only                                                                                        | 🟢     | [🔗](https://github.com/carloswm85/dotnet-template-kit/)                                |
-| `dkt-netcore10`          | NET Core 10 content                                                                                                                                  | 🟢     | [🔗](https://github.com/carloswm85/dotnet-template-kit/tree/dkt-netcore10)              |
+| Branch                   | Content/Stack                                                                                                                                        | Status | Link                                                                                |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------- |
+| `main`                   | NET Core 10 solution templates, production ready content only                                                                                        | 🟢     | [🔗](https://github.com/carloswm85/dotnet-template-kit/)                            |
+| `dkt-netcore10`          | NET Core 10 content                                                                                                                                  | 🟢     | [🔗](https://github.com/carloswm85/dotnet-template-kit/tree/dkt-netcore10)          |
 | `dkt-netcore10-identity` | NET Core 10 content, `CNLA` only, with [Identity API](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity) implementation | 🟢     | [🔗](https://github.com/carloswm85/dotnet-template-kit/tree/dkt-netcore10-identity) |
-| `dkt-netcore8`           | NET Core 8 content, `CNLA` only                                                                                                                      | 🟢     | [🔗](https://github.com/carloswm85/dotnet-template-kit/tree/dkt-netcore8)               |
+| `dkt-netcore8`           | NET Core 8 content, `CNLA` only                                                                                                                      | 🟢     | [🔗](https://github.com/carloswm85/dotnet-template-kit/tree/dkt-netcore8)           |
 
 `dev-*` is used for development versions.
 

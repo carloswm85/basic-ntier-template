@@ -2,6 +2,8 @@
 
 ---
 
+![alt text](docs/img/under-construction.jpg)
+
 # VerticalSliceTemplate Solution
 
 Based on Vertical Slice Architecture template: <https://github.com/carloswm85/dotnet-template-kit/>

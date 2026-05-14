@@ -2,6 +2,8 @@
 
 ---
 
+![alt text](docs/img/under-construction.jpg)
+
 # CleanArchitectureTemplate Solution
 
 Based on Clean Architecture template: <https://github.com/carloswm85/dotnet-template-kit/>

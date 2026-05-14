@@ -3,23 +3,23 @@
 	"author": "Carlos W. Mercado",
 	"classifications": [
 		"Solution",
-		"N-Layer",
+		"Clean Architecture",
 		"API",
 		"Web"
 	],
-	"identity": "Basic.NLayer.Template.CSharp",
-	"groupIdentity": "Basic.NLayer.Template",
-	"name": "DTK Basic N-Layer Template (C#)",
-	"shortName": "basic-nlayer-template",
-	"sourceName": "BasicNLayerTemplate",
-	"defaultName": "BasicNLayerProject",
+	"identity": "Clean.Architecture.Template.CSharp",
+	"groupIdentity": "Clean.Architecture.Template",
+	"name": "DTK Clean Architecture Template (C#)",
+	"shortName": "clean-architecture-template",
+	"sourceName": "CleanArchitectureTemplate",
+	"defaultName": "CleanArchitectureProject",
 	"tags": {
 		"language": "C#",
 		"type": "solution",
 		"platform": "web"
 	},
 	"preferNameDirectory": true,
-	"description": "A basic solution template with N-Layer architecture.",
+	"description": "Solution template with Clean Architecture.",
 	"symbols": {
 		"TargetFramework": {
 			"type": "parameter",
@@ -61,17 +61,8 @@
 	],
 	"primaryOutputs": [
 		{
-			"path": "solution/BasicNLayerTemplate.API/BasicNLayerTemplate.API.csproj"
-		},
-		{
-			"path": "solution/BasicNLayerTemplate.ApplicationCore/BasicNLayerTemplate.ApplicationCore.csproj"
-		},
-		{
-			"path": "solution/BasicNLayerTemplate.Infrastructure/BasicNLayerTemplate.Infrastructure.csproj"
-		},
-		{
-			"path": "solution/BasicNLayerTemplate.Web/BasicNLayerTemplate.Web.csproj"
-		}
+			"path": ""
+		}			
 	],
 	"postActions": [
 		{
