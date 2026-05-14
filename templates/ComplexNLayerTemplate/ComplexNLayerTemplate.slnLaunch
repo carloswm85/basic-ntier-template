@@ -15,7 +15,7 @@
     ]
   },
   {
-    "Name": "Web API (Headless)",
+    "Name": "Web API",
     "Projects": [
       {
         "Path": "solution\\ComplexNLayerTemplate.Web.API\\ComplexNLayerTemplate.Web.API.csproj",

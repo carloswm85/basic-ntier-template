@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
+  <Project Path="solution/SimpleMonolithTemplate.Module/SimpleMonolithTemplate.Module.csproj" />
+</Solution>
