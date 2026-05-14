@@ -89,6 +89,10 @@ bld/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
+# Uncomment if you have tasks that create the project's static files in wwwroot
+wwwroot/
+
+!wwwroot/images/defaults
 
 # Visual Studio 2017 auto generated files
 Generated\ Files/
@@ -443,11 +447,4 @@ FodyWeavers.xsd
 
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
-
-# End of https://www.toptal.com/developers/gitignore/api/visualstudio,visualstudiocode,angular
-
-# Additional instructions
-
 *.bak
-/templates/ComplexNLayerTemplate/solution/ComplexNLayerTemplate.Web.MVC/wwwroot/lib/bootstrap/css/bootstrap-grid.css
-/templates/ComplexNLayerTemplate/solution/ComplexNLayerTemplate.Web.MVC/wwwroot/lib/bootstrap/css/bootstrap-grid.min.css
