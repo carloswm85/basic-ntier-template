@@ -72,7 +72,6 @@ public class StartUp
 
         // Application services
         services.AddScoped<IContosoUniversityService, ContosoUniversityService>();
-        services.AddScoped<IWeatherForecastService, WeatherForectastService>();
 
         #endregion
     }
