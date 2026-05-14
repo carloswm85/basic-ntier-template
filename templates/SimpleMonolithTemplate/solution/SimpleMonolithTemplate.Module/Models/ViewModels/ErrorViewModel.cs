@@ -1,4 +1,4 @@
-namespace SimpleMonolithTemplate.Module.ViewModels;
+namespace SimpleMonolithTemplate.Module.Models.ViewModels;
 
 public class ErrorViewModel
 {

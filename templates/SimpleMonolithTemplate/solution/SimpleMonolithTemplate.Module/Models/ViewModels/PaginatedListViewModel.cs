@@ -1,6 +1,6 @@
 ﻿using SimpleMonolithTemplate.Module.Models;
 
-namespace SimpleMonolithTemplate.Module.ViewModels;
+namespace SimpleMonolithTemplate.Module.Models.ViewModels;
 
 public class PaginatedListViewModel<T> where T : class
 {

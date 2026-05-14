@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using SimpleMonolithTemplate.Module.Data.Entities.ContosoUniversity;
 using SimpleMonolithTemplate.Module.Dtos.ContosoUniversity;
 using SimpleMonolithTemplate.Module.Models;
+using SimpleMonolithTemplate.Module.Models.ViewModels;
 using SimpleMonolithTemplate.Module.Services.Interfaces.ExampleInterfaces;
-using SimpleMonolithTemplate.Module.ViewModels;
 
 namespace SimpleMonolithTemplate.Module.Controllers.ExampleControllers;
 
