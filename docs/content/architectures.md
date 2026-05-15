@@ -24,7 +24,7 @@ Warning quote:
 | `CNA`  | **Clean Architecture**                        | Domain-rich applications, teams prioritizing testability and strict dependency rules.                                                                                                |
 | `HXA`  | **Hexagonal Architecture** (Ports & Adapters) | Systems with multiple I/O adapters (REST, CLI, messaging), high infrastructure replaceability need.                                                                                  |
 | `ONA`  | **Onion Architecture**                        | DDD-aligned projects, complex domain logic needing strong layer isolation and inversion of control.                                                                                  |
-| `MSA`  | Microservices Architecture                    | Very large systems requiring independent deployment, isolated scaling, autonomous teams, and heterogeneous technology stacks.                                                        |
+| `MSA`  | **Microservices Architecture**                | Very large systems requiring independent deployment, isolated scaling, autonomous teams, and heterogeneous technology stacks.                                                        |
 
 ### Comparative Table
 

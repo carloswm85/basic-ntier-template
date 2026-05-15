@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SimpleMonolithTemplate.Module.ViewModels.ContosoUniversity;
+namespace SimpleMonolithTemplate.Module.Models.ViewModels.ContosoUniversity;
 
 public class EnrollmentDateGroup
 {

@@ -24,15 +24,13 @@
 
 ## 1. Available Templates
 
-| #      | Name                                          | Status | When to Use (recommendation)                                                                                                                                                         | Docs                                                                  |
-| ------ | --------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------- |
-| `SMA`  | **Simple Monolith Architecture**              | 🟢     | CRUD apps, internal tools, MVPs                                                                                                                                                      | [README.md](./templates/SimpleMonolithArchitectureTemplate/README.md) |
-| `BNLA` | **Basic N-Layer Architecture**                | 🟢     | Small to medium projects, learning/prototyping, simple CRUD apps with limited business complexity.                                                                                   | [README.md](./templates/BasicNLayerTemplate/README.md)                |
-| `CNLA` | **Complex N-Layer Architecture**              | 🟢     | Enterprise applications, large teams, long-term maintainability. N-Layer Architecture with **Unit of Work** and **Repository** design patterns. It also includes an Angular project. | [README.md](./templates/ComplexNLayerTemplate/README.md)              |
-| `VSA`  | **Vertical Slice Architecture**               | 🟡     | APIs with many independent endpoints, microservices, modular monoliths.                                                                                                              | [README.md](./templates/VerticalSliceTemplate/README.md)              |
-| `CNA`  | **Clean Architecture**                        | 🟠     | Domain-rich applications, teams prioritizing testability and strict dependency rules.                                                                                                | [README.md](./templates/CleanArchitectureTemplate/README.md)          |
-| `HGA`  | **Hexagonal Architecture** (Ports & Adapters) | 🟠     | Systems with multiple I/O adapters (REST, CLI, messaging), high infrastructure replaceability need.                                                                                  | [README.md](./templates/HexagonalArchitectureTemplate/README.md)      |
-| `ONA`  | **Onion Architecture**                        | 🟠     | DDD-aligned projects, complex domain logic needing strong layer isolation and inversion of control.                                                                                  | [README.md](./templates/OnionArchitectureTemplate/README.md)          |
+| #      | Name                             | Status | When to Use (recommendation)                                                                                                                                                         | Docs                                                                  |
+| ------ | -------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| `SMA`  | **Simple Monolith Architecture** | 🟢     | CRUD apps, internal tools, MVPs                                                                                                                                                      | [README.md](./templates/SimpleMonolithArchitectureTemplate/README.md) |
+| `BNLA` | **Basic N-Layer Architecture**   | 🟢     | Small to medium projects, learning/prototyping, simple CRUD apps with limited business complexity.                                                                                   | [README.md](./templates/BasicNLayerTemplate/README.md)                |
+| `CNLA` | **Complex N-Layer Architecture** | 🟢     | Enterprise applications, large teams, long-term maintainability. N-Layer Architecture with **Unit of Work** and **Repository** design patterns. It also includes an Angular project. | [README.md](./templates/ComplexNLayerTemplate/README.md)              |
+| `VSA`  | **Vertical Slice Architecture**  | 🟡     | APIs with many independent endpoints, microservices, modular monoliths.                                                                                                              | [README.md](./templates/VerticalSliceTemplate/README.md)              |
+| `CNA`  | **Clean Architecture**           | 🟠     | Domain-rich applications, teams prioritizing testability and strict dependency rules.                                                                                                | [README.md](./templates/CleanArchitectureTemplate/README.md)          |
 
 🟠 = Planned, 🟡 = In Progress, 🟢 = Finished, 🔴 = Blocked/Unfinished
 
@@ -71,6 +69,7 @@ The other architecture will be listed once they are finished.
 - Microsoft documentation:
   - <https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/>
   - <https://learn.microsoft.com/en-us/azure/architecture/>
+  - <https://github.com/dotnet-architecture/eBooks>
 - Architectures:
   - **Simple Monolith Architecture**
     - ?
@@ -81,8 +80,4 @@ The other architecture will be listed once they are finished.
   - **Vertical Slice Architecture**
     - ?
   - **Clean Architecture**
-    - ?
-  - **Hexagonal Architecture** (Ports & Adapters)\*\*
-    - ?
-  - **Onion Architecture**
-    - ?
+    - <https://github.com/ardalis/cleanarchitecture>
