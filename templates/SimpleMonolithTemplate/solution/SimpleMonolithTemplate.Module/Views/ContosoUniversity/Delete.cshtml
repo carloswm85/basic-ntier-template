@@ -19,12 +19,12 @@
                     <!-- Image Preview (Default or Existing) -->
                     <div class="mb-3 text-center">
                         <img id="previewImage"
-                            src="@(string.IsNullOrEmpty(Model?.ImagePath)
-                                ? Url.Content("~/images/defaults/default-person.png")
-                                : Url.Content(Model.ImagePath))"
-                            alt="Student profile"
-                            class="img-thumbnail"
-                            style="max-width: 150px;" />
+                             src="@(string.IsNullOrEmpty(Model?.ImagePath)
+                                                             ? Url.Content("~/images/defaults/default-person.png")
+                                                             : Url.Content(Model.ImagePath))"
+                             alt="Student profile"
+                             class="img-thumbnail"
+                             style="max-width: 150px;" />
                     </div>
 
                     <dl class="row">
@@ -52,17 +52,24 @@
 
                     <hr />
 
-                    <form asp-controller="ContosoUniversity" asp-action="delete" asp-route-id="@Model.Id" class="mt-4">
-                        <input type="hidden" asp-for="Id" />
-                        <div class="d-flex justify-content-between">
-                            <a asp-controller="ContosoUniversity" asp-action="list" class="btn btn-outline-secondary">
-                                <i class="bi bi-arrow-left-circle"></i> Back to List
-                            </a>
-                            <button type="submit" class="btn btn-danger">
-                                <i class="bi bi-trash"></i> Confirm Delete
-                            </button>
-                        </div>
-                    </form>
+                    @if (Model is not null)
+                    {
+                        <form asp-controller="ContosoUniversity" asp-action="delete" asp-route-id="@Model.Id" class="mt-4">
+                            <input type="hidden" asp-for="Id" />
+                            <div class="d-flex justify-content-between">
+                                <a asp-controller="ContosoUniversity" asp-action="list" class="btn btn-outline-secondary">
+                                    <i class="bi bi-arrow-left-circle"></i> Back to List
+                                </a>
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="bi bi-trash"></i> Confirm Delete
+                                </button>
+                            </div>
+                        </form>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning">Student not found.</div>
+                    }
                 </div>
             </div>
         </div>
