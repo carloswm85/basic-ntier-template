@@ -59,7 +59,7 @@ public class MvcEndpointsAvailabilityTests : IClassFixture<WebApplicationFactory
     [Fact]
     public async Task SelectedStudentDelete_ReturnsSuccessStatusCode()
     {
-        var response = await _client.GetAsync("/ContosoUniversity/Delete/40", TestContext.Current.CancellationToken);
+        var response = await _client.GetAsync("/ContosoUniversity/Delete/1", TestContext.Current.CancellationToken);
         response.IsSuccessStatusCode.Should().BeTrue(
             because: "The student delete page should be reachable");
     }
