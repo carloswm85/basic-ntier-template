@@ -17,15 +17,16 @@ namespace BasicNLayerTemplate.Service.Mappings.ContosoUniversity
             CreateMap<Student, StudentDto>()
                 .ForMember(destination => destination.FullName, options => options.Ignore())
                 .ForMember(dest => dest.GovernmentIdFormatted, opt => opt.Ignore())
-                .ForMember(dest => dest.Enrollments, opt => opt.Ignore())
-            ;
+                .ForMember(dest => dest.Enrollments, opt => opt.Ignore());
 
             // StudentDto -> Student (explicit control)
             CreateMap<StudentDto, Student>()
                 .ForMember(destination => destination.FullName, options => options.Ignore())
-                .ForMember(dest => dest.Enrollments, opt => opt.Ignore()) // Handle separately
+                .ForMember(
+                    dest => dest.Enrollments,
+                    opt => opt.Ignore()
+                ) // Handle separately
             ;
-
         }
     }
 }

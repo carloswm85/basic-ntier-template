@@ -16,14 +16,15 @@ public class StoredProcedureRepository<TEntity> : IStoredProcedureRepository<TEn
     public async Task<IEnumerable<TEntity>> ExecuteAsync(
         string procedureName,
         Dictionary<string, object> parameters,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         ValidateProcedureName(procedureName);
 
         var (sql, sqlParams) = BuildSql(procedureName, parameters);
 
-        return await _dbContext.Database
-            .SqlQueryRaw<TEntity>(sql, sqlParams)
+        return await _dbContext
+            .Database.SqlQueryRaw<TEntity>(sql, sqlParams)
             .ToListAsync(cancellationToken);
     }
 
@@ -39,7 +40,8 @@ public class StoredProcedureRepository<TEntity> : IStoredProcedureRepository<TEn
 
     private static (string sql, SqlParameter[] sqlParams) BuildSql(
         string procName,
-        Dictionary<string, object> parameters)
+        Dictionary<string, object> parameters
+    )
     {
         if (parameters == null || parameters.Count == 0)
             return ($"EXEC {procName}", Array.Empty<SqlParameter>());

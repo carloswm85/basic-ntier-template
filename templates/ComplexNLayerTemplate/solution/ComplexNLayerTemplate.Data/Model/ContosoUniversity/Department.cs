@@ -31,7 +31,7 @@ namespace ComplexNLayerTemplate.Data.Model
  * foreign keys and for many-to-many relationships. This can result in circular
  * cascade delete rules, which will cause an exception when you try to add a
  * migration.
- * 
+ *
  * For example, if you didn't define the Department.InstructorID property as
  * nullable, EF would configure a cascade delete rule to delete the department
  * when you delete the instructor, which isn't what you want to have happen.

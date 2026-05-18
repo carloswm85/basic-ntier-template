@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using BasicNLayerTemplate.Data.Model;
-
 using BasicNLayerTemplate.Service.Dtos.ContosoUniversity;
 using BasicNLayerTemplate.Service.Models;
 using BasicNLayerTemplate.Service.Services.ExampleServices.Interfaces;
@@ -14,7 +13,6 @@ namespace BasicNLayerTemplate.Service.Services.ExampleServices
         private readonly ILogger<ContosoUniversityService> _logger;
         private readonly BasicNLayerTemplateDbContext _context;
         private readonly IMapper _mapper;
-
 
         public ContosoUniversityService(
             ILogger<ContosoUniversityService> logger,
@@ -35,12 +33,11 @@ namespace BasicNLayerTemplate.Service.Services.ExampleServices
             {
                 student = await _context.Students.FindAsync(studentId);
                 return _mapper.Map<StudentDto>(student);
-
             }
 
-            student = await _context.Students
-                .Include(s => s.Enrollments)
-                .ThenInclude(e => e.Course)
+            student = await _context
+                .Students.Include(s => s.Enrollments)
+                    .ThenInclude(e => e.Course)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == studentId);
 
@@ -76,8 +73,7 @@ namespace BasicNLayerTemplate.Service.Services.ExampleServices
                 var term = searchString.Trim().ToUpper();
 
                 students = students.Where(s =>
-                    s.LastName.ToUpper().Contains(term) ||
-                    s.FirstMidName.ToUpper().Contains(term)
+                    s.LastName.ToUpper().Contains(term) || s.FirstMidName.ToUpper().Contains(term)
                 );
             }
             var filteredCount = students.Count();
@@ -100,10 +96,7 @@ namespace BasicNLayerTemplate.Service.Services.ExampleServices
             }
 
             var count = students.Count();
-            var items = students
-                .Skip((pageIndex - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+            var items = students.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
 
             var studentsDto = _mapper.Map<List<StudentDto>>(items);
 
@@ -123,8 +116,9 @@ namespace BasicNLayerTemplate.Service.Services.ExampleServices
             {
                 var student = _mapper.Map<Student>(studentDto);
 
-                student.GovernmentId = new string(student.GovernmentId
-                    .Where(char.IsDigit).ToArray());
+                student.GovernmentId = new string(
+                    student.GovernmentId.Where(char.IsDigit).ToArray()
+                );
 
                 await _context.Students.AddAsync(student);
                 await _context.SaveChangesAsync();
@@ -145,8 +139,7 @@ namespace BasicNLayerTemplate.Service.Services.ExampleServices
             studentDto.Id = studentId;
             var student = _mapper.Map<Student>(studentDto);
 
-            student.GovernmentId = new string(student.GovernmentId
-                    .Where(char.IsDigit).ToArray());
+            student.GovernmentId = new string(student.GovernmentId.Where(char.IsDigit).ToArray());
 
             _context.Students.Update(student);
             await _context.SaveChangesAsync();
@@ -188,7 +181,7 @@ namespace BasicNLayerTemplate.Service.Services.ExampleServices
                 select new EnrollmentDateGroupDto()
                 {
                     EnrollmentYear = dateGroup.Key,
-                    StudentCount = dateGroup.Count()
+                    StudentCount = dateGroup.Count(),
                 };
 
             return await data.ToListAsync();

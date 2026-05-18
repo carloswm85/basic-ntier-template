@@ -128,7 +128,10 @@ public class ContosoUniversityController : ControllerBase
         var studentIdResult = await _contosoService.CreateStudentAsync(studentDto);
         if (studentIdResult == 0)
         {
-            ModelState.AddModelError("CustomError", $"Something went wrong when trying to save the student {studentDto.FirstMidName} {studentDto.LastName}");
+            ModelState.AddModelError(
+                "CustomError",
+                $"Something went wrong when trying to save the student {studentDto.FirstMidName} {studentDto.LastName}"
+            );
             return StatusCode(500, ModelState);
         }
 
@@ -152,7 +155,10 @@ public class ContosoUniversityController : ControllerBase
 
         if (!_contosoService.StudentExists(studentDto.GovernmentId))
         {
-            ModelState.AddModelError("CustomError", $"Student with government id {studentDto.GovernmentId} does not exist");
+            ModelState.AddModelError(
+                "CustomError",
+                $"Student with government id {studentDto.GovernmentId} does not exist"
+            );
             return BadRequest(ModelState);
         }
 
@@ -160,7 +166,10 @@ public class ContosoUniversityController : ControllerBase
 
         if (!await _contosoService.UpdateStudentAsync(studentId, studentDto))
         {
-            ModelState.AddModelError("CustomError", $"Something went wrong when trying to save the student {studentDto.FirstMidName} {studentDto.LastName}");
+            ModelState.AddModelError(
+                "CustomError",
+                $"Something went wrong when trying to save the student {studentDto.FirstMidName} {studentDto.LastName}"
+            );
             return StatusCode(500, ModelState);
         }
 
@@ -179,7 +188,10 @@ public class ContosoUniversityController : ControllerBase
     {
         if (!await _contosoService.DeleteStudentAsync(studentId))
         {
-            ModelState.AddModelError("CustomError", $"Something went wrong when trying to eliminate the student with id {studentId}");
+            ModelState.AddModelError(
+                "CustomError",
+                $"Something went wrong when trying to eliminate the student with id {studentId}"
+            );
             return StatusCode(500, ModelState);
         }
         return NoContent();
@@ -195,9 +207,16 @@ public class ContosoUniversityController : ControllerBase
         if (studentDto.Image != null)
         {
             var folder = "students";
-            var imageFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", folder);
+            var imageFolder = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "wwwroot/images",
+                folder
+            );
 
-            string fileName = studentDto.Id + Guid.NewGuid().ToString() + Path.GetExtension(studentDto.Image.FileName);
+            string fileName =
+                studentDto.Id
+                + Guid.NewGuid().ToString()
+                + Path.GetExtension(studentDto.Image.FileName);
 
             if (!Directory.Exists(imageFolder))
                 Directory.CreateDirectory(imageFolder);
@@ -205,7 +224,8 @@ public class ContosoUniversityController : ControllerBase
             var filePath = Path.Combine(imageFolder, fileName);
             FileInfo file = new FileInfo(filePath);
 
-            if (file.Exists) file.Delete();
+            if (file.Exists)
+                file.Delete();
 
             using var fileStream = new FileStream(filePath, FileMode.Create);
             await studentDto.Image.CopyToAsync(fileStream); // Copy file to target stream

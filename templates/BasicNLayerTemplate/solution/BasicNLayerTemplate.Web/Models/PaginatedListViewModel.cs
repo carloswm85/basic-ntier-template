@@ -2,7 +2,8 @@
 
 namespace BasicNLayerTemplate.Web.Models
 {
-    public class PaginatedListViewModel<T> where T : class
+    public class PaginatedListViewModel<T>
+        where T : class
     {
         public PaginatedList<T> PaginatedList;
         public string CurrentFilter;

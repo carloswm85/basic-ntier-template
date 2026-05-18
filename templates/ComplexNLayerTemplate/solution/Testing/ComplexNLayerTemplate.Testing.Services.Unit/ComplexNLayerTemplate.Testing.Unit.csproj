@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <OutputType>Exe</OutputType>
@@ -16,5 +15,4 @@
   <ItemGroup>
     <ProjectReference Include="..\..\ComplexNLayerTemplate.Service\ComplexNLayerTemplate.Service.csproj" />
   </ItemGroup>
-
 </Project>

@@ -6,14 +6,14 @@ namespace BasicNLayerTemplate.Service.Dtos.ContosoUniversity
 {
     /// <summary>
     /// This is a bad use of DTOs, but it's for demonstration purposes only.
-    /// 
+    ///
     /// CORRECT APPROACH:
     /// - DTOs should be naked of annotations
     /// - All annotations should be in ViewModels
     /// - DTOs should be mapped to ViewModels in the Web layer
     /// - This way, validation and display concerns are separated from
     ///   data transfer concerns.
-    ///   
+    ///
     /// WHY IS THIS BAD EXAMPLE HERE:
     /// - For simplicity of the sample project
     /// </summary>
@@ -23,30 +23,49 @@ namespace BasicNLayerTemplate.Service.Dtos.ContosoUniversity
 
         [Required(ErrorMessage = "Government ID is required")]
         [RegularExpression(@"^\d+$", ErrorMessage = "Government ID must contain only numbers")]
-        [StringLength(20, MinimumLength = 7, ErrorMessage = "Government ID must be between 8 and 20 digits")]
+        [StringLength(
+            20,
+            MinimumLength = 7,
+            ErrorMessage = "Government ID must be between 8 and 20 digits"
+        )]
         [Display(Name = "Government ID")]
         public string GovernmentId { get; set; } = string.Empty;
 
         public string GovernmentIdFormatted =>
             long.TryParse(GovernmentId, out long num)
-                ? num.ToString("#,###,###", new System.Globalization.NumberFormatInfo
-                {
-                    NumberGroupSeparator = ".",
-                    NumberDecimalDigits = 0
-                })
+                ? num.ToString(
+                    "#,###,###",
+                    new System.Globalization.NumberFormatInfo
+                    {
+                        NumberGroupSeparator = ".",
+                        NumberDecimalDigits = 0,
+                    }
+                )
                 : GovernmentId; // Fallback to original value
 
         [Required(ErrorMessage = "First name is required")]
-        [StringLength(80, MinimumLength = 2, ErrorMessage = "First Name must be between 2 and 80 characters")]
-        [RegularExpression(@"^[a-zA-ZÁÉÍÓÚÑáéíóúñüÜ][a-zA-ZÁÉÍÓÚÑáéíóúñüÜ\s'-]*$",
-            ErrorMessage = "First name must start with a letter and can only contain letters, spaces, hyphens, and apostrophes")]
+        [StringLength(
+            80,
+            MinimumLength = 2,
+            ErrorMessage = "First Name must be between 2 and 80 characters"
+        )]
+        [RegularExpression(
+            @"^[a-zA-ZÁÉÍÓÚÑáéíóúñüÜ][a-zA-ZÁÉÍÓÚÑáéíóúñüÜ\s'-]*$",
+            ErrorMessage = "First name must start with a letter and can only contain letters, spaces, hyphens, and apostrophes"
+        )]
         [Display(Name = "First Name")]
         public string FirstMidName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Last name is required")]
-        [StringLength(80, MinimumLength = 2, ErrorMessage = "Last Name must be between 2 and 80 characters")]
-        [RegularExpression(@"^[a-zA-ZÁÉÍÓÚÑáéíóúñüÜ][a-zA-ZÁÉÍÓÚÑáéíóúñüÜ\s'-]*$",
-            ErrorMessage = "Last name must start with a letter and can only contain letters, spaces, hyphens, and apostrophes")]
+        [StringLength(
+            80,
+            MinimumLength = 2,
+            ErrorMessage = "Last Name must be between 2 and 80 characters"
+        )]
+        [RegularExpression(
+            @"^[a-zA-ZÁÉÍÓÚÑáéíóúñüÜ][a-zA-ZÁÉÍÓÚÑáéíóúñüÜ\s'-]*$",
+            ErrorMessage = "Last name must start with a letter and can only contain letters, spaces, hyphens, and apostrophes"
+        )]
         [Display(Name = "Last Name")]
         public string LastName { get; set; } = string.Empty;
 
@@ -60,7 +79,11 @@ namespace BasicNLayerTemplate.Service.Dtos.ContosoUniversity
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Enrollment Date")]
-        [DateRange("1950-01-01", 50, ErrorMessage = "Enrollment Date must be between 1950 and 50 years from now")]
+        [DateRange(
+            "1950-01-01",
+            50,
+            ErrorMessage = "Enrollment Date must be between 1950 and 50 years from now"
+        )]
         public DateOnly? EnrollmentDate { get; set; }
 
         public List<EnrollmentDto> Enrollments { get; set; } = [];
@@ -82,7 +105,10 @@ namespace BasicNLayerTemplate.Service.Dtos.ContosoUniversity
             _yearsIntoFuture = yearsIntoFuture;
         }
 
-        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
+        protected override ValidationResult? IsValid(
+            object? value,
+            ValidationContext validationContext
+        )
         {
             if (value is DateOnly date)
             {
@@ -91,7 +117,8 @@ namespace BasicNLayerTemplate.Service.Dtos.ContosoUniversity
                 if (date < _minDate || date > maxDate)
                 {
                     return new ValidationResult(
-                        ErrorMessage ?? $"Date must be between {_minDate:yyyy-MM-dd} and {maxDate:yyyy-MM-dd}"
+                        ErrorMessage
+                            ?? $"Date must be between {_minDate:yyyy-MM-dd} and {maxDate:yyyy-MM-dd}"
                     );
                 }
             }

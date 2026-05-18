@@ -11,12 +11,12 @@ namespace ComplexNLayerTemplate.Web.API.Controllers.ExampleControllers;
 /// Provides sample weather forecast data.
 /// </summary>
 /// <remarks>
-/// This controller demonstrates a basic public endpoint returning 
+/// This controller demonstrates a basic public endpoint returning
 /// randomly generated weather forecast information.
-/// 
+///
 /// Authorization:
 /// - Allows anonymous access.
-/// 
+///
 /// CORS:
 /// - Uses the <see cref="PolicyNames.AllowSpecificOrigin"/> policy.
 /// </remarks>
@@ -32,8 +32,16 @@ public class WeatherForecastsController : ControllerBase
     /// </summary>
     private static readonly string[] Summaries = new[]
     {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm",
-        "Balmy", "Hot", "Sweltering", "Scorching"
+        "Freezing",
+        "Bracing",
+        "Chilly",
+        "Cool",
+        "Mild",
+        "Warm",
+        "Balmy",
+        "Hot",
+        "Sweltering",
+        "Scorching",
     };
 
     private readonly ILogger<WeatherForecastsController> _logger;
@@ -44,8 +52,7 @@ public class WeatherForecastsController : ControllerBase
     /// <param name="logger">
     /// The logger used for diagnostic and operational logging.
     /// </param>
-    public WeatherForecastsController(
-        ILogger<WeatherForecastsController> logger)
+    public WeatherForecastsController(ILogger<WeatherForecastsController> logger)
     {
         _logger = logger;
     }
@@ -55,12 +62,12 @@ public class WeatherForecastsController : ControllerBase
     /// </summary>
     /// <remarks>
     /// Generates five random weather forecast entries starting from tomorrow.
-    /// 
+    ///
     /// Route:
     /// GET /api/weatherforecasts/data
     /// </remarks>
     /// <returns>
-    /// A collection of <see cref="WeatherForecast"/> objects 
+    /// A collection of <see cref="WeatherForecast"/> objects
     /// containing date, temperature, and summary information.
     /// </returns>
     /// <response code="200">
@@ -73,13 +80,9 @@ public class WeatherForecastsController : ControllerBase
             .Range(1, 5)
             .Select(index => new WeatherForecast
             {
-                Date = DateOnly.FromDateTime(
-                    DateTime.Now.AddDays(index)
-                ),
+                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                 TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[
-                    Random.Shared.Next(Summaries.Length)
-                ]
+                Summary = Summaries[Random.Shared.Next(Summaries.Length)],
             })
             .ToArray();
 
@@ -93,15 +96,12 @@ public class WeatherForecastsController : ControllerBase
             .Range(1, 5)
             .Select(index => new WeatherForecast
             {
-                Date = DateOnly.FromDateTime(
-                    DateTime.Now.AddDays(index)
-                ),
+                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                 TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[
-                    Random.Shared.Next(Summaries.Length)
-                ]
+                Summary = Summaries[Random.Shared.Next(Summaries.Length)],
             })
-            .ToArray().FirstOrDefault();
+            .ToArray()
+            .FirstOrDefault();
 
         return forecast;
     }
