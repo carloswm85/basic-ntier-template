@@ -3,10 +3,10 @@
 namespace SimpleMonolithTemplate.Module.Data.Entities.ContosoUniversity;
 
 /// <summary>
-/// There's a many-to-many relationship between the Student and Course 
+/// There's a many-to-many relationship between the Student and Course
 /// entities,and the Enrollment entity functions as a many-to-many join
-/// table with payload in the database. "With payload" means that the 
-/// Enrollment table contains additional data besides foreign keys for 
+/// table with payload in the database. "With payload" means that the
+/// Enrollment table contains additional data besides foreign keys for
 /// the joined tables (in this case, a primary key and a Grade property).
 /// </summary>
 public partial class Enrollment

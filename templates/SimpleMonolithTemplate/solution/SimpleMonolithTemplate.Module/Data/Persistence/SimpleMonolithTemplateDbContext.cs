@@ -4,7 +4,7 @@ namespace SimpleMonolithTemplate.Module.Data.Persistence;
 
 /// <summary>
 /// Partial class for SimpleMonolithTemplateContext.
-/// 
+///
 /// - This file content is intentionally left minimal.
 /// - All content here is deleted and replaced when scafolding from the database.
 /// - DO NOT use this file for customizations. Instead use additional partial class files.
@@ -12,20 +12,17 @@ namespace SimpleMonolithTemplate.Module.Data.Persistence;
 /// </summary>
 public partial class SimpleMonolithTemplateDbContext : DbContext
 {
-    public SimpleMonolithTemplateDbContext()
-    {
-    }
+    public SimpleMonolithTemplateDbContext() { }
 
-    public SimpleMonolithTemplateDbContext(DbContextOptions<SimpleMonolithTemplateDbContext> options)
-        : base(options)
-    {
-    }
+    public SimpleMonolithTemplateDbContext(
+        DbContextOptions<SimpleMonolithTemplateDbContext> options
+    )
+        : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         OnModelCreatingPartial(modelBuilder);
     }
-
 
     /// <summary>
     /// Use this method for extending the DbContext’s model configuration without modifying the generated file.
