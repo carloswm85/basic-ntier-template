@@ -4,14 +4,14 @@
   "classifications": [
     "Solution",
     "Web",
-    "ASP.NET",
     "Monolith",
-    "Simple"
+    "Simple",
+    "ASP.NET"
   ],
   "identity": "Simple.Monolith.Template.CSharp",
   "groupIdentity": "Simple.Monolith.Template",
   "name": "DTK Simple Monolith Template (C#)",
-  "shortName": "simple-monolith-template",
+  "shortName": "dtk-simple-monolith",
   "sourceName": "SimpleMonolithTemplate",
   "defaultName": "SimpleMonolithProject",
   "tags": {

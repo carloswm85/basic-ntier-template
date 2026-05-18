@@ -3,7 +3,7 @@
     - [1.1 Recommended Learning Path](#11-recommended-learning-path)
   - [2. Available Branches](#2-available-branches)
   - [3. Additional Documentation](#3-additional-documentation)
-    - [DKT Documentation](#dkt-documentation)
+    - [DTK Documentation](#dtk-documentation)
     - [Architecture](#architecture)
 
 ---
@@ -50,9 +50,9 @@ The other architecture will be listed once they are finished.
 | Branch                   | Content/Stack                                                                                                                                        | Status | Link                                                                                |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------- |
 | `main`                   | NET Core 10 solution templates, production ready content only                                                                                        | 🟢     | [🔗](https://github.com/carloswm85/dotnet-template-kit/)                            |
-| `dkt-netcore10`          | NET Core 10 content                                                                                                                                  | 🟢     | [🔗](https://github.com/carloswm85/dotnet-template-kit/tree/dkt-netcore10)          |
-| `dkt-netcore10-identity` | NET Core 10 content, `CNLA` only, with [Identity API](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity) implementation | 🟢     | [🔗](https://github.com/carloswm85/dotnet-template-kit/tree/dkt-netcore10-identity) |
-| `dkt-netcore8`           | NET Core 8 content, `CNLA` only                                                                                                                      | 🟢     | [🔗](https://github.com/carloswm85/dotnet-template-kit/tree/dkt-netcore8)           |
+| `dtk-netcore10`          | NET Core 10 content                                                                                                                                  | 🟢     | [🔗](https://github.com/carloswm85/dotnet-template-kit/tree/dtknetcore10)          |
+| `dtk-netcore10-identity` | NET Core 10 content, `CNLA` only, with [Identity API](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity) implementation | 🟢     | [🔗](https://github.com/carloswm85/dotnet-template-kit/tree/dtknetcore10-identity) |
+| `dtk-netcore8`           | NET Core 8 content, `CNLA` only                                                                                                                      | 🟢     | [🔗](https://github.com/carloswm85/dotnet-template-kit/tree/dtknetcore8)           |
 
 `dev-*` is used for development versions.
 
@@ -60,7 +60,7 @@ The other architecture will be listed once they are finished.
 
 ## 3. Additional Documentation
 
-### DKT Documentation
+### DTK Documentation
 
 - [README.md](./docs/README.md)
 
