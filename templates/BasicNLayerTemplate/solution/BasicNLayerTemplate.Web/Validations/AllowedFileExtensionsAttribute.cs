@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BasicNLayerTemplate.MVC.Validation;
+namespace BasicNLayerTemplate.MVC.Validations;
 
 /// <summary>
 /// Custom validation attribute to restrict uploaded file extensions.
