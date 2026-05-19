@@ -27,7 +27,10 @@ public class WeatherForecastController : Controller
         var viewModel = new WeatherViewModel();
 
         var weatherDataList = await _weatherForecastService.GetWeatherForecastExample();
-        _logger.LogInformation("Fetched {Count} weather forecast entries.", weatherDataList?.Count ?? 0);
+        _logger.LogInformation(
+            "Fetched {Count} weather forecast entries.",
+            weatherDataList?.Count ?? 0
+        );
         viewModel.WeatherList = weatherDataList;
 
         return View(viewModel);
@@ -35,7 +38,8 @@ public class WeatherForecastController : Controller
 
     public IActionResult ApiInstructions()
     {
-        var instructions = @"
+        var instructions =
+            @"
                 == Weather Forecast API Instructions ==
 
                 1. Run the BasicNLayerTemplace.API project using your favorite method. 

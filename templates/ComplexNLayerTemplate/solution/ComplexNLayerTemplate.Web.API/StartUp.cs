@@ -26,12 +26,16 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         // Connection string validation (fail fast)
-        var connectionString = Configuration.GetConnectionString("DefaultConnection")
-            ?? throw new InvalidOperationException("Missing connection string 'DefaultConnection'.");
+        var connectionString =
+            Configuration.GetConnectionString("DefaultConnection")
+            ?? throw new InvalidOperationException(
+                "Missing connection string 'DefaultConnection'."
+            );
 
         // DbContext
         services.AddDbContext<ComplexNLayerTemplateDbContext>(options =>
-            options.UseSqlServer(connectionString, sql => sql.EnableRetryOnFailure()));
+            options.UseSqlServer(connectionString, sql => sql.EnableRetryOnFailure())
+        );
 
         // Caching (optional, but can improve performance for certain scenarios)
         services.AddDistributedMemoryCache();
@@ -59,67 +63,76 @@ public class Startup
         );
 
         // Controllers
-        services.AddControllers(options =>
-        {
-            options.CacheProfiles.Add(CacheProfiles.Default10Sec, CacheProfiles.Profile10);
-            options.CacheProfiles.Add(CacheProfiles.Default60Sec, CacheProfiles.Profile60);
-        }).AddJsonOptions(options =>
-        {
-            options.JsonSerializerOptions.PropertyNamingPolicy = null;
-        });
+        services
+            .AddControllers(options =>
+            {
+                options.CacheProfiles.Add(CacheProfiles.Default10Sec, CacheProfiles.Profile10);
+                options.CacheProfiles.Add(CacheProfiles.Default60Sec, CacheProfiles.Profile60);
+            })
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.PropertyNamingPolicy = null;
+            });
 
         // OpenAPI
         // https://github.com/domaindrivendev/Swashbuckle.AspNetCore/blob/master/docs/configure-and-customize-swaggergen.md
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(options =>
         {
-            options.SwaggerDoc("v1", new OpenApiInfo
-            {
-                Version = "v1",
-                Title = "ComplexNLayerTemplate API V1",
-                Description = "An ASP.NET Core Web API for your resourses.",
-                TermsOfService = new Uri("https://example.com/terms"),
-                Contact = new OpenApiContact
+            options.SwaggerDoc(
+                "v1",
+                new OpenApiInfo
                 {
-                    Name = "Example Contact",
-                    Url = new Uri("https://example.com/contact")
-                },
-                License = new OpenApiLicense
-                {
-                    Name = "Example Use License",
-                    Url = new Uri("https://example.com/license")
+                    Version = "v1",
+                    Title = "ComplexNLayerTemplate API V1",
+                    Description = "An ASP.NET Core Web API for your resourses.",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Example Contact",
+                        Url = new Uri("https://example.com/contact"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Example Use License",
+                        Url = new Uri("https://example.com/license"),
+                    },
                 }
-            });
+            );
 
-            options.SwaggerDoc("v2", new OpenApiInfo
-            {
-                Version = "v2",
-                Title = "ComplexNLayerTemplate API V2",
-                Description = "An ASP.NET Core Web API for your resourses.",
-                TermsOfService = new Uri("https://example.com/terms")
-            });
+            options.SwaggerDoc(
+                "v2",
+                new OpenApiInfo
+                {
+                    Version = "v2",
+                    Title = "ComplexNLayerTemplate API V2",
+                    Description = "An ASP.NET Core Web API for your resourses.",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                }
+            );
 
-            options.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
-            {
-                Description = "JWT Authorization header using the Bearer scheme.",
-                Name = "Authorization",
-                Type = SecuritySchemeType.Http,
-                In = ParameterLocation.Header,
-                Scheme = "bearer",
-                BearerFormat = "JWT"
-            });
+            options.AddSecurityDefinition(
+                "bearer",
+                new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme.",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    In = ParameterLocation.Header,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                }
+            );
 
             options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
             {
-                [new OpenApiSecuritySchemeReference("bearer", document)] = []
+                [new OpenApiSecuritySchemeReference("bearer", document)] = [],
             });
 
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
             options.IncludeXmlComments(xmlPath);
             options.CustomSchemaIds(t => t.FullName!.Replace("+", "."));
-
-
         });
 
         var apiVersioningBuilder = services.AddApiVersioning(options =>
@@ -139,7 +152,6 @@ public class Startup
         {
             options.GroupNameFormat = "'v'VVV"; // e.g., "v1", "v2", etc.
             options.SubstituteApiVersionInUrl = true; // api/v{version}/resource
-
         });
 
         services.AddCors(options =>
@@ -148,10 +160,9 @@ public class Startup
                 PolicyNames.AllowSpecificOrigin,
                 builder =>
                 {
-                    builder.WithOrigins("*")
-                        .AllowAnyMethod()
-                        .AllowAnyHeader();
-                });
+                    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+                }
+            );
         });
     }
 
@@ -197,20 +208,24 @@ public class Startup
 
         app.UseResponseCaching();
 
-        app.Use(async (context, next) =>
-        {
-            context.Response.GetTypedHeaders().CacheControl =
-                new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
+        app.Use(
+            async (context, next) =>
+            {
+                context.Response.GetTypedHeaders().CacheControl =
+                    new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
+                    {
+                        Public = true,
+                        MaxAge = TimeSpan.FromSeconds(10),
+                    };
+
+                context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] = new string[]
                 {
-                    Public = true,
-                    MaxAge = TimeSpan.FromSeconds(10)
+                    "Accept-Encoding",
                 };
 
-            context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
-                new string[] { "Accept-Encoding" };
-
-            await next();
-        });
+                await next();
+            }
+        );
 
         app.UseEndpoints(endpoints =>
         {
@@ -220,6 +235,5 @@ public class Startup
             // Fallback for unmatched endpoints
             endpoints.MapFallback(() => Results.NotFound("Endpoint not found."));
         });
-
     }
 }

@@ -11,7 +11,7 @@ public partial class Student
     public string FirstMidName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
 
-    [NotMapped]  // Explicitly mark as not mapped to DB
+    [NotMapped] // Explicitly mark as not mapped to DB
     public string FullName => $"{LastName}, {FirstMidName}";
 
     public string? ImagePath { get; set; }

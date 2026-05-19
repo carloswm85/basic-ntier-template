@@ -1,7 +1,7 @@
 ﻿namespace BasicNLayerTemplate.Data.Model.ContosoUniversity
 {
     /// <summary>
-    /// `CourseInstructor` relationship class. Join table for the 
+    /// `CourseInstructor` relationship class. Join table for the
     /// Instructor-to-Courses many-to-many relationship,
     /// </summary>
     public class CourseAssignment

@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SimpleMonolithTemplate.Module.Data.Entities.ContosoUniversity;
 
-
 public partial class Instructor
 {
     public int Id { get; set; }

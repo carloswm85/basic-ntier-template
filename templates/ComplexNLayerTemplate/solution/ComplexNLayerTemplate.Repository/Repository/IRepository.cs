@@ -1,6 +1,7 @@
 ﻿namespace ComplexNLayerTemplate.Repository
 {
-    public interface IRepository<TEntity> where TEntity : class
+    public interface IRepository<TEntity>
+        where TEntity : class
     {
         // === Query root – exposes IQueryable for complex LINQ queries
         IQueryable<TEntity> Query();

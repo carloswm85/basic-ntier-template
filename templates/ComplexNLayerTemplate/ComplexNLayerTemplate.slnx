@@ -1,7 +1,13 @@
 <Solution>
   <Folder Name="/Testing/">
-    <Project Path="solution/Testing/ComplexNLayerTemplate.Testing.Integration/ComplexNLayerTemplate.Testing.Integration.csproj" Id="c790a793-aaa4-478f-8824-c475a11de900" />
-    <Project Path="solution/Testing/ComplexNLayerTemplate.Testing.Services.Unit/ComplexNLayerTemplate.Testing.Unit.csproj" Id="ce2677fd-82dc-4c75-8034-6e26c0d8dfad" />
+    <Project
+      Path="solution/Testing/ComplexNLayerTemplate.Testing.Integration/ComplexNLayerTemplate.Testing.Integration.csproj"
+      Id="c790a793-aaa4-478f-8824-c475a11de900"
+    />
+    <Project
+      Path="solution/Testing/ComplexNLayerTemplate.Testing.Services.Unit/ComplexNLayerTemplate.Testing.Unit.csproj"
+      Id="ce2677fd-82dc-4c75-8034-6e26c0d8dfad"
+    />
   </Folder>
   <Project Path="docker-compose.dcproj">
     <Build />

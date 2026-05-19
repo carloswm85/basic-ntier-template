@@ -1,8 +1,7 @@
-﻿using SimpleMonolithTemplate.Module.Models;
+﻿namespace SimpleMonolithTemplate.Module.Models.ViewModels;
 
-namespace SimpleMonolithTemplate.Module.Models.ViewModels;
-
-public class PaginatedListViewModel<T> where T : class
+public class PaginatedListViewModel<T>
+    where T : class
 {
     public PaginatedList<T> PaginatedList;
     public string CurrentFilter;

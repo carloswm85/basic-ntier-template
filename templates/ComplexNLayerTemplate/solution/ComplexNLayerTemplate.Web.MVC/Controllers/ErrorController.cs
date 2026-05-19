@@ -29,15 +29,19 @@ namespace ComplexNLayerTemplate.Web.MVC.Controllers
                     return View("Error");
                 case 404:
                     ViewBag.ErrorMessage = "Sorry, the resource you requested could not be found.";
-                    logger.LogWarning($"{statusCode} Error Ocurred. Path = {statusCodeData!.OriginalPath}" +
-                        $" and QueryString = {statusCodeData.OriginalQueryString ?? "no-query-string"}");
+                    logger.LogWarning(
+                        $"{statusCode} Error Ocurred. Path = {statusCodeData!.OriginalPath}"
+                            + $" and QueryString = {statusCodeData.OriginalQueryString ?? "no-query-string"}"
+                    );
                     break;
                 case 405:
                     // A 405 status code, also known as "Method Not Allowed", is an HTTP response code that a server
                     // sends when a client requests a method that the resource doesn't support.
                     ViewBag.ErrorMessage = "Sorry, the resource you requested could not be found.";
-                    logger.LogWarning($"405 Error Ocurred. Path = {statusCodeData!.OriginalPath}" +
-                        $" and QueryString = {statusCodeData.OriginalQueryString ?? "no-query-string"}");
+                    logger.LogWarning(
+                        $"405 Error Ocurred. Path = {statusCodeData!.OriginalPath}"
+                            + $" and QueryString = {statusCodeData.OriginalQueryString ?? "no-query-string"}"
+                    );
                     break;
                 case 500:
                     ViewBag.ErrorMessage = "An internal server error occurred.";
@@ -61,8 +65,10 @@ namespace ComplexNLayerTemplate.Web.MVC.Controllers
             var exceptionDetails = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
 
             // Log the path that caused the exception and the exception message.
-            logger.LogError($"The path {exceptionDetails!.Path} threw an exception " +
-                $" {exceptionDetails.Error}");
+            logger.LogError(
+                $"The path {exceptionDetails!.Path} threw an exception "
+                    + $" {exceptionDetails.Error}"
+            );
 
             // Return a view showing a custom error page
             // TODO: Create the CustomError view?

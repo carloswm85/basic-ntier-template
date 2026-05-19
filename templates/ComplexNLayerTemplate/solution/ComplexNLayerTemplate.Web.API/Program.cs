@@ -9,11 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 // ------------------------------------------------------------
 // Logging
 // ------------------------------------------------------------
-var logger = LoggerFactory.Create(logging =>
-{
-    logging.AddConsole();
-    logging.AddDebug();
-}).CreateLogger("Startup");
+var logger = LoggerFactory
+    .Create(logging =>
+    {
+        logging.AddConsole();
+        logging.AddDebug();
+    })
+    .CreateLogger("Startup");
 
 logger.LogInformation("API starting...");
 
@@ -54,7 +56,10 @@ using (var scope = app.Services.CreateScope())
 
                 foreach (var address in addresses ?? [])
                 {
-                    logger.LogInformation("Web API running at: {Address}/swagger/index.html", address);
+                    logger.LogInformation(
+                        "Web API running at: {Address}/swagger/index.html",
+                        address
+                    );
                 }
             });
         }

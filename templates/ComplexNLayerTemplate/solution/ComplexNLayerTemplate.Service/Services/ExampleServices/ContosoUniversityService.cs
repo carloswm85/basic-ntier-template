@@ -15,7 +15,6 @@ namespace ComplexNLayerTemplate.Service.Services.ExampleServices
         private readonly ILogger<ContosoUniversityService> _logger;
         private readonly IMapper _mapper;
 
-
         public ContosoUniversityService(
             ILogger<ContosoUniversityService> logger,
             IUnitOfWork unitOfWork,
@@ -25,7 +24,6 @@ namespace ComplexNLayerTemplate.Service.Services.ExampleServices
             _logger = logger;
             _uow = unitOfWork;
             _mapper = mapper;
-
         }
 
         public async Task<StudentDto?> GetStudentAsync(int studentId, bool asNoTracking = false)
@@ -36,12 +34,12 @@ namespace ComplexNLayerTemplate.Service.Services.ExampleServices
             {
                 student = await _uow.StudentRepository.GetByIdAsync(studentId);
                 return _mapper.Map<StudentDto>(student);
-
             }
 
-            student = await _uow.StudentRepository.Query()
+            student = await _uow
+                .StudentRepository.Query()
                 .Include(s => s.Enrollments)
-                .ThenInclude(e => e.Course)
+                    .ThenInclude(e => e.Course)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == studentId);
 
@@ -77,8 +75,7 @@ namespace ComplexNLayerTemplate.Service.Services.ExampleServices
                 var term = searchString.Trim().ToUpper();
 
                 students = students.Where(s =>
-                    s.LastName.ToUpper().Contains(term) ||
-                    s.FirstMidName.ToUpper().Contains(term)
+                    s.LastName.ToUpper().Contains(term) || s.FirstMidName.ToUpper().Contains(term)
                 );
             }
             var filteredCount = students.Count();
@@ -101,10 +98,7 @@ namespace ComplexNLayerTemplate.Service.Services.ExampleServices
             }
 
             var count = students.Count();
-            var items = students
-                .Skip((pageIndex - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+            var items = students.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
 
             var studentsDto = _mapper.Map<List<StudentDto>>(items);
 
@@ -124,8 +118,9 @@ namespace ComplexNLayerTemplate.Service.Services.ExampleServices
             {
                 var student = _mapper.Map<Student>(studentDto);
 
-                student.GovernmentId = new string(student.GovernmentId
-                    .Where(char.IsDigit).ToArray());
+                student.GovernmentId = new string(
+                    student.GovernmentId.Where(char.IsDigit).ToArray()
+                );
 
                 await _uow.StudentRepository.AddAsync(student);
                 await _uow.SaveChangesAsync();
@@ -146,8 +141,7 @@ namespace ComplexNLayerTemplate.Service.Services.ExampleServices
             studentDto.Id = studentId;
             var student = _mapper.Map<Student>(studentDto);
 
-            student.GovernmentId = new string(student.GovernmentId
-                    .Where(char.IsDigit).ToArray());
+            student.GovernmentId = new string(student.GovernmentId.Where(char.IsDigit).ToArray());
 
             _uow.StudentRepository.Update(student);
             await _uow.SaveChangesAsync();
@@ -189,7 +183,7 @@ namespace ComplexNLayerTemplate.Service.Services.ExampleServices
                 select new EnrollmentDateGroupDto()
                 {
                     EnrollmentYear = dateGroup.Key,
-                    StudentCount = dateGroup.Count()
+                    StudentCount = dateGroup.Count(),
                 };
 
             return await data.ToListAsync();

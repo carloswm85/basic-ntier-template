@@ -12,12 +12,8 @@ public class CacheProfiles
     {
         Duration = 10,
         Location = ResponseCacheLocation.Client,
-        NoStore = false
+        NoStore = false,
     };
 
-    public static readonly CacheProfile Profile60 = new()
-    {
-        Duration = 60,
-    };
-
+    public static readonly CacheProfile Profile60 = new() { Duration = 60 };
 }

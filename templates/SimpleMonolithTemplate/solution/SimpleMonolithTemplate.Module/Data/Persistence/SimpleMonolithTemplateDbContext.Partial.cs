@@ -23,7 +23,7 @@ public partial class SimpleMonolithTemplateDbContext : DbContext
 
     /// <summary>
     /// Example content for the partial class to configure the model.
-    /// 
+    ///
     /// This `OnModelCreatingPartial` mathod is used for:
     /// - Keeps your custom configurations separate from auto-generated code.
     /// - Prevents losing changes if you re-scaffold the database.
@@ -34,7 +34,6 @@ public partial class SimpleMonolithTemplateDbContext : DbContext
     {
         // Always call the base method first to ensure EF Core's default configurations are applied.
         base.OnModelCreating(modelBuilder);
-
 
         #region Contoso University Example Built Model Configurations
 
@@ -48,8 +47,7 @@ public partial class SimpleMonolithTemplateDbContext : DbContext
 
         // Configures the CourseAssignment entity's composite primary key.
         // This mapping can't be done with property attributes.
-        modelBuilder.Entity<CourseAssignment>()
-            .HasKey(c => new { c.CourseId, c.InstructorId });
+        modelBuilder.Entity<CourseAssignment>().HasKey(c => new { c.CourseId, c.InstructorId });
 
         // Optional: How to configure many-to-many relationship between
         // the Instructor and Course entities.
@@ -62,4 +60,3 @@ public partial class SimpleMonolithTemplateDbContext : DbContext
         #endregion
     }
 }
-

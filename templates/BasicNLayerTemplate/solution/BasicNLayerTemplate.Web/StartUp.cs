@@ -1,6 +1,5 @@
 ﻿using BasicNLayerTemplate.Data.Datum;
 using BasicNLayerTemplate.Data.Model;
-
 using BasicNLayerTemplate.Service.Mappings.ContosoUniversity;
 using BasicNLayerTemplate.Service.Services.ExampleServices;
 using BasicNLayerTemplate.Service.Services.ExampleServices.Interfaces;
@@ -39,24 +38,33 @@ public class StartUp
         #region Services Configuration
 
         // Connection string "DefaultConnection" is pulled from configuration (appsettings.json).
-        var connectionString = Configuration.GetConnectionString("DefaultConnection")
-            ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+        var connectionString =
+            Configuration.GetConnectionString("DefaultConnection")
+            ?? throw new InvalidOperationException(
+                "Connection string 'DefaultConnection' not found."
+            );
 
         // Register DbContext with SQL Server as the database provider.
         services.AddDbContext<BasicNLayerTemplateDbContext>(options =>
-            options.UseSqlServer(connectionString));
+            options.UseSqlServer(connectionString)
+        );
 
         // === HTTP CLIENT ===
         // Configure HttpClient with base address from configuration
-        services.AddHttpClient("ApiClient", (provider, client) =>
-        {
-            var apiBaseUrl = Configuration["ApiBaseUrl"];
-            if (string.IsNullOrWhiteSpace(apiBaseUrl))
+        services.AddHttpClient(
+            "ApiClient",
+            (provider, client) =>
             {
-                throw new InvalidOperationException("ApiBaseUrl configuration is missing or empty.");
+                var apiBaseUrl = Configuration["ApiBaseUrl"];
+                if (string.IsNullOrWhiteSpace(apiBaseUrl))
+                {
+                    throw new InvalidOperationException(
+                        "ApiBaseUrl configuration is missing or empty."
+                    );
+                }
+                client.BaseAddress = new Uri(apiBaseUrl);
             }
-            client.BaseAddress = new Uri(apiBaseUrl);
-        });
+        );
 
         services.AddLocalization(options => options.ResourcesPath = "Resources");
 
@@ -82,7 +90,11 @@ public class StartUp
 
     // === REQUEST PIPELINE
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public async void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+    public async void Configure(
+        IApplicationBuilder app,
+        IWebHostEnvironment env,
+        ILoggerFactory loggerFactory
+    )
     {
         #region Middleware Configuration
 
@@ -107,7 +119,6 @@ public class StartUp
             // {0} is a placeholder for the status code
             // app.UseStatusCodePagesWithRedirects("/Error/{0}"); // (2) Redirect to the string controller
             app.UseStatusCodePagesWithReExecute("/Error/{0}"); // (3) Re-executes the pipeline
-
 
             // Enable HTTP Strict Transport Security (HSTS) for enhanced security in production.
             // The default duration is 30 days; you can adjust this value based on your requirements.
@@ -159,7 +170,10 @@ public class StartUp
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "An error occurred while creating the database from the MVC layer.");
+                logger.LogError(
+                    ex,
+                    "An error occurred while creating the database from the MVC layer."
+                );
             }
         }
 

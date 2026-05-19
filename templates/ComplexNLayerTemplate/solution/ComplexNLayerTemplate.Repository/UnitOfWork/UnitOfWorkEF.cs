@@ -23,22 +23,28 @@ namespace ComplexNLayerTemplate.Repository
 
         #region Contoso University Example
 
-        public IRepository<Student> StudentRepository => _studentRepository ?? (_studentRepository = new RepositoryEF<Student>(_dbContext));
-        public IRepository<Course> CourseRepository => _courseRepository ?? (_courseRepository = new RepositoryEF<Course>(_dbContext));
-        public IRepository<Enrollment> EnrollmentRepository => _enrollmentRepository ?? (_enrollmentRepository = new RepositoryEF<Enrollment>(_dbContext));
+        public IRepository<Student> StudentRepository =>
+            _studentRepository ?? (_studentRepository = new RepositoryEF<Student>(_dbContext));
+        public IRepository<Course> CourseRepository =>
+            _courseRepository ?? (_courseRepository = new RepositoryEF<Course>(_dbContext));
+        public IRepository<Enrollment> EnrollmentRepository =>
+            _enrollmentRepository
+            ?? (_enrollmentRepository = new RepositoryEF<Enrollment>(_dbContext));
 
         #endregion
 
 
-        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-            => await _dbContext.SaveChangesAsync(cancellationToken);
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) =>
+            await _dbContext.SaveChangesAsync(cancellationToken);
 
         public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
         {
             if (_currentTransaction != null)
                 return;
 
-            _currentTransaction = await _dbContext.Database.BeginTransactionAsync(cancellationToken);
+            _currentTransaction = await _dbContext.Database.BeginTransactionAsync(
+                cancellationToken
+            );
         }
 
         public async Task CommitTransactionAsync(CancellationToken cancellationToken = default)

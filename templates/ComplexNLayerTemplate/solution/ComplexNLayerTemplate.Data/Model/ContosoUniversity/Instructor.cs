@@ -4,7 +4,6 @@ using ComplexNLayerTemplate.Data.Model.ContosoUniversity;
 
 namespace ComplexNLayerTemplate.Data.Model
 {
-
     public partial class Instructor
     {
         public int Id { get; set; }

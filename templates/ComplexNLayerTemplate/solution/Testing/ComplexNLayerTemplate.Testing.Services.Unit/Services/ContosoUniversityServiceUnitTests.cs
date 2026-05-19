@@ -25,22 +25,37 @@ public class ContosoUniversityServiceUnitTests
             Id = 1,
             GovernmentId = "12345678",
             LastName = "Doe",
-            FirstMidName = "John"
+            FirstMidName = "John",
         };
 
         mockRepo.Setup(r => r.GetByIdAsync(1)).ReturnsAsync(student);
         mockUow.Setup(u => u.StudentRepository).Returns(mockRepo.Object);
 
-        var expectedDto = new StudentDto { Id = 1, GovernmentId = "12345678", LastName = "Doe", FirstMidName = "John" };
-        mockMapper.Setup(m => m.Map<StudentDto>(It.IsAny<Student>())).Returns((Student s) => new StudentDto
+        var expectedDto = new StudentDto
         {
-            Id = s.Id,
-            GovernmentId = s.GovernmentId,
-            LastName = s.LastName,
-            FirstMidName = s.FirstMidName
-        });
+            Id = 1,
+            GovernmentId = "12345678",
+            LastName = "Doe",
+            FirstMidName = "John",
+        };
+        mockMapper
+            .Setup(m => m.Map<StudentDto>(It.IsAny<Student>()))
+            .Returns(
+                (Student s) =>
+                    new StudentDto
+                    {
+                        Id = s.Id,
+                        GovernmentId = s.GovernmentId,
+                        LastName = s.LastName,
+                        FirstMidName = s.FirstMidName,
+                    }
+            );
 
-        var service = new ContosoUniversityService(mockLogger.Object, mockUow.Object, mockMapper.Object);
+        var service = new ContosoUniversityService(
+            mockLogger.Object,
+            mockUow.Object,
+            mockMapper.Object
+        );
 
         // Act
         var result = await service.GetStudentAsync(1, asNoTracking: true);
@@ -61,20 +76,35 @@ public class ContosoUniversityServiceUnitTests
         var mockMapper = new Mock<IMapper>();
         var mockLogger = new Mock<ILogger<ContosoUniversityService>>();
 
-        var dto = new StudentDto { GovernmentId = "ABC-12-3456", LastName = "Smith", FirstMidName = "Anna" };
-        var mappedStudent = new Student { GovernmentId = "ABC-12-3456", LastName = "Smith", FirstMidName = "Anna" };
+        var dto = new StudentDto
+        {
+            GovernmentId = "ABC-12-3456",
+            LastName = "Smith",
+            FirstMidName = "Anna",
+        };
+        var mappedStudent = new Student
+        {
+            GovernmentId = "ABC-12-3456",
+            LastName = "Smith",
+            FirstMidName = "Anna",
+        };
 
         mockMapper.Setup(m => m.Map<Student>(It.IsAny<StudentDto>())).Returns(mappedStudent);
 
         // When AddAsync is called, set the Id to simulate DB behaviour
-        mockRepo.Setup(r => r.AddAsync(It.IsAny<Student>()))
+        mockRepo
+            .Setup(r => r.AddAsync(It.IsAny<Student>()))
             .Returns(Task.CompletedTask)
             .Callback<Student>(s => s.Id = 42);
 
         mockUow.Setup(u => u.StudentRepository).Returns(mockRepo.Object);
         mockUow.Setup(u => u.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(1);
 
-        var service = new ContosoUniversityService(mockLogger.Object, mockUow.Object, mockMapper.Object);
+        var service = new ContosoUniversityService(
+            mockLogger.Object,
+            mockUow.Object,
+            mockMapper.Object
+        );
 
         // Act
         var createdId = await service.CreateStudentAsync(dto);

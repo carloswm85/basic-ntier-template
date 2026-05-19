@@ -18,7 +18,7 @@ public class ContosoUniversityController : Controller
     public ContosoUniversityController(
         IContosoUniversityService contosoService,
         ILogger<ContosoUniversityController> logger
-        )
+    )
     {
         _logger = logger;
         _contosoService = contosoService;
@@ -39,16 +39,23 @@ public class ContosoUniversityController : Controller
         try
         {
             var students = await _contosoService.GetStudentsPaginatedListAsync(
-                currentFilter, pageIndex, pageSize, searchString, sortOrder);
+                currentFilter,
+                pageIndex,
+                pageSize,
+                searchString,
+                sortOrder
+            );
 
             var paginatedListViewModel = new PaginatedListViewModel<StudentDto>(
                 paginatedList: students,
                 currentFilter: searchString,
                 currentSort: sortOrder,
                 sortColumnOne: string.IsNullOrEmpty(sortOrder)
-                    ? CurrentSort.LastNameDesc : CurrentSort.LastNameAsc,
+                    ? CurrentSort.LastNameDesc
+                    : CurrentSort.LastNameAsc,
                 sortColumnTwo: sortOrder == CurrentSort.DateAsc
-                    ? CurrentSort.DateDesc : CurrentSort.DateAsc,
+                    ? CurrentSort.DateDesc
+                    : CurrentSort.DateAsc,
                 pageSize: pageSize
             );
 
@@ -105,9 +112,12 @@ public class ContosoUniversityController : Controller
         catch (DbUpdateException ex)
         {
             _logger.LogError(ex, "An error occurred while creating a new student.");
-            ModelState.AddModelError("", "Unable to save changes. " +
-                "Try again, and if the problem persists " +
-                "see your system administrator.");
+            ModelState.AddModelError(
+                "",
+                "Unable to save changes. "
+                    + "Try again, and if the problem persists "
+                    + "see your system administrator."
+            );
             return View(studentDto);
         }
     }
@@ -153,18 +163,31 @@ public class ContosoUniversityController : Controller
             if (!_contosoService.StudentExists(studentDto.Id))
                 return NotFound();
 
-            _logger.LogWarning(ex, "Concurrency conflict while updating student ID {StudentId}.", studentDto.Id);
-            ModelState.AddModelError("", "The record you attempted to edit was modified by another user.");
+            _logger.LogWarning(
+                ex,
+                "Concurrency conflict while updating student ID {StudentId}.",
+                studentDto.Id
+            );
+            ModelState.AddModelError(
+                "",
+                "The record you attempted to edit was modified by another user."
+            );
             return View(studentDto);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An error occurred while editing the student with ID {StudentId}.", studentDto.Id);
-            ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, contact your system administrator.");
+            _logger.LogError(
+                ex,
+                "An error occurred while editing the student with ID {StudentId}.",
+                studentDto.Id
+            );
+            ModelState.AddModelError(
+                "",
+                "Unable to save changes. Try again, and if the problem persists, contact your system administrator."
+            );
             return View(studentDto);
         }
     }
-
 
     // GET: /ContosoUniversity/Delete/5
     // Display student before deletion.
@@ -174,15 +197,19 @@ public class ContosoUniversityController : Controller
         if (id == null)
             return NotFound();
 
-        var student = await _contosoService.GetStudentAsync(studentId: id.Value, asNoTracking: true);
+        var student = await _contosoService.GetStudentAsync(
+            studentId: id.Value,
+            asNoTracking: true
+        );
 
-        if (student == null) return NotFound();
+        if (student == null)
+            return NotFound();
 
         if (saveChangesError.GetValueOrDefault())
         {
             ViewData["ErrorMessage"] =
-                "Delete failed. Try again, and if the problem persists " +
-                "see your system administrator.";
+                "Delete failed. Try again, and if the problem persists "
+                + "see your system administrator.";
         }
 
         return View(student);
@@ -205,10 +232,13 @@ public class ContosoUniversityController : Controller
         }
         catch (DbUpdateException ex)
         {
-            _logger.LogError(ex, "An error occurred while deleting the student with ID {StudentId}.", id);
+            _logger.LogError(
+                ex,
+                "An error occurred while deleting the student with ID {StudentId}.",
+                id
+            );
             return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
         }
-
     }
 
     // ADIITONAL METHODS CAN GO HERE
@@ -266,7 +296,8 @@ public class ContosoUniversityController : Controller
     [HttpGet("AdditionalInstructions")]
     public IActionResult ContosoUniversityInstructions()
     {
-        var instructions = @"
+        var instructions =
+            @"
                 == INSTRUCTIONS FOR THE CONTOSO UNIVERSITY CONTENT ==
 
                 Link to tutorial: https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/?view=aspnetcore-8.0
@@ -333,7 +364,8 @@ public class ContosoUniversityController : Controller
                 Directory.CreateDirectory(imageFolder);
 
             // Generate filename
-            string fileName = $"{imageContainer.Id}_{Guid.NewGuid()}{Path.GetExtension(imageContainer.Image.FileName)}";
+            string fileName =
+                $"{imageContainer.Id}_{Guid.NewGuid()}{Path.GetExtension(imageContainer.Image.FileName)}";
 
             var filePath = Path.Combine(imageFolder, fileName);
 
