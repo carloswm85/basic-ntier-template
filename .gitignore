@@ -49,7 +49,7 @@ e2e/*.map
 # Caches language service data
 *.lscache
 
-######################################################### VisualStudioCode Patch
+######################################## VisualStudioCode Patch
 # Ignore all local history of files
 .history
 .ionide
@@ -448,6 +448,6 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-############################################################# VisualStudio Patch
+######################################## VisualStudio Patch
 # Additional files built by Visual Studio
 *.bak
