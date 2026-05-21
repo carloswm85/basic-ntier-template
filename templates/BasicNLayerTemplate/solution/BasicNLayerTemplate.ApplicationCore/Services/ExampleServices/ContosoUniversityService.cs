@@ -1,12 +1,12 @@
-﻿using AutoMapper;
+﻿using BasicNLayerTemplate.ApplicationCore.Dtos.ContosoUniversity;
+using BasicNLayerTemplate.ApplicationCore.Models;
+using BasicNLayerTemplate.ApplicationCore.Services.ExampleServices.Interfaces;
 using BasicNLayerTemplate.Data.Model;
-using BasicNLayerTemplate.Service.Dtos.ContosoUniversity;
-using BasicNLayerTemplate.Service.Models;
-using BasicNLayerTemplate.Service.Services.ExampleServices.Interfaces;
+using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace BasicNLayerTemplate.Service.Services.ExampleServices
+namespace BasicNLayerTemplate.ApplicationCore.Services.ExampleServices
 {
     public class ContosoUniversityService : IContosoUniversityService
     {
@@ -32,6 +32,12 @@ namespace BasicNLayerTemplate.Service.Services.ExampleServices
             if (asNoTracking)
             {
                 student = await _context.Students.FindAsync(studentId);
+
+                if (student is null)
+                {
+                    return null;
+                }
+
                 return _mapper.Map<StudentDto>(student);
             }
 
@@ -40,6 +46,11 @@ namespace BasicNLayerTemplate.Service.Services.ExampleServices
                     .ThenInclude(e => e.Course)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == studentId);
+
+            if (student is null)
+            {
+                return null;
+            }
 
             return _mapper.Map<StudentDto>(student);
         }

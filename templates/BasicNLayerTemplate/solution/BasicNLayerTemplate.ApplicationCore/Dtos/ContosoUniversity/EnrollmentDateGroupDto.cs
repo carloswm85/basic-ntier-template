@@ -1,4 +1,4 @@
-﻿namespace BasicNLayerTemplate.Service.Dtos.ContosoUniversity
+﻿namespace BasicNLayerTemplate.ApplicationCore.Dtos.ContosoUniversity
 {
     public class EnrollmentDateGroupDto
     {

@@ -1,4 +1,4 @@
-﻿using BasicNLayerTemplate.Data.Model.ContosoUniversity;
+﻿using BasicNLayerTemplate.Infrastructure.Model.ContosoUniversity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BasicNLayerTemplate.Data.Model;

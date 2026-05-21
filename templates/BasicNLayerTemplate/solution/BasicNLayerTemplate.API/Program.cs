@@ -1,6 +1,6 @@
-using BasicNLayerTemplate.Data.Datum;
+using BasicNLayerTemplate.API;
 using BasicNLayerTemplate.Data.Model;
-using BasicNLayerTemplate.Web.API;
+using BasicNLayerTemplate.Infrastructure.Datum;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 

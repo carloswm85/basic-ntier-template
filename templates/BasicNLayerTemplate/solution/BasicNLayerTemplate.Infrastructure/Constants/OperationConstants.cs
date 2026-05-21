@@ -1,4 +1,4 @@
-﻿namespace BasicNLayerTemplate.Data.Constants;
+﻿namespace BasicNLayerTemplate.Infrastructure.Constants;
 
 /// <summary>
 /// Provides constant values for common operation names and role identifiers used throughout the application.

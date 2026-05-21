@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using BasicNLayerTemplate.Data.Constants;
+using BasicNLayerTemplate.Infrastructure.Constants;
 
 namespace BasicNLayerTemplate.Data.Model
 {

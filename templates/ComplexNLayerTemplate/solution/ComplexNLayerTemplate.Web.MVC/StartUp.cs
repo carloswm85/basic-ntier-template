@@ -1,11 +1,11 @@
 ﻿using ComplexNLayerTemplate.Data.Datum;
 using ComplexNLayerTemplate.Data.Model;
 using ComplexNLayerTemplate.Repository;
-using ComplexNLayerTemplate.Service.Mappings.ContosoUniversity;
 using ComplexNLayerTemplate.Service.Services.ExampleServices;
 using ComplexNLayerTemplate.Service.Services.ExampleServices.Interfaces;
 using ComplexNLayerTemplate.Web.MVC.Services;
 using ComplexNLayerTemplate.Web.MVC.Services.Interfaces;
+using Mapster;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
@@ -78,12 +78,7 @@ public class StartUp
         // === Source code services ===
         services.AddScoped<IUnitOfWork, UnitOfWorkEF>();
 
-        services.AddAutoMapper(
-            cfg => { },
-            typeof(StudentProfile).Assembly,
-            typeof(CourseProfile).Assembly,
-            typeof(EnrollmentProfile).Assembly
-        );
+        services.AddMapster();
 
         // Application services
         services.AddScoped<IContosoUniversityService, ContosoUniversityService>();

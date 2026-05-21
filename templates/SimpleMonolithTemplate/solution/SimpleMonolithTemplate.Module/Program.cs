@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace SimpleMonolithTemplate.Module.Module;
+namespace SimpleMonolithTemplate.Module;
 
 public partial class Program
 {

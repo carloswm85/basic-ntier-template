@@ -1,4 +1,4 @@
-﻿namespace BasicNLayerTemplate.Service.Contracts
+﻿namespace BasicNLayerTemplate.ApplicationCore.Contracts
 {
     public sealed class Result
     {

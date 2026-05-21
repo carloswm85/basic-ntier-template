@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using ComplexNLayerTemplate.Data.Model;
+﻿using ComplexNLayerTemplate.Data.Model;
 using ComplexNLayerTemplate.Repository;
 using ComplexNLayerTemplate.Service.Dtos.ContosoUniversity;
 using ComplexNLayerTemplate.Service.Services.ExampleServices;
+using MapsterMapper;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;

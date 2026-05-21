@@ -2,10 +2,10 @@
 using Asp.Versioning;
 using ComplexNLayerTemplate.Data.Model;
 using ComplexNLayerTemplate.Repository;
-using ComplexNLayerTemplate.Service.Mappings.ContosoUniversity;
 using ComplexNLayerTemplate.Service.Services.ExampleServices;
 using ComplexNLayerTemplate.Service.Services.ExampleServices.Interfaces;
 using ComplexNLayerTemplate.Web.API.Constants;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 
@@ -54,13 +54,7 @@ public class Startup
 
         #endregion
 
-        // AutoMapper (assemblies only)
-        services.AddAutoMapper(
-            cfg => { },
-            typeof(StudentProfile).Assembly,
-            typeof(CourseProfile).Assembly,
-            typeof(EnrollmentProfile).Assembly
-        );
+        services.AddMapster();
 
         // Controllers
         services

@@ -1,13 +1,13 @@
+using Mapster;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
 using SimpleMonolithTemplate.Module.Data;
 using SimpleMonolithTemplate.Module.Data.Persistence;
-using SimpleMonolithTemplate.Module.Mappings.ContosoUniversity;
 using SimpleMonolithTemplate.Module.Services.ExampleServices;
 using SimpleMonolithTemplate.Module.Services.Interfaces.ExampleInterfaces;
 
-namespace SimpleMonolithTemplate.Module.Module;
+namespace SimpleMonolithTemplate.Module;
 
 public class StartUp
 {
@@ -72,12 +72,7 @@ public class StartUp
             .AddDataAnnotationsLocalization()
             .AddXmlDataContractSerializerFormatters();
 
-        services.AddAutoMapper(
-            cfg => { },
-            typeof(StudentProfile).Assembly,
-            typeof(CourseProfile).Assembly,
-            typeof(EnrollmentProfile).Assembly
-        );
+        services.AddMapster();
 
         // Application services
         services.AddScoped<IContosoUniversityService, ContosoUniversityService>();
@@ -89,8 +84,7 @@ public class StartUp
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public async void Configure(
         IApplicationBuilder app,
-        IWebHostEnvironment env,
-        ILoggerFactory loggerFactory
+        IWebHostEnvironment env
     )
     {
         #region Middleware Configuration

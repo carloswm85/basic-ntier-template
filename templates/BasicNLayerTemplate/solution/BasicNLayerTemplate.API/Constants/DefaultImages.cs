@@ -1,4 +1,4 @@
-﻿namespace BasicNLayerTemplate.Web.API.Constants;
+﻿namespace BasicNLayerTemplate.API.Constants;
 
 public static class DefaultImages
 {

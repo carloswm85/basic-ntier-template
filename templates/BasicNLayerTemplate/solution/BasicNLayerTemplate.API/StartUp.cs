@@ -1,14 +1,14 @@
 ﻿using System.Reflection;
 using Asp.Versioning;
+using BasicNLayerTemplate.API.Constants;
+using BasicNLayerTemplate.ApplicationCore.Services.ExampleServices;
+using BasicNLayerTemplate.ApplicationCore.Services.ExampleServices.Interfaces;
 using BasicNLayerTemplate.Data.Model;
-using BasicNLayerTemplate.Service.Mappings.ContosoUniversity;
-using BasicNLayerTemplate.Service.Services.ExampleServices;
-using BasicNLayerTemplate.Service.Services.ExampleServices.Interfaces;
-using BasicNLayerTemplate.Web.API.Constants;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 
-namespace BasicNLayerTemplate.Web.API;
+namespace BasicNLayerTemplate.API;
 
 public class Startup
 {
@@ -53,12 +53,7 @@ public class Startup
         #endregion
 
         // AutoMapper (assemblies only)
-        services.AddAutoMapper(
-            cfg => { },
-            typeof(StudentProfile).Assembly,
-            typeof(CourseProfile).Assembly,
-            typeof(EnrollmentProfile).Assembly
-        );
+        services.AddMapster();
 
         // Controllers
         services

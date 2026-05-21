@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace BasicNLayerTemplate.Web.API.Constants;
+namespace BasicNLayerTemplate.API.Constants;
 
 public class CacheProfiles
 {

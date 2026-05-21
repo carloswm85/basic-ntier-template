@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using SimpleMonolithTemplate.Module.Data.Entities.ContosoUniversity;
 using SimpleMonolithTemplate.Module.Data.Persistence;
@@ -32,6 +32,12 @@ public class ContosoUniversityService : IContosoUniversityService
         if (asNoTracking)
         {
             student = await _context.Students.FindAsync(studentId);
+
+            if (student is null)
+            {
+                return null;
+            }
+
             return _mapper.Map<StudentDto>(student);
         }
 
@@ -40,6 +46,12 @@ public class ContosoUniversityService : IContosoUniversityService
                 .ThenInclude(e => e.Course)
             .AsNoTracking()
             .FirstOrDefaultAsync(m => m.Id == studentId);
+
+        if (student is null)
+        {
+            return null;
+        }
+
 
         return _mapper.Map<StudentDto>(student);
     }

@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-using ComplexNLayerTemplate.Data.Model;
+﻿using ComplexNLayerTemplate.Data.Model;
 using ComplexNLayerTemplate.Repository;
 using ComplexNLayerTemplate.Service.Dtos.ContosoUniversity;
 using ComplexNLayerTemplate.Service.Models;
 using ComplexNLayerTemplate.Service.Services.ExampleServices.Interfaces;
+using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -33,6 +33,12 @@ namespace ComplexNLayerTemplate.Service.Services.ExampleServices
             if (asNoTracking)
             {
                 student = await _uow.StudentRepository.GetByIdAsync(studentId);
+
+                if (student is null)
+                {
+                    return null;
+                }
+
                 return _mapper.Map<StudentDto>(student);
             }
 
@@ -42,6 +48,11 @@ namespace ComplexNLayerTemplate.Service.Services.ExampleServices
                     .ThenInclude(e => e.Course)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.Id == studentId);
+
+            if (student is null)
+            {
+                return null;
+            }
 
             return _mapper.Map<StudentDto>(student);
         }

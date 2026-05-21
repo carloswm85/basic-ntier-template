@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics;
 using Asp.Versioning;
-using BasicNLayerTemplate.Service.Dtos.ContosoUniversity;
-using BasicNLayerTemplate.Service.Services.ExampleServices.Interfaces;
-using BasicNLayerTemplate.Web.API.Constants;
+using BasicNLayerTemplate.API.Constants;
+using BasicNLayerTemplate.ApplicationCore.Dtos.ContosoUniversity;
+using BasicNLayerTemplate.ApplicationCore.Services.ExampleServices.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BasicNLayerTemplate.Web.API.Controllers.ExampleControllers;
+namespace BasicNLayerTemplate.API.Controllers.ExampleControllers;
 
 [ApiController]
 [AllowAnonymous]

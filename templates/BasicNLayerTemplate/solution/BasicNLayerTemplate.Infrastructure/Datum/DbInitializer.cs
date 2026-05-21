@@ -1,10 +1,10 @@
-﻿using BasicNLayerTemplate.Data.Constants;
-using BasicNLayerTemplate.Data.Model;
-using BasicNLayerTemplate.Data.Model.ContosoUniversity;
+﻿using BasicNLayerTemplate.Data.Model;
+using BasicNLayerTemplate.Infrastructure.Constants;
+using BasicNLayerTemplate.Infrastructure.Model.ContosoUniversity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BasicNLayerTemplate.Data.Datum;
+namespace BasicNLayerTemplate.Infrastructure.Datum;
 
 public static class DbInitializer
 {

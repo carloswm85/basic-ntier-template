@@ -1,4 +1,4 @@
-﻿namespace BasicNLayerTemplate.Data.Constants;
+﻿namespace BasicNLayerTemplate.Infrastructure.Constants;
 
 public enum Grade
 {

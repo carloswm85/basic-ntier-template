@@ -1,4 +1,4 @@
-﻿namespace BasicNLayerTemplate.Data.Model.ContosoUniversity
+﻿namespace BasicNLayerTemplate.Infrastructure.Model.ContosoUniversity
 {
     public class EnrollmentDateGroup
     {

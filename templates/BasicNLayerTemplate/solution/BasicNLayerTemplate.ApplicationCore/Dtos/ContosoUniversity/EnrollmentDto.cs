@@ -1,6 +1,6 @@
-﻿using BasicNLayerTemplate.Data.Constants;
+﻿using BasicNLayerTemplate.Infrastructure.Constants;
 
-namespace BasicNLayerTemplate.Service.Dtos.ContosoUniversity
+namespace BasicNLayerTemplate.ApplicationCore.Dtos.ContosoUniversity
 {
     public class EnrollmentDto
     {

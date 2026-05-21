@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BasicNLayerTemplate.Web.Models.ViewModels.Student
+namespace BasicNLayerTemplate.Web.Models.ViewModels.ContosoUniversity
 {
     public class EnrollmentDateGroup
     {

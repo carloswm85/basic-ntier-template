@@ -1,4 +1,4 @@
-﻿using BasicNLayerTemplate.Service.Models;
+﻿using BasicNLayerTemplate.ApplicationCore.Models;
 
 namespace BasicNLayerTemplate.Web.Models
 {

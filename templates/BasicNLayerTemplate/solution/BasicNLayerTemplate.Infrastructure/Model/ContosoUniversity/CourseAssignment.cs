@@ -1,4 +1,6 @@
-﻿namespace BasicNLayerTemplate.Data.Model.ContosoUniversity
+﻿using BasicNLayerTemplate.Data.Model;
+
+namespace BasicNLayerTemplate.Infrastructure.Model.ContosoUniversity
 {
     /// <summary>
     /// `CourseInstructor` relationship class. Join table for the

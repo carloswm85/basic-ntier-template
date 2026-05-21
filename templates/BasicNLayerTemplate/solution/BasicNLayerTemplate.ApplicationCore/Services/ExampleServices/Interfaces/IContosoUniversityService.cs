@@ -1,7 +1,7 @@
-﻿using BasicNLayerTemplate.Service.Dtos.ContosoUniversity;
-using BasicNLayerTemplate.Service.Models;
+﻿using BasicNLayerTemplate.ApplicationCore.Dtos.ContosoUniversity;
+using BasicNLayerTemplate.ApplicationCore.Models;
 
-namespace BasicNLayerTemplate.Service.Services.ExampleServices.Interfaces
+namespace BasicNLayerTemplate.ApplicationCore.Services.ExampleServices.Interfaces
 {
     public interface IContosoUniversityService
     {

@@ -1,7 +1,7 @@
+using BasicNLayerTemplate.ApplicationCore.Dtos.ContosoUniversity;
+using BasicNLayerTemplate.ApplicationCore.Models;
+using BasicNLayerTemplate.ApplicationCore.Services.ExampleServices.Interfaces;
 using BasicNLayerTemplate.Data.Model;
-using BasicNLayerTemplate.Service.Dtos.ContosoUniversity;
-using BasicNLayerTemplate.Service.Models;
-using BasicNLayerTemplate.Service.Services.ExampleServices.Interfaces;
 using BasicNLayerTemplate.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

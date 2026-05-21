@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BasicNLayerTemplate.Data.Model;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace BasicNLayerTemplate.Data.Model
+namespace BasicNLayerTemplate.Infrastructure.Model
 {
     public class BasicNLayerTemplateDbContextFactory
         : IDesignTimeDbContextFactory<BasicNLayerTemplateDbContext>

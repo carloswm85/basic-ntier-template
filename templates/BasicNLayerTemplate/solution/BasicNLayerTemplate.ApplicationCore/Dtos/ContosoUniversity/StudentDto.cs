@@ -2,7 +2,7 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Http;
 
-namespace BasicNLayerTemplate.Service.Dtos.ContosoUniversity
+namespace BasicNLayerTemplate.ApplicationCore.Dtos.ContosoUniversity
 {
     /// <summary>
     /// This is a bad use of DTOs, but it's for demonstration purposes only.

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using BasicNLayerTemplate.Data.Model.ContosoUniversity;
+using BasicNLayerTemplate.Infrastructure.Model.ContosoUniversity;
 
 namespace BasicNLayerTemplate.Data.Model
 {

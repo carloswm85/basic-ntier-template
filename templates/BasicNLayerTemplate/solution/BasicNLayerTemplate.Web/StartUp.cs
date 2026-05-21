@@ -1,15 +1,15 @@
-﻿using BasicNLayerTemplate.Data.Datum;
+﻿using BasicNLayerTemplate.ApplicationCore.Services.ExampleServices;
+using BasicNLayerTemplate.ApplicationCore.Services.ExampleServices.Interfaces;
 using BasicNLayerTemplate.Data.Model;
-using BasicNLayerTemplate.Service.Mappings.ContosoUniversity;
-using BasicNLayerTemplate.Service.Services.ExampleServices;
-using BasicNLayerTemplate.Service.Services.ExampleServices.Interfaces;
+using BasicNLayerTemplate.Infrastructure.Datum;
 using BasicNLayerTemplate.Web.Services;
 using BasicNLayerTemplate.Web.Services.Interfaces;
+using Mapster;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
 
-namespace BasicNLayerTemplate.Web.MVC;
+namespace BasicNLayerTemplate.Web;
 
 public class StartUp
 {
@@ -74,12 +74,7 @@ public class StartUp
             .AddDataAnnotationsLocalization()
             .AddXmlDataContractSerializerFormatters();
 
-        services.AddAutoMapper(
-            cfg => { },
-            typeof(StudentProfile).Assembly,
-            typeof(CourseProfile).Assembly,
-            typeof(EnrollmentProfile).Assembly
-        );
+        services.AddMapster();
 
         // Application services
         services.AddScoped<IContosoUniversityService, ContosoUniversityService>();

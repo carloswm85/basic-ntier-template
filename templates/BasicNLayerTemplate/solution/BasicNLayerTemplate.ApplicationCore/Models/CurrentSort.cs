@@ -1,4 +1,4 @@
-﻿namespace BasicNLayerTemplate.Service.Models
+﻿namespace BasicNLayerTemplate.ApplicationCore.Models
 {
     public static class CurrentSort
     {

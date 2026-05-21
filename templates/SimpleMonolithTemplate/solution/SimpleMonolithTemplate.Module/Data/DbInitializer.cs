@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SimpleMonolithTemplate.Module.Data.Entities.ContosoUniversity;
 using SimpleMonolithTemplate.Module.Data.Persistence;
-using SimpleMonolithTemplate.Module.Module;
 
 namespace SimpleMonolithTemplate.Module.Data;
 

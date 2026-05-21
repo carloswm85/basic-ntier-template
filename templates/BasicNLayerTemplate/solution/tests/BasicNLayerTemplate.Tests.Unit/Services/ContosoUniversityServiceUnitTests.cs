@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace BasicNLayerTemplate.Testing.Unit.Services;
+namespace BasicNLayerTemplate.Tests.Unit.Services;
 
 public class ContosoUniversityServiceUnitTests
 {

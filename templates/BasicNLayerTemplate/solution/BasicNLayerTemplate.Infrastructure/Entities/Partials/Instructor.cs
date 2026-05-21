@@ -1,4 +1,6 @@
-﻿namespace BasicNLayerTemplate.Data.Model
+﻿using BasicNLayerTemplate.Infrastructure.Entities;
+
+namespace BasicNLayerTemplate.Data.Model
 {
     public partial class Instructor : IEntity
     {

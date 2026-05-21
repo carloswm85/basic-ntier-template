@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace BasicNLayerTemplate.Web.MVC;
+namespace BasicNLayerTemplate.Web;
 
 public partial class Program
 {

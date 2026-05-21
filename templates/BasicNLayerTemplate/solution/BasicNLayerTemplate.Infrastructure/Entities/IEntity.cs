@@ -1,4 +1,4 @@
-﻿namespace BasicNLayerTemplate.Data
+﻿namespace BasicNLayerTemplate.Infrastructure.Entities
 {
     public interface IEntity
     {
