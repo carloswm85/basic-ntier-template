@@ -52,7 +52,6 @@ public class ContosoUniversityService : IContosoUniversityService
             return null;
         }
 
-
         return _mapper.Map<StudentDto>(student);
     }
 
