@@ -10,13 +10,13 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/common": "^20.2.0",
+    "@angular/common": "^22.1.0",
     "@angular/compiler": "^20.2.0",
     "@angular/core": "^20.2.0",
-    "@angular/forms": "^20.2.0",
-    "@angular/platform-browser": "^20.2.0",
-    "@angular/platform-browser-dynamic": "^20.2.0",
-    "@angular/router": "^20.2.0",
+    "@angular/forms": "^22.1.0",
+    "@angular/platform-browser": "^22.1.0",
+    "@angular/platform-browser-dynamic": "^22.1.0",
+    "@angular/router": "^22.1.0",
     "jest-editor-support": "*",
     "run-script-os": "*",
     "rxjs": "~7.8.0",
@@ -24,7 +24,7 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular/build": "^20.3.18",
+    "@angular/build": "^22.1.2",
     "@angular/cli": "^20.2.0",
     "@angular/compiler-cli": "^20.2.0",
     "@types/jasmine": "~5.1.0",
