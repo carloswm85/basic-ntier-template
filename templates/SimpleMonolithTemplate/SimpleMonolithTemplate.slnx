@@ -2,5 +2,5 @@
   <Project Path="docker-compose.dcproj">
     <Build />
   </Project>
-  <Project Path="solution/SimpleMonolithTemplate.Module/SimpleMonolithTemplate.Module.csproj" />
+  <Project Path="solution/SimpleMonolithTemplate.Monolith/SimpleMonolithTemplate.Monolith.csproj" />
 </Solution>

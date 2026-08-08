@@ -10,5 +10,5 @@
 
 ```pws
 # Run the application
-dotnet run --project .\solution\SimpleMonolithTemplate.Module\SimpleMonolithTemplate.Module.csproj
+dotnet run --project .\solution\SimpleMonolithTemplate.Monolith\SimpleMonolithTemplate.Monolith.csproj
 ```

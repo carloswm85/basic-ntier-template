@@ -1,5 +1,7 @@
 - [DotNet Template Kit](#dotnet-template-kit)
   - [(1) Available templates](#1-available-templates)
+    - [Single-Project Solution](#single-project-solution)
+    - [Multi -Project Solution](#multi--project-solution)
   - [(2) Requirements](#2-requirements)
   - [(3) Installation](#3-installation)
   - [(4) Quick start](#4-quick-start)
@@ -34,12 +36,19 @@
 - `✅ Ready - 🚧 In progress - 📋 Planned - ⛔ Blocked`
 - Increasing complexity, top to bottom.
 
-| Code  | Architecture                                                      | Status | Recommended for                                                  | Template command                    | Documentation                                           |
-| ----- | ----------------------------------------------------------------- | ------ | ---------------------------------------------------------------- | ----------------------------------- | ------------------------------------------------------- |
-| `SMA` | Simple Monolith                                                   | ✅     | CRUD applications, internal tools, and MVPs                      | `dotnet new dtk-simple-monolith`    | [docs](./templates/SimpleMonolithTemplate/README.md)    |
-| `NLA` | N-Layer                                                           | ✅     | Enterprise applications, large teams, and long-term maintenance  | `dotnet new dtk-nlayer`             | [docs](./templates/NLayerTemplate/README.md)            |
-| `VSA` | Vertical Slice                                                    | 📋     | Independent API features, microservices, and modular monoliths   | Not available yet                   | [docs](./templates/VerticalSliceTemplate/README.md)     |
-| `CNA` | Clean Architecture with Microsoft's `Identity API` implementation | ⛔     | Clean Architecture applications requiring ASP\.NET Core Identity | `dotnet new dtk-clean-architecture` | [docs](./templates/CleanArchitectureTemplate/README.md) |
+### Single-Project Solution
+
+| Code  | Architecture    | Status | Recommended for                             | Template command                 | Documentation                                        |
+| ----- | --------------- | ------ | ------------------------------------------- | -------------------------------- | ---------------------------------------------------- |
+| `SMA` | Simple Monolith | ✅     | CRUD applications, internal tools, and MVPs | `dotnet new dtk-simple-monolith` | [docs](./templates/SimpleMonolithTemplate/README.md) |
+
+### Multi -Project Solution
+
+| Code  | Architecture       | Status | Recommended for                                                                     | Template command                    | Documentation                                           |
+| ----- | ------------------ | ------ | ----------------------------------------------------------------------------------- | ----------------------------------- | ------------------------------------------------------- |
+| `NLA` | N-Layer            | ✅     | Enterprise applications, large teams, and long-term maintenance                     | `dotnet new dtk-nlayer`             | [docs](./templates/NLayerTemplate/README.md)            |
+| `VSA` | Vertical Slice     | 📋     | Independent API features, microservices, and modular monoliths                      | Not available yet                   | [docs](./templates/VerticalSliceTemplate/README.md)     |
+| `CNA` | Clean Architecture | ⛔     | Clean Architecture applications requiring implementing `ASP.NET Core Identity API` | `dotnet new dtk-clean-architecture` | [docs](./templates/CleanArchitectureTemplate/README.md) |
 
 ## (2) Requirements
 

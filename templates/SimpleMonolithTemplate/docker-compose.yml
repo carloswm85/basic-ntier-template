@@ -1,10 +1,10 @@
 services:
 
-  simplemonolithtemplate.module:
-    image: ${DOCKER_REGISTRY-}simplemonolithtemplatemodule
+  simplemonolithtemplate.monolith:
+    image: ${DOCKER_REGISTRY-}simplemonolithtemplatemonolith
     build:
       context: .
-      dockerfile: solution/SimpleMonolithTemplate.Module/Dockerfile
+      dockerfile: solution/SimpleMonolithTemplate.Monolith/Dockerfile
     depends_on:
       - sqlserver
     environment:
