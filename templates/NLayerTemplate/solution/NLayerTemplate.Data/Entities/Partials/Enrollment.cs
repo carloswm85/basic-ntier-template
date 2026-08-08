@@ -1,4 +1,4 @@
-﻿namespace ComplexNLayerTemplate.Data.Model
+﻿namespace NLayerTemplate.Data.Model
 {
     public partial class Enrollment : IEntity
     {

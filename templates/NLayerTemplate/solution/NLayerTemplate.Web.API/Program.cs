@@ -1,6 +1,6 @@
-using ComplexNLayerTemplate.Data.Datum;
-using ComplexNLayerTemplate.Data.Model;
-using ComplexNLayerTemplate.Web.API;
+using NLayerTemplate.Data.Datum;
+using NLayerTemplate.Data.Model;
+using NLayerTemplate.Web.API;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 
@@ -42,7 +42,7 @@ using (var scope = app.Services.CreateScope())
 
     try
     {
-        var db = serviceProvider.GetRequiredService<ComplexNLayerTemplateDbContext>();
+        var db = serviceProvider.GetRequiredService<NLayerTemplateDbContext>();
         await DbInitializer.Initialize(serviceProvider);
 
         logger.LogInformation("Database successfully initialized (Web API).");

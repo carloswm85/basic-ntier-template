@@ -1,16 +1,16 @@
-﻿using ComplexNLayerTemplate.Data.Datum;
-using ComplexNLayerTemplate.Data.Model;
-using ComplexNLayerTemplate.Repository;
-using ComplexNLayerTemplate.Service.Services.ExampleServices;
-using ComplexNLayerTemplate.Service.Services.ExampleServices.Interfaces;
-using ComplexNLayerTemplate.Web.MVC.Services;
-using ComplexNLayerTemplate.Web.MVC.Services.Interfaces;
+﻿using NLayerTemplate.Data.Datum;
+using NLayerTemplate.Data.Model;
+using NLayerTemplate.Repository;
+using NLayerTemplate.Service.Services.ExampleServices;
+using NLayerTemplate.Service.Services.ExampleServices.Interfaces;
+using NLayerTemplate.Web.MVC.Services;
+using NLayerTemplate.Web.MVC.Services.Interfaces;
 using Mapster;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
 
-namespace ComplexNLayerTemplate.Web.MVC;
+namespace NLayerTemplate.Web.MVC;
 
 public class StartUp
 {
@@ -46,7 +46,7 @@ public class StartUp
             );
 
         // Register DbContext with SQL Server as the database provider.
-        services.AddDbContext<ComplexNLayerTemplateDbContext>(options =>
+        services.AddDbContext<NLayerTemplateDbContext>(options =>
             options.UseSqlServer(connectionString)
         );
 

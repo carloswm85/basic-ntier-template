@@ -1,4 +1,4 @@
-﻿namespace ComplexNLayerTemplate.Data
+﻿namespace NLayerTemplate.Data
 {
     public interface IEntity
     {

@@ -1,28 +1,28 @@
-@ComplexNLayerTemplate.Server_HostAddress = http://localhost:5018
+@NLayerTemplate.Server_HostAddress = http://localhost:5018
 
 ###
 
 ### Weather forecast endpoint
-GET {{ComplexNLayerTemplate.Server_HostAddress}}/api/WeatherForecasts/data
+GET {{NLayerTemplate.Server_HostAddress}}/api/WeatherForecasts/data
 Accept: application/json
 
 ###
 
 ### Get all students
-GET {{ComplexNLayerTemplate.Server_HostAddress}}/api/ContosoUniversity/students
+GET {{NLayerTemplate.Server_HostAddress}}/api/ContosoUniversity/students
 Accept: application/json
 
 ###
 
 ### Get student by Id
 @studentId = 1
-GET {{ComplexNLayerTemplate.Server_HostAddress}}/api/ContosoUniversity/students/{{studentId}}
+GET {{NLayerTemplate.Server_HostAddress}}/api/ContosoUniversity/students/{{studentId}}
 Accept: application/json
 
 ###
 
 ### Create student
-POST {{ComplexNLayerTemplate.Server_HostAddress}}/api/ContosoUniversity/students
+POST {{NLayerTemplate.Server_HostAddress}}/api/ContosoUniversity/students
 Content-Type: application/json
 
 {
@@ -38,7 +38,7 @@ Content-Type: application/json
 
 ### Update student
 @studentId = 1
-PUT {{ComplexNLayerTemplate.Server_HostAddress}}/api/ContosoUniversity/students/{{studentId}}
+PUT {{NLayerTemplate.Server_HostAddress}}/api/ContosoUniversity/students/{{studentId}}
 Content-Type: application/json
 
 {
@@ -52,6 +52,6 @@ Content-Type: application/json
 
 ### Delete student
 @studentId = 99
-DELETE {{ComplexNLayerTemplate.Server_HostAddress}}/api/ContosoUniversity/students/{{studentId}}
+DELETE {{NLayerTemplate.Server_HostAddress}}/api/ContosoUniversity/students/{{studentId}}
 
 ###

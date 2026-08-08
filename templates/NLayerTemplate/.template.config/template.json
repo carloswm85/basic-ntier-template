@@ -8,19 +8,19 @@
 		"Web",
 		"ASP.NET"
 	],
-	"identity": "Complex.NLayer.Template.CSharp",
-	"groupIdentity": "Complex.NLayer.Template",
-	"name": "DTK Complex N-Layer Template (C#)",
-	"shortName": "dtk-complex-nlayer",
-	"sourceName": "ComplexNLayerTemplate",
-	"defaultName": "ComplexNLayerProject",
+	"identity": "NLayer.Template.CSharp",
+	"groupIdentity": "NLayer.Template",
+	"name": "DTK N-Layer Template (C#)",
+	"shortName": "dtk-nlayer",
+	"sourceName": "NLayerTemplate",
+	"defaultName": "NLayerProject",
 	"tags": {
 		"language": "C#",
 		"type": "solution",
 		"platform": "web"
 	},
 	"preferNameDirectory": true,
-	"description": "A complex solution template with N-Layer architecture.",
+	"description": "A solution template with N-Layer architecture.",
 	"symbols": {
 		"SolutionGuid": {
 			"type": "generated",
@@ -67,7 +67,7 @@
 	],
 	"primaryOutputs": [
 		{
-			"path": "./ComplexNLayerTemplate.slnx"
+			"path": "./NLayerTemplate.slnx"
 		}		
 	],
 	"postActions": [
@@ -76,7 +76,7 @@
 			"description": "Restore NuGet packages",
 			"continueOnError": true,
 			"args": {
-				"files": "./SimpleMonolithTemplate.sln"
+				"files": "./NLayerTemplate.slnx"
 			},
 			"manualInstructions": [
 				{

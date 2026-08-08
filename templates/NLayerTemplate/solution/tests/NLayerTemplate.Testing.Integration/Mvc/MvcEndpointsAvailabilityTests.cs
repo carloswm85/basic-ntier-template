@@ -1,9 +1,9 @@
-﻿using ComplexNLayerTemplate.Web.MVC;
+﻿using NLayerTemplate.Web.MVC;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
-namespace ComplexNLayerTemplate.Testing.Integration.Mvc;
+namespace NLayerTemplate.Testing.Integration.Mvc;
 
 public class MvcEndpointsAvailabilityTests : IClassFixture<WebApplicationFactory<Program>>
 {

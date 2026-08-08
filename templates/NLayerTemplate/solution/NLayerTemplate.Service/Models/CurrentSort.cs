@@ -1,4 +1,4 @@
-﻿namespace ComplexNLayerTemplate.Service.Models
+﻿namespace NLayerTemplate.Service.Models
 {
     public static class CurrentSort
     {

@@ -13,6 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ComplexNLayerTemplate.Service\ComplexNLayerTemplate.Service.csproj" />
+    <ProjectReference Include="..\..\NLayerTemplate.Service\NLayerTemplate.Service.csproj" />
   </ItemGroup>
 </Project>

@@ -10,28 +10,28 @@ EXPOSE 8081
 # Environment variables for development.
 # These can be overridden when running the container in production or when running from VS in regular mode (Default when not using the Debug configuration)
 ENV ASPNETCORE_ENVIRONMENT=Development
-ENV ConnectionStrings__DefaultConnection="Server=sqlserver;Database=ComplexNLayerTemplateDb;User Id=sa;Password=YourStrongPassword123!;TrustServerCertificate=True"
+ENV ConnectionStrings__DefaultConnection="Server=sqlserver;Database=NLayerTemplateDb;User Id=sa;Password=YourStrongPassword123!;TrustServerCertificate=True"
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["solution/ComplexNLayerTemplate.Web.MVC/ComplexNLayerTemplate.Web.MVC.csproj", "solution/ComplexNLayerTemplate.Web.MVC/"]
-COPY ["solution/ComplexNLayerTemplate.Data/ComplexNLayerTemplate.Data.csproj", "solution/ComplexNLayerTemplate.Data/"]
-COPY ["solution/ComplexNLayerTemplate.Service/ComplexNLayerTemplate.Service.csproj", "solution/ComplexNLayerTemplate.Service/"]
-COPY ["solution/ComplexNLayerTemplate.Repository/ComplexNLayerTemplate.Repository.csproj", "solution/ComplexNLayerTemplate.Repository/"]
-RUN dotnet restore "./solution/ComplexNLayerTemplate.Web.MVC/ComplexNLayerTemplate.Web.MVC.csproj"
+COPY ["solution/NLayerTemplate.Web.MVC/NLayerTemplate.Web.MVC.csproj", "solution/NLayerTemplate.Web.MVC/"]
+COPY ["solution/NLayerTemplate.Data/NLayerTemplate.Data.csproj", "solution/NLayerTemplate.Data/"]
+COPY ["solution/NLayerTemplate.Service/NLayerTemplate.Service.csproj", "solution/NLayerTemplate.Service/"]
+COPY ["solution/NLayerTemplate.Repository/NLayerTemplate.Repository.csproj", "solution/NLayerTemplate.Repository/"]
+RUN dotnet restore "./solution/NLayerTemplate.Web.MVC/NLayerTemplate.Web.MVC.csproj"
 COPY . .
-WORKDIR "/src/solution/ComplexNLayerTemplate.Web.MVC"
-RUN dotnet build "./ComplexNLayerTemplate.Web.MVC.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/solution/NLayerTemplate.Web.MVC"
+RUN dotnet build "./NLayerTemplate.Web.MVC.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./ComplexNLayerTemplate.Web.MVC.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./NLayerTemplate.Web.MVC.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ComplexNLayerTemplate.Web.MVC.dll"]
+ENTRYPOINT ["dotnet", "NLayerTemplate.Web.MVC.dll"]

@@ -1,4 +1,4 @@
-﻿namespace ComplexNLayerTemplate.Service.Dtos.ContosoUniversity
+﻿namespace NLayerTemplate.Service.Dtos.ContosoUniversity
 {
     public class EnrollmentDateGroupDto
     {

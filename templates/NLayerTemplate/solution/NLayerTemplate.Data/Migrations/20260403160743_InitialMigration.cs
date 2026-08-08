@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ComplexNLayerTemplate.Data.Migrations
+namespace NLayerTemplate.Data.Migrations
 {
     /// <inheritdoc />
     public partial class InitialMigration : Migration

@@ -1,4 +1,4 @@
-﻿namespace ComplexNLayerTemplate.Web.MVC.Constants;
+﻿namespace NLayerTemplate.Web.MVC.Constants;
 
 public static class DefaultImages
 {

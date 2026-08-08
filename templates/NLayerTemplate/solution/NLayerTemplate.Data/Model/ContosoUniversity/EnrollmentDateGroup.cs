@@ -1,4 +1,4 @@
-﻿namespace ComplexNLayerTemplate.Data.Model.ContosoUniversity
+﻿namespace NLayerTemplate.Data.Model.ContosoUniversity
 {
     public class EnrollmentDateGroup
     {

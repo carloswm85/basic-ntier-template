@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ComplexNLayerTemplate.Data.Model.ContosoUniversity;
+using NLayerTemplate.Data.Model.ContosoUniversity;
 
-namespace ComplexNLayerTemplate.Data.Model
+namespace NLayerTemplate.Data.Model
 {
     public partial class Instructor
     {

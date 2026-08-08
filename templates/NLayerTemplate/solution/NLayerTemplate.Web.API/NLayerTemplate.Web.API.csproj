@@ -7,7 +7,7 @@
     <NoWarn>$(NoWarn);1591</NoWarn>
     <!-- Angular SPA dev proxy configuration -->
     <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
-    <SpaRoot>..\ComplexNLayerTemplate.Web.Angular</SpaRoot>
+    <SpaRoot>..\NLayerTemplate.Web.Angular</SpaRoot>
     <SpaProxyServerUrl>https://localhost:6024</SpaProxyServerUrl>
   </PropertyGroup>
 
@@ -27,8 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ComplexNLayerTemplate.Data\ComplexNLayerTemplate.Data.csproj" />
-    <ProjectReference Include="..\ComplexNLayerTemplate.Repository\ComplexNLayerTemplate.Repository.csproj" />
-    <ProjectReference Include="..\ComplexNLayerTemplate.Service\ComplexNLayerTemplate.Service.csproj" />
+    <ProjectReference Include="..\NLayerTemplate.Data\NLayerTemplate.Data.csproj" />
+    <ProjectReference Include="..\NLayerTemplate.Repository\NLayerTemplate.Repository.csproj" />
+    <ProjectReference Include="..\NLayerTemplate.Service\NLayerTemplate.Service.csproj" />
   </ItemGroup>
 </Project>

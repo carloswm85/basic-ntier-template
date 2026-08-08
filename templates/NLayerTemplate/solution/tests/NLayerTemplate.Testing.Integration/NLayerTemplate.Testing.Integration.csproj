@@ -14,6 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ComplexNLayerTemplate.Web.MVC\ComplexNLayerTemplate.Web.MVC.csproj" />
+    <ProjectReference Include="..\..\NLayerTemplate.Web.MVC\NLayerTemplate.Web.MVC.csproj" />
   </ItemGroup>
 </Project>

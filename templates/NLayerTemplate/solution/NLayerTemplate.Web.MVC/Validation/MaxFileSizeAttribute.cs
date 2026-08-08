@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ComplexNLayerTemplate.MVC.Validation;
+namespace NLayerTemplate.MVC.Validation;
 
 /// <summary>
 /// Custom validation attribute to restrict the maximum file size of uploaded files.

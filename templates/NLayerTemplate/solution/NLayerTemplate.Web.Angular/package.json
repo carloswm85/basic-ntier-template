@@ -1,5 +1,5 @@
 {
-  "name": "complex-nlayer-template.web.angular",
+  "name": "nlayer-template.web.angular",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

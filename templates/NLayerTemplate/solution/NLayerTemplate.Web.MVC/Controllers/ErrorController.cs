@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ComplexNLayerTemplate.Web.MVC.Controllers
+namespace NLayerTemplate.Web.MVC.Controllers
 {
     public class ErrorController : Controller
     {

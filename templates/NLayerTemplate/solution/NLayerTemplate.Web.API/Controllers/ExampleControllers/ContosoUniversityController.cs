@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics;
 using Asp.Versioning;
-using ComplexNLayerTemplate.Service.Dtos.ContosoUniversity;
-using ComplexNLayerTemplate.Service.Services.ExampleServices.Interfaces;
-using ComplexNLayerTemplate.Web.API.Constants;
+using NLayerTemplate.Service.Dtos.ContosoUniversity;
+using NLayerTemplate.Service.Services.ExampleServices.Interfaces;
+using NLayerTemplate.Web.API.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ComplexNLayerTemplate.Web.API.Controllers.ExampleControllers;
+namespace NLayerTemplate.Web.API.Controllers.ExampleControllers;
 
 [ApiController]
 [AllowAnonymous]

@@ -1,4 +1,4 @@
-﻿namespace ComplexNLayerTemplate.Web.API.Contracts;
+﻿namespace NLayerTemplate.Web.API.Contracts;
 
 public sealed class GenericMessageResponse
 {

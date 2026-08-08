@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "ComplexNLayerTemplate.Web.Angular": {
+        "NLayerTemplate.Web.Angular": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -23,7 +23,7 @@
                 "build": {
                     "builder": "@angular/build:application",
                     "options": {
-                        "outputPath": "dist/complexnlayertemplate.web.angular",
+                        "outputPath": "dist/nlayertemplate.web.angular",
                         "index": "solution/index.html",
                         "browser": "solution/main.ts",
                         "polyfills": [
@@ -69,10 +69,10 @@
                     "builder": "@angular/build:dev-server",
                     "configurations": {
                         "production": {
-                            "buildTarget": "ComplexNLayerTemplate.Web.Angular:build:production"
+                            "buildTarget": "NLayerTemplate.Web.Angular:build:production"
                         },
                         "development": {
-                            "buildTarget": "ComplexNLayerTemplate.Web.Angular:build:development"
+                            "buildTarget": "NLayerTemplate.Web.Angular:build:development"
                         }
                     },
                     "defaultConfiguration": "development",

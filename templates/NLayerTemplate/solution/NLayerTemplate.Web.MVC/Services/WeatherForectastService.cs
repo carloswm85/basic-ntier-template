@@ -1,9 +1,9 @@
 ﻿using System.Net.Sockets;
 using System.Text.Json;
-using ComplexNLayerTemplate.Web.MVC.Models.ViewModels.WeatherForecast;
-using ComplexNLayerTemplate.Web.MVC.Services.Interfaces;
+using NLayerTemplate.Web.MVC.Models.ViewModels.WeatherForecast;
+using NLayerTemplate.Web.MVC.Services.Interfaces;
 
-namespace ComplexNLayerTemplate.Web.MVC.Services
+namespace NLayerTemplate.Web.MVC.Services
 {
     public class WeatherForectastService(
         IHttpClientFactory httpClientFactory,

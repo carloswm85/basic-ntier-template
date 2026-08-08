@@ -1,4 +1,4 @@
-﻿namespace ComplexNLayerTemplate.Data.Constants;
+﻿namespace NLayerTemplate.Data.Constants;
 
 public static class ApplicationConstants
 {

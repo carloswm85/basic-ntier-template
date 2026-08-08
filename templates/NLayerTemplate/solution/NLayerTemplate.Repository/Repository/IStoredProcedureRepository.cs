@@ -1,4 +1,4 @@
-﻿namespace ComplexNLayerTemplate.Repository
+﻿namespace NLayerTemplate.Repository
 {
     public interface IStoredProcedureRepository<TEntity>
         where TEntity : class

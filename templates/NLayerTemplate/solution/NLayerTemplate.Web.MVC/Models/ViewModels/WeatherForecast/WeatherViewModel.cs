@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ComplexNLayerTemplate.Web.MVC.Models.ViewModels.WeatherForecast
+namespace NLayerTemplate.Web.MVC.Models.ViewModels.WeatherForecast
 {
     public class WeatherViewModel
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace ComplexNLayerTemplate.Service.Models
+namespace NLayerTemplate.Service.Models
 {
     /// <summary>
     /// Creates a paginated subset of an <see cref="IQueryable{T}"/> source.

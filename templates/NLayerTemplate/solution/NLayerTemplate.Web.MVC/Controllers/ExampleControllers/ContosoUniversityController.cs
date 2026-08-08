@@ -1,13 +1,13 @@
-using ComplexNLayerTemplate.Data.Model;
-using ComplexNLayerTemplate.Service.Dtos.ContosoUniversity;
-using ComplexNLayerTemplate.Service.Models;
-using ComplexNLayerTemplate.Service.Services.ExampleServices.Interfaces;
-using ComplexNLayerTemplate.Web.MVC.Models;
+using NLayerTemplate.Data.Model;
+using NLayerTemplate.Service.Dtos.ContosoUniversity;
+using NLayerTemplate.Service.Models;
+using NLayerTemplate.Service.Services.ExampleServices.Interfaces;
+using NLayerTemplate.Web.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace ComplexNLayerTemplate.Web.MVC.Controllers.ExampleControllers;
+namespace NLayerTemplate.Web.MVC.Controllers.ExampleControllers;
 
 [Route("ContosoUniversity")]
 public class ContosoUniversityController : Controller

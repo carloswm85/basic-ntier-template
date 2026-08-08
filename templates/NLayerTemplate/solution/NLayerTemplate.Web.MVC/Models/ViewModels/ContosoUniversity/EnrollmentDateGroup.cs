@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ComplexNLayerTemplate.Web.MVC.Models.ViewModels.Student
+namespace NLayerTemplate.Web.MVC.Models.ViewModels.Student
 {
     public class EnrollmentDateGroup
     {

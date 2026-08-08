@@ -1,6 +1,6 @@
-﻿using ComplexNLayerTemplate.Data.Constants;
+﻿using NLayerTemplate.Data.Constants;
 
-namespace ComplexNLayerTemplate.Service.Dtos.ContosoUniversity
+namespace NLayerTemplate.Service.Dtos.ContosoUniversity
 {
     public class EnrollmentDto
     {

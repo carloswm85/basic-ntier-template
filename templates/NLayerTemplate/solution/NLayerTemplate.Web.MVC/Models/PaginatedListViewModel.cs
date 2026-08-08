@@ -1,6 +1,6 @@
-﻿using ComplexNLayerTemplate.Service.Models;
+﻿using NLayerTemplate.Service.Models;
 
-namespace ComplexNLayerTemplate.Web.MVC.Models
+namespace NLayerTemplate.Web.MVC.Models
 {
     public class PaginatedListViewModel<T>
         where T : class

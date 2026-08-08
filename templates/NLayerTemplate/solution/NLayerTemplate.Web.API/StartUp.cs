@@ -1,15 +1,15 @@
 ﻿using System.Reflection;
 using Asp.Versioning;
-using ComplexNLayerTemplate.Data.Model;
-using ComplexNLayerTemplate.Repository;
-using ComplexNLayerTemplate.Service.Services.ExampleServices;
-using ComplexNLayerTemplate.Service.Services.ExampleServices.Interfaces;
-using ComplexNLayerTemplate.Web.API.Constants;
+using NLayerTemplate.Data.Model;
+using NLayerTemplate.Repository;
+using NLayerTemplate.Service.Services.ExampleServices;
+using NLayerTemplate.Service.Services.ExampleServices.Interfaces;
+using NLayerTemplate.Web.API.Constants;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 
-namespace ComplexNLayerTemplate.Web.API;
+namespace NLayerTemplate.Web.API;
 
 public class Startup
 {
@@ -33,7 +33,7 @@ public class Startup
             );
 
         // DbContext
-        services.AddDbContext<ComplexNLayerTemplateDbContext>(options =>
+        services.AddDbContext<NLayerTemplateDbContext>(options =>
             options.UseSqlServer(connectionString, sql => sql.EnableRetryOnFailure())
         );
 
@@ -78,7 +78,7 @@ public class Startup
                 new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "ComplexNLayerTemplate API V1",
+                    Title = "NLayerTemplate API V1",
                     Description = "An ASP.NET Core Web API for your resourses.",
                     TermsOfService = new Uri("https://example.com/terms"),
                     Contact = new OpenApiContact
@@ -99,7 +99,7 @@ public class Startup
                 new OpenApiInfo
                 {
                     Version = "v2",
-                    Title = "ComplexNLayerTemplate API V2",
+                    Title = "NLayerTemplate API V2",
                     Description = "An ASP.NET Core Web API for your resourses.",
                     TermsOfService = new Uri("https://example.com/terms"),
                 }

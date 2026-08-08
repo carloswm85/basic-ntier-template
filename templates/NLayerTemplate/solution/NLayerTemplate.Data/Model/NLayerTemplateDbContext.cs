@@ -1,20 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace ComplexNLayerTemplate.Data.Model;
+namespace NLayerTemplate.Data.Model;
 
 /// <summary>
-/// Partial class for ComplexNLayerTemplateContext.
+/// Partial class for NLayerTemplateContext.
 ///
 /// - This file content is intentionally left minimal.
 /// - All content here is deleted and replaced when scafolding from the database.
 /// - DO NOT use this file for customizations. Instead use additional partial class files.
 /// - This is the convention.
 /// </summary>
-public partial class ComplexNLayerTemplateDbContext : DbContext
+public partial class NLayerTemplateDbContext : DbContext
 {
-    public ComplexNLayerTemplateDbContext() { }
+    public NLayerTemplateDbContext() { }
 
-    public ComplexNLayerTemplateDbContext(DbContextOptions<ComplexNLayerTemplateDbContext> options)
+    public NLayerTemplateDbContext(DbContextOptions<NLayerTemplateDbContext> options)
         : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

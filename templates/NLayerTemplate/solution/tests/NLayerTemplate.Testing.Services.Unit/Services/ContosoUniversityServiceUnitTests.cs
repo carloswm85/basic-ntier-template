@@ -1,13 +1,13 @@
-﻿using ComplexNLayerTemplate.Data.Model;
-using ComplexNLayerTemplate.Repository;
-using ComplexNLayerTemplate.Service.Dtos.ContosoUniversity;
-using ComplexNLayerTemplate.Service.Services.ExampleServices;
+﻿using NLayerTemplate.Data.Model;
+using NLayerTemplate.Repository;
+using NLayerTemplate.Service.Dtos.ContosoUniversity;
+using NLayerTemplate.Service.Services.ExampleServices;
 using MapsterMapper;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 
-namespace ComplexNLayerTemplate.Testing.Unit.Services;
+namespace NLayerTemplate.Testing.Unit.Services;
 
 public class ContosoUniversityServiceUnitTests
 {

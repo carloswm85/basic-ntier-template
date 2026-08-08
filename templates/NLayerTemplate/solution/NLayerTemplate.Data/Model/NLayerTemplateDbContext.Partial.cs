@@ -1,12 +1,12 @@
-﻿using ComplexNLayerTemplate.Data.Model.ContosoUniversity;
+﻿using NLayerTemplate.Data.Model.ContosoUniversity;
 using Microsoft.EntityFrameworkCore;
 
-namespace ComplexNLayerTemplate.Data.Model;
+namespace NLayerTemplate.Data.Model;
 
 /// <summary>
-/// Partial class for ComplexNLayerTemplateContext.
+/// Partial class for NLayerTemplateContext.
 /// </summary>
-public partial class ComplexNLayerTemplateDbContext : DbContext
+public partial class NLayerTemplateDbContext : DbContext
 {
     #region Contoso University Example DbSet Properties
 

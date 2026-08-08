@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ComplexNLayerTemplate.Data.Model
+namespace NLayerTemplate.Data.Model
 {
     public partial class OfficeAssignment
     {

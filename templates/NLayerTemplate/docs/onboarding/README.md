@@ -1,4 +1,4 @@
-- [Complex NLayer Template](#complex-nlayer-template)
+- [NLayer Template](#nlayer-template)
   - [Version compatibility](#version-compatibility)
     - [Table: .NET Core](#table-net-core)
     - [Table: Identity API](#table-identity-api)
@@ -16,7 +16,7 @@
 
 ---
 
-# Complex NLayer Template
+# NLayer Template
 
 ---
 

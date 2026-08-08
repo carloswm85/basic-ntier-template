@@ -1,16 +1,16 @@
-﻿using ComplexNLayerTemplate.Data.Constants;
-using ComplexNLayerTemplate.Data.Model;
-using ComplexNLayerTemplate.Data.Model.ContosoUniversity;
+﻿using NLayerTemplate.Data.Constants;
+using NLayerTemplate.Data.Model;
+using NLayerTemplate.Data.Model.ContosoUniversity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ComplexNLayerTemplate.Data.Datum;
+namespace NLayerTemplate.Data.Datum;
 
 public static class DbInitializer
 {
     public static async Task Initialize(IServiceProvider serviceProvider)
     {
-        var dbContext = serviceProvider.GetRequiredService<ComplexNLayerTemplateDbContext>();
+        var dbContext = serviceProvider.GetRequiredService<NLayerTemplateDbContext>();
 
         // #1 — Migrate handles creation
         await dbContext.Database.MigrateAsync();
@@ -24,7 +24,7 @@ public static class DbInitializer
         await SeedDB(dbContext);
     }
 
-    private static async Task SeedDB(ComplexNLayerTemplateDbContext dbContext)
+    private static async Task SeedDB(NLayerTemplateDbContext dbContext)
     {
         // === CONTOSO UNIVERSITY SEEDING FOR CRUD EXAMPLE
         IEnumerable<Student> students = GetStudents();

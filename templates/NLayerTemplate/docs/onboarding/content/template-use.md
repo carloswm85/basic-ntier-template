@@ -15,34 +15,34 @@
 
 1. Clone or download repository.
 1. Install from local folder.
-1. At root level `complex-nlayer-template` run:
+1. At root level `nlayer-template` run:
 
    ```powershell
-   # complex-nlayer-template\.
+   # nlayer-template\.
    dotnet new install .
    ```
 
    Or:
 
    ```powershell
-   # complex-nlayer-template\.
+   # nlayer-template\.
    dotnet new uninstall .
    ```
 
 1. Use the template from anywhere:
 
 ```powershell
-dotnet new complex-nlayer-template -o "ComplexNLayerTemplateExample"
+dotnet new nlayer-template -o "NLayerTemplateExample"
 ```
 
 ## Using The Template
 
 ```powershell
 # Custom solution name (and path, if included in the string)
-dotnet new complex-nlayer-template -o "../../MyFolder/ComplexNLayerTemplateExample2"
+dotnet new nlayer-template -o "../../MyFolder/NLayerTemplateExample2"
 ```
 
 ```powershell
 # Force file generation, and override existing files if any
-dotnet new complex-nlayer-template -o  "ComplexNLayerTemplateExample3" --force
+dotnet new nlayer-template -o  "NLayerTemplateExample3" --force
 ```

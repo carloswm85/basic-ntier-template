@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ComplexNLayerTemplate.Web.API.Constants;
+namespace NLayerTemplate.Web.API.Constants;
 
 public class CacheProfiles
 {

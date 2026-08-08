@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ComplexNLayerTemplate.Data\ComplexNLayerTemplate.Data.csproj" />
-    <ProjectReference Include="..\ComplexNLayerTemplate.Service\ComplexNLayerTemplate.Service.csproj" />
+    <ProjectReference Include="..\NLayerTemplate.Data\NLayerTemplate.Data.csproj" />
+    <ProjectReference Include="..\NLayerTemplate.Service\NLayerTemplate.Service.csproj" />
   </ItemGroup>
 </Project>

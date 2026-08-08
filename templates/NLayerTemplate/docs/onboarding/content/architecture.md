@@ -34,7 +34,7 @@ These span multiple layers:
 
 **Clean Architecture follows the Dependency Rule: dependencies point inward, toward the Domain.**
 
-`ComplexNLayerTemplate` is a Clean Architecture variant. For better understanding, we'll highlight here the similarities between the two.
+`NLayerTemplate` is a Clean Architecture variant. For better understanding, we'll highlight here the similarities between the two.
 
 1. **Domain Layer (Core)** - Innermost layer, no dependencies
    - Enterprise business rules
@@ -74,7 +74,7 @@ _Diagram made using [mermaid.js](https://mermaid.js.org/)_
 
 ```mermaid
 ---
-title: "- Complex NLayer Template Architecture Diagram -"
+title: "- NLayer Template Architecture Diagram -"
 config:
   theme: dark
   themeVariables:

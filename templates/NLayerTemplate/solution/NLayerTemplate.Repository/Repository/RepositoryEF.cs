@@ -1,8 +1,8 @@
-﻿using ComplexNLayerTemplate.Data;
-using ComplexNLayerTemplate.Data.Model;
+﻿using NLayerTemplate.Data;
+using NLayerTemplate.Data.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace ComplexNLayerTemplate.Repository
+namespace NLayerTemplate.Repository
 {
     //The reading is: It is a class, that takes a generic type, and implements an interface, AND this generic type is limited to be any class + entities interface.
     public class RepositoryEF<TEntity> : IRepository<TEntity>
@@ -10,14 +10,14 @@ namespace ComplexNLayerTemplate.Repository
     {
         #region Private fields
 
-        private readonly ComplexNLayerTemplateDbContext _dbContext;
+        private readonly NLayerTemplateDbContext _dbContext;
         private readonly DbSet<TEntity> _dbSet;
 
         #endregion
 
         #region Constructors
 
-        public RepositoryEF(ComplexNLayerTemplateDbContext dbContext)
+        public RepositoryEF(NLayerTemplateDbContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<TEntity>();

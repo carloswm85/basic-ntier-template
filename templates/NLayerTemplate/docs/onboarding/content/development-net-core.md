@@ -18,7 +18,7 @@ Be sure you have the right tools: [Installation requirements](./docs/content/ins
 ### Code-First
 
 - Using PowerShell:
-  - Inside the `ComplexNLayerTemplate.Data` project folder run:
+  - Inside the `NLayerTemplate.Data` project folder run:
 
   ```powershell
   > dotnet ef migrations add InitialMigration
@@ -26,7 +26,7 @@ Be sure you have the right tools: [Installation requirements](./docs/content/ins
   ```
 
 - Using Package Manager Console:
-  - Set "Default Project" to `ComplexNLayerTemplate.Data`, and run:
+  - Set "Default Project" to `NLayerTemplate.Data`, and run:
 
   ```console
   PM> Add-Migration InitialMigration
@@ -39,31 +39,31 @@ Your database should be named `MyDatabaseDb` for scaffolding to work out-of-the-
 
 <https://learn.microsoft.com/en-us/ef/core/managing-schemas/scaffolding/>
 
-- Inside the `ComplexNLayerTemplate.Data` project folder, using Package Manager Console:
+- Inside the `NLayerTemplate.Data` project folder, using Package Manager Console:
   - When using directly the connection string in the command line:
 
   ```console
-  PM> Scaffold-DbContext "Server=.;Database=ComplexNLayerTemplateDb;user id=SomeUser;password=ThisIsSomePassword;Trusted_Connection=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
+  PM> Scaffold-DbContext "Server=.;Database=NLayerTemplateDb;user id=SomeUser;password=ThisIsSomePassword;Trusted_Connection=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
   ```
 
-  - When extracting the connection string from `appsettings.json` in the `ComplexNLayerTemplate.Web.API` project:
+  - When extracting the connection string from `appsettings.json` in the `NLayerTemplate.Web.API` project:
 
   ```console
-  PM> Scaffold-DbContext "Name=ComplexNLayerTemplateConnection" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
+  PM> Scaffold-DbContext "Name=NLayerTemplateConnection" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
   ```
 
-The previous command will overrite the existing `ComplexNLayerTemplateContext.cs` file.
+The previous command will overrite the existing `NLayerTemplateContext.cs` file.
 
 #### Additional Commands
 
 ```console
-PM>  Scaffold-DbContext "Name=ComplexNLayerTemplateConnection" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model -Project ComplexNLayerTemplate.Data -StartupProject ComplexNLayerTemplate.Web.API -Force -UseDatabaseNames -NoPluralize
+PM>  Scaffold-DbContext "Name=NLayerTemplateConnection" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model -Project NLayerTemplate.Data -StartupProject NLayerTemplate.Web.API -Force -UseDatabaseNames -NoPluralize
 ```
 
 Or using .NET Core CLI:
 
 ```console
-dotnet ef dbcontext scaffold "Name=ComplexNLayerTemplateConnection" Microsoft.EntityFrameworkCore.SqlServer --output-dir Model --project ComplexNLayerTemplate.Data --startup-project ComplexNLayerTemplate.Web.API --force --use-database-names --no-pluralize
+dotnet ef dbcontext scaffold "Name=NLayerTemplateConnection" Microsoft.EntityFrameworkCore.SqlServer --output-dir Model --project NLayerTemplate.Data --startup-project NLayerTemplate.Web.API --force --use-database-names --no-pluralize
 ```
 
 ---
@@ -75,7 +75,7 @@ dotnet ef dbcontext scaffold "Name=ComplexNLayerTemplateConnection" Microsoft.En
 ```json
 {
 	"ConnectionStrings": {
-		"DefaultConnection": "Server=.;Database=ComplexNLayerTemplateDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+		"DefaultConnection": "Server=.;Database=NLayerTemplateDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
 	}
 }
 ```
@@ -84,7 +84,7 @@ dotnet ef dbcontext scaffold "Name=ComplexNLayerTemplateConnection" Microsoft.En
    - Specifies the SQL Server instance to connect to.
    - Selected server is: `Default Server`
 
-2. `Database=ComplexNLayerTemplateData;`
+2. `Database=NLayerTemplateData;`
    - Name of the **database** you want to connect to.
 
 3. `Trusted_Connection=True;`

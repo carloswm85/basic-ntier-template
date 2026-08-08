@@ -1,7 +1,7 @@
-﻿using ComplexNLayerTemplate.Service.Dtos.ContosoUniversity;
-using ComplexNLayerTemplate.Service.Models;
+﻿using NLayerTemplate.Service.Dtos.ContosoUniversity;
+using NLayerTemplate.Service.Models;
 
-namespace ComplexNLayerTemplate.Service.Services.ExampleServices.Interfaces
+namespace NLayerTemplate.Service.Services.ExampleServices.Interfaces
 {
     public interface IContosoUniversityService
     {

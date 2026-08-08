@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ComplexNLayerTemplate.Web.MVC.Controllers
+namespace NLayerTemplate.Web.MVC.Controllers
 {
     public class HomeController() : Controller
     {

@@ -19,7 +19,7 @@ Warning quote:
 | ------ | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `SMA`  | **Simple Monolith Architecture**              | APIs with many independent business modules, large monoliths needing clear boundaries, systems expected to evolve gradually toward distributed architectures.                        |
 | `BNLA` | **Basic N-Layer Architecture**                | Small to medium projects, learning/prototyping, simple CRUD apps with limited business complexity.                                                                                   |
-| `CNLA` | **Complex N-Layer Architecture**              | Enterprise applications, large teams, long-term maintainability. N-Layer Architecture with **Unit of Work** and **Repository** design patterns. It also includes an Angular project. |
+| `NLA`  | **N-Layer Architecture**                      | Enterprise applications, large teams, long-term maintainability. N-Layer Architecture with **Unit of Work** and **Repository** design patterns. It also includes an Angular project. |
 | `VSA`  | **Vertical Slice Architecture**               | APIs with many independent endpoints, microservices, modular monoliths.                                                                                                              |
 | `CNA`  | **Clean Architecture**                        | Domain-rich applications, teams prioritizing testability and strict dependency rules.                                                                                                |
 | `HXA`  | **Hexagonal Architecture** (Ports & Adapters) | Systems with multiple I/O adapters (REST, CLI, messaging), high infrastructure replaceability need.                                                                                  |
@@ -30,7 +30,7 @@ Warning quote:
 
 | Feature              | Simple Monolith Architecture                                      | N-Layer Architecture                    | Vertical Slice Architecture      | Clean Architecture                       | Hexagonal Architecture                    | Onion Architecture                     | Microservices Architecture                                                |
 | -------------------- | ----------------------------------------------------------------- | --------------------------------------- | -------------------------------- | ---------------------------------------- | ----------------------------------------- | -------------------------------------- | ------------------------------------------------------------------------- |
-| **Acronym**          | `SMA`                                                             | `BNLA` and `CNLA`                       | `VSA`                            | `CNA`                                    | `HXA`                                     | `ONA`                                  | `MSA`                                                                     |
+| **Acronym**          | `SMA`                                                             | `BNLA` and `NLA`                        | `VSA`                            | `CNA`                                    | `HXA`                                     | `ONA`                                  | `MSA`                                                                     |
 | **Origin**           | Domain-driven modular monolith movement (2015+)                   | Traditional enterprise systems (1990s)  | Modern .NET community (2018+)    | Uncle Bob (2012)                         | Alistair Cockburn (2005)                  | Jeffrey Palermo (2008)                 | Martin Fowler / James Lewis coined the term (2014); concept predates this |
 | **Core Focus**       | Modular business boundaries inside one deployable unit            | Technical layers                        | Feature-based slices             | Domain + Use Cases                       | Ports & Adapters                          | Domain-centric layers                  | Independently deployable services                                         |
 | **External Systems** | Shared infrastructure with isolated modules                       | Data layer / service layer              | Embedded per feature             | Infrastructure outer ring                | Adapters (DB, UI, API)                    | Infrastructure outer layer             | Each service owns integrations                                            |
@@ -68,15 +68,15 @@ Warning quote:
 
 ## Pros and Cons Table
 
-| Architecture  | Pros                                                                                                                                        | Cons                                                                                                                    |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `SMA`         | Strong modularity without distributed complexity; easier refactoring toward microservices; good team ownership; simpler deployment than MSA | Requires strict module boundaries; shared database can create coupling; horizontal scaling requires extracting services |
-| `BNLA`/`CNLA` | Simple to understand; clear technical separation; fast for CRUD applications                                                                | Tight coupling between layers; feature changes touch many files; harder to scale large domains                          |
-| `VSA`         | Feature cohesion; localized changes; easier parallel development; good maintainability                                                      | Possible code duplication; weaker shared domain model; can become inconsistent without discipline                       |
-| `CNA`         | Clear separation; framework independence; highly testable; works well with CQRS                                                             | Over-engineering risk; steeper learning curve; requires strict discipline                                               |
-| `HXA`         | Flexible adapters; external systems replaceable; testable via ports; fits multiple interfaces                                               | Many abstractions; boilerplate in simple systems; governance required                                                   |
-| `ONA`         | Domain isolation; strong separation of concerns; highly testable; good for rich business rules                                              | Higher setup cost; complexity for small apps; infrastructure leaks can still happen                                     |
-| `MSA`         | Independent deployment; isolated scaling; team autonomy; technology freedom                                                                 | Distributed complexity; monitoring overhead; data consistency challenges; operational cost                              |
+| Architecture | Pros                                                                                                                                        | Cons                                                                                                                    |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `SMA`        | Strong modularity without distributed complexity; easier refactoring toward microservices; good team ownership; simpler deployment than MSA | Requires strict module boundaries; shared database can create coupling; horizontal scaling requires extracting services |
+| `BNLA`/`NLA` | Simple to understand; clear technical separation; fast for CRUD applications                                                                | Tight coupling between layers; feature changes touch many files; harder to scale large domains                          |
+| `VSA`        | Feature cohesion; localized changes; easier parallel development; good maintainability                                                      | Possible code duplication; weaker shared domain model; can become inconsistent without discipline                       |
+| `CNA`        | Clear separation; framework independence; highly testable; works well with CQRS                                                             | Over-engineering risk; steeper learning curve; requires strict discipline                                               |
+| `HXA`        | Flexible adapters; external systems replaceable; testable via ports; fits multiple interfaces                                               | Many abstractions; boilerplate in simple systems; governance required                                                   |
+| `ONA`        | Domain isolation; strong separation of concerns; highly testable; good for rich business rules                                              | Higher setup cost; complexity for small apps; infrastructure leaks can still happen                                     |
+| `MSA`        | Independent deployment; isolated scaling; team autonomy; technology freedom                                                                 | Distributed complexity; monitoring overhead; data consistency challenges; operational cost                              |
 
 Quick reading:
 
@@ -95,15 +95,15 @@ N-Layer    Vertical Slice    Simple Monolith    Clean/Hex    Microservices
 
 ### Simplified Way to Think
 
-| Architecture  | Explanation                                                     |
-| ------------- | --------------------------------------------------------------- |
-| `SMA`         | One deployable application split into isolated business modules |
-| `BNLA`/`CNLA` | Organized by technical layers                                   |
-| `VSA`         | Organize by business feature                                    |
-| `CNA`         | Onion with **explicit use cases** (CQRS style)                  |
-| `HXA`         | Focuses on **system boundaries** through ports/adapters         |
-| `ONA`         | **domain-centric layering**                                     |
-| `MSA`         | Organize by independent business services                       |
+| Architecture | Explanation                                                     |
+| ------------ | --------------------------------------------------------------- |
+| `SMA`        | One deployable application split into isolated business modules |
+| `BNLA`/`NLA` | Organized by technical layers                                   |
+| `VSA`        | Organize by business feature                                    |
+| `CNA`        | Onion with **explicit use cases** (CQRS style)                  |
+| `HXA`        | Focuses on **system boundaries** through ports/adapters         |
+| `ONA`        | **domain-centric layering**                                     |
+| `MSA`        | Organize by independent business services                       |
 
 Clean, Onion, and Hexagonal are usually considered closely related because they all enforce **dependency inversion toward the business core**, while Vertical Slice changes **how code is organized**, and Microservices changes **deployment boundaries**.
 
@@ -116,7 +116,7 @@ Inventory Module
 Billing Module
 Shared Infrastructure
 
-=== `BNLA`/`CNLA`: Stacked technical layers ===
+=== `BNLA`/`NLA`: Stacked technical layers ===
 UI
 Business
 Data

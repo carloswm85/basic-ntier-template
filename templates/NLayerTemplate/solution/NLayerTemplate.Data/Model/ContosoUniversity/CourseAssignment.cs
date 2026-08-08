@@ -1,4 +1,4 @@
-﻿namespace ComplexNLayerTemplate.Data.Model.ContosoUniversity
+﻿namespace NLayerTemplate.Data.Model.ContosoUniversity
 {
     /// <summary>
     /// `CourseInstructor` relationship class. Join table for the

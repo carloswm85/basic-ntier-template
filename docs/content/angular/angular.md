@@ -13,4 +13,4 @@
 
 ## Install/Update Angular
 
-- [Update instructions](./../../../templates/ComplexNLayerTemplate/docs/onboarding/content/development-setup.md#angular-development-installation-and-upgrade)
+- [Update instructions](./../../../templates/NLayerTemplate/docs/onboarding/content/development-setup.md#angular-development-installation-and-upgrade)

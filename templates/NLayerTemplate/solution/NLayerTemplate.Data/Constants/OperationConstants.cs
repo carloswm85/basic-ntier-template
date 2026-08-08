@@ -1,4 +1,4 @@
-﻿namespace ComplexNLayerTemplate.Data.Constants;
+﻿namespace NLayerTemplate.Data.Constants;
 
 /// <summary>
 /// Provides constant values for common operation names and role identifiers used throughout the application.

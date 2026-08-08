@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using ComplexNLayerTemplate.Data.Constants;
+using NLayerTemplate.Data.Constants;
 
-namespace ComplexNLayerTemplate.Data.Model
+namespace NLayerTemplate.Data.Model
 {
     /// <summary>
     /// There's a many-to-many relationship between the Student and Course

@@ -1,6 +1,6 @@
-﻿using ComplexNLayerTemplate.Data.Model;
+﻿using NLayerTemplate.Data.Model;
 
-namespace ComplexNLayerTemplate.Repository
+namespace NLayerTemplate.Repository
 {
     public interface IUnitOfWork : IDisposable
     {

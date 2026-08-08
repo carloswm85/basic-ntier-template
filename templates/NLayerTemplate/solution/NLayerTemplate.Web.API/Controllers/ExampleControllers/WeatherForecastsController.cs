@@ -1,11 +1,11 @@
 ﻿using Asp.Versioning;
-using ComplexNLayerTemplate.Web.API.ApiModels;
-using ComplexNLayerTemplate.Web.API.Constants;
+using NLayerTemplate.Web.API.ApiModels;
+using NLayerTemplate.Web.API.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ComplexNLayerTemplate.Web.API.Controllers.ExampleControllers;
+namespace NLayerTemplate.Web.API.Controllers.ExampleControllers;
 
 /// <summary>
 /// Provides sample weather forecast data.

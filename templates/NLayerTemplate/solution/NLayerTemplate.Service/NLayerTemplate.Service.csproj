@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ComplexNLayerTemplate.Data\ComplexNLayerTemplate.Data.csproj" />
-    <ProjectReference Include="..\ComplexNLayerTemplate.Repository\ComplexNLayerTemplate.Repository.csproj" />
+    <ProjectReference Include="..\NLayerTemplate.Data\NLayerTemplate.Data.csproj" />
+    <ProjectReference Include="..\NLayerTemplate.Repository\NLayerTemplate.Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>

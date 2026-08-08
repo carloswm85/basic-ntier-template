@@ -1,13 +1,13 @@
-﻿using ComplexNLayerTemplate.Data.Model;
-using ComplexNLayerTemplate.Repository;
-using ComplexNLayerTemplate.Service.Dtos.ContosoUniversity;
-using ComplexNLayerTemplate.Service.Models;
-using ComplexNLayerTemplate.Service.Services.ExampleServices.Interfaces;
+﻿using NLayerTemplate.Data.Model;
+using NLayerTemplate.Repository;
+using NLayerTemplate.Service.Dtos.ContosoUniversity;
+using NLayerTemplate.Service.Models;
+using NLayerTemplate.Service.Services.ExampleServices.Interfaces;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace ComplexNLayerTemplate.Service.Services.ExampleServices
+namespace NLayerTemplate.Service.Services.ExampleServices
 {
     public class ContosoUniversityService : IContosoUniversityService
     {

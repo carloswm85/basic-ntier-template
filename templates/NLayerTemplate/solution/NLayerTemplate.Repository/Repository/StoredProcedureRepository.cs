@@ -1,14 +1,14 @@
-﻿using ComplexNLayerTemplate.Data.Model;
-using ComplexNLayerTemplate.Repository;
+﻿using NLayerTemplate.Data.Model;
+using NLayerTemplate.Repository;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 public class StoredProcedureRepository<TEntity> : IStoredProcedureRepository<TEntity>
     where TEntity : class
 {
-    private readonly ComplexNLayerTemplateDbContext _dbContext;
+    private readonly NLayerTemplateDbContext _dbContext;
 
-    public StoredProcedureRepository(ComplexNLayerTemplateDbContext dbContext)
+    public StoredProcedureRepository(NLayerTemplateDbContext dbContext)
     {
         _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
     }

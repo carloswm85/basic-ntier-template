@@ -1,6 +1,6 @@
-﻿using ComplexNLayerTemplate.Web.MVC.Models.ViewModels.WeatherForecast;
+﻿using NLayerTemplate.Web.MVC.Models.ViewModels.WeatherForecast;
 
-namespace ComplexNLayerTemplate.Web.MVC.Services.Interfaces
+namespace NLayerTemplate.Web.MVC.Services.Interfaces
 {
     public interface IWeatherForecastService
     {

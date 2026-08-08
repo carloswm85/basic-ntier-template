@@ -4,7 +4,7 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "complexnlayertemplate.web.mvc": "StartDebugging"
+        "nlayertemplate.web.mvc": "StartDebugging"
       }
     }
   }

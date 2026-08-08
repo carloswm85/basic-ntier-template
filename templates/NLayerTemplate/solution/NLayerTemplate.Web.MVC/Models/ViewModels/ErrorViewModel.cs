@@ -1,4 +1,4 @@
-﻿namespace ComplexNLayerTemplate.Web.MVC.Models.ViewModels
+﻿namespace NLayerTemplate.Web.MVC.Models.ViewModels
 {
     public class ErrorViewModel
     {

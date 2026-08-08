@@ -1,4 +1,4 @@
-namespace ComplexNLayerTemplate.Web.API.ApiModels
+namespace NLayerTemplate.Web.API.ApiModels
 {
     public class WeatherForecast
     {

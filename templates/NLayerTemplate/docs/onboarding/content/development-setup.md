@@ -89,7 +89,7 @@ Commands:
 For Angular development you have 2 options:
 
 1. Run both projects together from ASP.NET Core.
-2. Run the `ComplexNLayerTemplate.Web.API` project separately from the `ComplexNLayerTemplate.Web.Angular` poject.
+2. Run the `NLayerTemplate.Web.API` project separately from the `NLayerTemplate.Web.Angular` poject.
 
 #### (a) Running SPA in ASP.NET Core (Together)
 
@@ -99,23 +99,23 @@ For Angular development you have 2 options:
 dotnet add package Microsoft.AspNetCore.SpaProxy
 ```
 
-2. At `ComplexNLayerTemplate.Web.API\Properties\launchSettings.json`, uncomment lines:
+2. At `NLayerTemplate.Web.API\Properties\launchSettings.json`, uncomment lines:
 
 ```json
 "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
 ```
 
-3. At `ComplexNLayerTemplate.Web.API\ComplexNLayerTemplate.Web.API.csproj` uncomment:
+3. At `NLayerTemplate.Web.API\NLayerTemplate.Web.API.csproj` uncomment:
 
 ```xml
 <!-- Angular Project
 -->
 <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
-<SpaRoot>..\ComplexNLayerTemplate.Web.Angular</SpaRoot>
+<SpaRoot>..\NLayerTemplate.Web.Angular</SpaRoot>
 <SpaProxyServerUrl>https://localhost:5021</SpaProxyServerUrl>
 ```
 
-4. When debugging `ComplexNLayerTemplate.Web.API`, the Angular SPA will be launched (`ComplexNLayerTemplate.Web.Angular`).
+4. When debugging `NLayerTemplate.Web.API`, the Angular SPA will be launched (`NLayerTemplate.Web.Angular`).
 
 Working demo page, fetching data from API layer to Angular layer:
 
@@ -123,5 +123,5 @@ Working demo page, fetching data from API layer to Angular layer:
 
 #### (b) Running SPA and ASP.NET Core Separately
 
-- Run `ComplexNLayerTemplate.Web.API` without following the previous steps.
+- Run `NLayerTemplate.Web.API` without following the previous steps.
 - Run the Angular app from its root folder using `ng serve` using your favorite IDE or editor.

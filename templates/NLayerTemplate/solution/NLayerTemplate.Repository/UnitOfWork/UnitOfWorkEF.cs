@@ -1,13 +1,13 @@
-﻿using ComplexNLayerTemplate.Data.Model;
+﻿using NLayerTemplate.Data.Model;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace ComplexNLayerTemplate.Repository
+namespace NLayerTemplate.Repository
 {
     public sealed class UnitOfWorkEF : IDisposable, IUnitOfWork
     {
         #region Private Fields
 
-        private readonly ComplexNLayerTemplateDbContext _dbContext;
+        private readonly NLayerTemplateDbContext _dbContext;
         private IDbContextTransaction? _currentTransaction;
 
         private IRepository<Student>? _studentRepository;
@@ -16,7 +16,7 @@ namespace ComplexNLayerTemplate.Repository
 
         #endregion
 
-        public UnitOfWorkEF(ComplexNLayerTemplateDbContext dbContext)
+        public UnitOfWorkEF(NLayerTemplateDbContext dbContext)
         {
             _dbContext = dbContext;
         }

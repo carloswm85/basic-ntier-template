@@ -1,4 +1,4 @@
-﻿namespace ComplexNLayerTemplate.Service.Contracts
+﻿namespace NLayerTemplate.Service.Contracts
 {
     public sealed class Result
     {

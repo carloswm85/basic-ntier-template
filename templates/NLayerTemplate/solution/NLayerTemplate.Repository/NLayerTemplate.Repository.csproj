@@ -11,6 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ComplexNLayerTemplate.Data\ComplexNLayerTemplate.Data.csproj" />
+    <ProjectReference Include="..\NLayerTemplate.Data\NLayerTemplate.Data.csproj" />
   </ItemGroup>
 </Project>
