@@ -31,14 +31,15 @@ systems with strict dependency boundaries.
 
 ## (1) Available templates
 
-| Code    | Architecture                     | Status         | Recommended for                                                  | Template command                             | Documentation                                                                 |
-| ------- | -------------------------------- | -------------- | ---------------------------------------------------------------- | -------------------------------------------- | ----------------------------------------------------------------------------- |
-| `SMA`   | Simple Monolith                  | ✅ Ready       | CRUD applications, internal tools, and MVPs                      | `dotnet new dtk-simple-monolith`             | [Simple Monolith documentation](./templates/SimpleMonolithTemplate/README.md) |
-| `CNLA`  | N-Layer                          | ✅ Ready       | Enterprise applications, large teams, and long-term maintenance  | `dotnet new dtk-complex-nlayer`              | [Complex N-Layer documentation](./templates/ComplexNLayerTemplate/README.md)  |
-| `VSA`   | Vertical Slice                   | 🚧 In progress | Independent API features, microservices, and modular monoliths   | Not available yet                            | [Vertical Slice documentation](./templates/VerticalSliceTemplate/README.md)   |
-| `CNA-I` | Clean Architecture with Identity | ✅ Ready       | Clean Architecture applications requiring ASP\.NET Core Identity | `dotnet new dtk-clean-architecture-identity` | [Identity template documentation](./templates/IdentityTemplate/README.md)     |
+- `✅ Ready - 🚧 In progress - 📋 Planned - ⛔ Blocked`
+- Increasing complexity, top to bottom.
 
----
+| Code    | Architecture                     | Status | Recommended for                                                  | Template command                             | Documentation                                                                 |
+| ------- | -------------------------------- | ------ | ---------------------------------------------------------------- | -------------------------------------------- | ----------------------------------------------------------------------------- |
+| `SMA`   | Simple Monolith                  | ✅     | CRUD applications, internal tools, and MVPs                      | `dotnet new dtk-simple-monolith`             | [Simple Monolith documentation](./templates/SimpleMonolithTemplate/README.md) |
+| `CNLA`  | N-Layer                          | ⛔     | Enterprise applications, large teams, and long-term maintenance  | `dotnet new dtk-complex-nlayer`              | [Complex N-Layer documentation](./templates/ComplexNLayerTemplate/README.md)  |
+| `VSA`   | Vertical Slice                   | ⛔     | Independent API features, microservices, and modular monoliths   | Not available yet                            | [Vertical Slice documentation](./templates/VerticalSliceTemplate/README.md)   |
+| `CNA-I` | Clean Architecture with Identity | ⛔     | Clean Architecture applications requiring ASP\.NET Core Identity | `dotnet new dtk-clean-architecture-identity` | [Identity template documentation](./templates/IdentityTemplate/README.md)     |
 
 ## (2) Requirements
 
