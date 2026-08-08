@@ -6,13 +6,12 @@
 		"N-Layer",
 		"API",
 		"Web",
-		"ASP.NET",
-		"Identity API"
+		"ASP.NET"
 	],
 	"identity": "Clean.Architecture.Template.CSharp",
 	"groupIdentity": "Clean.Architecture.Template",
-	"name": "DTK Clean Architecture Template with Identity (C#)",
-	"shortName": "dtk-clean-architecture-identity",
+	"name": "DTK Clean Architecture Template (C#)",
+	"shortName": "dtk-clean-architecture",
 	"sourceName": "CleanArchitectureTemplate",
 	"defaultName": "CleanArchitectureProject",
 	"tags": {
@@ -21,7 +20,7 @@
 		"platform": "web"
 	},
 	"preferNameDirectory": true,
-	"description": "A solution template implementing Clean Architecture and Identity API.",
+	"description": "A solution template implementing Clean Architecture.",
 	"symbols": {
 		"SolutionGuid": {
 			"type": "generated",
