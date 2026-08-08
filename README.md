@@ -11,21 +11,21 @@
 
 ---
 
-<https://github.com/carloswm85/dotnet-template-kit>
-
 ![DotNet Template Kit banner](./docs/img/banner.png)
-![Under Construction](./docs/img/under-construction.jpg)
 
 ---
 
+![Under Construction](./docs/img/under-construction.jpg)
+
 # DotNet Template Kit
 
-DotNet Template Kit is a collection of opinionated .NET 10 solution templates
-for building web applications with architectures of increasing complexity.
+<https://github.com/carloswm85/dotnet-template-kit>
 
-Choose a lightweight monolith for smaller applications, an N-layer solution for
-clear separation of concerns, or a Clean Architecture template for domain-rich
-systems with strict dependency boundaries.
+- DotNet Template Kit is a collection of opinionated .NET 10 solution templates for building web applications with architectures of increasing complexity.
+- Choose:
+  - **Lightweight monolith** for smaller applications,
+  - **N-layer** solution for clear separation of concerns, or
+  - **Clean Architecture** template for domain-rich systems with strict dependency boundaries.
 
 ---
 
@@ -34,12 +34,12 @@ systems with strict dependency boundaries.
 - `✅ Ready - 🚧 In progress - 📋 Planned - ⛔ Blocked`
 - Increasing complexity, top to bottom.
 
-| Code    | Architecture                     | Status | Recommended for                                                  | Template command                             | Documentation                                                                 |
-| ------- | -------------------------------- | ------ | ---------------------------------------------------------------- | -------------------------------------------- | ----------------------------------------------------------------------------- |
-| `SMA`   | Simple Monolith                  | ✅     | CRUD applications, internal tools, and MVPs                      | `dotnet new dtk-simple-monolith`             | [Simple Monolith documentation](./templates/SimpleMonolithTemplate/README.md) |
-| `NLA`  | N-Layer                          | ⛔     | Enterprise applications, large teams, and long-term maintenance  | `dotnet new dtk-nlayer`              | [N-Layer documentation](./templates/NLayerTemplate/README.md)  |
-| `VSA`   | Vertical Slice                   | ⛔     | Independent API features, microservices, and modular monoliths   | Not available yet                            | [Vertical Slice documentation](./templates/VerticalSliceTemplate/README.md)   |
-| `CNA-I` | Clean Architecture with Identity | ⛔     | Clean Architecture applications requiring ASP\.NET Core Identity | `dotnet new dtk-clean-architecture-identity` | [Identity template documentation](./templates/IdentityTemplate/README.md)     |
+| Code  | Architecture                                                      | Status | Recommended for                                                  | Template command                    | Documentation                                           |
+| ----- | ----------------------------------------------------------------- | ------ | ---------------------------------------------------------------- | ----------------------------------- | ------------------------------------------------------- |
+| `SMA` | Simple Monolith                                                   | ✅     | CRUD applications, internal tools, and MVPs                      | `dotnet new dtk-simple-monolith`    | [docs](./templates/SimpleMonolithTemplate/README.md)    |
+| `NLA` | N-Layer                                                           | ✅     | Enterprise applications, large teams, and long-term maintenance  | `dotnet new dtk-nlayer`             | [docs](./templates/NLayerTemplate/README.md)            |
+| `VSA` | Vertical Slice                                                    | 📋     | Independent API features, microservices, and modular monoliths   | Not available yet                   | [docs](./templates/VerticalSliceTemplate/README.md)     |
+| `CNA` | Clean Architecture with Microsoft's `Identity API` implementation | ⛔     | Clean Architecture applications requiring ASP\.NET Core Identity | `dotnet new dtk-clean-architecture` | [docs](./templates/CleanArchitectureTemplate/README.md) |
 
 ## (2) Requirements
 
@@ -87,13 +87,12 @@ Then pass the listed package or directory identifier to `dotnet new uninstall`.
 Create a Basic N-Layer solution named `Contoso.BackOffice`:
 
 ```powershell
-dotnet new dtk-basic-nlayer --name Contoso.BackOffice
-Set-Location ./Contoso.BackOffice
+dotnet new <template-name> --name ContosoBackOffice
+Set-Location ./ContosoBackOffice
 dotnet restore
 ```
 
-Use another command from the [available templates](#1-available-templates)
-table to select a different architecture.
+Use another command from the [available templates](#1-available-templates) table to select a different architecture.
 
 ---
 
@@ -104,20 +103,19 @@ The available templates target .NET 10 and support the following shared options:
 | Option                   | Type     | Default           | Description                                                  |
 | ------------------------ | -------- | ----------------- | ------------------------------------------------------------ |
 | `--name`                 | `string` | Template-specific | Sets the generated solution and project name                 |
-| `--TargetFramework`      | `choice` | `net10.0`         | Selects the target framework                                 |
 | `--IncludeDocumentation` | `bool`   | `false`           | Includes explanatory documentation in the generated solution |
 
 Inspect every option supported by a template before creating a solution:
 
 ```powershell
-dotnet new dtk-basic-nlayer --help
+dotnet new <template-name> --help
 ```
 
 Example with documentation included:
 
 ```powershell
-dotnet new dtk-basic-nlayer `
-    --name Contoso.BackOffice `
+dotnet new <template-name> `
+    --name ContosoBackOffice `
     --IncludeDocumentation true
 ```
 
@@ -137,9 +135,8 @@ dotnet new dtk-basic-nlayer `
 
 ## (7) Project status
 
-The `main` branch contains the latest supported templates and documentation.
-Templates still under development are identified in the
-[available templates](#1-available-templates) table.
+- The `main` branch contains the latest supported templates and documentation.
+- Templates still under development are identified in the [available templates](#1-available-templates) table.
 
 ---
 
@@ -156,5 +153,4 @@ Issues and pull requests are welcome. Before proposing a change:
 
 ## (9) License
 
-DotNet Template Kit is available under the terms of the
-[MIT License](./LICENSE.txt).
+DotNet Template Kit is available under the terms of the [MIT License](./LICENSE.txt).
