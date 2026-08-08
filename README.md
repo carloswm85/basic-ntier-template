@@ -27,6 +27,8 @@ Choose a lightweight monolith for smaller applications, an N-layer solution for
 clear separation of concerns, or a Clean Architecture template for domain-rich
 systems with strict dependency boundaries.
 
+---
+
 ## (1) Available templates
 
 | Code    | Architecture                     | Status         | Recommended for                                                  | Template command                             | Documentation                                                                       |
@@ -37,6 +39,8 @@ systems with strict dependency boundaries.
 | `VSA`   | Vertical Slice                   | 🚧 In progress | Independent API features, microservices, and modular monoliths   | Not available yet                            | [Vertical Slice documentation](./templates/VerticalSliceTemplate/README.md)         |
 | `CNA`   | Clean Architecture               | 📋 Planned     | Domain-rich applications with strict dependency boundaries       | `dotnet new dtk-clean-architecture`          | [Clean Architecture documentation](./templates/CleanArchitectureTemplate/README.md) |
 | `CNA-I` | Clean Architecture with Identity | ✅ Ready       | Clean Architecture applications requiring ASP\.NET Core Identity | `dotnet new dtk-clean-architecture-identity` | [Identity template documentation](./templates/IdentityTemplate/README.md)           |
+
+---
 
 ## (2) Requirements
 
@@ -50,6 +54,8 @@ Run the following command to verify the installed .NET SDKs:
 ```powershell
 dotnet --list-sdks
 ```
+
+---
 
 ## (3) Installation
 
@@ -75,6 +81,8 @@ dotnet new uninstall
 
 Then pass the listed package or directory identifier to `dotnet new uninstall`.
 
+---
+
 ## (4) Quick start
 
 Create a Basic N-Layer solution named `Contoso.BackOffice`:
@@ -87,6 +95,8 @@ dotnet restore
 
 Use another command from the [available templates](#1-available-templates)
 table to select a different architecture.
+
+---
 
 ## (5) Template options
 
@@ -112,6 +122,8 @@ dotnet new dtk-basic-nlayer `
     --IncludeDocumentation true
 ```
 
+---
+
 ## (6) Documentation
 
 - [Project documentation](./docs/README.md)
@@ -122,11 +134,15 @@ dotnet new dtk-basic-nlayer `
   - [Ardalis CleanArchitecture](https://github.com/ardalis/CleanArchitecture)
   - [Jason Taylor CleanArchitecture](https://github.com/jasontaylordev/CleanArchitecture)
 
+---
+
 ## (7) Project status
 
 The `main` branch contains the latest supported templates and documentation.
 Templates still under development are identified in the
 [available templates](#1-available-templates) table.
+
+---
 
 ## (8) Contributing
 
@@ -136,6 +152,8 @@ Issues and pull requests are welcome. Before proposing a change:
 - Keep architecture-specific changes inside the corresponding template directory.
 - Update the relevant template documentation.
 - Confirm that the template installs and creates a new solution successfully.
+
+---
 
 ## (9) License
 
