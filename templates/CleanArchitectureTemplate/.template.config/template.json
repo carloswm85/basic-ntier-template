@@ -3,15 +3,16 @@
 	"author": "Carlos W. Mercado",
 	"classifications": [
 		"Solution",
-		"Clean Architecture",
+		"N-Layer",
 		"API",
 		"Web",
-		"ASP.NET"
+		"ASP.NET",
+		"Identity API"
 	],
 	"identity": "Clean.Architecture.Template.CSharp",
 	"groupIdentity": "Clean.Architecture.Template",
-	"name": "DTK Clean Architecture Template (C#)",
-	"shortName": "dtk-clean-architecture",
+	"name": "DTK Clean Architecture Template with Identity (C#)",
+	"shortName": "dtk-clean-architecture-identity",
 	"sourceName": "CleanArchitectureTemplate",
 	"defaultName": "CleanArchitectureProject",
 	"tags": {
@@ -20,7 +21,7 @@
 		"platform": "web"
 	},
 	"preferNameDirectory": true,
-	"description": "Solution template with Clean Architecture.",
+	"description": "A solution template implementing Clean Architecture and Identity API.",
 	"symbols": {
 		"SolutionGuid": {
 			"type": "generated",
@@ -67,7 +68,7 @@
 	],
 	"primaryOutputs": [
 		{
-			"path": ""
+			"path": "./CleanArchitectureTemplate.slnx"
 		}
 	],
 	"postActions": [

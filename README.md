@@ -31,14 +31,12 @@ systems with strict dependency boundaries.
 
 ## (1) Available templates
 
-| Code    | Architecture                     | Status         | Recommended for                                                  | Template command                             | Documentation                                                                       |
-| ------- | -------------------------------- | -------------- | ---------------------------------------------------------------- | -------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `SMA`   | Simple Monolith                  | ✅ Ready       | CRUD applications, internal tools, and MVPs                      | `dotnet new dtk-simple-monolith`             | [Simple Monolith documentation](./templates/SimpleMonolithTemplate/README.md)       |
-| `BNLA`  | Basic N-Layer                    | ✅ Ready       | Small-to-medium applications, learning, and prototypes           | `dotnet new dtk-basic-nlayer`                | [Basic N-Layer documentation](./templates/BasicNLayerTemplate/README.md)            |
-| `CNLA`  | Complex N-Layer                  | ✅ Ready       | Enterprise applications, large teams, and long-term maintenance  | `dotnet new dtk-complex-nlayer`              | [Complex N-Layer documentation](./templates/ComplexNLayerTemplate/README.md)        |
-| `VSA`   | Vertical Slice                   | 🚧 In progress | Independent API features, microservices, and modular monoliths   | Not available yet                            | [Vertical Slice documentation](./templates/VerticalSliceTemplate/README.md)         |
-| `CNA`   | Clean Architecture               | 📋 Planned     | Domain-rich applications with strict dependency boundaries       | `dotnet new dtk-clean-architecture`          | [Clean Architecture documentation](./templates/CleanArchitectureTemplate/README.md) |
-| `CNA-I` | Clean Architecture with Identity | ✅ Ready       | Clean Architecture applications requiring ASP\.NET Core Identity | `dotnet new dtk-clean-architecture-identity` | [Identity template documentation](./templates/IdentityTemplate/README.md)           |
+| Code    | Architecture                     | Status         | Recommended for                                                  | Template command                             | Documentation                                                                 |
+| ------- | -------------------------------- | -------------- | ---------------------------------------------------------------- | -------------------------------------------- | ----------------------------------------------------------------------------- |
+| `SMA`   | Simple Monolith                  | ✅ Ready       | CRUD applications, internal tools, and MVPs                      | `dotnet new dtk-simple-monolith`             | [Simple Monolith documentation](./templates/SimpleMonolithTemplate/README.md) |
+| `CNLA`  | N-Layer                          | ✅ Ready       | Enterprise applications, large teams, and long-term maintenance  | `dotnet new dtk-complex-nlayer`              | [Complex N-Layer documentation](./templates/ComplexNLayerTemplate/README.md)  |
+| `VSA`   | Vertical Slice                   | 🚧 In progress | Independent API features, microservices, and modular monoliths   | Not available yet                            | [Vertical Slice documentation](./templates/VerticalSliceTemplate/README.md)   |
+| `CNA-I` | Clean Architecture with Identity | ✅ Ready       | Clean Architecture applications requiring ASP\.NET Core Identity | `dotnet new dtk-clean-architecture-identity` | [Identity template documentation](./templates/IdentityTemplate/README.md)     |
 
 ---
 
