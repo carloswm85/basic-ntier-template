@@ -1,12 +1,12 @@
 - [Scaling Up: From Identity API to Identity Server](#scaling-up-from-identity-api-to-identity-server)
-	- [Progressive Path](#progressive-path)
-		- [1. Starting Point](#1-starting-point)
-		- [2. Scaling Up Alternatives](#2-scaling-up-alternatives)
-		- [3.1 Implementation](#31-implementation)
-		- [3.2 Implementation Diagram](#32-implementation-diagram)
-	- [General ASP.NET Core Identity Architecture](#general-aspnet-core-identity-architecture)
-		- [Note on Tokens](#note-on-tokens)
-	- [Readings](#readings)
+    - [Progressive Path](#progressive-path)
+        - [1. Starting Point](#1-starting-point)
+        - [2. Scaling Up Alternatives](#2-scaling-up-alternatives)
+        - [3.1 Implementation](#31-implementation)
+        - [3.2 Implementation Diagram](#32-implementation-diagram)
+    - [General ASP.NET Core Identity Architecture](#general-aspnet-core-identity-architecture)
+        - [Note on Tokens](#note-on-tokens)
+    - [Readings](#readings)
 
 ---
 

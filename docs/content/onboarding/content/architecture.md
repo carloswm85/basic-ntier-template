@@ -1,10 +1,10 @@
 - [Solution Architecture](#solution-architecture)
-	- [Table: Architecture Layers](#table-architecture-layers)
-	- [Cross-Cutting Concerns For All Layers](#cross-cutting-concerns-for-all-layers)
-	- [Clean Architecture Layer Breakdown (Different Than Template Variant)](#clean-architecture-layer-breakdown-different-than-template-variant)
-		- [Key Mapping Notes: CA Vs N-Tier](#key-mapping-notes-ca-vs-n-tier)
-	- [Diagram: N-Tier Architecture](#diagram-n-tier-architecture)
-	- [Notes](#notes)
+    - [Table: Architecture Layers](#table-architecture-layers)
+    - [Cross-Cutting Concerns For All Layers](#cross-cutting-concerns-for-all-layers)
+    - [Clean Architecture Layer Breakdown (Different Than Template Variant)](#clean-architecture-layer-breakdown-different-than-template-variant)
+        - [Key Mapping Notes: CA Vs N-Tier](#key-mapping-notes-ca-vs-n-tier)
+    - [Diagram: N-Tier Architecture](#diagram-n-tier-architecture)
+    - [Notes](#notes)
 
 ---
 

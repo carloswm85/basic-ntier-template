@@ -3,9 +3,9 @@
 - [(3) Example Structure](#3-example-structure)
 - [(4) Purpose of Each Layer](#4-purpose-of-each-layer)
 - [(5) Common Variations](#5-common-variations)
-	- [(5.1) Simple Monolith](#51-simple-monolith)
-	- [(5.2) Layered Monolith (Most Common)](#52-layered-monolith-most-common)
-	- [(5.3) Modular Monolith](#53-modular-monolith)
+    - [(5.1) Simple Monolith](#51-simple-monolith)
+    - [(5.2) Layered Monolith (Most Common)](#52-layered-monolith-most-common)
+    - [(5.3) Modular Monolith](#53-modular-monolith)
 - [(6) Recommended Approach for Modern .NET](#6-recommended-approach-for-modern-net)
 
 ---

@@ -1,5 +1,5 @@
 - [Application Roles](#application-roles)
-	- [Note on Regulatory Frameworks](#note-on-regulatory-frameworks)
+    - [Note on Regulatory Frameworks](#note-on-regulatory-frameworks)
 
 ---
 

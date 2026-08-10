@@ -1,6 +1,6 @@
 - [Angular](#angular)
-	- [Architecture Examples](#architecture-examples)
-	- [Update Angular Version](#update-angular-version)
+    - [Architecture Examples](#architecture-examples)
+    - [Update Angular Version](#update-angular-version)
 
 ---
 

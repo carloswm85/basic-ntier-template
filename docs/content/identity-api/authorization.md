@@ -1,30 +1,30 @@
 - [Authorization](#authorization)
-	- [Key Concepts Now Shown](#key-concepts-now-shown)
-	- [Key Relationships Highlighted](#key-relationships-highlighted)
-	- [Additional Explanation](#additional-explanation)
-		- [1) Claims are the foundation](#1-claims-are-the-foundation)
-			- [Readings: Claims](#readings-claims)
-		- [2) Roles are a specialization of claims](#2-roles-are-a-specialization-of-claims)
-		- [3) Policies are rules that evaluate claims](#3-policies-are-rules-that-evaluate-claims)
-		- [A) Mental model (important)](#a-mental-model-important)
-		- [B) Practical guidance](#b-practical-guidance)
+    - [Key Concepts Now Shown](#key-concepts-now-shown)
+    - [Key Relationships Highlighted](#key-relationships-highlighted)
+    - [Additional Explanation](#additional-explanation)
+        - [1) Claims are the foundation](#1-claims-are-the-foundation)
+            - [Readings: Claims](#readings-claims)
+        - [2) Roles are a specialization of claims](#2-roles-are-a-specialization-of-claims)
+        - [3) Policies are rules that evaluate claims](#3-policies-are-rules-that-evaluate-claims)
+        - [A) Mental model (important)](#a-mental-model-important)
+        - [B) Practical guidance](#b-practical-guidance)
 - [Admin User Complete Lifecycle Flow](#admin-user-complete-lifecycle-flow)
-	- [What the Diagram Shows](#what-the-diagram-shows)
-	- [Differences Between Admin And Regular Users Side By Side](#differences-between-admin-and-regular-users-side-by-side)
-		- [Key Differences Highlighted](#key-differences-highlighted)
-		- [Important Authorization Patterns Shown](#important-authorization-patterns-shown)
+    - [What the Diagram Shows](#what-the-diagram-shows)
+    - [Differences Between Admin And Regular Users Side By Side](#differences-between-admin-and-regular-users-side-by-side)
+        - [Key Differences Highlighted](#key-differences-highlighted)
+        - [Important Authorization Patterns Shown](#important-authorization-patterns-shown)
 - [Full Example - Identity API: Pet Shop](#full-example---identity-api-pet-shop)
-	- [What's Included](#whats-included)
-	- [Why This is Forward-Thinking](#why-this-is-forward-thinking)
-	- [Code: 🏪 PET SHOP AUTHORIZATION - POLICY-BASED DESIGN (Modern ASP.NET Core)](#code--pet-shop-authorization---policy-based-design-modern-aspnet-core)
-		- [1️⃣ DOMAIN MODELS](#1️⃣-domain-models)
-		- [2️⃣ AUTHORIZATION REQUIREMENTS (Business Rules)](#2️⃣-authorization-requirements-business-rules)
-		- [3️⃣ AUTHORIZATION HANDLERS (Business Logic)](#3️⃣-authorization-handlers-business-logic)
-		- [4️⃣ PROGRAM.CS - POLICY REGISTRATION (Modern approach)](#4️⃣-programcs---policy-registration-modern-approach)
-		- [5️⃣ CONTROLLER - POLICY USAGE](#5️⃣-controller---policy-usage)
-		- [6️⃣ USAGE EXAMPLES \& SCENARIOS](#6️⃣-usage-examples--scenarios)
-		- [✨ BENEFITS OF THIS MODERN APPROACH](#-benefits-of-this-modern-approach)
-		- [🚀 FORWARD-THINKING: Future Enhancements](#-forward-thinking-future-enhancements)
+    - [What's Included](#whats-included)
+    - [Why This is Forward-Thinking](#why-this-is-forward-thinking)
+    - [Code: 🏪 PET SHOP AUTHORIZATION - POLICY-BASED DESIGN (Modern ASP.NET Core)](#code--pet-shop-authorization---policy-based-design-modern-aspnet-core)
+        - [1️⃣ DOMAIN MODELS](#1️⃣-domain-models)
+        - [2️⃣ AUTHORIZATION REQUIREMENTS (Business Rules)](#2️⃣-authorization-requirements-business-rules)
+        - [3️⃣ AUTHORIZATION HANDLERS (Business Logic)](#3️⃣-authorization-handlers-business-logic)
+        - [4️⃣ PROGRAM.CS - POLICY REGISTRATION (Modern approach)](#4️⃣-programcs---policy-registration-modern-approach)
+        - [5️⃣ CONTROLLER - POLICY USAGE](#5️⃣-controller---policy-usage)
+        - [6️⃣ USAGE EXAMPLES \& SCENARIOS](#6️⃣-usage-examples--scenarios)
+        - [✨ BENEFITS OF THIS MODERN APPROACH](#-benefits-of-this-modern-approach)
+        - [🚀 FORWARD-THINKING: Future Enhancements](#-forward-thinking-future-enhancements)
 
 ---
 
@@ -276,87 +276,87 @@ config:
  look: handDrawn
 ---
 sequenceDiagram
-	autonumber
-	actor Admin as 👤 Admin User
-	participant Login as 🔐 Login Page
-	participant Auth as 🎫 Authentication Service
-	participant Token as 🪙 Token/Cookie Handler
-	participant API as 🌐 API/Controller
-	participant AuthZ as ✅ Authorization Middleware
-	participant DB as 💾 Database
-	participant Logout as 🚪 Logout Handler
+    autonumber
+    actor Admin as 👤 Admin User
+    participant Login as 🔐 Login Page
+    participant Auth as 🎫 Authentication Service
+    participant Token as 🪙 Token/Cookie Handler
+    participant API as 🌐 API/Controller
+    participant AuthZ as ✅ Authorization Middleware
+    participant DB as 💾 Database
+    participant Logout as 🚪 Logout Handler
 
-	rect rgb(30, 64, 175)
-	Note over Admin,Token: 🔵 AUTHENTICATION PHASE: Login
-	Admin->>Login: 1. Enter credentials<br/>(username + password)
-	Login->>Auth: 2. Validate credentials
-	Auth->>DB: 3. Query user + claims
-	DB-->>Auth: 4. User found<br/>Claims: {role: "Admin", email: "admin@app.com"}
-	Auth->>Token: 5. Generate JWT/Cookie
-	Token-->>Admin: 6. Set authentication token<br/>(HttpOnly cookie or Bearer token)
-	Note over Admin: ✓ User authenticated<br/>Identity established
-	end
+    rect rgb(30, 64, 175)
+    Note over Admin,Token: 🔵 AUTHENTICATION PHASE: Login
+    Admin->>Login: 1. Enter credentials<br/>(username + password)
+    Login->>Auth: 2. Validate credentials
+    Auth->>DB: 3. Query user + claims
+    DB-->>Auth: 4. User found<br/>Claims: {role: "Admin", email: "admin@app.com"}
+    Auth->>Token: 5. Generate JWT/Cookie
+    Token-->>Admin: 6. Set authentication token<br/>(HttpOnly cookie or Bearer token)
+    Note over Admin: ✓ User authenticated<br/>Identity established
+    end
 
-	rect rgb(192, 38, 211)
-	Note over Admin,DB: 🟣 CREATE OPERATION
-	Admin->>API: 7. POST /api/products<br/>Authorization: Bearer {token}
-	API->>Token: 8. Validate token
-	Token-->>API: 9. Token valid<br/>Extract ClaimsPrincipal
-	API->>AuthZ: 10. Check authorization<br/>[Authorize(Roles="Admin")]
-	AuthZ->>AuthZ: 11. Verify "Admin" claim exists
-	AuthZ-->>API: 12. ✅ Authorized
-	API->>DB: 13. INSERT INTO products
-	DB-->>API: 14. Product created (ID: 42)
-	API-->>Admin: 15. 201 Created<br/>{id: 42, name: "Widget"}
-	end
+    rect rgb(192, 38, 211)
+    Note over Admin,DB: 🟣 CREATE OPERATION
+    Admin->>API: 7. POST /api/products<br/>Authorization: Bearer {token}
+    API->>Token: 8. Validate token
+    Token-->>API: 9. Token valid<br/>Extract ClaimsPrincipal
+    API->>AuthZ: 10. Check authorization<br/>[Authorize(Roles="Admin")]
+    AuthZ->>AuthZ: 11. Verify "Admin" claim exists
+    AuthZ-->>API: 12. ✅ Authorized
+    API->>DB: 13. INSERT INTO products
+    DB-->>API: 14. Product created (ID: 42)
+    API-->>Admin: 15. 201 Created<br/>{id: 42, name: "Widget"}
+    end
 
-	rect rgb(5, 150, 105)
-	Note over Admin,DB: 🟢 READ OPERATION
-	Admin->>API: 16. GET /api/products/42<br/>Authorization: Bearer {token}
-	API->>Token: 17. Validate token
-	Token-->>API: 18. Token valid
-	API->>AuthZ: 19. Check authorization
-	AuthZ-->>API: 20. ✅ Authorized
-	API->>DB: 21. SELECT * FROM products WHERE id=42
-	DB-->>API: 22. Product data
-	API-->>Admin: 23. 200 OK<br/>{id: 42, name: "Widget", price: 99.99}
-	end
+    rect rgb(5, 150, 105)
+    Note over Admin,DB: 🟢 READ OPERATION
+    Admin->>API: 16. GET /api/products/42<br/>Authorization: Bearer {token}
+    API->>Token: 17. Validate token
+    Token-->>API: 18. Token valid
+    API->>AuthZ: 19. Check authorization
+    AuthZ-->>API: 20. ✅ Authorized
+    API->>DB: 21. SELECT * FROM products WHERE id=42
+    DB-->>API: 22. Product data
+    API-->>Admin: 23. 200 OK<br/>{id: 42, name: "Widget", price: 99.99}
+    end
 
-	rect rgb(234, 88, 12)
-	Note over Admin,DB: 🟠 UPDATE OPERATION
-	Admin->>API: 24. PUT /api/products/42<br/>Authorization: Bearer {token}
-	API->>Token: 25. Validate token
-	Token-->>API: 26. Token valid
-	API->>AuthZ: 27. Check authorization<br/>[Authorize(Policy="CanEditProducts")]
-	AuthZ->>AuthZ: 28. Evaluate policy requirements
-	AuthZ-->>API: 29. ✅ Authorized
-	API->>DB: 30. UPDATE products SET... WHERE id=42
-	DB-->>API: 31. Product updated
-	API-->>Admin: 32. 200 OK<br/>{id: 42, name: "Super Widget"}
-	end
+    rect rgb(234, 88, 12)
+    Note over Admin,DB: 🟠 UPDATE OPERATION
+    Admin->>API: 24. PUT /api/products/42<br/>Authorization: Bearer {token}
+    API->>Token: 25. Validate token
+    Token-->>API: 26. Token valid
+    API->>AuthZ: 27. Check authorization<br/>[Authorize(Policy="CanEditProducts")]
+    AuthZ->>AuthZ: 28. Evaluate policy requirements
+    AuthZ-->>API: 29. ✅ Authorized
+    API->>DB: 30. UPDATE products SET... WHERE id=42
+    DB-->>API: 31. Product updated
+    API-->>Admin: 32. 200 OK<br/>{id: 42, name: "Super Widget"}
+    end
 
-	rect rgb(220, 38, 38)
-	Note over Admin,DB: 🔴 DELETE OPERATION
-	Admin->>API: 33. DELETE /api/products/42<br/>Authorization: Bearer {token}
-	API->>Token: 34. Validate token
-	Token-->>API: 35. Token valid
-	API->>AuthZ: 36. Check authorization<br/>[Authorize(Roles="Admin")]
-	AuthZ-->>API: 37. ✅ Authorized
-	API->>DB: 38. DELETE FROM products WHERE id=42
-	DB-->>API: 39. Product deleted
-	API-->>Admin: 40. 204 No Content
-	end
+    rect rgb(220, 38, 38)
+    Note over Admin,DB: 🔴 DELETE OPERATION
+    Admin->>API: 33. DELETE /api/products/42<br/>Authorization: Bearer {token}
+    API->>Token: 34. Validate token
+    Token-->>API: 35. Token valid
+    API->>AuthZ: 36. Check authorization<br/>[Authorize(Roles="Admin")]
+    AuthZ-->>API: 37. ✅ Authorized
+    API->>DB: 38. DELETE FROM products WHERE id=42
+    DB-->>API: 39. Product deleted
+    API-->>Admin: 40. 204 No Content
+    end
 
-	rect rgb(71, 85, 105)
-	Note over Admin,Logout: ⚫ LOGOUT PHASE
-	Admin->>Logout: 41. Click logout button
-	Logout->>Token: 42. Invalidate token/session
-	Token->>DB: 43. Revoke refresh token (if applicable)
-	Token-->>Logout: 44. Token invalidated
-	Logout->>Admin: 45. Clear cookies/local storage
-	Logout-->>Admin: 46. Redirect to login page
-	Note over Admin: ✓ User logged out<br/>Session terminated
-	end
+    rect rgb(71, 85, 105)
+    Note over Admin,Logout: ⚫ LOGOUT PHASE
+    Admin->>Logout: 41. Click logout button
+    Logout->>Token: 42. Invalidate token/session
+    Token->>DB: 43. Revoke refresh token (if applicable)
+    Token-->>Logout: 44. Token invalidated
+    Logout->>Admin: 45. Clear cookies/local storage
+    Logout-->>Admin: 46. Redirect to login page
+    Note over Admin: ✓ User logged out<br/>Session terminated
+    end
 ```
 
 ## Differences Between Admin And Regular Users Side By Side
@@ -401,101 +401,101 @@ config:
  look: handDrawn
 ---
 flowchart TB
-	subgraph Login["🔐 LOGIN PHASE"]
-		direction LR
-		AdminLogin["👑 Admin User<br/>Credentials"]
-		UserLogin["👤 Regular User<br/>Credentials"]
+    subgraph Login["🔐 LOGIN PHASE"]
+        direction LR
+        AdminLogin["👑 Admin User<br/>Credentials"]
+        UserLogin["👤 Regular User<br/>Credentials"]
 
-		AdminLogin --> AdminClaims["Claims Generated:<br/>{role: 'Admin'<br/>email: 'admin@app.com'<br/>userId: '123'}"]
-		UserLogin --> UserClaims["Claims Generated:<br/>{role: 'User'<br/>email: 'user@app.com'<br/>userId: '456'}"]
-	end
+        AdminLogin --> AdminClaims["Claims Generated:<br/>{role: 'Admin'<br/>email: 'admin@app.com'<br/>userId: '123'}"]
+        UserLogin --> UserClaims["Claims Generated:<br/>{role: 'User'<br/>email: 'user@app.com'<br/>userId: '456'}"]
+    end
 
-	AdminClaims --> AdminOps
-	UserClaims --> UserOps
+    AdminClaims --> AdminOps
+    UserClaims --> UserOps
 
-	subgraph AdminOps["👑 ADMIN USER - OPERATIONS"]
-		direction TB
-		AC[["🟣 CREATE<br/>POST /api/products"]]
-		AR[["🟢 READ<br/>GET /api/products/42"]]
-		AU[["🟠 UPDATE<br/>PUT /api/products/42"]]
-		AD[["🔴 DELETE<br/>DELETE /api/products/42"]]
+    subgraph AdminOps["👑 ADMIN USER - OPERATIONS"]
+        direction TB
+        AC[["🟣 CREATE<br/>POST /api/products"]]
+        AR[["🟢 READ<br/>GET /api/products/42"]]
+        AU[["🟠 UPDATE<br/>PUT /api/products/42"]]
+        AD[["🔴 DELETE<br/>DELETE /api/products/42"]]
 
-		AC --> AC_Auth["[Authorize(Roles='Admin')]"]
-		AC_Auth --> AC_Result["✅ 201 Created<br/>Product created successfully"]
+        AC --> AC_Auth["[Authorize(Roles='Admin')]"]
+        AC_Auth --> AC_Result["✅ 201 Created<br/>Product created successfully"]
 
-		AR --> AR_Auth["[Authorize]<br/>(any authenticated user)"]
-		AR_Auth --> AR_Result["✅ 200 OK<br/>Product data returned"]
+        AR --> AR_Auth["[Authorize]<br/>(any authenticated user)"]
+        AR_Auth --> AR_Result["✅ 200 OK<br/>Product data returned"]
 
-		AU --> AU_Auth["[Authorize(Policy='CanEditProducts')]<br/>✓ Is Admin OR is Owner"]
-		AU_Auth --> AU_Result["✅ 200 OK<br/>Product updated"]
+        AU --> AU_Auth["[Authorize(Policy='CanEditProducts')]<br/>✓ Is Admin OR is Owner"]
+        AU_Auth --> AU_Result["✅ 200 OK<br/>Product updated"]
 
-		AD --> AD_Auth["[Authorize(Roles='Admin')]"]
-		AD_Auth --> AD_Result["✅ 204 No Content<br/>Product deleted"]
-	end
+        AD --> AD_Auth["[Authorize(Roles='Admin')]"]
+        AD_Auth --> AD_Result["✅ 204 No Content<br/>Product deleted"]
+    end
 
-	subgraph UserOps["👤 REGULAR USER - OPERATIONS"]
-		direction TB
-		UC[["🟣 CREATE<br/>POST /api/products"]]
-		UR[["🟢 READ<br/>GET /api/products/42"]]
-		UU[["🟠 UPDATE<br/>PUT /api/products/42"]]
-		UD[["🔴 DELETE<br/>DELETE /api/products/42"]]
+    subgraph UserOps["👤 REGULAR USER - OPERATIONS"]
+        direction TB
+        UC[["🟣 CREATE<br/>POST /api/products"]]
+        UR[["🟢 READ<br/>GET /api/products/42"]]
+        UU[["🟠 UPDATE<br/>PUT /api/products/42"]]
+        UD[["🔴 DELETE<br/>DELETE /api/products/42"]]
 
-		UC --> UC_Auth["[Authorize(Roles='Admin')]<br/>❌ User doesn't have Admin role"]
-		UC_Auth --> UC_Result["❌ 403 Forbidden<br/>'Insufficient permissions'"]
+        UC --> UC_Auth["[Authorize(Roles='Admin')]<br/>❌ User doesn't have Admin role"]
+        UC_Auth --> UC_Result["❌ 403 Forbidden<br/>'Insufficient permissions'"]
 
-		UR --> UR_Auth["[Authorize]<br/>(any authenticated user)"]
-		UR_Auth --> UR_Result["✅ 200 OK<br/>Product data returned"]
+        UR --> UR_Auth["[Authorize]<br/>(any authenticated user)"]
+        UR_Auth --> UR_Result["✅ 200 OK<br/>Product data returned"]
 
-		UU --> UU_Choice{"Check Policy<br/>[Authorize(Policy='CanEditProducts')]"}
-		UU_Choice -->|"Is Owner"| UU_Yes["✅ 200 OK<br/>Own product updated"]
-		UU_Choice -->|"Not Owner"| UU_No["❌ 403 Forbidden<br/>'Cannot edit this product'"]
+        UU --> UU_Choice{"Check Policy<br/>[Authorize(Policy='CanEditProducts')]"}
+        UU_Choice -->|"Is Owner"| UU_Yes["✅ 200 OK<br/>Own product updated"]
+        UU_Choice -->|"Not Owner"| UU_No["❌ 403 Forbidden<br/>'Cannot edit this product'"]
 
-		UD --> UD_Auth["[Authorize(Roles='Admin')]<br/>❌ User doesn't have Admin role"]
-		UD_Auth --> UD_Result["❌ 403 Forbidden<br/>'Only admins can delete'"]
-	end
+        UD --> UD_Auth["[Authorize(Roles='Admin')]<br/>❌ User doesn't have Admin role"]
+        UD_Auth --> UD_Result["❌ 403 Forbidden<br/>'Only admins can delete'"]
+    end
 
-	subgraph Logout["🚪 LOGOUT PHASE"]
-		direction LR
-		AdminLogout["Admin Logout"]
-		UserLogout["Regular User Logout"]
+    subgraph Logout["🚪 LOGOUT PHASE"]
+        direction LR
+        AdminLogout["Admin Logout"]
+        UserLogout["Regular User Logout"]
 
-		AdminLogout --> TokenInvalidation["Token/Session<br/>Invalidated"]
-		UserLogout --> TokenInvalidation
+        AdminLogout --> TokenInvalidation["Token/Session<br/>Invalidated"]
+        UserLogout --> TokenInvalidation
 
-		TokenInvalidation --> Redirect["Redirect to<br/>Login Page"]
-	end
+        TokenInvalidation --> Redirect["Redirect to<br/>Login Page"]
+    end
 
-	AdminOps --> Logout
-	UserOps --> Logout
+    AdminOps --> Logout
+    UserOps --> Logout
 
-	spacer(( ))
-	class spacer invisible;
-	Logout --- spacer --- Legend
-	linkStyle 26,27 stroke:transparent
+    spacer(( ))
+    class spacer invisible;
+    Logout --- spacer --- Legend
+    linkStyle 26,27 stroke:transparent
 
-	subgraph Legend["📋 KEY DIFFERENCES"]
-		direction TB
-		L1["✅ ADMIN: Full CRUD access"]
-		L2["✅ REGULAR: Read access to all"]
-		L3["🛑 REGULAR: Create - DENIED"]
-		L4["⚠️ REGULAR: Update - Only own resources"]
-		L5["🛑 REGULAR: Delete - DENIED"]
-	end
+    subgraph Legend["📋 KEY DIFFERENCES"]
+        direction TB
+        L1["✅ ADMIN: Full CRUD access"]
+        L2["✅ REGULAR: Read access to all"]
+        L3["🛑 REGULAR: Create - DENIED"]
+        L4["⚠️ REGULAR: Update - Only own resources"]
+        L5["🛑 REGULAR: Delete - DENIED"]
+    end
 
-	style AdminClaims fill:#7c3aed,stroke:#a78bfa,color:#fff
-	style UserClaims fill:#0891b2,stroke:#22d3ee,color:#fff
-	style AdminOps fill:#1e293b,stroke:#a78bfa,color:#cbd5e1
-	style UserOps fill:#1e293b,stroke:#22d3ee,color:#cbd5e1
-	style AC_Result fill:#059669,stroke:#34d399,color:#fff
-	style AR_Result fill:#059669,stroke:#34d399,color:#fff
-	style AU_Result fill:#059669,stroke:#34d399,color:#fff
-	style AD_Result fill:#059669,stroke:#34d399,color:#fff
-	style UC_Result fill:#dc2626,stroke:#f87171,color:#fff
-	style UR_Result fill:#059669,stroke:#34d399,color:#fff
-	style UU_Yes fill:#059669,stroke:#34d399,color:#fff
-	style UU_No fill:#dc2626,stroke:#f87171,color:#fff
-	style UD_Result fill:#dc2626,stroke:#f87171,color:#fff
-	style Legend fill:#422006,stroke:#fbbf24,color:#fef3c7
+    style AdminClaims fill:#7c3aed,stroke:#a78bfa,color:#fff
+    style UserClaims fill:#0891b2,stroke:#22d3ee,color:#fff
+    style AdminOps fill:#1e293b,stroke:#a78bfa,color:#cbd5e1
+    style UserOps fill:#1e293b,stroke:#22d3ee,color:#cbd5e1
+    style AC_Result fill:#059669,stroke:#34d399,color:#fff
+    style AR_Result fill:#059669,stroke:#34d399,color:#fff
+    style AU_Result fill:#059669,stroke:#34d399,color:#fff
+    style AD_Result fill:#059669,stroke:#34d399,color:#fff
+    style UC_Result fill:#dc2626,stroke:#f87171,color:#fff
+    style UR_Result fill:#059669,stroke:#34d399,color:#fff
+    style UU_Yes fill:#059669,stroke:#34d399,color:#fff
+    style UU_No fill:#dc2626,stroke:#f87171,color:#fff
+    style UD_Result fill:#dc2626,stroke:#f87171,color:#fff
+    style Legend fill:#422006,stroke:#fbbf24,color:#fef3c7
 ```
 
 ---

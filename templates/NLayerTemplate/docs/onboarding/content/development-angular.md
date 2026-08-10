@@ -1,5 +1,5 @@
 - [Angular Development](#angular-development)
-	- [Dependencies](#dependencies)
+    - [Dependencies](#dependencies)
 
 ---
 

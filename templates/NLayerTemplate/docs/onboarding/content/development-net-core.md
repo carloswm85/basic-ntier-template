@@ -74,9 +74,9 @@ dotnet ef dbcontext scaffold "Name=NLayerTemplateConnection" Microsoft.EntityFra
 
 ```json
 {
-	"ConnectionStrings": {
-		"DefaultConnection": "Server=.;Database=NLayerTemplateDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
-	}
+    "ConnectionStrings": {
+        "DefaultConnection": "Server=.;Database=NLayerTemplateDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+    }
 }
 ```
 

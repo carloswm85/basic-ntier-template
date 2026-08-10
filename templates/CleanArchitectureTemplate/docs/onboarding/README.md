@@ -1,10 +1,10 @@
 - [Clean Architecture](#clean-architecture)
-	- [1. Overview](#1-overview)
-	- [2. Layer Description: Organizing Code in Clean Architecture](#2-layer-description-organizing-code-in-clean-architecture)
-		- [2.1 Application Core](#21-application-core)
-		- [2.2 Infrastructure](#22-infrastructure)
-		- [2.3 UI Layer](#23-ui-layer)
-	- [References](#references)
+    - [1. Overview](#1-overview)
+    - [2. Layer Description: Organizing Code in Clean Architecture](#2-layer-description-organizing-code-in-clean-architecture)
+        - [2.1 Application Core](#21-application-core)
+        - [2.2 Infrastructure](#22-infrastructure)
+        - [2.3 UI Layer](#23-ui-layer)
+    - [References](#references)
 
 ---
 

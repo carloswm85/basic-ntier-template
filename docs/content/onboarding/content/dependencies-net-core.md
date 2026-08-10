@@ -1,11 +1,11 @@
 - [NET Core Dependencies](#net-core-dependencies)
-	- [Use Entity Framework Core](#use-entity-framework-core)
-		- [Code-First](#code-first)
-		- [Database-First (Database Scaffolding, or Reverse Engineering)](#database-first-database-scaffolding-or-reverse-engineering)
-			- [Additional Commands](#additional-commands)
-	- [Configuration Information](#configuration-information)
-		- [Connection String](#connection-string)
-		- [AutoMapper Use](#automapper-use)
+    - [Use Entity Framework Core](#use-entity-framework-core)
+        - [Code-First](#code-first)
+        - [Database-First (Database Scaffolding, or Reverse Engineering)](#database-first-database-scaffolding-or-reverse-engineering)
+            - [Additional Commands](#additional-commands)
+    - [Configuration Information](#configuration-information)
+        - [Connection String](#connection-string)
+        - [AutoMapper Use](#automapper-use)
 
 ---
 
@@ -19,21 +19,21 @@ Be sure you have the right tools: [Installation requirements](./docs/content/ins
 
 - Using PowerShell:
 
-	- Inside the `BasicNtierTemplate.Data` project folder run:
+    - Inside the `BasicNtierTemplate.Data` project folder run:
 
-	```powershell
-	> dotnet ef migrations add InitialMigration
-	> dotnet ef database update
-	```
+    ```powershell
+    > dotnet ef migrations add InitialMigration
+    > dotnet ef database update
+    ```
 
 - Using Package Manager Console:
 
-	- Set "Default Project" to `BasicNtierTemplate.Data`, and run:
+    - Set "Default Project" to `BasicNtierTemplate.Data`, and run:
 
-	```console
-	PM> Add-Migration InitialMigration
-	PM> Update-Database
-	```
+    ```console
+    PM> Add-Migration InitialMigration
+    PM> Update-Database
+    ```
 
 ### Database-First (Database Scaffolding, or Reverse Engineering)
 
@@ -43,17 +43,17 @@ Your database should be named `MyDatabaseDb` for scaffolding to work out-of-the-
 
 - Inside the `BasicNtierTemplate.Data` project folder, using Package Manager Console:
 
-	- When using directly the connection string in the command line:
+    - When using directly the connection string in the command line:
 
-	```console
-	PM> Scaffold-DbContext "Server=.;Database=BasicNtierTemplateDb;user id=SomeUser;password=ThisIsSomePassword;Trusted_Connection=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
-	```
+    ```console
+    PM> Scaffold-DbContext "Server=.;Database=BasicNtierTemplateDb;user id=SomeUser;password=ThisIsSomePassword;Trusted_Connection=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
+    ```
 
-	- When extracting the connection string from `appsettings.json` in the `BasicNtierTemplate.API` project:
+    - When extracting the connection string from `appsettings.json` in the `BasicNtierTemplate.API` project:
 
-	```console
-	PM> Scaffold-DbContext "Name=BasicNtierTemplateConnection" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
-	```
+    ```console
+    PM> Scaffold-DbContext "Name=BasicNtierTemplateConnection" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Model
+    ```
 
 The previous command will overrite the existing `BasicNtierTemplateContext.cs` file.
 
@@ -77,9 +77,9 @@ dotnet ef dbcontext scaffold "Name=BasicNtierTemplateConnection" Microsoft.Entit
 
 ```json
 {
-	"ConnectionStrings": {
-		"DefaultConnection": "Server=.;Database=BasicNtierTemplateDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
-	}
+    "ConnectionStrings": {
+        "DefaultConnection": "Server=.;Database=BasicNtierTemplateDb;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+    }
 }
 ```
 

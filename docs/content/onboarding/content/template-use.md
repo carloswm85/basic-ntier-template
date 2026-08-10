@@ -1,7 +1,7 @@
 - [Template Installation And Use](#template-installation-and-use)
-	- [From Nuget](#from-nuget)
-	- [From Local Repository](#from-local-repository)
-	- [Using The Template](#using-the-template)
+    - [From Nuget](#from-nuget)
+    - [From Local Repository](#from-local-repository)
+    - [Using The Template](#using-the-template)
 
 ---
 
