@@ -1,11 +1,11 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using Asp.Versioning;
 using CleanArchitectureTemplate.API.Constants;
-using CleanArchitectureTemplate.ApplicationCore.Interfaces.ContosoInterfaces;
-using CleanArchitectureTemplate.ApplicationCore.Interfaces.IdentityInterfaces;
+using CleanArchitectureTemplate.ApplicationCore.Interfaces.ContosoUniversity;
+using CleanArchitectureTemplate.ApplicationCore.Interfaces.Identity;
 using CleanArchitectureTemplate.Infrastructure.Model;
 using CleanArchitectureTemplate.Infrastructure.Model.Identity;
 using CleanArchitectureTemplate.Infrastructure.Services.ContosoServices;

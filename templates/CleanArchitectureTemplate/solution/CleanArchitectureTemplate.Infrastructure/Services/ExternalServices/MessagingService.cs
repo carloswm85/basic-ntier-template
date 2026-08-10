@@ -1,4 +1,4 @@
-﻿using CleanArchitectureTemplate.ApplicationCore.Interfaces.IdentityInterfaces;
+using CleanArchitectureTemplate.ApplicationCore.Interfaces.Identity;
 
 namespace CleanArchitectureTemplate.Infrastructure.Services.ExternalServices;
 

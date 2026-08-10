@@ -1,7 +1,8 @@
-﻿using CleanArchitectureTemplate.ApplicationCore.Constants;
+using CleanArchitectureTemplate.ApplicationCore.Constants;
 using CleanArchitectureTemplate.ApplicationCore.Interfaces;
-using CleanArchitectureTemplate.ApplicationCore.Interfaces.ContosoInterfaces;
-using CleanArchitectureTemplate.ApplicationCore.Interfaces.IdentityInterfaces;
+using CleanArchitectureTemplate.ApplicationCore.Interfaces.ContosoUniversity;
+using CleanArchitectureTemplate.ApplicationCore.Interfaces.Identity;
+using CleanArchitectureTemplate.ApplicationCore.Mappings;
 using CleanArchitectureTemplate.Infrastructure.Authorization.ContactAuthorization;
 using CleanArchitectureTemplate.Infrastructure.Data;
 using CleanArchitectureTemplate.Infrastructure.Interfaces.IdentityInterfaces;
@@ -11,9 +12,11 @@ using CleanArchitectureTemplate.Infrastructure.Services;
 using CleanArchitectureTemplate.Infrastructure.Services.ContosoServices;
 using CleanArchitectureTemplate.Infrastructure.Services.ExternalServices;
 using CleanArchitectureTemplate.Infrastructure.Services.IdentityServices;
+using CleanArchitectureTemplate.Web.Mappings;
 using CleanArchitectureTemplate.Web.Services;
 using CleanArchitectureTemplate.Web.Services.Interfaces;
 using Mapster;
+using MapsterMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -64,7 +67,7 @@ public class StartUp
         //        options => options.SignIn.RequireConfirmedAccount = true
         //    )
         //    .AddRoles<ApplicationRole>()
-        //    .AddEntityFrameworkStores<CleanArchitectureTemplateDbContext>()
+        //    .AddEntityFrameworkStores<ApplicationDbContext>()
         //    .AddSignInManager()
         //    .AddDefaultTokenProviders();
 
@@ -95,6 +98,16 @@ public class StartUp
             options.Lockout.MaxFailedAccessAttempts = 3;
             options.Lockout.AllowedForNewUsers = true;
         });
+
+        // === MAPPINGS ===
+        var mapsterConfig = TypeAdapterConfig.GlobalSettings;
+        mapsterConfig.Scan(
+            typeof(ApplicationMappingRegister).Assembly,
+            typeof(WebMappingRegister).Assembly
+        );
+
+        services.AddSingleton(mapsterConfig);
+        services.AddScoped<IMapper, ServiceMapper>();
 
         // === AUTHORIZATION HANDLERS ===
         services.AddScoped<IAuthorizationHandler, ContactIsOwnerAuthorizationHandler>();
@@ -142,9 +155,9 @@ public class StartUp
         services.AddTransient<ISmsSender, MessagingService>();
 
         // Application services
+        services.AddScoped<IPaginationService, PaginationService>();
         services.AddScoped<IContosoUniversityService, ContosoUniversityService>();
         services.AddScoped<IWeatherForecastService, WeatherForectastService>();
-        services.AddScoped<IPaginationService, PaginationService>();
 
         #endregion
     }

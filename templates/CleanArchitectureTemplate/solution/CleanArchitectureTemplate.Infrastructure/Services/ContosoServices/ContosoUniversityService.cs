@@ -1,7 +1,7 @@
-﻿using CleanArchitectureTemplate.ApplicationCore.Dtos.ContosoUniversity;
+using CleanArchitectureTemplate.ApplicationCore.Dtos.ContosoUniversity;
 using CleanArchitectureTemplate.ApplicationCore.Entities;
 using CleanArchitectureTemplate.ApplicationCore.Entities.ContosoUniversity;
-using CleanArchitectureTemplate.ApplicationCore.Interfaces.ContosoInterfaces;
+using CleanArchitectureTemplate.ApplicationCore.Interfaces.ContosoUniversity;
 using CleanArchitectureTemplate.Infrastructure.Model;
 using MapsterMapper;
 using Microsoft.EntityFrameworkCore;

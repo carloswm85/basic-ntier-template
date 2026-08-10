@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +14,7 @@ public class ErrorController : Controller
     }
 
     [Route("Error/{statusCode}")]
-    public IActionResult HttpStatusCodeHandler(int statusCode)
+    public IActionResult HttpStatusCodeHandler(int statusCode, string message, string errorId)
     {
         var statusCodeData = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
 
@@ -24,32 +24,53 @@ public class ErrorController : Controller
         switch (statusCode)
         {
             case 403:
-                ViewBag.ErrorMessage = "You don't have permission to access this resource.";
-                ViewBag.ErrorTitle = "Forbidden";
+                // EXPLANATION :
+                //
+                ViewBag.ErrorTitle = "Access forbidden";
+                ViewBag.ErrorMessage = "You do not have permission to access this resource.";
+                ViewBag.ErrorDetail = message;
+                ViewBag.ErrorId = errorId;
                 return View("Error");
             case 404:
-                ViewBag.ErrorMessage = "Sorry, the resource you requested could not be found.";
+                // EXPLANATION :
+                //
+                ViewBag.ErrorTitle = "Not found";
+                ViewBag.ErrorMessage = "The requested resource was not found.";
+                ViewBag.ErrorDetail = message;
+                ViewBag.ErrorId = errorId;
                 logger.LogWarning(
                     $"{statusCode} Error Ocurred. Path = {statusCodeData!.OriginalPath}"
                         + $" and QueryString = {statusCodeData.OriginalQueryString ?? "no-query-string"}"
                 );
                 break;
             case 405:
+                // EXPLANATION :
                 // A 405 status code, also known as "Method Not Allowed", is an HTTP response code that a server
                 // sends when a client requests a method that the resource doesn't support.
-                ViewBag.ErrorMessage = "Sorry, the resource you requested could not be found.";
+                ViewBag.ErrorTitle = "Method not allowed";
+                ViewBag.ErrorMessage = "The method used to access this resource is not allowed.";
+                ViewBag.ErrorDetail = message;
+                ViewBag.ErrorId = errorId;
                 logger.LogWarning(
                     $"405 Error Ocurred. Path = {statusCodeData!.OriginalPath}"
                         + $" and QueryString = {statusCodeData.OriginalQueryString ?? "no-query-string"}"
                 );
                 break;
             case 500:
-                ViewBag.ErrorMessage = "An internal server error occurred.";
-                ViewBag.ErrorTitle = "Server Error";
+                // EXPLANATION :
+                //
+                ViewBag.ErrorTitle = "Server error";
+                ViewBag.ErrorMessage = "An error occurred on the server.";
+                ViewBag.ErrorDetail = message;
+                ViewBag.ErrorId = errorId;
                 return View("Error");
             default:
-                ViewBag.ErrorMessage = "An error occurred processing your request.";
+                // EXPLANATION :
+                //
                 ViewBag.ErrorTitle = "Error";
+                ViewBag.ErrorMessage = "An error occurred while processing the request.";
+                ViewBag.ErrorDetail = message;
+                ViewBag.ErrorId = errorId;
                 return View("Error");
         }
 

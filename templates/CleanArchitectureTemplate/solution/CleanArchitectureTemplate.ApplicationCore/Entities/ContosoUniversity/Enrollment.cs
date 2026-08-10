@@ -12,6 +12,7 @@ namespace CleanArchitectureTemplate.ApplicationCore.Entities.ContosoUniversity;
 /// </summary>
 public partial class Enrollment
 {
+    [Key]
     public int EnrollmentId { get; set; }
     public int CourseId { get; set; }
     public int StudentId { get; set; }
