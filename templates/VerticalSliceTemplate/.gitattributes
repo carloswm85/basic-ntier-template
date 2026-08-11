@@ -1,0 +1,28 @@
+* text=auto eol=lf
+
+# Keep cross-platform scripts on LF.
+*.ps1 text eol=lf
+*.psm1 text eol=lf
+*.psd1 text eol=lf
+*.sh text eol=lf
+
+# Windows command scripts require CRLF for cmd.exe compatibility.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Improve C# diffs and reduce solution-file merge conflicts.
+*.cs text diff=csharp
+*.sln text merge=union
+
+# Binary files must not be modified by line-ending normalization.
+*.dll binary
+*.exe binary
+*.gif binary
+*.ico binary
+*.jpeg binary
+*.jpg binary
+*.nupkg binary
+*.pdf binary
+*.png binary
+*.snupkg binary
+*.zip binary
