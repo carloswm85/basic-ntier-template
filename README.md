@@ -1,15 +1,15 @@
 - [DotNet Template Kit](#dotnet-template-kit)
-  - [(1) Available templates](#1-available-templates)
-    - [Single-Project Solution](#single-project-solution)
-    - [Multi -Project Solution](#multi--project-solution)
-  - [(2) Requirements](#2-requirements)
-  - [(3) Installation](#3-installation)
-  - [(4) Quick start](#4-quick-start)
-  - [(5) Template options](#5-template-options)
-  - [(6) Documentation](#6-documentation)
-  - [(7) Project status](#7-project-status)
-  - [(8) Contributing](#8-contributing)
-  - [(9) License](#9-license)
+    - [(1) Available templates](#1-available-templates)
+        - [Single-Project Solution](#single-project-solution)
+        - [Multi-Project Solution](#multi-project-solution)
+    - [(2) Requirements](#2-requirements)
+    - [(3) Installation](#3-installation)
+    - [(4) Quick start](#4-quick-start)
+    - [(5) Template options](#5-template-options)
+    - [(6) Documentation](#6-documentation)
+    - [(7) Project status](#7-project-status)
+    - [(8) Contributing](#8-contributing)
+    - [(9) License](#9-license)
 
 ---
 
@@ -25,9 +25,9 @@
 
 - DotNet Template Kit is a collection of opinionated .NET 10 solution templates for building web applications with architectures of increasing complexity.
 - Choose:
-  - **Lightweight monolith** for smaller applications,
-  - **N-layer** solution for clear separation of concerns, or
-  - **Clean Architecture** template for domain-rich systems with strict dependency boundaries.
+    - **Lightweight monolith** for smaller applications,
+    - **N-layer** solution for clear separation of concerns, or
+    - **Clean Architecture** template for domain-rich systems with strict dependency boundaries.
 
 ---
 
@@ -42,13 +42,13 @@
 | ----- | --------------- | ------ | ------------------------------------------- | -------------------------------- | ---------------------------------------------------- |
 | `SMA` | Simple Monolith | ✅     | CRUD applications, internal tools, and MVPs | `dotnet new dtk-simple-monolith` | [docs](./templates/SimpleMonolithTemplate/README.md) |
 
-### Multi -Project Solution
+### Multi-Project Solution
 
-| Code  | Architecture       | Status | Recommended for                                                                     | Template command                    | Documentation                                           |
-| ----- | ------------------ | ------ | ----------------------------------------------------------------------------------- | ----------------------------------- | ------------------------------------------------------- |
-| `NLA` | N-Layer            | ✅     | Enterprise applications, large teams, and long-term maintenance                     | `dotnet new dtk-nlayer`             | [docs](./templates/NLayerTemplate/README.md)            |
-| `VSA` | Vertical Slice     | 📋     | Independent API features, microservices, and modular monoliths                      | Not available yet                   | [docs](./templates/VerticalSliceTemplate/README.md)     |
-| `CNA` | Clean Architecture | ⛔     | Clean Architecture applications requiring implementing `ASP.NET Core Identity API` | `dotnet new dtk-clean-architecture` | [docs](./templates/CleanArchitectureTemplate/README.md) |
+| Code  | Architecture       | Status | Recommended for                                                                    | Template command                    | Documentation                                           |
+| ----- | ------------------ | ------ | ---------------------------------------------------------------------------------- | ----------------------------------- | ------------------------------------------------------- |
+| `NLA` | N-Layer            | ✅     | Enterprise applications, large teams, and long-term maintenance                    | `dotnet new dtk-nlayer`             | [docs](./templates/NLayerTemplate/README.md)            |
+| `VSA` | Vertical Slice     | 📋     | Independent API features, microservices, and modular monoliths                     | Not available yet                   | [docs](./templates/VerticalSliceTemplate/README.md)     |
+| `CNA` | Clean Architecture | ✅     | Clean Architecture applications requiring implementing `ASP.NET Core Identity API` | `dotnet new dtk-clean-architecture` | [docs](./templates/CleanArchitectureTemplate/README.md) |
 
 ## (2) Requirements
 
@@ -137,8 +137,8 @@ dotnet new <template-name> `
 - [Azure Architecture Center](https://learn.microsoft.com/azure/architecture/)
 - [.NET architecture guides](https://github.com/dotnet-architecture/eBooks)
 - Clean Architecture examples:
-  - [Ardalis CleanArchitecture](https://github.com/ardalis/CleanArchitecture)
-  - [Jason Taylor CleanArchitecture](https://github.com/jasontaylordev/CleanArchitecture)
+    - [Ardalis CleanArchitecture](https://github.com/ardalis/CleanArchitecture)
+    - [Jason Taylor CleanArchitecture](https://github.com/jasontaylordev/CleanArchitecture)
 
 ---
 
