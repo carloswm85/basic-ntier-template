@@ -1,15 +1,16 @@
 - [DotNet Template Kit](#dotnet-template-kit)
-    - [(1) Available templates](#1-available-templates)
-        - [Single-Project Solution](#single-project-solution)
-        - [Multi-Project Solution](#multi-project-solution)
-    - [(2) Requirements](#2-requirements)
-    - [(3) Installation](#3-installation)
-    - [(4) Quick start](#4-quick-start)
-    - [(5) Template options](#5-template-options)
-    - [(6) Documentation](#6-documentation)
-    - [(7) Project status](#7-project-status)
-    - [(8) Contributing](#8-contributing)
-    - [(9) License](#9-license)
+  - [(1) Available templates](#1-available-templates)
+    - [Single-Project Solution](#single-project-solution)
+    - [Multi-Project Solution](#multi-project-solution)
+  - [(2) Branching](#2-branching)
+  - [(3) Requirements](#3-requirements)
+  - [(4) Installation](#4-installation)
+  - [(5) Quick start](#5-quick-start)
+  - [(6) Template options](#6-template-options)
+  - [(7) Documentation](#7-documentation)
+  - [(8) Project status](#8-project-status)
+  - [(9) Contributing](#9-contributing)
+  - [(10) License](#10-license)
 
 ---
 
@@ -50,7 +51,16 @@
 | `VSA` | Vertical Slice     | 📋     | Independent API features, microservices, and modular monoliths                     | Not available yet                   | [docs](./templates/VerticalSliceTemplate/README.md)     |
 | `CNA` | Clean Architecture | ✅     | Clean Architecture applications requiring implementing `ASP.NET Core Identity API` | `dotnet new dtk-clean-architecture` | [docs](./templates/CleanArchitectureTemplate/README.md) |
 
-## (2) Requirements
+## (2) Branching
+
+```powershell
+`main` # Latest version of the project, this is the working branch
+   | # Working versions are migrated to latest available version
+   |-> `dtk-netcore10-identity` # Current and latest (2026)
+   |-> `dtk-netcore08-lightweight` # Archived, working but not receiving changes
+```
+
+## (3) Requirements
 
 - [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
 - A development environment such as Visual Studio, Visual Studio Code, or JetBrains Rider
@@ -65,7 +75,7 @@ dotnet --list-sdks
 
 ---
 
-## (3) Installation
+## (4) Installation
 
 Clone the repository and install its templates from the repository root:
 
@@ -91,7 +101,7 @@ Then pass the listed package or directory identifier to `dotnet new uninstall`.
 
 ---
 
-## (4) Quick start
+## (5) Quick start
 
 Create a Basic N-Layer solution named `Contoso.BackOffice`:
 
@@ -105,7 +115,7 @@ Use another command from the [available templates](#1-available-templates) table
 
 ---
 
-## (5) Template options
+## (6) Template options
 
 The available templates target .NET 10 and support the following shared options:
 
@@ -130,7 +140,7 @@ dotnet new <template-name> `
 
 ---
 
-## (6) Documentation
+## (7) Documentation
 
 - [Project documentation](./docs/README.md)
 - [Microsoft .NET application architecture](https://learn.microsoft.com/dotnet/architecture/)
@@ -142,14 +152,14 @@ dotnet new <template-name> `
 
 ---
 
-## (7) Project status
+## (8) Project status
 
 - The `main` branch contains the latest supported templates and documentation.
 - Templates still under development are identified in the [available templates](#1-available-templates) table.
 
 ---
 
-## (8) Contributing
+## (9) Contributing
 
 Issues and pull requests are welcome. Before proposing a change:
 
@@ -160,6 +170,6 @@ Issues and pull requests are welcome. Before proposing a change:
 
 ---
 
-## (9) License
+## (10) License
 
 DotNet Template Kit is available under the terms of the [MIT License](./LICENSE.txt).
